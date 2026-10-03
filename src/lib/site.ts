@@ -7,5 +7,5 @@ export const site = {
   name: "cd/ui",
   author: "Cauã Diorio",
   github: "di0rio",
-  portfolio: "https://portfolio-cd.vercel.app",
+  portfolio: "", // TODO: link do portfólio. Vazio = nome sem link no rodapé.
 };
