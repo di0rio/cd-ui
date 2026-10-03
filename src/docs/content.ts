@@ -281,7 +281,7 @@ export const content: Record<string, ComponentDoc> = {
       { keys: ["↑", "↓"], description: "Navega entre opções." },
       { keys: ["Enter"], description: "Escolhe a opção." },
       { keys: ["Esc"], description: "Fecha sem mudar." },
-      { keys: ["A–Z"], description: "Pula para a opção que começa com a letra." },
+      { keys: ["A-Z"], description: "Pula para a opção que começa com a letra." },
     ],
   },
   dialog: {

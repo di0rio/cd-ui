@@ -25,7 +25,7 @@ Ou registre o namespace no `components.json` e use `npx shadcn@latest add @cd/bu
 - **Leve**: média ~540 B gzip por componente (veja `/docs/performance`). 6 são Server Components e não mandam JS.
 - **Zod sem peso**: o `Form` usa só `zod/v4/core`, então aceita `zod` e `zod/mini`. Passe `schema`, dê `name` aos `Field` e o `onSubmit` recebe os dados validados e tipados.
 - **Acessível**: foco, teclado e aria vêm do Base UI. Cada página de componente lista teclas e notas de acessibilidade.
-- **Movimento com propósito**: 100–250ms, curvas fortes, só `transform`/`opacity`, `prefers-reduced-motion` em todos.
+- **Movimento com propósito**: 100-250ms, curvas fortes, só `transform`/`opacity`, `prefers-reduced-motion` em todos.
 
 ## Desenvolver
 

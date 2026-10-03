@@ -24,7 +24,7 @@ const principles = [
   },
   {
     title: "Movimento com propósito",
-    text: "animações curtas (100–250ms), curvas fortes, só transform e opacity, e prefers-reduced-motion respeitado em todos.",
+    text: "animações curtas (100-250ms), curvas fortes, só transform e opacity, e prefers-reduced-motion respeitado em todos.",
   },
   {
     title: "O código é seu",
