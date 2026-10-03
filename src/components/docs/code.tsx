@@ -1,0 +1,29 @@
+import { CopyButton } from "@/components/copy-button";
+import { highlight } from "@/lib/highlight";
+import { cn } from "@/registry/cd/lib/utils";
+
+/** Bloco de código com destaque feito no servidor e botão de copiar. */
+export async function Code({
+  code,
+  lang = "tsx",
+  title,
+  className,
+}: {
+  code: string;
+  lang?: "tsx" | "bash" | "css" | "json";
+  title?: string;
+  className?: string;
+}) {
+  const html = await highlight(code, lang);
+  return (
+    <div className={cn("group/code relative overflow-hidden rounded-xl border bg-card", className)}>
+      {title && <p className="border-b px-4 py-2 font-mono text-muted-foreground text-xs">{title}</p>}
+      <CopyButton className="absolute top-1.5 right-1.5 bg-card" text={code} />
+      <div
+        className="code max-h-[480px] overflow-auto p-4 pe-12 font-mono text-[13px] leading-6"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: HTML gerado pelo shiki no build a partir do nosso próprio código
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </div>
+  );
+}

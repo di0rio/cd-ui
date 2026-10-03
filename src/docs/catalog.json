@@ -1,0 +1,19 @@
+[
+  { "name": "button", "title": "Button", "category": "Ações", "description": "Botão com variantes, tamanhos, estado de carregamento e render prop pra virar link." },
+  { "name": "badge", "title": "Badge", "category": "Exibição", "description": "Etiqueta curta pra status, contagem ou categoria." },
+  { "name": "card", "title": "Card", "category": "Exibição", "description": "Superfície plana pra agrupar conteúdo relacionado, com cabeçalho, corpo e rodapé." },
+  { "name": "kbd", "title": "Kbd", "category": "Exibição", "description": "Tecla ou atalho de teclado." },
+  { "name": "separator", "title": "Separator", "category": "Exibição", "description": "Linha fina pra dividir conteúdo, horizontal ou vertical." },
+  { "name": "skeleton", "title": "Skeleton", "category": "Feedback", "description": "Bloco de carregamento que reserva o espaço do conteúdo." },
+  { "name": "spinner", "title": "Spinner", "category": "Feedback", "description": "Indicador de carregamento em SVG, sem JavaScript." },
+  { "name": "input", "title": "Input", "category": "Formulário", "description": "Campo de texto com estados de foco, erro e desativado." },
+  { "name": "textarea", "title": "Textarea", "category": "Formulário", "description": "Texto longo que cresce com o conteúdo, sem JavaScript." },
+  { "name": "field", "title": "Field", "category": "Formulário", "description": "Liga label, controle, descrição e erro com ids e aria corretos." },
+  { "name": "form", "title": "Form", "category": "Formulário", "description": "Formulário com validação por schema do Zod: passe o schema e pronto." },
+  { "name": "checkbox", "title": "Checkbox", "category": "Formulário", "description": "Caixa de seleção com estado indeterminado e check desenhado." },
+  { "name": "switch", "title": "Switch", "category": "Formulário", "description": "Liga e desliga uma opção na hora." },
+  { "name": "select", "title": "Select", "category": "Formulário", "description": "Escolha uma opção numa lista que abre a partir do gatilho." },
+  { "name": "dialog", "title": "Dialog", "category": "Sobreposição", "description": "Janela modal que pede atenção, com foco preso e devolvido." },
+  { "name": "tooltip", "title": "Tooltip", "category": "Sobreposição", "description": "Dica curta no hover ou foco, instantânea entre vizinhos." },
+  { "name": "tabs", "title": "Tabs", "category": "Navegação", "description": "Abas com indicador que desliza até a aba ativa." }
+]

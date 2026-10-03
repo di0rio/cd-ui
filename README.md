@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# cd/ui
 
-## Getting Started
+Componentes React acessíveis em [Base UI](https://base-ui.com) e Tailwind CSS v4, distribuídos como **registry do shadcn**: o código vem pro seu projeto e passa a ser seu. Pensados pra pesar o mínimo (medido em bytes a cada build) e serem óbvios de usar, com validação de formulário por Zod.
 
-First, run the development server:
+Feito por [Cauã Diorio](https://portfolio-cd.vercel.app), com a mesma identidade do portfólio: creme/grafite, um amarelo de destaque, prompt de terminal e o mascote em cartoon.
+
+## Usar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx shadcn@latest init
+npx shadcn@latest add https://<domínio>/r/theme.json
+npx shadcn@latest add https://<domínio>/r/button.json https://<domínio>/r/form.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ou registre o namespace no `components.json` e use `npx shadcn@latest add @cd/button`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```json
+{ "registries": { "@cd": "https://<domínio>/r/{name}.json" } }
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## O que tem
 
-## Learn More
+17 componentes: Button, Badge, Card, Kbd, Separator, Skeleton, Spinner, Input, Textarea, Field, Form, Checkbox, Switch, Select, Dialog, Tooltip, Tabs.
 
-To learn more about Next.js, take a look at the following resources:
+- **Leve**: média ~540 B gzip por componente (veja `/docs/performance`). 6 são Server Components e não mandam JS.
+- **Zod sem peso**: o `Form` usa só `zod/v4/core`, então aceita `zod` e `zod/mini`. Passe `schema`, dê `name` aos `Field` e o `onSubmit` recebe os dados validados e tipados.
+- **Acessível**: foco, teclado e aria vêm do Base UI. Cada página de componente lista teclas e notas de acessibilidade.
+- **Movimento com propósito**: 100–250ms, curvas fortes, só `transform`/`opacity`, `prefers-reduced-motion` em todos.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Desenvolver
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+bun install
+bun dev                 # docs em http://localhost:3001
+bun run registry:build  # gera registry.json, mede tamanhos e gera public/r/*.json
+bun run build           # registry:build + next build
+```
 
-## Deploy on Vercel
+### Estrutura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/registry/cd/ui/*.tsx       componentes (o que é distribuído)
+src/docs/catalog.json          nome, título, categoria e descrição de cada componente (fonte única)
+src/docs/content.ts            exemplos, API, teclado e acessibilidade de cada componente
+src/docs/examples/*.tsx        exemplos (preview + código mostrado nas docs)
+src/docs/metrics.json          gerado: tamanho gzip e client/server de cada componente
+scripts/build-registry.mjs     gera registry.json (dependências lidas dos imports; tema copiado do globals.css)
+scripts/metrics.mjs            mede cada componente com esbuild + gzip
+src/app/docs/...               páginas de docs (guias e /docs/components/[name])
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Adicionar um componente
+
+1. Crie `src/registry/cd/ui/<nome>.tsx` (use `"use client"` só se tiver estado ou eventos).
+2. Adicione a entrada em `src/docs/catalog.json`.
+3. Crie os exemplos em `src/docs/examples/` e a documentação em `src/docs/content.ts`.
+4. `bun run registry:build`.
+
+## Deploy
+
+Na Vercel, `VERCEL_PROJECT_PRODUCTION_URL` entra sozinho nos comandos de instalação e nas dependências entre componentes do registry. Localmente, tudo aponta pra `http://localhost:3001`.
