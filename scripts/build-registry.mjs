@@ -9,6 +9,8 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   : "http://localhost:3001";
 
 const catalog = JSON.parse(readFileSync("src/docs/catalog.json", "utf8"));
+// O nome vira caminho de arquivo e URL: só letras minúsculas, números e hífen.
+for (const { name } of catalog) if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`nome inválido no catálogo: ${name}`);
 
 function importsOf(file) {
   const src = readFileSync(file, "utf8");

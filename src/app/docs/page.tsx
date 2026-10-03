@@ -50,7 +50,7 @@ export default function Introduction() {
       <P>
         O cd/ui é uma coleção de componentes que você instala pelo shadcn CLI. Em vez de adicionar uma dependência, o
         código de cada componente vai direto pro seu projeto, em <code className="font-mono text-sm">components/ui</code>.
-        Por baixo, quem cuida de foco, teclado e acessibilidade é o <a className="underline decoration-brand underline-offset-4" href="https://base-ui.com" rel="noopener" target="_blank">Base UI</a>;
+        Por baixo, quem cuida de foco, teclado e acessibilidade é o <a className="underline decoration-brand underline-offset-4" href="https://base-ui.com" rel="noopener noreferrer" target="_blank">Base UI</a>;
         por cima, vem o estilo e um cuidado grande com tamanho e movimento.
       </P>
 

@@ -3,7 +3,7 @@ import { Button } from "@/registry/cd/ui/button";
 
 export default function ButtonLink() {
   return (
-    <Button nativeButton={false} render={<a href="https://github.com/di0rio" rel="noopener" target="_blank" />} variant="outline">
+    <Button nativeButton={false} render={<a href="https://github.com/di0rio" rel="noopener noreferrer" target="_blank" />} variant="outline">
       abrir no github <ArrowUpRightIcon aria-hidden="true" />
     </Button>
   );
