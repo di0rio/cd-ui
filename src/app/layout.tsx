@@ -58,7 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                   aria-label="GitHub"
                   className="grid size-8 place-items-center rounded-md text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground"
                   href={`https://github.com/${site.github}`}
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   target="_blank"
                 >
                   <GithubIcon aria-hidden="true" className="size-4" />
@@ -72,9 +72,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-muted-foreground text-sm lg:px-6">
               <span>
                 feito por{" "}
-                <a className="text-foreground underline decoration-brand underline-offset-4" href={site.portfolio} rel="noopener" target="_blank">
-                  {site.author}
-                </a>
+                {site.portfolio ? (
+                  <a className="text-foreground underline decoration-brand underline-offset-4" href={site.portfolio} rel="noopener noreferrer" target="_blank">
+                    {site.author}
+                  </a>
+                ) : (
+                  <span className="text-foreground">{site.author}</span>
+                )}
                 . código aberto, copie à vontade.
               </span>
               <span className="font-mono text-xs">base ui · tailwind v4 · shadcn cli</span>
