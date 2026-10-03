@@ -1,0 +1,61 @@
+"use client";
+
+import { Field as FieldPrimitive } from "@base-ui/react/field";
+import * as React from "react";
+import { cn } from "@/registry/cd/lib/utils";
+
+type FieldValidator = (name: string, value: unknown) => string[] | null;
+
+/**
+ * Canal entre `Form` e `Field`: o form (com schema) entrega um validador por nome de campo.
+ * Fica aqui, e não no form, pra quem usa só o `Field` não carregar o Zod.
+ */
+export const FieldValidationContext = React.createContext<FieldValidator | null>(null);
+
+/**
+ * Agrupa label, controle, descrição e erro com os ids e o `aria-*` certos.
+ * Dentro de um `Form` com `schema`, basta dar `name` pro campo validar sozinho.
+ */
+export function Field({ className, name, validate, ...props }: FieldPrimitive.Root.Props): React.ReactElement {
+  const validateFromSchema = React.useContext(FieldValidationContext);
+  return (
+    <FieldPrimitive.Root
+      className={cn("flex flex-col gap-1.5", className)}
+      data-slot="field"
+      name={name}
+      validate={validate ?? (validateFromSchema && name ? (value) => validateFromSchema(name, value) : undefined)}
+      {...props}
+    />
+  );
+}
+
+export function FieldLabel({ className, ...props }: FieldPrimitive.Label.Props): React.ReactElement {
+  return (
+    <FieldPrimitive.Label
+      className={cn("font-medium text-sm data-disabled:opacity-50", className)}
+      data-slot="field-label"
+      {...props}
+    />
+  );
+}
+
+export function FieldDescription({ className, ...props }: FieldPrimitive.Description.Props): React.ReactElement {
+  return (
+    <FieldPrimitive.Description
+      className={cn("text-muted-foreground text-xs", className)}
+      data-slot="field-description"
+      {...props}
+    />
+  );
+}
+
+/** Mensagem de erro. Sem `match`, mostra o que a validação (HTML, `validate` ou schema) devolver. */
+export function FieldError({ className, ...props }: FieldPrimitive.Error.Props): React.ReactElement {
+  return (
+    <FieldPrimitive.Error
+      className={cn("text-destructive-foreground text-xs", className)}
+      data-slot="field-error"
+      {...props}
+    />
+  );
+}

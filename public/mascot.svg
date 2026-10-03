@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="56 4 404 404">
+  <rect x="56" y="4" width="404" height="404" fill="#1C1C1C"/>
+  <g transform="rotate(-8 256 270)">
+  <g stroke="#000" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" fill="#fff">
+    <!-- fio do fone -->
+    <path d="M160 330 C124 386 150 432 190 470 C205 486 212 500 214 520" fill="none" stroke-width="18"/>
+    <path d="M160 330 C124 386 150 432 190 470 C205 486 212 500 214 520" fill="none" stroke="#fff" stroke-width="6"/>
+
+    <!-- topete rebelde -->
+    <path d="M284 84 C276 42 288 20 310 16 C326 13 334 30 320 38" fill="none" stroke-width="12"/>
+
+    <!-- cabelo (massa de trás) -->
+    <path d="M130 340 C100 310 92 268 104 232
+             C88 228 74 214 72 198 C90 206 104 204 116 196
+             C108 152 130 116 166 100
+             C160 84 162 62 176 48 C184 66 196 78 212 82
+             C232 66 256 60 278 64
+             C290 46 310 36 332 36 C322 50 318 64 322 76
+             C348 82 370 96 386 116
+             C404 108 424 108 440 116 C424 124 412 136 406 150
+             C424 176 428 210 418 240
+             C432 250 446 268 448 286 C432 278 418 276 406 278
+             C400 306 394 326 384 342 Z"/>
+
+    <!-- rosto -->
+    <path d="M176 226 C168 300 180 362 214 396 C240 420 286 420 312 396 C346 362 354 300 348 226 Z"/>
+  </g>
+
+  <!-- franja + mechas laterais: preenchimento sem contorno, só a borda de baixo é traçada -->
+  <path fill="#fff" d="M346 336 Q350 280 356 238
+           Q346 256 334 270 Q330 250 318 242 Q306 264 290 278 Q288 256 274 246
+           Q262 268 244 276 Q242 254 228 246 Q216 266 198 270 Q198 254 190 244
+           Q180 290 184 328 L144 322 L142 150 L378 150 L374 334 Z"/>
+  <path fill="none" stroke="#000" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"
+        d="M346 336 Q350 280 356 238
+           Q346 256 334 270 Q330 250 318 242 Q306 264 290 278 Q288 256 274 246
+           Q262 268 244 276 Q242 254 228 246 Q216 266 198 270 Q198 254 190 244
+           Q180 290 184 328"/>
+
+  <!-- orelha + fone -->
+  <g stroke="#000" stroke-width="12" stroke-linejoin="round" fill="#fff">
+    <path d="M186 300 C160 290 152 336 186 342"/>
+    <circle cx="168" cy="322" r="11"/>
+  </g>
+
+  <!-- olhos de sono: pálpebra reta + meia pupila -->
+  <g stroke="#000" stroke-linecap="round" fill="#000">
+    <path d="M210 306 h34" stroke-width="9" fill="none"/>
+    <path d="M216 306 a11 11 0 0 0 22 0 z" stroke-width="2"/>
+    <path d="M280 306 h34" stroke-width="9" fill="none"/>
+    <path d="M286 306 a11 11 0 0 0 22 0 z" stroke-width="2"/>
+    <!-- olheiras -->
+    <path d="M216 330 q11 6 22 0" stroke-width="5" fill="none"/>
+    <path d="M286 330 q11 6 22 0" stroke-width="5" fill="none"/>
+    <!-- boca torta -->
+    <path d="M240 370 q10 -7 20 0 q9 6 22 -3" stroke-width="8" fill="none"/>
+  </g>
+  </g>
+</svg>

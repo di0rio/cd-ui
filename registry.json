@@ -1,0 +1,364 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "cd-ui",
+  "homepage": "http://localhost:3001",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Tema cd/ui",
+      "description": "Tokens de cor, raio e curvas de animação do cd/ui (creme/grafite + amarelo).",
+      "cssVars": {
+        "theme": {
+          "color-brand": "var(--brand)",
+          "color-brand-foreground": "var(--brand-foreground)",
+          "color-brand-contrast": "var(--brand-contrast)",
+          "color-destructive-foreground": "var(--destructive-foreground)",
+          "ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
+          "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
+        },
+        "light": {
+          "background": "#f6f4ee",
+          "foreground": "#262626",
+          "card": "#fbfaf6",
+          "card-foreground": "#262626",
+          "popover": "#fbfaf6",
+          "popover-foreground": "#262626",
+          "muted": "rgb(0 0 0 / 0.04)",
+          "muted-foreground": "#686868",
+          "accent": "rgb(0 0 0 / 0.04)",
+          "accent-foreground": "#262626",
+          "border": "rgb(0 0 0 / 0.08)",
+          "input": "rgb(0 0 0 / 0.12)",
+          "ring": "#e0b320",
+          "destructive": "#dc2626",
+          "destructive-foreground": "#b91c1c",
+          "brand": "#ffd23f",
+          "brand-foreground": "#7a5c00",
+          "brand-contrast": "#1c1c1c",
+          "radius": "0.625rem"
+        },
+        "dark": {
+          "background": "#1c1c1c",
+          "foreground": "#f5f5f5",
+          "card": "#222220",
+          "card-foreground": "#f5f5f5",
+          "popover": "#222220",
+          "popover-foreground": "#f5f5f5",
+          "muted": "rgb(255 255 255 / 0.04)",
+          "muted-foreground": "#8a8a8a",
+          "accent": "rgb(255 255 255 / 0.06)",
+          "accent-foreground": "#f5f5f5",
+          "border": "rgb(255 255 255 / 0.08)",
+          "input": "rgb(255 255 255 / 0.12)",
+          "ring": "#ffd23f",
+          "destructive": "#dc2626",
+          "destructive-foreground": "#f87171",
+          "brand-foreground": "#ffd23f"
+        }
+      }
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Botão com variantes, tamanhos, estado de carregamento e render prop pra virar link.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3001/r/spinner.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Etiqueta curta pra status, contagem ou categoria.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Superfície plana pra agrupar conteúdo relacionado, com cabeçalho, corpo e rodapé.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Tecla ou atalho de teclado.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Linha fina pra dividir conteúdo, horizontal ou vertical.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Bloco de carregamento que reserva o espaço do conteúdo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Indicador de carregamento em SVG, sem JavaScript.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Campo de texto com estados de foco, erro e desativado.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Texto longo que cresce com o conteúdo, sem JavaScript.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Liga label, controle, descrição e erro com ids e aria corretos.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "title": "Form",
+      "description": "Formulário com validação por schema do Zod: passe o schema e pronto.",
+      "dependencies": [
+        "@base-ui/react",
+        "zod"
+      ],
+      "registryDependencies": [
+        "utils",
+        "http://localhost:3001/r/field.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/form.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Caixa de seleção com estado indeterminado e check desenhado.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Liga e desliga uma opção na hora.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Escolha uma opção numa lista que abre a partir do gatilho.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Janela modal que pede atenção, com foco preso e devolvido.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Dica curta no hover ou foco, instantânea entre vizinhos.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Abas com indicador que desliza até a aba ativa.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

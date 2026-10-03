@@ -1,0 +1,109 @@
+{
+  "button": {
+    "gzip": 1089,
+    "client": true,
+    "base": [
+      "button"
+    ]
+  },
+  "badge": {
+    "gzip": 453,
+    "client": false,
+    "base": []
+  },
+  "card": {
+    "gzip": 377,
+    "client": false,
+    "base": []
+  },
+  "kbd": {
+    "gzip": 282,
+    "client": false,
+    "base": []
+  },
+  "separator": {
+    "gzip": 285,
+    "client": false,
+    "base": []
+  },
+  "skeleton": {
+    "gzip": 234,
+    "client": false,
+    "base": []
+  },
+  "spinner": {
+    "gzip": 400,
+    "client": false,
+    "base": []
+  },
+  "input": {
+    "gzip": 438,
+    "client": true,
+    "base": [
+      "input"
+    ]
+  },
+  "textarea": {
+    "gzip": 445,
+    "client": true,
+    "base": [
+      "field"
+    ]
+  },
+  "field": {
+    "gzip": 451,
+    "client": true,
+    "base": [
+      "field"
+    ]
+  },
+  "form": {
+    "gzip": 553,
+    "client": true,
+    "base": [
+      "form"
+    ]
+  },
+  "checkbox": {
+    "gzip": 702,
+    "client": true,
+    "base": [
+      "checkbox"
+    ]
+  },
+  "switch": {
+    "gzip": 474,
+    "client": true,
+    "base": [
+      "switch"
+    ]
+  },
+  "select": {
+    "gzip": 990,
+    "client": true,
+    "base": [
+      "select"
+    ]
+  },
+  "dialog": {
+    "gzip": 910,
+    "client": true,
+    "base": [
+      "dialog"
+    ]
+  },
+  "tooltip": {
+    "gzip": 482,
+    "client": true,
+    "base": [
+      "tooltip"
+    ]
+  },
+  "tabs": {
+    "gzip": 628,
+    "client": true,
+    "base": [
+      "tabs"
+    ]
+  }
+}
