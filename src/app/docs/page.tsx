@@ -7,28 +7,28 @@ export const metadata: Metadata = { title: "Introdução" };
 
 const principles = [
   {
-    title: "Leve de verdade, medido no build",
-    text: `cada componente é empacotado e medido em gzip a cada build. média de ${formatBytes(stats.avg)}; o maior tem ${formatBytes(stats.max)}.`,
+    title: "Peso medido no build",
+    text: `O build empacota cada componente e mede o resultado em gzip. A média é ${formatBytes(stats.avg)}; o maior tem ${formatBytes(stats.max)}.`,
   },
   {
-    title: "Servidor primeiro",
-    text: `${stats.server} de ${stats.count} componentes não têm estado e rodam como React Server Component: zero JavaScript no navegador.`,
+    title: "Servidor por padrão",
+    text: `${stats.server} dos ${stats.count} componentes rodam como React Server Components e não enviam JavaScript pro navegador.`,
   },
   {
-    title: "Acessível por padrão",
-    text: "foco, teclado, aria e leitores de tela vêm do Base UI, testado em produção por muita gente. você não reimplementa nada disso.",
+    title: "Acessibilidade desde a base",
+    text: "O Base UI cuida dos comportamentos de foco, teclado e atributos aria. Você compõe esses padrões sem começar do zero.",
   },
   {
-    title: "Fácil de usar",
-    text: "uma importação por componente, padrões bons e APIs pequenas. formulário com Zod é passar o schema e dar name aos campos.",
+    title: "Comece sem cerimônia",
+    text: "Cada componente tem uma importação e uma API enxuta. No Form, passe um schema Zod e conecte os campos pelo name.",
   },
   {
-    title: "Movimento com propósito",
-    text: "animações curtas (100-250ms), curvas fortes, só transform e opacity, e prefers-reduced-motion respeitado em todos.",
+    title: "Movimento na medida",
+    text: "Animações curtas, feitas com transform e opacity. Todos os componentes respeitam prefers-reduced-motion.",
   },
   {
-    title: "O código é seu",
-    text: "não é um pacote: o shadcn CLI copia o arquivo pro seu projeto. quer mudar algo? abra o arquivo e mude.",
+    title: "O código fica com você",
+    text: "O shadcn CLI copia cada arquivo pro seu projeto. Quer mudar um detalhe? Abra o componente e edite direto.",
   },
 ];
 
@@ -42,16 +42,16 @@ export default function Introduction() {
       ]}
     >
       <DocHeader
-        description="Componentes React acessíveis, construídos em Base UI e Tailwind CSS v4, pensados pra pesar o mínimo e serem óbvios de usar."
+        description="Componentes React com Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build e instalados como código no seu projeto."
         title="Introdução"
       />
 
       <H2 id="o-que-e">O que é</H2>
       <P>
-        O cd/ui é uma coleção de componentes que você instala pelo shadcn CLI. Em vez de adicionar uma dependência, o
-        código de cada componente vai direto pro seu projeto, em <code className="font-mono text-sm">components/ui</code>.
-        Por baixo, quem cuida de foco, teclado e acessibilidade é o <a className="underline decoration-brand underline-offset-4" href="https://base-ui.com" rel="noopener noreferrer" target="_blank">Base UI</a>;
-        por cima, vem o estilo e um cuidado grande com tamanho e movimento.
+        O cd/ui é uma coleção de componentes que você instala pelo shadcn CLI. Em vez de puxar outra dependência, você
+        recebe cada arquivo direto em <code className="font-mono text-sm">components/ui</code> e pode editar o código quando quiser.
+        O <a className="underline decoration-brand underline-offset-4" href="https://base-ui.com" rel="noopener noreferrer" target="_blank">Base UI</a> cuida dos comportamentos de foco e teclado.
+        O cd/ui entra com estilos e atenção a tamanho e movimento.
       </P>
 
       <H2 id="principios">Princípios</H2>
@@ -66,13 +66,13 @@ export default function Introduction() {
 
       <H2 id="quando-usar">Quando usar</H2>
       <P>
-        Use quando você quer componentes prontos sem abrir mão de controle: projetos Next.js (ou qualquer React com Tailwind
-        v4) em que peso de JavaScript importa e você prefere ajustar o código a brigar com uma API de tema.
+        Use quando quiser começar com componentes prontos sem abrir mão do controle. Funciona em projetos Next.js e em outros apps React com Tailwind
+        CSS v4, especialmente quando o tamanho do JavaScript importa e você quer editar o código.
       </P>
       <P>
-        Próximo passo:{" "}
+        Quer começar?{" "}
         <Link className="font-medium underline decoration-brand underline-offset-4" href="/docs/instalacao">
-          instalar →
+          veja como instalar →
         </Link>
       </P>
     </DocPage>

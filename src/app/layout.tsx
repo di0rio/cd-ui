@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setLocale } from "@/i18n/generated";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "next-themes";
@@ -15,8 +16,8 @@ const ubuntuHeading = Ubuntu({ subsets: ["latin"], weight: ["500", "700"], varia
 const ubuntuMono = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: { default: "cd/ui · componentes leves em Base UI", template: "%s · cd/ui" },
-  description: "Componentes React acessíveis em Base UI e Tailwind, medidos em bytes, com validação por Zod. Instale pelo shadcn CLI.",
+  title: { default: "cd/ui · lightweight, accessible React components", template: "%s · cd/ui" },
+  description: "Accessible React components built with Base UI and Tailwind CSS v4. Build-measured bundle size, installed as source code with the shadcn CLI.",
 };
 
 const searchItems: SearchItem[] = [
@@ -34,11 +35,12 @@ function GithubIcon(props: React.ComponentProps<"svg">) {
 
 const navLink = "rounded-md px-2.5 py-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground";
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = await setLocale();
   return (
     <html
       className={cn("h-full antialiased", ubuntu.variable, ubuntuHeading.variable, ubuntuMono.variable)}
-      lang="pt-BR"
+      lang={locale}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
@@ -79,7 +81,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 ) : (
                   <span className="text-foreground">{site.author}</span>
                 )}
-                . código aberto, copie à vontade.
+                . Código disponível no GitHub.
               </span>
               <span className="font-mono text-xs">base ui · tailwind v4 · shadcn cli</span>
             </div>

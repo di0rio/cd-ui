@@ -18,11 +18,11 @@ export const categories = [...new Set(components.map((c) => c.category))];
 
 /** Páginas de guia (lado esquerdo das docs e busca). */
 export const guides = [
-  { href: "/docs", title: "Introdução", description: "O que é o cd/ui e por que ele é leve." },
-  { href: "/docs/instalacao", title: "Instalação", description: "Do zero até o primeiro componente." },
-  { href: "/docs/tema", title: "Tema", description: "Tokens de cor, raio e movimento." },
-  { href: "/docs/formularios", title: "Formulários com Zod", description: "Validação por schema em três linhas." },
-  { href: "/docs/performance", title: "Performance", description: "Quanto cada componente pesa, medido no build." },
+  { href: "/docs", title: "Introdução", description: "Conheça a biblioteca e as escolhas por trás dela." },
+  { href: "/docs/instalacao", title: "Instalação", description: "Do projeto pronto ao primeiro componente." },
+  { href: "/docs/tema", title: "Tema", description: "Cores, cantos e movimento em tokens CSS." },
+  { href: "/docs/formularios", title: "Formulários com Zod", description: "Conecte schemas Zod aos campos do formulário." },
+  { href: "/docs/performance", title: "Performance", description: "Veja como medimos o tamanho de cada componente." },
 ];
 
 export const formatBytes = (bytes: number) => (bytes < 1000 ? `${bytes} B` : `${(bytes / 1000).toFixed(1)} kB`);

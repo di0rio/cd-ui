@@ -28,25 +28,25 @@ export default function Home() {
               <span className="size-1.5 rounded-full bg-brand" /> v0.2 · {stats.count} componentes
             </p>
             <h1 className="max-w-[720px] text-balance font-bold font-heading text-[44px] leading-[1.02] tracking-[-0.03em] sm:text-[60px]">
-              componentes que pesam pouco e caem bem.
+              Lightweight components. Your code.
             </h1>
             <p className="mt-5 max-w-[560px] text-pretty text-[18px] text-muted-foreground leading-relaxed">
-              React, Base UI e Tailwind v4. acessíveis por padrão, medidos em bytes, com validação por Zod em três linhas.
-              você copia o código e ele passa a ser seu.
+              React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod-powered forms.
+              Install with the shadcn CLI and shape every component to fit your project.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button nativeButton={false} render={<Link href="/docs/instalacao" />} size="lg" variant="brand">
-                começar <ArrowRightIcon aria-hidden="true" />
+                install cd/ui <ArrowRightIcon aria-hidden="true" />
               </Button>
               <Button nativeButton={false} render={<Link href="#componentes" />} size="lg" variant="outline">
-                ver componentes
+                browse components
               </Button>
             </div>
             <dl className="mt-12 grid max-w-[560px] grid-cols-3 gap-6 border-t pt-6">
               {[
-                { value: formatBytes(stats.avg), label: "média gzip" },
-                { value: `${stats.server}`, label: "rodam no servidor" },
-                { value: "100%", label: "teclado e leitor de tela" },
+                { value: formatBytes(stats.avg), label: "avg. gzip size" },
+                { value: `${stats.server}`, label: "no browser JS" },
+                { value: "Base UI", label: "accessible by default" },
               ].map((s) => (
                 <div key={s.label}>
                   <dt className="text-muted-foreground text-xs">{s.label}</dt>
@@ -67,7 +67,7 @@ export default function Home() {
               width={256}
             />
             <span className="absolute -top-6 -left-24 animate-sticker rounded-2xl border-[3px] border-black bg-white px-4 py-2 font-heading font-semibold text-[#1c1c1c] text-lg [animation-delay:250ms] after:absolute after:top-full after:right-6 after:-mt-[7px] after:size-3.5 after:rotate-45 after:border-black after:border-r-[3px] after:border-b-[3px] after:bg-white">
-              bora montar uma tela?
+              want to try one?
             </span>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function Home() {
 
       <section className="border-b bg-card/50">
         <div className="mx-auto max-w-[1400px] px-4 py-8 lg:px-6">
-          <p className="mb-3 text-muted-foreground text-sm">instale o tema e o primeiro componente:</p>
+          <p className="mb-3 text-muted-foreground text-sm">Install the theme and add your first component to your project:</p>
           <div className="max-w-[760px]">
             <Install urls={[`${siteUrl}/r/theme.json`, `${siteUrl}/r/button.json`]} />
           </div>
@@ -86,10 +86,10 @@ export default function Home() {
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="font-bold font-heading text-[32px] tracking-[-0.02em]">componentes</h2>
-            <p className="mt-1 text-muted-foreground">tamanho em gzip e onde roda, em cada card.</p>
+            <p className="mt-1 text-muted-foreground">See each component gzip size and where it runs.</p>
           </div>
           <Link className="text-muted-foreground text-sm underline-offset-4 hover:text-foreground hover:underline" href="/docs/performance">
-            como medimos →
+            how we measure →
           </Link>
         </div>
 

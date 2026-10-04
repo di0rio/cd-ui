@@ -7,12 +7,12 @@ import { Badge } from "@/registry/cd/ui/badge";
 export const metadata: Metadata = { title: "Performance" };
 
 const techniques = [
-  ["Server Components por padrão", "componentes sem estado não têm \"use client\": viram HTML no servidor e não mandam JS."],
-  ["Imports por subcaminho", "cada componente importa só a parte do Base UI que usa (@base-ui/react/dialog), nunca o pacote inteiro."],
-  ["CSS em vez de JS", "animações, crescimento de textarea (field-sizing), spinner e skeleton são CSS puro."],
-  ["Zod pelo núcleo", "o Form usa zod/v4/core: aceita zod/mini e não puxa a API completa."],
-  ["Só transform e opacity", "animações não disparam layout nem pintura; rodam na GPU e não travam com a página ocupada."],
-  ["Medido a cada build", "os números abaixo saem do esbuild + gzip no build, não de estimativa."],
+  ["Servidor por padrão", "Componentes sem estado não precisam de \"use client\": rodam no servidor e não enviam JS ao navegador."],
+  ["Imports enxutos", "Cada componente importa só o módulo do Base UI que usa, como @base-ui/react/dialog."],
+  ["CSS onde basta", "Animações, crescimento do Textarea, Spinner e Skeleton usam CSS, sem JavaScript extra."],
+  ["Zod pelo núcleo", "O Form usa zod/v4/core e aceita schemas de zod/mini sem puxar a API completa."],
+  ["Movimento leve", "As animações usam transform e opacity para evitar recalcular o layout."],
+  ["Medido no build", "O esbuild empacota cada componente e o gzip mede o resultado. Nada de chute."],
 ];
 
 export default function Performance() {
@@ -28,15 +28,15 @@ export default function Performance() {
       ]}
     >
       <DocHeader
-        description="Tamanho de cada componente em gzip, medido no build. É o código que entra no seu projeto além das bibliotecas que ele usa."
+        description="Veja quanto pesa cada componente em gzip. A medida conta o código do cd/ui e deixa as bibliotecas externas de fora."
         title="Performance"
       />
 
       <div className="grid grid-cols-3 gap-3">
         {[
           { value: formatBytes(stats.avg), label: "média por componente" },
-          { value: `${stats.server}/${stats.count}`, label: "rodam só no servidor" },
-          { value: formatBytes(stats.max), label: "o maior" },
+          { value: `${stats.server}/${stats.count}`, label: "sem JS no navegador" },
+          { value: formatBytes(stats.max), label: "maior componente" },
         ].map((s) => (
           <div className="rounded-xl border bg-card p-4" key={s.label}>
             <p className="font-bold font-heading text-2xl tabular-nums tracking-[-0.02em]">{s.value}</p>
@@ -75,9 +75,9 @@ export default function Performance() {
 
       <H2 id="metodo">Como medimos</H2>
       <P>
-        O script scripts/metrics.mjs empacota cada componente com esbuild (minificado, ESM), deixando React, Base UI, Zod,
-        lucide e utilitários de classe como externos, e mede o resultado em gzip nível 9. Ou seja: é o custo do código do
-        cd/ui em si. As bibliotecas externas entram uma vez no seu bundle e são compartilhadas entre componentes.
+        O script scripts/metrics.mjs empacota cada componente com esbuild, em ESM minificado, e mede o resultado em gzip nível 9. React, Base UI, Zod,
+        lucide e utilitários de classe ficam de fora. Assim, o número mostra o custo do próprio
+        cd/ui; as bibliotecas externas são compartilhadas no bundle do seu projeto.
       </P>
     </DocPage>
   );
