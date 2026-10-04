@@ -32,7 +32,7 @@ export function Login01() {
     <div className="flex min-h-[640px] w-full items-center justify-center px-4 py-12">
       <Card className="w-full max-w-sm gap-6 p-6">
         <CardHeader className="items-center gap-3 text-center">
-          <span className="grid size-10 -rotate-6 place-items-center rounded-xl border-2 border-black bg-brand font-bold font-heading text-brand-contrast shadow-[3px_3px_0_var(--foreground)]">
+          <span className="grid size-10 -rotate-6 place-items-center rounded-xl border-2 border-foreground bg-brand font-bold font-heading text-brand-contrast shadow-[3px_3px_0_var(--foreground)]">
             A
           </span>
           <CardTitle className="mt-1 text-xl">Welcome back</CardTitle>

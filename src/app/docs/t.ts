@@ -5,8 +5,8 @@ const layout = {
 
 const intro = {
   description: {
-    en: "React components built with Base UI and Tailwind CSS v4. Accessible by default, measured at build time, and installed as code in your project.",
-    pt: "Componentes React com Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build e instalados como código no seu projeto.",
+    en: "Accessible React components built with Base UI and Tailwind CSS v4. Install with the shadcn CLI, then edit the source right in your project.",
+    pt: "Componentes acessíveis com Base UI e Tailwind CSS v4. Instale pelo shadcn CLI e edite o código direto no seu projeto.",
   },
   toc: {
     what: { en: "What it is", pt: "O que é" },
@@ -16,16 +16,16 @@ const intro = {
   whatTitle: { en: "What it is", pt: "O que é" },
   what: {
     before: {
-      en: "cd/ui is a collection of components you install with the shadcn CLI. Instead of pulling in another dependency, you get each file directly in ",
-      pt: "O cd/ui é uma coleção de componentes que você instala pelo shadcn CLI. Em vez de puxar outra dependência, você recebe cada arquivo direto em ",
+      en: "Install cd/ui components with the shadcn CLI. The files land right in ",
+      pt: "Instale os componentes do cd/ui pelo shadcn CLI. Os arquivos vão direto pra ",
     },
     middle: {
-      en: " and can edit the code whenever you want. ",
-      pt: " e pode editar o código quando quiser. O ",
+      en: " and stay yours to edit. ",
+      pt: " e ficam no seu projeto pra você editar. O ",
     },
     after: {
-      en: " handles focus and keyboard behavior. cd/ui brings the styles and attention to size and motion.",
-      pt: " cuida dos comportamentos de foco e teclado. O cd/ui entra com estilos e atenção a tamanho e movimento.",
+      en: " handles focus and keyboard behavior. cd/ui adds the styling, with bundle size and motion in mind.",
+      pt: " cuida do foco e do teclado. O cd/ui traz os estilos e deixa tamanho e movimento no radar.",
     },
   },
   principlesTitle: { en: "Principles", pt: "Princípios" },
@@ -33,8 +33,8 @@ const intro = {
     weight: {
       title: { en: "Weight measured at build time", pt: "Peso medido no build" },
       text: {
-        en: "The build bundles each component and measures the result in gzip. The average is {avg}; the largest is {max}.",
-        pt: "O build empacota cada componente e mede o resultado em gzip. A média é {avg}; o maior tem {max}.",
+        en: "We bundle each component and measure its gzip size at build time. Average: {avg}. Largest: {max}.",
+        pt: "Cada componente é empacotado e medido em gzip no build. Média: {avg}. Maior: {max}.",
       },
     },
     server: {
@@ -75,8 +75,8 @@ const intro = {
   },
   whenTitle: { en: "When to use", pt: "Quando usar" },
   when: {
-    en: "Use it when you want to start with ready-made components without giving up control. It works in Next.js projects and other React apps with Tailwind CSS v4, especially when JavaScript size matters and you want to edit the code.",
-    pt: "Use quando quiser começar com componentes prontos sem abrir mão do controle. Funciona em projetos Next.js e em outros apps React com Tailwind CSS v4, especialmente quando o tamanho do JavaScript importa e você quer editar o código.",
+    en: "Use cd/ui when you want a head start without giving up control. It works with Next.js and other React apps on Tailwind CSS v4. Install only what you need, then change the source however you like.",
+    pt: "Use o cd/ui pra começar com componentes prontos sem abrir mão do controle. Funciona com Next.js e outros apps React com Tailwind CSS v4. Instale só o que precisa e ajuste o código à vontade.",
   },
   start: { en: "Want to get started? ", pt: "Quer começar? " },
   startLink: { en: "see how to install →", pt: "veja como instalar →" },
@@ -84,8 +84,8 @@ const intro = {
 
 const installation = {
   description: {
-    en: "Prepare your project, install the theme, and add your first components in three steps.",
-    pt: "Prepare o projeto, instale o tema e adicione seus primeiros componentes em três passos.",
+    en: "Go from a fresh project to your first components in three steps.",
+    pt: "Do projeto limpo aos primeiros componentes em três passos.",
   },
   toc: {
     requirements: { en: "Requirements", pt: "Requisitos" },
@@ -117,7 +117,7 @@ const installation = {
   },
   namespaceTitle: { en: "Namespace shortcut", pt: "Atalho com namespace" },
   namespace: {
-    en: "Want to shorten the next commands? Register cd/ui once in components.json:",
+    en: "Want shorter install commands? Add cd/ui to components.json once:",
     pt: "Quer encurtar os próximos comandos? Registre o cd/ui uma vez no components.json:",
   },
 };

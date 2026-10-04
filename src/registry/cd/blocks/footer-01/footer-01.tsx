@@ -19,7 +19,7 @@ export function Footer01() {
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.4fr_2fr]">
         <div>
           <a className="inline-flex items-center gap-2 font-heading font-semibold" href="#home">
-            <span className="grid size-8 place-items-center rounded-lg border-2 border-black bg-brand font-bold text-brand-contrast text-sm">A</span>
+            <span className="grid size-8 place-items-center rounded-lg border-2 border-foreground bg-brand font-bold text-brand-contrast text-sm">A</span>
             Acme
           </a>
           <p className="mt-3 max-w-xs text-muted-foreground text-sm leading-relaxed">One calm workspace for plans, people and progress.</p>

@@ -107,7 +107,7 @@ export const translations = {
 					navigation: "navigation",
 				},
 				intro: {
-					description: "React components built with Base UI and Tailwind CSS v4. Accessible by default, measured at build time, and installed as code in your project.",
+					description: "Accessible React components built with Base UI and Tailwind CSS v4. Install with the shadcn CLI, then edit the source right in your project.",
 					toc: {
 						what: "What it is",
 						principles: "Principles",
@@ -115,15 +115,15 @@ export const translations = {
 					},
 					whatTitle: "What it is",
 					what: {
-						before: "cd/ui is a collection of components you install with the shadcn CLI. Instead of pulling in another dependency, you get each file directly in ",
+						before: "Install cd/ui components with the shadcn CLI. The source lands right in ",
 						middle: " and can edit the code whenever you want. ",
-						after: " handles focus and keyboard behavior. cd/ui brings the styles and attention to size and motion.",
+						after: " handles focus and keyboard behavior. cd/ui adds the styling, with bundle size and motion in mind.",
 					},
 					principlesTitle: "Principles",
 					principles: {
 						weight: {
 							title: "Weight measured at build time",
-							text: (v: { avg: string; max: string }) => `The build bundles each component and measures the result in gzip. The average is ${v.avg}; the largest is ${v.max}.`,
+							text: (v: { avg: string; max: string }) => `We bundle each component and measure its gzip size at build time. Average: ${v.avg}. Largest: ${v.max}.`,
 						},
 						server: {
 							title: "Server by default",
@@ -147,12 +147,12 @@ export const translations = {
 						},
 					},
 					whenTitle: "When to use",
-					when: "Use it when you want to start with ready-made components without giving up control. It works in Next.js projects and other React apps with Tailwind CSS v4, especially when JavaScript size matters and you want to edit the code.",
+					when: "Use cd/ui when you want a head start without giving up control. It works with Next.js and other React apps on Tailwind CSS v4. Install only what you need, then change the source however you like.",
 					start: "Want to get started? ",
 					startLink: "see how to install →",
 				},
 				installation: {
-					description: "Prepare your project, install the theme, and add your first components in three steps.",
+					description: "Go from a fresh project to your first components in three steps.",
 					toc: {
 						requirements: "Requirements",
 						shadcn: "1. shadcn CLI",
@@ -170,7 +170,7 @@ export const translations = {
 					componentsTitle: "3. Add components",
 					components: "Add one component or several at once. The CLI also installs dependencies such as Base UI and Zod when needed.",
 					namespaceTitle: "Namespace shortcut",
-					namespace: "Want to shorten the next commands? Register cd/ui once in components.json:",
+					namespace: "Want shorter install commands? Add cd/ui to components.json once:",
 				},
 				theme: {
 					description: "Colors, radii, and animation curves come from CSS tokens. Adjust the values in your globals.css and give the theme a new look.",
@@ -292,8 +292,8 @@ export const translations = {
 				},
 			},
 			metadata: {
-				title: "cd/ui · lightweight, accessible React components",
-				description: "Accessible React components built with Base UI and Tailwind CSS v4. Build-measured bundle size, installed as source code with the shadcn CLI.",
+				title: "cd/ui · small, accessible React components",
+				description: "Accessible React components built with Base UI and Tailwind CSS v4. Install them with the shadcn CLI, keep the source, and make each one yours.",
 			},
 			layout: {
 				mainNav: "Main navigation",
@@ -305,12 +305,12 @@ export const translations = {
 			},
 			home: {
 				badge: (v: { count: string }) => `v0.2 · ${v.count} components`,
-				title: "Lightweight components. Your code.",
-				lead: "React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod-powered forms. Install with the shadcn CLI and shape every component to fit your project.",
+				title: "Lean components. Yours to shape.",
+				lead: "Built with React 19, Base UI, and Tailwind CSS v4. Accessible from the start, measured at build time, and ready to edit in your project after install.",
 				install: "install cd/ui",
 				browse: "browse components",
 				stats: {
-					avg: "avg. gzip size",
+					avg: "average gzip size",
 					noJs: "no browser JS",
 					accessible: "accessible by default",
 				},
@@ -1230,7 +1230,7 @@ export const translations = {
 					navigation: "navegação",
 				},
 				intro: {
-					description: "Componentes React com Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build e instalados como código no seu projeto.",
+					description: "Componentes acessíveis com Base UI e Tailwind CSS v4. Instale pelo shadcn CLI e edite o código direto no seu projeto.",
 					toc: {
 						what: "O que é",
 						principles: "Princípios",
@@ -1238,15 +1238,15 @@ export const translations = {
 					},
 					whatTitle: "O que é",
 					what: {
-						before: "O cd/ui é uma coleção de componentes que você instala pelo shadcn CLI. Em vez de puxar outra dependência, você recebe cada arquivo direto em ",
+						before: "Instale os componentes do cd/ui pelo shadcn CLI. O código vai direto pra ",
 						middle: " e pode editar o código quando quiser. O ",
-						after: " cuida dos comportamentos de foco e teclado. O cd/ui entra com estilos e atenção a tamanho e movimento.",
+						after: " cuida do foco e do teclado. O cd/ui traz os estilos e deixa tamanho e movimento no radar.",
 					},
 					principlesTitle: "Princípios",
 					principles: {
 						weight: {
 							title: "Peso medido no build",
-							text: (v: { avg: string; max: string }) => `O build empacota cada componente e mede o resultado em gzip. A média é ${v.avg}; o maior tem ${v.max}.`,
+							text: (v: { avg: string; max: string }) => `Cada componente é empacotado e medido em gzip no build. Média: ${v.avg}. Maior: ${v.max}.`,
 						},
 						server: {
 							title: "Servidor por padrão",
@@ -1270,12 +1270,12 @@ export const translations = {
 						},
 					},
 					whenTitle: "Quando usar",
-					when: "Use quando quiser começar com componentes prontos sem abrir mão do controle. Funciona em projetos Next.js e em outros apps React com Tailwind CSS v4, especialmente quando o tamanho do JavaScript importa e você quer editar o código.",
+					when: "Use o cd/ui pra começar com componentes prontos sem abrir mão do controle. Funciona com Next.js e outros apps React com Tailwind CSS v4. Instale só o que precisa e ajuste o código à vontade.",
 					start: "Quer começar? ",
 					startLink: "veja como instalar →",
 				},
 				installation: {
-					description: "Prepare o projeto, instale o tema e adicione seus primeiros componentes em três passos.",
+					description: "Do projeto limpo aos primeiros componentes em três passos.",
 					toc: {
 						requirements: "Requisitos",
 						shadcn: "1. shadcn CLI",
@@ -1415,8 +1415,8 @@ export const translations = {
 				},
 			},
 			metadata: {
-				title: "cd/ui · componentes React leves e acessíveis",
-				description: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Tamanho medido no build, código instalado no seu projeto pelo shadcn CLI.",
+				title: "cd/ui · componentes leves e acessíveis",
+				description: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Instale pelo shadcn CLI, fique com o código e adapte cada um ao seu projeto.",
 			},
 			layout: {
 				mainNav: "Navegação principal",
@@ -1428,13 +1428,13 @@ export const translations = {
 			},
 			home: {
 				badge: (v: { count: string }) => `v0.2 · ${v.count} componentes`,
-				title: "Componentes leves. Seu código.",
-				lead: "React 19, Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build, com formulários movidos a Zod. Instale pelo shadcn CLI e ajuste cada componente ao seu projeto.",
+				title: "Componentes leves. Do seu jeito.",
+				lead: "Feitos com React 19, Base UI e Tailwind CSS v4. Acessíveis desde o início, medidos no build e prontos pra você adaptar no seu projeto.",
 				install: "instalar cd/ui",
 				browse: "ver componentes",
 				stats: {
 					avg: "tamanho médio gzip",
-					noJs: "sem JS no navegador",
+					noJs: "zero JS no navegador",
 					accessible: "acessível por padrão",
 				},
 				sticker: "quer experimentar um?",

@@ -29,7 +29,7 @@
     "base": []
   },
   "separator": {
-    "gzip": 285,
+    "gzip": 284,
     "client": false,
     "base": []
   },
@@ -41,7 +41,7 @@
     ]
   },
   "table": {
-    "gzip": 574,
+    "gzip": 586,
     "client": false,
     "base": []
   },
@@ -146,7 +146,7 @@
     ]
   },
   "dialog": {
-    "gzip": 910,
+    "gzip": 945,
     "client": true,
     "base": [
       "dialog"

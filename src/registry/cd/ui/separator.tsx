@@ -13,11 +13,10 @@ export function Separator({
 }: React.ComponentProps<"div"> & { orientation?: "horizontal" | "vertical"; decorative?: boolean }): React.ReactElement {
   return (
     <div
-      aria-orientation={decorative ? undefined : orientation}
       className={cn("shrink-0 bg-border", orientation === "horizontal" ? "h-px w-full" : "w-px self-stretch", className)}
       data-orientation={orientation}
       data-slot="separator"
-      role={decorative ? "none" : "separator"}
+      {...(decorative ? { role: "none" } : { role: "separator", "aria-orientation": orientation })}
       {...props}
     />
   );

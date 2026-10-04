@@ -8,7 +8,7 @@
   {"name":"hero-02","key":"hero02","category":"marketing","title":"Hero 02","description":"Split hero with copy, stats and a layered product visual."},
   {"name":"features-01","key":"features01","category":"marketing","title":"Features 01","description":"Bento-style feature grid with two wide cards."},
   {"name":"pricing-01","key":"pricing01","category":"marketing","title":"Pricing 01","description":"Three pricing tiers with a monthly/yearly toggle."},
-  {"name":"cta-01","key":"cta01","category":"marketing","title":"CTA 01","description":"High-contrast closing call-to-action banner."},
+  {"name":"cta-01","key":"cta01","category":"marketing","title":"CTA 01","description":"Closing call-to-action card that follows the theme."},
   {"name":"faq-01","key":"faq01","category":"marketing","title":"FAQ 01","description":"Two-column FAQ with an accordion."},
   {"name":"footer-01","key":"footer01","category":"marketing","title":"Footer 01","description":"Site footer with brand, status, link columns and legal row."},
   {"name":"settings-01","key":"settings01","category":"app","title":"Settings 01","description":"Profile settings form with Zod validation and notification switches."},

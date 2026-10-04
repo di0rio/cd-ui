@@ -1,8 +1,8 @@
 const metadata = {
-  title: { en: "cd/ui · lightweight, accessible React components", pt: "cd/ui · componentes React leves e acessíveis" },
+  title: { en: "cd/ui · lightweight, accessible React components", pt: "cd/ui · componentes leves e acessíveis" },
   description: {
-    en: "Accessible React components built with Base UI and Tailwind CSS v4. Build-measured bundle size, installed as source code with the shadcn CLI.",
-    pt: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Tamanho medido no build, código instalado no seu projeto pelo shadcn CLI.",
+    en: "Accessible React components built with Base UI and Tailwind CSS v4. Bundle sizes measured at build time. Install with the shadcn CLI, keep the source, and make each component yours.",
+    pt: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Tamanho medido no build. Instale pelo shadcn CLI, fique com o código e adapte cada um ao seu projeto.",
   },
 };
 
@@ -17,16 +17,16 @@ const layout = {
 
 const home = {
   badge: { en: "v0.2 · {count} components", pt: "v0.2 · {count} componentes" },
-  title: { en: "Lightweight components. Your code.", pt: "Componentes leves. Seu código." },
+  title: { en: "Lean components. Yours to shape.", pt: "Componentes leves. Do seu jeito." },
   lead: {
-    en: "React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod-powered forms. Install with the shadcn CLI and shape every component to fit your project.",
-    pt: "React 19, Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build, com formulários movidos a Zod. Instale pelo shadcn CLI e ajuste cada componente ao seu projeto.",
+    en: "React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod forms. Install with the shadcn CLI and edit the source in your project.",
+    pt: "React 19, Base UI e Tailwind CSS v4. Acessibilidade desde a base, tamanho medido no build e formulários com Zod. Instale pelo shadcn CLI e edite o código no seu projeto.",
   },
   install: { en: "install cd/ui", pt: "instalar cd/ui" },
   browse: { en: "browse components", pt: "ver componentes" },
   stats: {
-    avg: { en: "avg. gzip size", pt: "tamanho médio gzip" },
-    noJs: { en: "no browser JS", pt: "sem JS no navegador" },
+    avg: { en: "average size per component", pt: "média em gzip por componente" },
+    noJs: { en: "no browser JS", pt: "zero JS no navegador" },
     accessible: { en: "accessible by default", pt: "acessível por padrão" },
   },
   sticker: { en: "want to try one?", pt: "quer experimentar um?" },

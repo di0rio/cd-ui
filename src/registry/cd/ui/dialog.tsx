@@ -11,15 +11,16 @@ export const DialogClose = DialogPrimitive.Close;
 
 /**
  * Janela modal centralizada. Entra de `scale(0.96)` + opacidade em 200ms e sai mais rápido (150ms).
- * Modal não nasce do gatilho: fica no centro, então o `transform-origin` é o centro mesmo.
+ * `position="top"` ancora no topo (ex.: paleta de comandos). Modal não nasce do gatilho: fica no centro, então o `transform-origin` é o centro mesmo.
  */
 export function DialogPopup({
   className,
   children,
   showClose = true,
   closeLabel = "Close",
+  position = "center",
   ...props
-}: DialogPrimitive.Popup.Props & { showClose?: boolean; closeLabel?: string }): React.ReactElement {
+}: DialogPrimitive.Popup.Props & { showClose?: boolean; closeLabel?: string; position?: "center" | "top" }): React.ReactElement {
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
@@ -29,7 +30,13 @@ export function DialogPopup({
         )}
         data-slot="dialog-backdrop"
       />
-      <DialogPrimitive.Viewport className="fixed inset-0 z-50 grid place-items-center p-4" data-slot="dialog-viewport">
+      <DialogPrimitive.Viewport
+        className={cn(
+          "fixed inset-0 z-50 grid justify-items-center p-4",
+          position === "top" ? "items-start pt-[12vh]" : "items-center",
+        )}
+        data-slot="dialog-viewport"
+      >
         <DialogPrimitive.Popup
           className={cn(
             "relative flex w-full max-w-md flex-col gap-4 rounded-2xl border bg-popover p-6 text-popover-foreground shadow-lg/5 outline-none",
