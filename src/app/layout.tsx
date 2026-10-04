@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setLocale } from "@/i18n/generated";
+import { LocaleSwitch } from "@/components/locale-switch";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "next-themes";
@@ -48,12 +49,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-md">
             <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-4 px-4 lg:px-6">
               <Prompt />
-              <nav aria-label="Principal" className="ml-auto flex items-center gap-1">
+              <nav aria-label={locale === "en" ? "Main navigation" : "Navegação principal"} className="ml-auto flex items-center gap-1">
                 <Link className={cn(navLink, "max-sm:hidden")} href="/docs">
                   docs
                 </Link>
                 <Link className={cn(navLink, "max-sm:hidden")} href="/#componentes">
-                  componentes
+                  {locale === "en" ? "components" : "componentes"}
                 </Link>
                 <Search items={searchItems} />
                 <a
@@ -65,6 +66,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 >
                   <GithubIcon aria-hidden="true" className="size-4" />
                 </a>
+                <LocaleSwitch locale={locale as "en" | "pt"} />
                 <ThemeToggle />
               </nav>
             </div>
@@ -73,7 +75,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <footer className="border-t">
             <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-muted-foreground text-sm lg:px-6">
               <span>
-                feito por{" "}
+                {locale === "en" ? "made by " : "feito por "}
                 {site.portfolio ? (
                   <a className="text-foreground underline decoration-brand underline-offset-4" href={site.portfolio} rel="noopener noreferrer" target="_blank">
                     {site.author}
@@ -81,7 +83,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 ) : (
                   <span className="text-foreground">{site.author}</span>
                 )}
-                . Código disponível no GitHub.
+                . Source available on GitHub.
               </span>
               <span className="font-mono text-xs">base ui · tailwind v4 · shadcn cli</span>
             </div>
@@ -91,3 +93,4 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     </html>
   );
 }
+
