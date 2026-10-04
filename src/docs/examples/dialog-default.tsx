@@ -13,15 +13,15 @@ import {
 export default function DialogDefault() {
   return (
     <Dialog>
-      <DialogTrigger render={<Button variant="outline" />}>apagar projeto</DialogTrigger>
-      <DialogPopup closeLabel="Fechar">
+      <DialogTrigger render={<Button variant="outline" />}>delete project</DialogTrigger>
+      <DialogPopup closeLabel="Close">
         <DialogHeader>
-          <DialogTitle>apagar projeto?</DialogTitle>
-          <DialogDescription>isso remove o projeto e todos os arquivos. não dá pra desfazer.</DialogDescription>
+          <DialogTitle>delete project?</DialogTitle>
+          <DialogDescription>this removes the project and all its files. this cannot be undone.</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose render={<Button variant="ghost" />}>cancelar</DialogClose>
-          <DialogClose render={<Button variant="destructive" />}>apagar</DialogClose>
+          <DialogClose render={<Button variant="ghost" />}>cancel</DialogClose>
+          <DialogClose render={<Button variant="destructive" />}>delete</DialogClose>
         </DialogFooter>
       </DialogPopup>
     </Dialog>

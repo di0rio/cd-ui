@@ -1,0 +1,17 @@
+[
+  {"name":"login-01","key":"login01","category":"auth","title":"Login 01","description":"Simple sign-in card with email, password, social login and Zod validation."},
+  {"name":"login-02","key":"login02","category":"auth","title":"Login 02","description":"Split-screen sign-in with a brand panel and testimonial."},
+  {"name":"signup-01","key":"signup01","category":"auth","title":"Signup 01","description":"Account creation card with password confirmation and terms checkbox."},
+  {"name":"forgot-password-01","key":"forgotPassword01","category":"auth","title":"Forgot password 01","description":"Password reset request that swaps to a confirmation message."},
+  {"name":"verify-01","key":"verify01","category":"auth","title":"Verify 01","description":"One-time-code verification with auto-advancing digit boxes and resend countdown."},
+  {"name":"hero-01","key":"hero01","category":"marketing","title":"Hero 01","description":"Centered hero with announcement pill, calls to action and a product window."},
+  {"name":"hero-02","key":"hero02","category":"marketing","title":"Hero 02","description":"Split hero with copy, stats and a layered product visual."},
+  {"name":"features-01","key":"features01","category":"marketing","title":"Features 01","description":"Bento-style feature grid with two wide cards."},
+  {"name":"pricing-01","key":"pricing01","category":"marketing","title":"Pricing 01","description":"Three pricing tiers with a monthly/yearly toggle."},
+  {"name":"cta-01","key":"cta01","category":"marketing","title":"CTA 01","description":"High-contrast closing call-to-action banner."},
+  {"name":"faq-01","key":"faq01","category":"marketing","title":"FAQ 01","description":"Two-column FAQ with an accordion."},
+  {"name":"footer-01","key":"footer01","category":"marketing","title":"Footer 01","description":"Site footer with brand, status, link columns and legal row."},
+  {"name":"settings-01","key":"settings01","category":"app","title":"Settings 01","description":"Profile settings form with Zod validation and notification switches."},
+  {"name":"contact-01","key":"contact01","category":"app","title":"Contact 01","description":"Contact page with details and a validated message form."},
+  {"name":"not-found-01","key":"notFound01","category":"app","title":"Not found 01","description":"404 page with an oversized status code and two ways back."}
+]

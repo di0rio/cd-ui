@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { CopyButton } from "@/components/copy-button";
+import { useLocale } from "@/components/locale-provider";
 import { cn } from "@/registry/cd/lib/utils";
 
 const managers = {
@@ -36,13 +37,14 @@ const choose = (pm: Manager) => {
 
 /** Comando de instalação com abas por gerenciador de pacotes (bun, npm, pnpm, yarn). */
 export function Install({ urls }: { urls: string[] }) {
+  const { ui } = useLocale();
   const pm = useSyncExternalStore(subscribe, read, () => "npm" as Manager);
   const command = `${managers[pm]} ${urls.join(" ")}`;
 
   return (
     <div className="overflow-hidden rounded-xl border bg-card">
       <div className="flex items-center justify-between gap-2 border-b px-2 py-1.5">
-        <div aria-label="Gerenciador de pacotes" className="flex gap-0.5" role="group">
+        <div aria-label={ui.install.packageManager} className="flex gap-0.5" role="group">
           {(Object.keys(managers) as Manager[]).map((name) => (
             <button
               aria-pressed={pm === name}

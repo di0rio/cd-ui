@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { ApiPart, KeyRow } from "@/docs/content";
 import { Badge } from "@/registry/cd/ui/badge";
+import { t } from "@/i18n/generated";
 import { Kbd } from "@/registry/cd/ui/kbd";
 
 /** Transforma `trechos` entre crases em <code> (as descrições do content.ts usam isso). */
@@ -35,9 +36,9 @@ export function ApiTable({ part }: { part: ApiPart }) {
         <table className="w-full min-w-[560px] text-left text-sm">
           <thead className="bg-muted/60 text-muted-foreground text-xs">
             <tr>
-              <th className="px-4 py-2 font-medium">prop</th>
-              <th className="px-4 py-2 font-medium">tipo</th>
-              <th className="px-4 py-2 font-medium">padrão</th>
+              <th className="px-4 py-2 font-medium">{t.components.docs.tables.prop}</th>
+              <th className="px-4 py-2 font-medium">{t.components.docs.tables.type}</th>
+              <th className="px-4 py-2 font-medium">{t.components.docs.tables.default}</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -70,8 +71,8 @@ export function KeyTable({ rows }: { rows: KeyRow[] }) {
       <table className="w-full text-left text-sm">
         <thead className="bg-muted/60 text-muted-foreground text-xs">
           <tr>
-            <th className="w-48 px-4 py-2 font-medium">tecla</th>
-            <th className="px-4 py-2 font-medium">ação</th>
+            <th className="w-48 px-4 py-2 font-medium">{t.components.docs.tables.key}</th>
+            <th className="px-4 py-2 font-medium">{t.components.docs.tables.action}</th>
           </tr>
         </thead>
         <tbody className="divide-y">

@@ -6,7 +6,7 @@ export default function SpinnerDefault() {
       <Spinner />
       <Spinner className="size-6" />
       <span className="flex items-center gap-2 text-sm">
-        <Spinner className="text-brand-foreground" label="Salvando" /> salvando…
+        <Spinner className="text-brand-foreground" label="Saving" /> saving…
       </span>
     </div>
   );

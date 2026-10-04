@@ -15,7 +15,7 @@ export default function ButtonLoading() {
       }}
       variant="brand"
     >
-      publicar projeto
+      publish project
     </Button>
   );
 }

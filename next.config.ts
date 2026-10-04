@@ -21,23 +21,24 @@ const csp = [
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-  "frame-ancestors 'none'",
   "upgrade-insecure-requests",
 ].join("; ");
 
-const securityHeaders = [
+const securityHeaders = (frame: "none" | "self") => [
   // Em dev (http) o upgrade-insecure-requests quebraria os assets; só vale em produção.
-  { key: "Content-Security-Policy", value: isDev ? csp.replace("; upgrade-insecure-requests", "") : csp },
+  { key: "Content-Security-Policy", value: `${isDev ? csp.replace("; upgrade-insecure-requests", "") : csp}; frame-ancestors '${frame}'` },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Frame-Options", value: frame === "self" ? "SAMEORIGIN" : "DENY" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
 ];
 
 const nextConfig: NextConfig = {
   headers: async () => [
-    { source: "/(.*)", headers: securityHeaders },
+    // A tela cheia de um bloco (/blocks/x/view) pode ser embutida pelo próprio site (preview de tablet/celular); o resto não.
+    { source: "/:path((?!.*/blocks/[^/]+/view$).*)", headers: securityHeaders("none") },
+    { source: "/:path*/blocks/:name/view", headers: securityHeaders("self") },
     // Registry público (shadcn CLI e ferramentas no navegador, tipo "abrir no v0"): leitura liberada pra qualquer origem.
     { source: "/r/:path*", headers: [{ key: "Access-Control-Allow-Origin", value: "*" }] },
   ],

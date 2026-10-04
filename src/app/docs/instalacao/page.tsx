@@ -1,44 +1,51 @@
 import type { Metadata } from "next";
 import { Code } from "@/components/docs/code";
-import { DocHeader, DocPage, H2, P } from "@/components/docs/doc-page";
+import { DocHeader, DocPage, H2, P, Rich } from "@/components/docs/doc-page";
 import { Install } from "@/components/docs/install";
+import { setLocale, t, translations } from "@/i18n/generated";
 import { siteUrl } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Instalação" };
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description } = translations[await setLocale()].docs.guides.installation;
+  return { title, description };
+}
 
 export default function Installation() {
+  const page = t.app.docs.installation;
   return (
     <DocPage
       toc={[
-        { id: "requisitos", title: "Requisitos" },
-        { id: "shadcn", title: "1. shadcn CLI" },
-        { id: "tema", title: "2. Tema" },
-        { id: "componentes", title: "3. Componentes" },
-        { id: "namespace", title: "Atalho com namespace" },
+        { id: "requisitos", title: page.toc.requirements },
+        { id: "shadcn", title: page.toc.shadcn },
+        { id: "tema", title: page.toc.theme },
+        { id: "componentes", title: page.toc.components },
+        { id: "namespace", title: page.toc.namespace },
       ]}
     >
-      <DocHeader description="Prepare o projeto, instale o tema e adicione seus primeiros componentes em três passos." title="Instalação" />
+      <DocHeader description={page.description} title={t.docs.guides.installation.title} />
 
-      <H2 id="requisitos">Requisitos</H2>
+      <H2 id="requisitos">{page.requirements}</H2>
       <ul className="flex list-disc flex-col gap-1.5 pl-5 leading-7 marker:text-brand-foreground">
-        <li>React 19 e Tailwind CSS v4.</li>
-        <li>Um alias de importação configurado (<code className="font-mono text-sm">@/*</code>), como o padrão do Next.js.</li>
+        <li>{page.react}</li>
+        <li>
+          <Rich text={page.alias} />
+        </li>
       </ul>
 
-      <H2 id="shadcn">1. Prepare o projeto com o shadcn CLI</H2>
-      <P>Esse comando cria o components.json, o utilitário cn e as variáveis de tema no CSS. Pule esta etapa se já usa shadcn.</P>
+      <H2 id="shadcn">{page.shadcnTitle}</H2>
+      <P>{page.shadcn}</P>
       <Code code="npx shadcn@latest init" lang="bash" />
 
-      <H2 id="tema">2. Instalar o tema</H2>
-      <P>Adicione os tokens do cd/ui ao seu globals.css: cores creme, grafite e amarelo, raios e curvas de animação.</P>
+      <H2 id="tema">{page.themeTitle}</H2>
+      <P>{page.theme}</P>
       <Install urls={[`${siteUrl}/r/theme.json`]} />
 
-      <H2 id="componentes">3. Adicionar componentes</H2>
-      <P>Adicione um componente ou vários de uma vez. O CLI também instala dependências como Base UI e Zod quando necessário.</P>
+      <H2 id="componentes">{page.componentsTitle}</H2>
+      <P>{page.components}</P>
       <Install urls={[`${siteUrl}/r/button.json`, `${siteUrl}/r/form.json`]} />
 
-      <H2 id="namespace">Atalho com namespace</H2>
-      <P>Quer encurtar os próximos comandos? Registre o cd/ui uma vez no components.json:</P>
+      <H2 id="namespace">{page.namespaceTitle}</H2>
+      <P>{page.namespace}</P>
       <Code code={`{\n  "registries": {\n    "@cd": "${siteUrl}/r/{name}.json"\n  }\n}`} lang="json" title="components.json" />
       <div className="mt-4">
         <Code code="npx shadcn@latest add @cd/button @cd/dialog" lang="bash" />

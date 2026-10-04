@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { Checkbox } from "@/registry/cd/ui/checkbox";
 
-const items = ["agenda", "prontuário", "financeiro"];
+const items = ["scheduling", "records", "billing"];
 
 export default function CheckboxIndeterminate() {
-  const [checked, setChecked] = useState<string[]>(["agenda"]);
+  const [checked, setChecked] = useState<string[]>(["scheduling"]);
   const all = checked.length === items.length;
 
   return (
@@ -17,7 +17,7 @@ export default function CheckboxIndeterminate() {
           indeterminate={!all && checked.length > 0}
           onCheckedChange={(value) => setChecked(value ? items : [])}
         />
-        todos os módulos
+        all modules
       </label>
       <div className="flex flex-col gap-3 pl-6">
         {items.map((item) => (

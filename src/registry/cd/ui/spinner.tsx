@@ -2,7 +2,7 @@ import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
 /** Indicador de carregamento em SVG + CSS. Sem estado: roda no servidor, zero JS no cliente. */
-export function Spinner({ className, label = "Carregando", ...props }: React.ComponentProps<"svg"> & { label?: string }) {
+export function Spinner({ className, label = "Loading", ...props }: React.ComponentProps<"svg"> & { label?: string }) {
   return (
     <svg
       aria-label={label}

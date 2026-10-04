@@ -1,9 +1,16 @@
 {
   "button": {
-    "gzip": 1089,
+    "gzip": 1085,
     "client": true,
     "base": [
       "button"
+    ]
+  },
+  "dropdown-menu": {
+    "gzip": 1131,
+    "client": true,
+    "base": [
+      "menu"
     ]
   },
   "badge": {
@@ -26,15 +33,53 @@
     "client": false,
     "base": []
   },
+  "avatar": {
+    "gzip": 383,
+    "client": true,
+    "base": [
+      "avatar"
+    ]
+  },
+  "table": {
+    "gzip": 574,
+    "client": false,
+    "base": []
+  },
+  "accordion": {
+    "gzip": 721,
+    "client": true,
+    "base": [
+      "accordion"
+    ]
+  },
   "skeleton": {
     "gzip": 234,
     "client": false,
     "base": []
   },
   "spinner": {
-    "gzip": 400,
+    "gzip": 398,
     "client": false,
     "base": []
+  },
+  "alert": {
+    "gzip": 530,
+    "client": false,
+    "base": []
+  },
+  "progress": {
+    "gzip": 475,
+    "client": true,
+    "base": [
+      "progress"
+    ]
+  },
+  "toast": {
+    "gzip": 1296,
+    "client": true,
+    "base": [
+      "toast"
+    ]
   },
   "input": {
     "gzip": 516,
@@ -71,11 +116,26 @@
       "checkbox"
     ]
   },
+  "radio-group": {
+    "gzip": 535,
+    "client": true,
+    "base": [
+      "radio",
+      "radio-group"
+    ]
+  },
   "switch": {
     "gzip": 474,
     "client": true,
     "base": [
       "switch"
+    ]
+  },
+  "slider": {
+    "gzip": 668,
+    "client": true,
+    "base": [
+      "slider"
     ]
   },
   "select": {
@@ -90,6 +150,13 @@
     "client": true,
     "base": [
       "dialog"
+    ]
+  },
+  "popover": {
+    "gzip": 588,
+    "client": true,
+    "base": [
+      "popover"
     ]
   },
   "tooltip": {
