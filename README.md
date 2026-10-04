@@ -2,7 +2,7 @@
 
 Componentes React acessíveis em [Base UI](https://base-ui.com) e Tailwind CSS v4, distribuídos como **registry do shadcn**: o código vem pro seu projeto e passa a ser seu. Pensados pra pesar o mínimo (medido em bytes a cada build) e serem óbvios de usar, com validação de formulário por Zod.
 
-Feito por Cauã Diorio, com a mesma identidade do portfólio: creme/grafite, um amarelo de destaque, prompt de terminal e o mascote em cartoon.
+Feito por Cauã Diório, com a mesma identidade do portfólio: creme/grafite, um amarelo de destaque, prompt de terminal e o mascote em cartoon.
 
 ## Usar
 
@@ -59,3 +59,11 @@ src/app/docs/...               páginas de docs (guias e /docs/components/[name]
 ## Deploy
 
 Na Vercel, `VERCEL_PROJECT_PRODUCTION_URL` entra sozinho nos comandos de instalação e nas dependências entre componentes do registry. Localmente, tudo aponta pra `http://localhost:3001`.
+
+## Contribuindo
+
+Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licença
+
+[MIT](LICENSE)

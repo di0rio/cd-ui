@@ -2,7 +2,7 @@
 
 Lightweight, accessible React components built with [Base UI](https://base-ui.com) and Tailwind CSS v4. Distributed as a **shadcn registry**, so component source is copied into your project and stays yours. Bundle sizes are measured at build time, and forms use Zod for validation.
 
-Made by Cauã Diorio, with the same visual identity as the portfolio: warm cream and graphite, a bright yellow accent, terminal prompts, and a cartoon mascot.
+Made by Cauã Diório, with the same visual identity as the portfolio: warm cream and graphite, a bright yellow accent, terminal prompts, and a cartoon mascot.
 
 ## Install
 
@@ -59,3 +59,11 @@ src/app/docs/...               guides and /docs/components/[name]
 ## Deploy
 
 On Vercel, `VERCEL_PROJECT_PRODUCTION_URL` is picked up automatically for install commands and registry component dependencies. Locally, everything points to `http://localhost:3001`.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE)
