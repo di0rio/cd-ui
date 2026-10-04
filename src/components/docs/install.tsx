@@ -18,7 +18,7 @@ const EVENT = "cd-ui:pm";
 const read = (): Manager => {
   try {
     const value = localStorage.getItem(KEY);
-    return value && value in managers ? (value as Manager) : "npm";
+    return value && Object.hasOwn(managers, value) ? (value as Manager) : "npm";
   } catch {
     return "npm";
   }
