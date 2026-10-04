@@ -21,14 +21,36 @@ function importsOf(file) {
 
 const npmName = (spec) => (spec.startsWith("@") ? spec.split("/").slice(0, 2).join("/") : spec.split("/")[0]);
 
+const utilsUrl = `${siteUrl}/r/utils.json`;
+const catalogNames = new Set(catalog.map((c) => c.name));
+
+// Itens ui: arquivos irmãos importados que não estão no catálogo (ex.: button-variants.ts) viajam no mesmo item.
 const items = catalog.map(({ name, title, description }) => {
   const path = `src/registry/cd/ui/${name}.tsx`;
-  const specs = importsOf(path);
+  const paths = [path];
+  for (let i = 0; i < paths.length; i++) {
+    for (const s of importsOf(paths[i])) {
+      const m = s.match(/^@\/registry\/cd\/ui\/(.+)$/);
+      const sibling = m && !catalogNames.has(m[1]) && `src/registry/cd/ui/${m[1]}.ts`;
+      if (sibling && !paths.includes(sibling)) paths.push(sibling);
+    }
+  }
+  const specs = paths.flatMap(importsOf);
   const dependencies = [...new Set(specs.filter((s) => !s.startsWith("@/") && s !== "react").map(npmName))].sort();
-  const internal = specs.filter((s) => s.startsWith("@/registry/cd/ui/")).map((s) => s.split("/").pop());
-  const registryDependencies = ["utils", ...internal.map((n) => `${siteUrl}/r/${n}.json`)];
-  return { name, type: "registry:ui", title, description, dependencies, registryDependencies, files: [{ path, type: "registry:ui" }] };
+  const internal = [...new Set(specs.filter((s) => s.startsWith("@/registry/cd/ui/")).map((s) => s.split("/").pop()))].filter((n) => catalogNames.has(n) && n !== name);
+  const registryDependencies = [utilsUrl, ...internal.map((n) => `${siteUrl}/r/${n}.json`)];
+  return { name, type: "registry:ui", title, description, dependencies, registryDependencies, files: paths.map((p) => ({ path: p, type: "registry:ui" })) };
 });
+
+// "utils" sem URL cairia no item embutido do shadcn, que instala `export { cn } from "cn"`.
+const utils = {
+  name: "utils",
+  type: "registry:lib",
+  title: "cn helper",
+  description: "The cn() helper (clsx + tailwind-merge) used by every cd/ui component.",
+  dependencies: ["clsx", "tailwind-merge"],
+  files: [{ path: "src/registry/cd/lib/utils.ts", type: "registry:lib" }],
+};
 
 const css = readFileSync("src/app/globals.css", "utf8");
 const block = (selector) => {
@@ -72,7 +94,7 @@ const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "cd-ui",
   homepage: siteUrl,
-  items: [theme, ...items, ...blockItems],
+  items: [theme, utils, ...items, ...blockItems],
 };
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);
 console.log(`registry.json: ${items.length} componentes + ${blockItems.length} blocos + tema (${siteUrl})`);

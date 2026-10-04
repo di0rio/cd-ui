@@ -9,7 +9,7 @@ export function NotFound01() {
         <p aria-hidden="true" className="select-none font-bold font-heading text-[120px] text-foreground/10 leading-none tracking-[-0.06em] sm:text-[200px]">
           404
         </p>
-        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-6 whitespace-nowrap rounded-2xl border-[3px] border-black bg-brand px-5 py-2 font-heading font-semibold text-brand-contrast text-xl shadow-[5px_5px_0_#000] sm:text-3xl">
+        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-6 whitespace-nowrap rounded-2xl border-[3px] border-foreground bg-brand px-5 py-2 font-heading font-semibold text-brand-contrast text-xl shadow-[5px_5px_0_var(--foreground)] sm:text-3xl">
           Page not found
         </span>
       </div>

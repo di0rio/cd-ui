@@ -65,7 +65,7 @@ export function Settings01() {
           </CardHeader>
           <CardContent className="flex flex-col gap-5">
             <div className="flex items-center gap-4">
-              <span className="grid size-14 place-items-center rounded-full border-2 border-black bg-brand font-bold font-heading text-brand-contrast text-lg">
+              <span className="grid size-14 place-items-center rounded-full border-2 border-foreground bg-brand font-bold font-heading text-brand-contrast text-lg">
                 JD
               </span>
               <Button size="sm" type="button" variant="outline">
