@@ -13,6 +13,11 @@ export function TooltipProvider({ delay = 400, ...props }: TooltipPrimitive.Prov
 }
 
 export const Tooltip = TooltipPrimitive.Root;
+/**
+ * Gatilho do tooltip. Com `render` (ex.: `render={<Button />}`), coloque `onClick`, `aria-label` e
+ * outros handlers aqui no `TooltipTrigger`, não no elemento do `render`: em build de produção o
+ * `onClick` do elemento passado no `render` pode não disparar.
+ */
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 
 /** Balão do tooltip: nasce do gatilho, 125ms. Os seguintes (`data-instant`) aparecem sem animação. */
