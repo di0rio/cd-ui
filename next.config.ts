@@ -35,6 +35,11 @@ const securityHeaders = (frame: "none" | "self") => [
 ];
 
 const nextConfig: NextConfig = {
+  // As páginas de componente e bloco leem o código-fonte com fs em runtime (são dinâmicas por causa do cookie de idioma),
+  // então esses arquivos precisam ir junto pra função na Vercel.
+  outputFileTracingIncludes: {
+    "/*": ["./src/registry/cd/ui/**/*", "./src/registry/cd/blocks/**/*", "./src/docs/examples/**/*"],
+  },
   headers: async () => [
     // A tela cheia de um bloco (/blocks/x/view) pode ser embutida pelo próprio site (preview de tablet/celular); o resto não.
     { source: "/:path((?!.*/blocks/[^/]+/view$).*)", headers: securityHeaders("none") },

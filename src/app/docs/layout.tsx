@@ -26,7 +26,7 @@ export default function DocsLayout({ children }: LayoutProps<"/docs">) {
   const groups = getGroups();
   return (
     <div className="mx-auto flex w-full max-w-[1400px] flex-1 gap-10 px-4 lg:px-6">
-      <aside className="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-56 shrink-0 overflow-y-auto py-8 pr-2 [scrollbar-width:thin] lg:block">
+      <aside className="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-56 shrink-0 overflow-y-auto overscroll-contain py-8 pr-2 [scrollbar-width:none] lg:block [&::-webkit-scrollbar]:hidden">
         <Sidebar groups={groups} />
       </aside>
       <div className="min-w-0 flex-1 py-8 lg:py-12">
