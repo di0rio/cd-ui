@@ -320,7 +320,7 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
     },
     tooltip: {
       examples: [{ file: "tooltip-default", title: c.tooltip.ex.default.title, description: c.tooltip.ex.default.description, Component: TooltipDefault }],
-      usage: `import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"\n\n<TooltipProvider>\n  <Tooltip>\n    <TooltipTrigger render={<Button />}>?</TooltipTrigger>\n    <TooltipPopup>help</TooltipPopup>\n  </Tooltip>\n</TooltipProvider>`,
+      usage: `import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"\n\n<TooltipProvider>\n  <Tooltip>\n    <TooltipTrigger aria-label="Help" onClick={openHelp} render={<Button />}>?</TooltipTrigger>\n    <TooltipPopup>help</TooltipPopup>\n  </Tooltip>\n</TooltipProvider>`,
       api: [
         {
           name: "TooltipProvider",
