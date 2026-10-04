@@ -26,12 +26,12 @@ export default function Theme() {
       ]}
     >
       <DocHeader
-        description="Tokens em CSS variables: creme e grafite em vez de branco e preto puros, um único amarelo de destaque e bordas finas."
+        description="Cores, raios e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema."
         title="Tema"
       />
 
       <H2 id="cores">Cores</H2>
-      <P>Mude o tema do site (botão no topo) e veja os valores trocarem. Os componentes só usam esses tokens.</P>
+      <P>Troque o tema no botão do topo e veja os valores mudarem. Os componentes usam esses tokens em vez de cores fixas.</P>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {swatches.map((s) => (
           <div className="overflow-hidden rounded-xl border" key={s.name}>
@@ -44,7 +44,7 @@ export default function Theme() {
         ))}
       </div>
       <P>
-        A regra é uma luz só: o amarelo aparece pequeno (foco, check, switch ligado, botão brand) e nunca como fundo grande.
+        O amarelo funciona como um sinal: aparece em detalhes como foco, check, switch ligado e botão principal, sem tomar a tela toda.
       </P>
 
       <H2 id="raios">Raios</H2>
@@ -59,8 +59,8 @@ export default function Theme() {
 
       <H2 id="movimento">Movimento</H2>
       <P>
-        Duas curvas fortes substituem as do Tailwind: <code className="font-mono text-sm">ease-out</code> pra entradas e respostas
-        e <code className="font-mono text-sm">ease-in-out</code> pra coisas que se movem na tela. Durações ficam entre 100 e 250ms.
+        Duas curvas dão ritmo às interações: <code className="font-mono text-sm">ease-out</code> para entradas e respostas
+        e <code className="font-mono text-sm">ease-in-out</code> para elementos que se deslocam. Durações ficam entre 100 e 250ms.
       </P>
       <Code
         code={`--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entradas, cliques, abrir popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* indicador de abas, switch */`}
@@ -68,7 +68,7 @@ export default function Theme() {
       />
 
       <H2 id="personalizar">Personalizar</H2>
-      <P>Troque os valores no seu globals.css. Ex.: um destaque verde no lugar do amarelo:</P>
+      <P>Quer outra paleta? Troque os valores no seu globals.css. Aqui, o destaque amarelo vira verde:</P>
       <Code code={`:root {\n  --brand: #22c55e;\n  --brand-foreground: #15803d;\n  --brand-contrast: #052e16;\n}`} lang="css" title="globals.css" />
     </DocPage>
   );

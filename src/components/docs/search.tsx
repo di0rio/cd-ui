@@ -61,7 +61,7 @@ export function Search({ items }: { items: SearchItem[] }) {
     >
       <DialogPrimitive.Trigger className="flex h-8 cursor-pointer items-center gap-2 rounded-lg border bg-background pr-1.5 pl-2.5 text-muted-foreground text-sm outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
         <SearchIcon aria-hidden="true" className="size-3.5" />
-        <span className="hidden md:inline">buscar…</span>
+        <span className="hidden md:inline">buscar docs…</span>
         <span className="hidden gap-0.5 sm:flex">
           <Kbd>Ctrl</Kbd>
           <Kbd>K</Kbd>
@@ -97,7 +97,7 @@ export function Search({ items }: { items: SearchItem[] }) {
                   go(results[active]);
                 }
               }}
-              placeholder="componente, guia…"
+              placeholder="componente ou assunto…"
               role="combobox"
               aria-expanded="true"
               value={query}
@@ -105,7 +105,7 @@ export function Search({ items }: { items: SearchItem[] }) {
             <Kbd>Esc</Kbd>
           </div>
           <ul className="overflow-y-auto p-2" id="search-results" ref={list} role="listbox">
-            {results.length === 0 && <li className="px-3 py-8 text-center text-muted-foreground text-sm">nada encontrado pra “{query}”.</li>}
+            {results.length === 0 && <li className="px-3 py-8 text-center text-muted-foreground text-sm">Não achei nada pra “{query}”.</li>}
             {results.map((item, i) => (
               <li
                 aria-selected={i === active}
