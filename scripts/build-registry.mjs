@@ -39,8 +39,8 @@ const block = (selector) => {
 const theme = {
   name: "theme",
   type: "registry:theme",
-  title: "Tema cd/ui",
-  description: "Tokens de cor, raio e curvas de animação do cd/ui (creme/grafite + amarelo).",
+  title: "cd/ui theme",
+  description: "cd/ui color, radius, and animation-curve tokens (cream/graphite + yellow).",
   cssVars: {
     theme: {
       "color-brand": "var(--brand)",
@@ -55,11 +55,24 @@ const theme = {
   },
 };
 
+// Blocos (src/blocks/catalog.json): uma tela pronta por pasta em src/registry/cd/blocks/<nome>/<nome>.tsx.
+// Os componentes ui usados viram registryDependencies, lidos dos imports.
+const blockCatalog = JSON.parse(readFileSync("src/blocks/catalog.json", "utf8"));
+const blockItems = blockCatalog.map(({ name, title, description }) => {
+  if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`nome inválido no catálogo de blocos: ${name}`);
+  const path = `src/registry/cd/blocks/${name}/${name}.tsx`;
+  const specs = importsOf(path);
+  const dependencies = [...new Set(specs.filter((s) => !s.startsWith("@/") && s !== "react").map(npmName))].sort();
+  const internal = [...new Set(specs.filter((s) => s.startsWith("@/registry/cd/ui/")).map((s) => s.split("/").pop()))].sort();
+  const registryDependencies = [`${siteUrl}/r/theme.json`, ...internal.map((n) => `${siteUrl}/r/${n}.json`)];
+  return { name, type: "registry:block", title, description, dependencies, registryDependencies, files: [{ path, type: "registry:component" }] };
+});
+
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "cd-ui",
   homepage: siteUrl,
-  items: [theme, ...items],
+  items: [theme, ...items, ...blockItems],
 };
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);
-console.log(`registry.json: ${items.length} componentes + tema (${siteUrl})`);
+console.log(`registry.json: ${items.length} componentes + ${blockItems.length} blocos + tema (${siteUrl})`);

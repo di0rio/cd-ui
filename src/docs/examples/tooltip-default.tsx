@@ -3,9 +3,9 @@ import { Button } from "@/registry/cd/ui/button";
 import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@/registry/cd/ui/tooltip";
 
 const tools = [
-  { label: "Negrito", Icon: BoldIcon },
-  { label: "Itálico", Icon: ItalicIcon },
-  { label: "Sublinhado", Icon: UnderlineIcon },
+  { label: "Bold", Icon: BoldIcon },
+  { label: "Italic", Icon: ItalicIcon },
+  { label: "Underline", Icon: UnderlineIcon },
   { label: "Link", Icon: LinkIcon },
 ];
 

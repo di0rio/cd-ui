@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { setLocale } from "@/i18n/generated";
+import { setLocale, translations } from "@/i18n/generated";
+import { LocaleProvider } from "@/components/locale-provider";
 import { LocaleSwitch } from "@/components/locale-switch";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "next-themes";
 import { Prompt } from "@/components/docs/prompt";
 import { Search, type SearchItem } from "@/components/docs/search";
+import { SiteChrome } from "@/components/site-chrome";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { components, guides } from "@/docs";
+import { blocks } from "@/blocks";
+import { getComponents, getGuides } from "@/docs";
+import type { Dict } from "@/lib/dict";
+import { type Locale, withLocale } from "@/lib/locale-path";
 import { site } from "@/lib/site";
 import { cn } from "@/registry/cd/lib/utils";
 import "./globals.css";
@@ -16,14 +21,15 @@ const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["400", "500", "700"], varia
 const ubuntuHeading = Ubuntu({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-heading" });
 const ubuntuMono = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono" });
 
-export const metadata: Metadata = {
-  title: { default: "cd/ui · lightweight, accessible React components", template: "%s · cd/ui" },
-  description: "Accessible React components built with Base UI and Tailwind CSS v4. Build-measured bundle size, installed as source code with the shadcn CLI.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description } = translations[await setLocale()].app.metadata;
+  return { title: { default: title, template: "%s · cd/ui" }, description };
+}
 
-const searchItems: SearchItem[] = [
-  ...guides.map((g) => ({ ...g, group: "Guias" })),
-  ...components.map((c) => ({ href: `/docs/components/${c.name}`, title: c.title, description: c.description, group: "Componentes" })),
+const searchItems = (locale: Locale, tr: Dict): SearchItem[] => [
+  ...getGuides(tr).map((g) => ({ ...g, href: withLocale(locale, g.href), group: "guide" as const })),
+  ...getComponents(tr).map((c) => ({ href: withLocale(locale, `/docs/components/${c.name}`), title: c.title, description: c.description, group: "component" as const })),
+  ...blocks.map((b) => ({ href: withLocale(locale, `/blocks/${b.name}`), title: tr.app.blocks.items[b.key].title, description: tr.app.blocks.items[b.key].description, group: "block" as const })),
 ];
 
 function GithubIcon(props: React.ComponentProps<"svg">) {
@@ -37,7 +43,9 @@ function GithubIcon(props: React.ComponentProps<"svg">) {
 const navLink = "rounded-md px-2.5 py-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground";
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const locale = await setLocale();
+  const locale = (await setLocale()) as Locale;
+  const tr = translations[locale];
+  const layout = tr.app.layout;
   return (
     <html
       className={cn("h-full antialiased", ubuntu.variable, ubuntuHeading.variable, ubuntuMono.variable)}
@@ -45,18 +53,42 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <LocaleProvider locale={locale} ui={tr.components.ui}>
         <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
+          <SiteChrome
+            footer={
+          <footer className="border-t">
+            <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-muted-foreground text-sm lg:px-6">
+              <span>
+                {layout.madeBy}
+                {site.portfolio ? (
+                  <a className="text-foreground underline decoration-brand underline-offset-4" href={site.portfolio} rel="noopener noreferrer" target="_blank">
+                    {site.author}
+                  </a>
+                ) : (
+                  <span className="text-foreground">{site.author}</span>
+                )}
+                . {layout.sourceNote}
+              </span>
+              <span className="font-mono text-xs">base ui · tailwind v4 · shadcn cli</span>
+            </div>
+          </footer>
+            }
+            header={
           <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-md">
             <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-4 px-4 lg:px-6">
               <Prompt />
-              <nav aria-label={locale === "en" ? "Main navigation" : "Navegação principal"} className="ml-auto flex items-center gap-1">
-                <Link className={cn(navLink, "max-sm:hidden")} href="/docs">
-                  docs
+              <nav aria-label={layout.mainNav} className="ml-auto flex items-center gap-1">
+                <Link className={cn(navLink, "max-sm:hidden")} href={withLocale(locale, "/docs")}>
+                  {layout.docs}
                 </Link>
-                <Link className={cn(navLink, "max-sm:hidden")} href="/#componentes">
-                  {locale === "en" ? "components" : "componentes"}
+                <Link className={cn(navLink, "max-sm:hidden")} href={withLocale(locale, "/blocks")}>
+                  {layout.blocks}
                 </Link>
-                <Search items={searchItems} />
+                <Link className={cn(navLink, "max-sm:hidden")} href={withLocale(locale, "/#componentes")}>
+                  {layout.components}
+                </Link>
+                <Search items={searchItems(locale, tr)} />
                 <a
                   aria-label="GitHub"
                   className="grid size-8 place-items-center rounded-md text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground"
@@ -66,29 +98,17 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 >
                   <GithubIcon aria-hidden="true" className="size-4" />
                 </a>
-                <LocaleSwitch locale={locale as "en" | "pt"} />
+                <LocaleSwitch />
                 <ThemeToggle />
               </nav>
             </div>
           </header>
+            }
+          >
           <div className="flex flex-1 flex-col">{children}</div>
-          <footer className="border-t">
-            <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-muted-foreground text-sm lg:px-6">
-              <span>
-                {locale === "en" ? "made by " : "feito por "}
-                {site.portfolio ? (
-                  <a className="text-foreground underline decoration-brand underline-offset-4" href={site.portfolio} rel="noopener noreferrer" target="_blank">
-                    {site.author}
-                  </a>
-                ) : (
-                  <span className="text-foreground">{site.author}</span>
-                )}
-                . Source available on GitHub.
-              </span>
-              <span className="font-mono text-xs">base ui · tailwind v4 · shadcn cli</span>
-            </div>
-          </footer>
+          </SiteChrome>
         </ThemeProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

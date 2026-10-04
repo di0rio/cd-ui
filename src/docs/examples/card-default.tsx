@@ -8,15 +8,15 @@ export default function CardDefault() {
       <CardHeader>
         <div className="flex items-center justify-between gap-2">
           <CardTitle>loopvet</CardTitle>
-          <Badge variant="brand">em produção</Badge>
+          <Badge variant="brand">in production</Badge>
         </div>
-        <CardDescription>sistema de gestão pra clínica veterinária.</CardDescription>
+        <CardDescription>management system for veterinary clinics.</CardDescription>
       </CardHeader>
-      <CardContent className="text-muted-foreground">agenda, prontuário e financeiro numa tela só.</CardContent>
+      <CardContent className="text-muted-foreground">scheduling, records, and billing on a single screen.</CardContent>
       <CardFooter>
-        <Button size="sm">abrir</Button>
+        <Button size="sm">open</Button>
         <Button size="sm" variant="ghost">
-          detalhes
+          details
         </Button>
       </CardFooter>
     </Card>

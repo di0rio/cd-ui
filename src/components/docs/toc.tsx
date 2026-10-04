@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale } from "@/components/locale-provider";
 import { cn } from "@/registry/cd/lib/utils";
 
 export type TocItem = { id: string; title: string; depth?: 1 | 2 };
 
 /** "Nesta página": acompanha a seção visível enquanto você rola. */
 export function Toc({ items }: { items: TocItem[] }) {
+  const { ui } = useLocale();
   const [active, setActive] = useState(items[0]?.id);
 
   useEffect(() => {
@@ -25,8 +27,8 @@ export function Toc({ items }: { items: TocItem[] }) {
   }, [items]);
 
   return (
-    <nav aria-label="Nesta página" className="text-sm">
-      <p className="mb-2 font-medium text-muted-foreground text-xs">nesta página</p>
+    <nav aria-label={ui.toc.label} className="text-sm">
+      <p className="mb-2 font-medium text-muted-foreground text-xs">{ui.toc.title}</p>
       <ul className="flex flex-col border-l">
         {items.map((item) => (
           <li key={item.id}>

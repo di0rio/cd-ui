@@ -2,21 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "@/components/locale-provider";
+import { stripLocale } from "@/lib/locale-path";
 import { cn } from "@/registry/cd/lib/utils";
 
 export type NavGroup = { title: string; links: { href: string; title: string; badge?: string }[] };
 
 /** Navegação das docs. A página atual ganha fundo e um ponto amarelo. */
 export function Sidebar({ groups }: { groups: NavGroup[] }) {
-  const path = usePathname();
+  const path = stripLocale(usePathname());
+  const { ui } = useLocale();
   return (
-    <nav aria-label="Documentação" className="flex flex-col gap-6 text-sm">
+    <nav aria-label={ui.sidebar.label} className="flex flex-col gap-6 text-sm">
       {groups.map((group) => (
         <div key={group.title}>
           <p className="mb-1.5 px-2.5 font-medium text-muted-foreground text-xs">{group.title}</p>
           <ul className="flex flex-col">
             {group.links.map((link) => {
-              const current = path === link.href;
+              const current = path === stripLocale(link.href);
               return (
                 <li key={link.href}>
                   <Link

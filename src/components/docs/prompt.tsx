@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "@/components/locale-provider";
+import { stripLocale, withLocale } from "@/lib/locale-path";
 
 /** Prompt de terminal: `cd/ui ~/docs/button $▍` mostra onde você está (identidade do portfólio). O texto já é a logo. */
 export function Prompt() {
-  const path = usePathname() ?? "/";
+  const path = stripLocale(usePathname() ?? "/");
+  const { locale, ui } = useLocale();
   return (
-    <Link aria-label="cd/ui, início" className="flex min-w-0 items-center gap-2.5 rounded-md font-mono outline-none focus-visible:ring-2 focus-visible:ring-ring" href="/">
+    <Link aria-label={ui.home} className="flex min-w-0 items-center gap-2.5 rounded-md font-mono outline-none focus-visible:ring-2 focus-visible:ring-ring" href={withLocale(locale, "/")}>
       <span className="shrink-0 font-bold text-[17px] text-foreground">
         cd<span className="text-brand-foreground">/</span>ui
       </span>

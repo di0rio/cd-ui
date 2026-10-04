@@ -7,25 +7,2247 @@ import { createI18n } from "better-intl/runtime";
 export const translations = {
 	en: {
 		app: {
+			blocks: {
+				metadata: {
+					title: "Blocks",
+					description: "Ready-made login, hero, pricing and settings blocks built with cd/ui. Copy them into your project with the shadcn CLI.",
+				},
+				index: {
+					badge: (v: { count: string }) => `${v.count} blocks`,
+					title: "Blocks. Whole screens, ready to ship.",
+					lead: "Logins, heroes, pricing, settings and more, composed from cd/ui components. Validated forms, loading states and light/dark included. Install one with a single command and make it yours.",
+					open: (v: { name: string }) => `Open ${v.name}`,
+				},
+				categories: {
+					auth: "authentication",
+					marketing: "marketing",
+					app: "application",
+				},
+				detail: {
+					back: "all blocks",
+					installTitle: "Install",
+					installIntro: "Adds the block and every cd/ui component it uses to your project:",
+					previewTitle: "Preview",
+					openFull: "open full page",
+					fullHint: "The preview follows your window width: use the size toggle or the full page view to check mobile layouts.",
+					devices: "Preview size",
+					desktop: "Desktop",
+					tablet: "Tablet",
+					mobile: "Mobile",
+					frame: "Block preview",
+					previous: "previous",
+					next: "next",
+				},
+				items: {
+					login01: {
+						title: "Login 01",
+						description: "Simple sign-in card with email, password, social login and Zod validation.",
+					},
+					login02: {
+						title: "Login 02",
+						description: "Split-screen sign-in with a brand panel and testimonial.",
+					},
+					signup01: {
+						title: "Signup 01",
+						description: "Account creation card with password confirmation and terms checkbox.",
+					},
+					forgotPassword01: {
+						title: "Forgot password 01",
+						description: "Password reset request that swaps to a confirmation message.",
+					},
+					verify01: {
+						title: "Verify 01",
+						description: "One-time-code verification with auto-advancing digit boxes and resend countdown.",
+					},
+					hero01: {
+						title: "Hero 01",
+						description: "Centered hero with announcement pill, calls to action and a product window.",
+					},
+					hero02: {
+						title: "Hero 02",
+						description: "Split hero with copy, stats and a layered product visual.",
+					},
+					features01: {
+						title: "Features 01",
+						description: "Bento-style feature grid with two wide cards.",
+					},
+					pricing01: {
+						title: "Pricing 01",
+						description: "Three pricing tiers with a monthly/yearly toggle.",
+					},
+					cta01: {
+						title: "CTA 01",
+						description: "High-contrast closing call-to-action banner.",
+					},
+					faq01: {
+						title: "FAQ 01",
+						description: "Two-column FAQ with an accordion.",
+					},
+					footer01: {
+						title: "Footer 01",
+						description: "Site footer with brand, status, link columns and legal row.",
+					},
+					settings01: {
+						title: "Settings 01",
+						description: "Profile settings form with Zod validation and notification switches.",
+					},
+					contact01: {
+						title: "Contact 01",
+						description: "Contact page with details and a validated message form.",
+					},
+					notFound01: {
+						title: "Not found 01",
+						description: "404 page with an oversized status code and two ways back.",
+					},
+				},
+			},
+			docs: {
+				layout: {
+					gettingStarted: "getting started",
+					navigation: "navigation",
+				},
+				intro: {
+					description: "React components built with Base UI and Tailwind CSS v4. Accessible by default, measured at build time, and installed as code in your project.",
+					toc: {
+						what: "What it is",
+						principles: "Principles",
+						when: "When to use",
+					},
+					whatTitle: "What it is",
+					what: {
+						before: "cd/ui is a collection of components you install with the shadcn CLI. Instead of pulling in another dependency, you get each file directly in ",
+						middle: " and can edit the code whenever you want. ",
+						after: " handles focus and keyboard behavior. cd/ui brings the styles and attention to size and motion.",
+					},
+					principlesTitle: "Principles",
+					principles: {
+						weight: {
+							title: "Weight measured at build time",
+							text: (v: { avg: string; max: string }) => `The build bundles each component and measures the result in gzip. The average is ${v.avg}; the largest is ${v.max}.`,
+						},
+						server: {
+							title: "Server by default",
+							text: (v: { server: string; count: string }) => `${v.server} of ${v.count} components run as React Server Components and send no JavaScript to the browser.`,
+						},
+						a11y: {
+							title: "Accessibility from the ground up",
+							text: "Base UI handles focus, keyboard, and aria attribute behavior. You compose these patterns without starting from scratch.",
+						},
+						simple: {
+							title: "Start without ceremony",
+							text: "Each component has one import and a lean API. In Form, pass a Zod schema and connect the fields by name.",
+						},
+						motion: {
+							title: "Motion in moderation",
+							text: "Short animations built with transform and opacity. Every component respects prefers-reduced-motion.",
+						},
+						code: {
+							title: "The code stays with you",
+							text: "The shadcn CLI copies each file into your project. Want to change a detail? Open the component and edit it directly.",
+						},
+					},
+					whenTitle: "When to use",
+					when: "Use it when you want to start with ready-made components without giving up control. It works in Next.js projects and other React apps with Tailwind CSS v4, especially when JavaScript size matters and you want to edit the code.",
+					start: "Want to get started? ",
+					startLink: "see how to install →",
+				},
+				installation: {
+					description: "Prepare your project, install the theme, and add your first components in three steps.",
+					toc: {
+						requirements: "Requirements",
+						shadcn: "1. shadcn CLI",
+						theme: "2. Theme",
+						components: "3. Components",
+						namespace: "Namespace shortcut",
+					},
+					requirements: "Requirements",
+					react: "React 19 and Tailwind CSS v4.",
+					alias: "An import alias configured (`@/*`), like the Next.js default.",
+					shadcnTitle: "1. Prepare your project with the shadcn CLI",
+					shadcn: "This command creates components.json, the cn utility, and the theme variables in your CSS. Skip this step if you already use shadcn.",
+					themeTitle: "2. Install the theme",
+					theme: "Add the cd/ui tokens to your globals.css: cream, graphite, and yellow colors, radii, and animation curves.",
+					componentsTitle: "3. Add components",
+					components: "Add one component or several at once. The CLI also installs dependencies such as Base UI and Zod when needed.",
+					namespaceTitle: "Namespace shortcut",
+					namespace: "Want to shorten the next commands? Register cd/ui once in components.json:",
+				},
+				theme: {
+					description: "Colors, radii, and animation curves come from CSS tokens. Adjust the values in your globals.css and give the theme a new look.",
+					toc: {
+						colors: "Colors",
+						radii: "Radii",
+						motion: "Motion",
+						customize: "Customize",
+					},
+					colorsTitle: "Colors",
+					colors: "Switch the theme with the button at the top and watch the values change. Components use these tokens instead of fixed colors.",
+					swatches: {
+						background: "background",
+						card: "surface",
+						foreground: "text",
+						mutedForeground: "secondary text",
+						brand: "accent",
+						brandForeground: "accent text",
+						border: "border",
+						destructive: "danger",
+					},
+					yellow: "Yellow works as a signal: it shows up in details like focus, check, an enabled switch, and the primary button, without taking over the whole screen.",
+					radiiTitle: "Radii",
+					motionTitle: "Motion",
+					motion: "Two curves set the rhythm of interactions: `ease-out` for entrances and responses and `ease-in-out` for elements that move. Durations stay between 100 and 250ms.",
+					motionCode: "--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entrances, clicks, opening popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* tabs indicator, switch */",
+					customizeTitle: "Customize",
+					customize: "Want a different palette? Change the values in your globals.css. Here, the yellow accent turns green:",
+				},
+				forms: {
+					description: "Pass a Zod schema to Form and connect each field through the name prop. Validate when leaving a field and get typed data on submit.",
+					toc: {
+						example: "Example",
+						how: "How it works",
+						mini: "Even lighter with zod/mini",
+						errors: "Server errors",
+						install: "Install",
+					},
+					exampleTitle: "Example",
+					example: "Try the flow: submit the empty form, leave an invalid field, and fix the value.",
+					howTitle: "How it works",
+					how: {
+						one: "The `Form` receives the schema and prepares field validation.",
+						two: "Each `Field` with a `name` validates its own schema key when you leave the field. Change that timing with `validationMode`.",
+						three: "On submit, the whole schema is validated. If there is an error, it appears in the matching `FieldError` and focus moves to the first invalid field. If everything is valid, `onSubmit` receives the data converted and typed by the schema.",
+					},
+					schemaComment: "number, not string",
+					tip: "Tip: with a schema, prefer `inputMode=\"email\"` over `type=\"email\"`. The mobile keyboard stays the same; the error message comes from the schema, not the browser.",
+					miniTitle: "Even lighter with zod/mini",
+					mini: "Form imports only the core of Zod (`zod/v4/core`), so it also accepts schemas from `zod/mini`. With it, the bundle gets leaner.",
+					errorsTitle: "Server errors",
+					errors: "When the back end finds an error, such as an email that is already registered, pass the message through the errors prop:",
+					installTitle: "Install",
+				},
+				performance: {
+					description: "See how much each component weighs in gzip. The measurement counts cd/ui code and leaves external libraries out.",
+					toc: {
+						numbers: "The numbers",
+						light: "How it stays light",
+						method: "How we measure",
+					},
+					stats: {
+						avg: "average per component",
+						noJs: "no browser JS",
+						max: "largest component",
+					},
+					numbersTitle: "The numbers",
+					client: "client",
+					server: "server",
+					lightTitle: "How it stays light",
+					techniques: {
+						server: {
+							title: "Server by default",
+							text: "Stateless components don't need \"use client\": they run on the server and send no JS to the browser.",
+						},
+						imports: {
+							title: "Lean imports",
+							text: "Each component imports only the Base UI module it uses, such as @base-ui/react/dialog.",
+						},
+						css: {
+							title: "CSS where it's enough",
+							text: "Animations, Textarea growth, Spinner, and Skeleton use CSS, with no extra JavaScript.",
+						},
+						zod: {
+							title: "Zod through the core",
+							text: "Form uses zod/v4/core and accepts zod/mini schemas without pulling in the full API.",
+						},
+						motion: {
+							title: "Light motion",
+							text: "Animations use transform and opacity to avoid recalculating layout.",
+						},
+						measured: {
+							title: "Measured at build time",
+							text: "esbuild bundles each component and gzip measures the result. No guessing.",
+						},
+					},
+					methodTitle: "How we measure",
+					method: "The scripts/metrics.mjs script bundles each component with esbuild, as minified ESM, and measures the result in gzip level 9. React, Base UI, Zod, lucide, and class utilities are left out. This way, the number shows the cost of cd/ui itself; external libraries are shared in your project's bundle.",
+				},
+				component: {
+					breadcrumb: "components",
+					runsOnServer: "runs on the server · 0 JS",
+					toc: {
+						installation: "Installation",
+						usage: "Usage",
+						examples: "Examples",
+						keyboard: "Keyboard",
+						accessibility: "Accessibility",
+					},
+					installMethod: "Install method",
+					manual: "manual",
+					firstTime: "first time? install the theme first: see ",
+					firstTimeLink: "installation",
+					installDeps: "install the dependencies:",
+					copyFile: "copy the file into your project:",
+					other: "Other components",
+					previous: "previous",
+					next: "next",
+				},
+			},
 			metadata: {
 				title: "cd/ui · lightweight, accessible React components",
 				description: "Accessible React components built with Base UI and Tailwind CSS v4. Build-measured bundle size, installed as source code with the shadcn CLI.",
 			},
-			locale: {
-				english: "English",
-				portuguese: "Portuguese",
+			layout: {
+				mainNav: "Main navigation",
+				docs: "docs",
+				components: "components",
+				blocks: "blocks",
+				madeBy: "made by ",
+				sourceNote: "Source available on GitHub.",
+			},
+			home: {
+				badge: (v: { count: string }) => `v0.2 · ${v.count} components`,
+				title: "Lightweight components. Your code.",
+				lead: "React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod-powered forms. Install with the shadcn CLI and shape every component to fit your project.",
+				install: "install cd/ui",
+				browse: "browse components",
+				stats: {
+					avg: "avg. gzip size",
+					noJs: "no browser JS",
+					accessible: "accessible by default",
+				},
+				sticker: "want to try one?",
+				installIntro: "Install the theme and add your first component to your project:",
+				componentsTitle: "components",
+				componentsLead: "See each component gzip size and where it runs.",
+				measure: "how we measure →",
+				client: "client",
+				server: "server · 0 js",
+			},
+		},
+		components: {
+			ui: {
+				search: {
+					open: "search docs…",
+					label: "Search the documentation",
+					input: "Search",
+					placeholder: "component or topic…",
+					empty: "Nothing found for",
+				},
+				sidebar: {
+					label: "Documentation",
+				},
+				toc: {
+					label: "On this page",
+					title: "on this page",
+				},
+				home: "cd/ui, home",
+				copy: {
+					copy: "Copy",
+					copied: "Copied",
+				},
+				theme: {
+					toLight: "Switch to light theme",
+					toDark: "Switch to dark theme",
+				},
+				install: {
+					packageManager: "Package manager",
+				},
+				preview: {
+					view: "View",
+					preview: "preview",
+					code: "code",
+				},
+				language: {
+					label: "Language",
+					en: "English",
+					pt: "Portuguese",
+				},
+			},
+			docs: {
+				tables: {
+					prop: "prop",
+					type: "type",
+					default: "default",
+					key: "key",
+					action: "action",
+				},
+			},
+		},
+		docs: {
+			guides: {
+				intro: {
+					title: "Introduction",
+					description: "Get to know the library and the choices behind it.",
+				},
+				installation: {
+					title: "Installation",
+					description: "From a ready project to your first component.",
+				},
+				theme: {
+					title: "Theme",
+					description: "Colors, corners, and motion as CSS tokens.",
+				},
+				forms: {
+					title: "Forms with Zod",
+					description: "Connect Zod schemas to your form fields.",
+				},
+				performance: {
+					title: "Performance",
+					description: "See how we measure the size of each component.",
+				},
+			},
+			categories: {
+				actions: "Actions",
+				display: "Display",
+				feedback: "Feedback",
+				form: "Form",
+				overlay: "Overlay",
+				navigation: "Navigation",
+			},
+			catalog: {
+				button: "Button with variants, sizes, a loading state, and the option to render as a link.",
+				badge: "Compact badge to show a status, count, or category.",
+				card: "Group related content into a header, body, and footer.",
+				kbd: "Show a key or shortcut styled like a keycap.",
+				separator: "Separate content with a horizontal or vertical line.",
+				skeleton: "Reserve space for content while it loads.",
+				spinner: "Indicate loading with a CSS-animated SVG, no JavaScript.",
+				input: "Text field with visual states for focus, error, and disabled.",
+				textarea: "Long text field that grows with its content, no JavaScript.",
+				field: "Connect label, control, help text, and error with ids and aria attributes.",
+				form: "Pass a Zod schema and validate fields without adding another form library.",
+				checkbox: "Checkbox with checked, unchecked, and indeterminate states.",
+				switch: "Toggle an option with immediate effect.",
+				select: "Pick an option from a list that opens from the button.",
+				dialog: "Modal window with managed focus that returns on close.",
+				tooltip: "Show a short hint on hover or keyboard navigation.",
+				tabs: "Switch content with tabs and an indicator that follows the selection.",
+				accordion: "Stacked sections that expand and collapse with a smooth height animation.",
+				alert: "An inline message for information, success, or errors.",
+				avatar: "A round profile picture with a fallback for when the image is missing.",
+				"dropdown-menu": "A menu of actions that opens from a button, with checkable items, radio groups, and submenus.",
+				popover: "A floating panel anchored to a button that can hold interactive content.",
+				"radio-group": "Pick exactly one option from a small set, with arrow-key navigation.",
+				slider: "Pick a number or a range by dragging a thumb or using the arrow keys.",
+				progress: "A bar that shows how far a task has come, or that it is still working.",
+				toast: "Stacked notifications that dismiss themselves, with swipe and keyboard support.",
+				table: "A styled native table for rows and columns of data.",
+			},
+			content: {
+				shared: {
+					className: "Extra classes, merged with `cn` (yours wins).",
+					render: "Swaps the rendered element while keeping behavior and style (e.g. become an `<a>` or a `<Link>`).",
+					visualStyle: "Visual style.",
+					controlledOrInitial: "Controlled or initial state.",
+					formSubmit: "To submit in a form.",
+					formState: "Disabled and required states.",
+					root: "Root.",
+					validationMode: "When to validate.",
+				},
+				button: {
+					ex: {
+						default: {
+							title: "Variants",
+						},
+						sizes: {
+							title: "Sizes",
+							description: "Three heights and two square icon sizes.",
+						},
+						loading: {
+							title: "Loading",
+							description: "`loading` swaps the content for a spinner without changing the button width and blocks repeated clicks.",
+						},
+						link: {
+							title: "As a link",
+							description: "With `render`, the button becomes an `<a>` (or Next's `<Link>`) with the same look.",
+						},
+					},
+					api: {
+						Button: {
+							description: "Native button with variants. Accepts every prop of Base UI's `Button`.",
+							props: {
+								size: "Height and spacing.",
+								loading: "Shows the spinner, keeps the width, sets `aria-busy`, and blocks clicks (the button stays focusable).",
+								nativeButton: "Pass `false` when using `render` with an element that isn't a `<button>`.",
+							},
+						},
+					},
+					kb: {
+						enter: "Activates the button.",
+					},
+					a11y: {
+						iconOnly: "Icon-only buttons need an `aria-label`.",
+						loading: "During `loading` the button stays focusable (`focusableWhenDisabled`), so focus doesn't jump elsewhere.",
+					},
+				},
+				badge: {
+					ex: {
+						default: {
+							title: "Variants",
+						},
+					},
+					api: {
+						Badge: {
+							description: "A styled `<span>`. Server component: sends no JS.",
+						},
+					},
+				},
+				card: {
+					ex: {
+						default: {
+							title: "Card with actions",
+						},
+					},
+					api: {
+						Card: {
+							description: "Surface with a thin border and a slightly raised background. Server component.",
+						},
+						header: {
+							description: "Header, title (`<h3>`), and description.",
+						},
+						content: {
+							description: "Body and footer (row of actions).",
+						},
+					},
+				},
+				kbd: {
+					ex: {
+						default: {
+							title: "Shortcuts in text",
+						},
+					},
+					api: {
+						Kbd: {
+							description: "A `<kbd>` that looks like a key. Server component.",
+						},
+					},
+				},
+				separator: {
+					ex: {
+						default: {
+							title: "Horizontal and vertical",
+						},
+					},
+					api: {
+						Separator: {
+							description: "1px line. Server component.",
+							props: {
+								orientation: "Line direction.",
+								decorative: "If `false`, it becomes `role=\"separator\"` and is announced by screen readers.",
+							},
+						},
+					},
+				},
+				skeleton: {
+					ex: {
+						default: {
+							title: "Loading list",
+						},
+					},
+					api: {
+						Skeleton: {
+							description: "Block with a slow pulse. Set the size with classes. Server component.",
+						},
+					},
+					a11y: {
+						hidden: "It is `aria-hidden`: announce the loading somewhere else (e.g. `aria-busy` on the container).",
+					},
+				},
+				spinner: {
+					ex: {
+						default: {
+							title: "Sizes and color",
+						},
+					},
+					api: {
+						Spinner: {
+							description: "SVG spinning via CSS. Inherits the text color. Server component.",
+							props: {
+								label: "Announced text (`role=\"status\"`).",
+							},
+						},
+					},
+				},
+				input: {
+					ex: {
+						default: {
+							title: "States",
+						},
+					},
+					api: {
+						Input: {
+							description: "Text field. Inside a `Field`, it gets its id, `aria-describedby`, and error state on its own.",
+							props: {
+								props: "Everything from the native `<input>` and Base UI's `Input`.",
+							},
+						},
+					},
+				},
+				textarea: {
+					ex: {
+						default: {
+							title: "With label",
+						},
+					},
+					api: {
+						Textarea: {
+							description: "`<textarea>` that grows with its content via `field-sizing: content` (no JS). Integrates with `Field`.",
+							props: {
+								props: "Everything from the native `<textarea>`.",
+							},
+						},
+					},
+				},
+				field: {
+					ex: {
+						default: {
+							title: "Native validation",
+							description: "Without a schema, `Field` uses HTML validation (`required`, `type=\"email\"`…).",
+						},
+					},
+					api: {
+						Field: {
+							description: "Groups the parts. Inside a `Form` with a `schema`, it validates by `name` with no configuration.",
+							props: {
+								name: "Field name. Links the value to the form and to the schema key.",
+								validate: "Custom validation. If provided, it takes priority over the schema.",
+								validationModeDefault: "inherits from Form",
+								disabledInvalid: "States controlled from outside.",
+							},
+						},
+						FieldLabel: {
+							description: "`<label>` linked to the control.",
+						},
+						FieldDescription: {
+							description: "Help text, linked through `aria-describedby`.",
+						},
+						FieldError: {
+							description: "Error message. Without `match`, it shows whatever the validation returns.",
+							props: {
+								match: "Shows only for one kind of error (e.g. `\"valueMissing\"`).",
+							},
+						},
+					},
+					a11y: {
+						error: "The error is added to the control's `aria-describedby` and the field gets `aria-invalid`.",
+						label: "The label is linked through `for`/`id` automatically.",
+					},
+				},
+				form: {
+					ex: {
+						zod: {
+							title: "Sign-up with Zod",
+							description: "Pass the schema and give the fields a `name`. Each field validates when you leave it; submit only happens when everything is valid.",
+						},
+					},
+					api: {
+						Form: {
+							description: "`<form>` with schema validation. It uses only Zod's core (`zod/v4/core`), so it accepts schemas from `zod` and `zod/mini`.",
+							props: {
+								schema: "Zod schema. Each `Field` with a `name` validates its own key.",
+								onSubmit: "Only runs with valid data, already converted and typed.",
+								validationMode: "When each field validates.",
+								errors: "Errors coming from outside (e.g. a server response).",
+							},
+						},
+					},
+					a11y: {
+						errors: "Errors appear in each field's `FieldError` and are linked to the control through `aria-describedby`.",
+						focus: "On submit with errors, focus moves to the first invalid field (Base UI behavior).",
+						inputMode: "With a schema, prefer `inputMode=\"email\"` over `type=\"email\"`: the native type makes the browser show its own message (in the system language) instead of the schema's.",
+					},
+				},
+				checkbox: {
+					ex: {
+						default: {
+							title: "With label",
+						},
+						indeterminate: {
+							title: "Indeterminate",
+							description: "A parent that reflects its children: checked, unchecked, or partial.",
+						},
+					},
+					api: {
+						Checkbox: {
+							description: "Checkbox. The check is an SVG stroke that draws itself in 150ms.",
+							props: {
+								onCheckedChange: "Called when checked or unchecked.",
+								indeterminate: "Shows the \"partial\" dash.",
+							},
+						},
+					},
+					kb: {
+						space: "Checks or unchecks.",
+					},
+				},
+				switch: {
+					ex: {
+						default: {
+							title: "Settings",
+						},
+					},
+					api: {
+						Switch: {
+							description: "Toggle. Use it for immediate effect; for \"apply later\", prefer Checkbox.",
+							props: {
+								onCheckedChange: "Called when toggled.",
+							},
+						},
+					},
+					kb: {
+						toggle: "Toggles.",
+					},
+				},
+				select: {
+					ex: {
+						default: {
+							title: "With label",
+						},
+					},
+					api: {
+						Select: {
+							description: "Root. Pass `items` so the displayed value uses the right label before the list opens.",
+							props: {
+								items: "List of options (used by `SelectValue`).",
+								value: "Controlled or initial value.",
+								onValueChange: "Called when an option is chosen.",
+							},
+						},
+						trigger: {
+							description: "Button that opens the list and the text of the current value.",
+						},
+						SelectPopup: {
+							description: "List. Opens from the trigger in 150ms, closes in 100ms.",
+						},
+						SelectItem: {
+							description: "Option with a yellow check when chosen.",
+							props: {
+								value: "Option value.",
+							},
+						},
+					},
+					kb: {
+						open: "Opens the list.",
+						navigate: "Moves between options.",
+						choose: "Chooses the option.",
+						close: "Closes without changing.",
+						letter: "Jumps to the option that starts with the letter.",
+					},
+				},
+				dialog: {
+					ex: {
+						default: {
+							title: "Confirmation",
+						},
+					},
+					api: {
+						Dialog: {
+							description: "Root.",
+							props: {
+								open: "Open state control.",
+							},
+						},
+						trigger: {
+							description: "Open and close. Use `render` to use your own `Button`.",
+						},
+						DialogPopup: {
+							description: "Centered window with a dimmed backdrop. Enters with a scale (200ms), leaves faster (150ms).",
+							props: {
+								showClose: "Shows the X in the corner.",
+								closeLabel: "Label of the X for screen readers.",
+							},
+						},
+						structure: {
+							description: "Content structure. Title and description are announced when it opens.",
+						},
+					},
+					kb: {
+						esc: "Closes and returns focus to the trigger.",
+						tab: "Cycles only inside the window.",
+					},
+				},
+				tooltip: {
+					ex: {
+						default: {
+							title: "Toolbar",
+							description: "Move from one button to the next: after the first, tooltips appear instantly.",
+						},
+					},
+					api: {
+						TooltipProvider: {
+							description: "Shares the delay between neighboring tooltips.",
+							props: {
+								delay: "Delay (ms) of the first tooltip.",
+							},
+						},
+						root: {
+							description: "Root and trigger.",
+						},
+						TooltipPopup: {
+							description: "Bubble. Grows from the trigger in 125ms; the following ones appear without animation.",
+							props: {
+								side: "Preferred side.",
+								sideOffset: "Distance from the trigger (px).",
+							},
+						},
+					},
+					a11y: {
+						focus: "Also opens with keyboard focus.",
+						interactive: "Don't put interactive content inside the tooltip: use a Popover.",
+					},
+				},
+				tabs: {
+					ex: {
+						default: {
+							title: "Periods",
+						},
+					},
+					api: {
+						Tabs: {
+							description: "Root.",
+							props: {
+								value: "Active tab.",
+							},
+						},
+						TabsList: {
+							description: "List with the sliding indicator (250ms, strong ease-in-out).",
+						},
+						tab: {
+							description: "Tab and content, linked by `value`.",
+							props: {
+								value: "Tab identifier.",
+							},
+						},
+					},
+					kb: {
+						arrows: "Moves between tabs.",
+						homeEnd: "First and last tab.",
+					},
+				},
+				accordion: {
+					ex: {
+						default: {
+							title: "FAQ",
+						},
+					},
+					api: {
+						Accordion: {
+							description: "Root. By default only one item stays open; pass `multiple` to allow several.",
+							props: {
+								value: "Open items, as an array of item values. Controlled or initial.",
+								multiple: "Allows more than one item open at the same time.",
+								onValueChange: "Called when an item opens or closes.",
+							},
+						},
+						AccordionItem: {
+							description: "One section, identified by `value`.",
+							props: {
+								value: "Item identifier.",
+							},
+						},
+						AccordionTrigger: {
+							description: "Heading button. The chevron turns 180° in 200ms as the panel opens.",
+						},
+						AccordionPanel: {
+							description: "Content. Animates its height in 200ms and is removed from the page while closed.",
+						},
+					},
+					kb: {
+						toggle: "Opens or closes the focused item.",
+						arrows: "Moves focus between headings.",
+						homeEnd: "Focuses the first or last heading.",
+					},
+					a11y: {
+						structure: "Each trigger sits inside a heading and is linked to its panel with `aria-expanded` and `aria-controls`.",
+					},
+				},
+				alert: {
+					ex: {
+						default: {
+							title: "Variants",
+						},
+					},
+					api: {
+						Alert: {
+							description: "Block message with `role=\"alert\"`. An icon placed directly inside takes the first column. Server component.",
+						},
+						parts: {
+							description: "Title and description of the message.",
+						},
+					},
+					a11y: {
+						role: "`role=\"alert\"` is announced right away by screen readers: use it for important messages, and override it with `role=\"status\"` for gentle ones.",
+					},
+				},
+				avatar: {
+					ex: {
+						default: {
+							title: "Image and fallback",
+						},
+					},
+					api: {
+						Avatar: {
+							description: "Round container, 40px by default. Change the size with `className` (e.g. `size-12`).",
+						},
+						AvatarImage: {
+							description: "The picture. It only shows after loading successfully.",
+						},
+						AvatarFallback: {
+							description: "Shown while the image loads or if it fails (usually initials).",
+							props: {
+								delay: "Wait (ms) before showing, to avoid a flash on fast loads.",
+							},
+						},
+					},
+					a11y: {
+						alt: "Give `AvatarImage` an `alt` with the person's name, or an empty `alt` when the name is written next to it.",
+					},
+				},
+				"dropdown-menu": {
+					ex: {
+						default: {
+							title: "Actions menu",
+						},
+					},
+					api: {
+						DropdownMenu: {
+							description: "Root. Also used for each submenu, through `DropdownMenuSub`.",
+							props: {
+								open: "Open state control.",
+							},
+						},
+						trigger: {
+							description: "Button that opens the menu. Use `render` to use your own `Button`.",
+						},
+						DropdownMenuPopup: {
+							description: "List of actions. Opens from the trigger in 150ms, closes in 100ms.",
+							props: {
+								side: "Preferred side. Submenus open to the right on their own.",
+								align: "Alignment relative to the trigger.",
+								sideOffset: "Distance from the trigger (px).",
+							},
+						},
+						DropdownMenuItem: {
+							description: "Action. The menu closes after it is chosen.",
+							props: {
+								variant: "Use `destructive` for dangerous actions.",
+								onClick: "Called when the item is chosen.",
+							},
+						},
+						checkable: {
+							description: "Items with a check. The checkbox item toggles on its own; radio items live inside a `DropdownMenuRadioGroup`.",
+						},
+						structure: {
+							description: "Organize the list: `DropdownMenuGroup` with a `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut`, and `DropdownMenuSub` with `DropdownMenuSubTrigger`.",
+						},
+					},
+					kb: {
+						open: "Opens the menu from the trigger.",
+						navigate: "Moves between items.",
+						choose: "Chooses the item.",
+						sub: "Opens and closes a submenu.",
+						close: "Closes and returns focus to the trigger.",
+						letter: "Jumps to the item that starts with the letter.",
+					},
+					a11y: {
+						shortcut: "`DropdownMenuShortcut` only displays the hint. Wire up the real shortcut yourself.",
+					},
+				},
+				popover: {
+					ex: {
+						default: {
+							title: "With a form",
+						},
+					},
+					api: {
+						Popover: {
+							description: "Root.",
+							props: {
+								open: "Open state control.",
+							},
+						},
+						trigger: {
+							description: "Open and close. Use `render` to use your own `Button`.",
+						},
+						PopoverPopup: {
+							description: "Panel that grows from the trigger in 150ms and closes in 100ms.",
+							props: {
+								side: "Preferred side.",
+								align: "Alignment relative to the trigger.",
+								sideOffset: "Distance from the trigger (px).",
+							},
+						},
+						structure: {
+							description: "Title and description are linked to the panel for screen readers.",
+						},
+					},
+					kb: {
+						open: "Opens or closes from the trigger.",
+						esc: "Closes and returns focus to the trigger.",
+						tab: "Moves through the content of the panel.",
+					},
+					a11y: {
+						interactive: "Unlike a Tooltip, a Popover can hold buttons and fields. Use `PopoverTitle` so the panel has a name.",
+					},
+				},
+				"radio-group": {
+					ex: {
+						default: {
+							title: "Plans",
+						},
+					},
+					api: {
+						RadioGroup: {
+							description: "Group of exclusive options. Give it a name with `aria-label` or a visible label.",
+							props: {
+								value: "Controlled or initial value.",
+								onValueChange: "Called when another option is chosen.",
+							},
+						},
+						Radio: {
+							description: "One option. The dot inside grows in 150ms when selected.",
+							props: {
+								value: "Option value.",
+							},
+						},
+					},
+					kb: {
+						arrows: "Moves the selection between options.",
+						tab: "Enters and leaves the group.",
+						space: "Selects the focused option.",
+					},
+					a11y: {
+						label: "Wrap each `Radio` in a `<label>` so its text is the accessible name and clicking the text selects it.",
+					},
+				},
+				slider: {
+					ex: {
+						default: {
+							title: "Single value and range",
+						},
+					},
+					api: {
+						Slider: {
+							description: "A number renders one thumb; an array renders one thumb per value (a range).",
+							props: {
+								value: "Controlled or initial value: a number or an array of numbers.",
+								onValueChange: "Called while dragging.",
+								onValueCommitted: "Called when you let go.",
+								range: "Limits and step.",
+								thumbLabel: "Accessible name of each thumb. Use an array for a range.",
+							},
+						},
+					},
+					kb: {
+						arrows: "Changes the value by one step.",
+						pageKeys: "Changes the value by a larger step.",
+						homeEnd: "Jumps to the minimum or maximum.",
+					},
+					a11y: {
+						label: "Each thumb needs an accessible name: use `thumbLabel` or a visible label.",
+					},
+				},
+				progress: {
+					ex: {
+						default: {
+							title: "Determinate and indeterminate",
+						},
+					},
+					api: {
+						Progress: {
+							description: "Bar from 0 to 100. The fill moves in 300ms. With a `null` value it becomes indeterminate.",
+							props: {
+								value: "Current progress, or `null` when unknown.",
+								range: "Limits of the scale.",
+							},
+						},
+						parts: {
+							description: "`ProgressLabel` names the bar and `ProgressValue` shows the percentage.",
+						},
+					},
+					a11y: {
+						role: "It has `role=\"progressbar\"` with `aria-valuenow`. Always name it with `ProgressLabel` or `aria-label`.",
+					},
+				},
+				toast: {
+					ex: {
+						default: {
+							title: "Success and error",
+						},
+					},
+					api: {
+						ToastProvider: {
+							description: "Wrap your app once. It renders the stack of notifications in the bottom-right corner.",
+							props: {
+								timeout: "Time (ms) before a toast dismisses itself. Use `0` to keep it.",
+								limit: "Maximum number of visible toasts.",
+								closeLabel: "Label of the X for screen readers.",
+							},
+						},
+						useToast: {
+							description: "Hook that returns the manager. Call `add({ title, description, type })` to show a toast; it also has `close` and `update`.",
+							props: {
+								content: "Text shown in the toast.",
+								type: "Free text. `success` and `error` get a colored border.",
+							},
+						},
+						createToastManager: {
+							description: "Creates a manager you can use outside React (pass it to `ToastProvider` as `toastManager`).",
+						},
+					},
+					kb: {
+						f6: "Moves focus to the toast area.",
+						tab: "Moves between toasts and their close buttons.",
+						activate: "Dismisses the toast when its X is focused.",
+					},
+					a11y: {
+						live: "Toasts are announced by screen readers without taking focus. Don't put the only copy of important information in a toast.",
+						pause: "The timer pauses on hover and while the window is out of focus, so there is time to read.",
+					},
+				},
+				table: {
+					ex: {
+						default: {
+							title: "Invoices",
+						},
+					},
+					api: {
+						Table: {
+							description: "`<table>` inside a container that scrolls sideways on small screens. Server component.",
+						},
+						sections: {
+							description: "`TableHeader`, `TableBody`, and `TableFooter` map to `<thead>`, `<tbody>`, and `<tfoot>`.",
+						},
+						cells: {
+							description: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`.",
+						},
+					},
+					a11y: {
+						semantics: "It keeps native table semantics. Use `TableHead` (`<th>`) for headers and `TableCaption` to name the table.",
+					},
+				},
 			},
 		},
 	},
 	pt: {
 		app: {
+			blocks: {
+				metadata: {
+					title: "Blocos",
+					description: "Blocos prontos de login, hero, preços e configurações feitos com cd/ui. Copie pro seu projeto com o shadcn CLI.",
+				},
+				index: {
+					badge: (v: { count: string }) => `${v.count} blocos`,
+					title: "Blocos. Telas inteiras, prontas pra usar.",
+					lead: "Logins, heroes, preços, configurações e mais, montados com os componentes do cd/ui. Formulários validados, estados de carregamento e claro/escuro inclusos. Instale um com um comando e deixe com a sua cara.",
+					open: (v: { name: string }) => `Abrir ${v.name}`,
+				},
+				categories: {
+					auth: "autenticação",
+					marketing: "marketing",
+					app: "aplicação",
+				},
+				detail: {
+					back: "todos os blocos",
+					installTitle: "Instalação",
+					installIntro: "Adiciona o bloco e todos os componentes do cd/ui que ele usa ao seu projeto:",
+					previewTitle: "Preview",
+					openFull: "abrir em tela cheia",
+					fullHint: "O preview segue a largura da janela: use o seletor de tamanho ou a tela cheia pra conferir o layout no celular.",
+					devices: "Tamanho do preview",
+					desktop: "Desktop",
+					tablet: "Tablet",
+					mobile: "Celular",
+					frame: "Preview do bloco",
+					previous: "anterior",
+					next: "próximo",
+				},
+				items: {
+					login01: {
+						title: "Login 01",
+						description: "Card de login simples com e-mail, senha, login social e validação com Zod.",
+					},
+					login02: {
+						title: "Login 02",
+						description: "Login em tela dividida, com painel da marca e depoimento.",
+					},
+					signup01: {
+						title: "Cadastro 01",
+						description: "Card de criação de conta com confirmação de senha e aceite dos termos.",
+					},
+					forgotPassword01: {
+						title: "Esqueci a senha 01",
+						description: "Pedido de redefinição de senha que troca por uma mensagem de confirmação.",
+					},
+					verify01: {
+						title: "Verificação 01",
+						description: "Verificação por código com caixas que avançam sozinhas e contagem pra reenviar.",
+					},
+					hero01: {
+						title: "Hero 01",
+						description: "Hero centralizado com aviso de novidade, chamadas pra ação e janela do produto.",
+					},
+					hero02: {
+						title: "Hero 02",
+						description: "Hero dividido com texto, números e um visual do produto em camadas.",
+					},
+					features01: {
+						title: "Recursos 01",
+						description: "Grade de recursos em estilo bento, com dois cards largos.",
+					},
+					pricing01: {
+						title: "Preços 01",
+						description: "Três planos de preço com alternância mensal/anual.",
+					},
+					cta01: {
+						title: "CTA 01",
+						description: "Banner final de chamada pra ação, em alto contraste.",
+					},
+					faq01: {
+						title: "FAQ 01",
+						description: "Perguntas frequentes em duas colunas, com accordion.",
+					},
+					footer01: {
+						title: "Rodapé 01",
+						description: "Rodapé com marca, status, colunas de links e linha legal.",
+					},
+					settings01: {
+						title: "Configurações 01",
+						description: "Formulário de perfil com validação Zod e chaves de notificação.",
+					},
+					contact01: {
+						title: "Contato 01",
+						description: "Página de contato com informações e formulário de mensagem validado.",
+					},
+					notFound01: {
+						title: "Não encontrado 01",
+						description: "Página 404 com código gigante e dois caminhos de volta.",
+					},
+				},
+			},
+			docs: {
+				layout: {
+					gettingStarted: "começando",
+					navigation: "navegação",
+				},
+				intro: {
+					description: "Componentes React com Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build e instalados como código no seu projeto.",
+					toc: {
+						what: "O que é",
+						principles: "Princípios",
+						when: "Quando usar",
+					},
+					whatTitle: "O que é",
+					what: {
+						before: "O cd/ui é uma coleção de componentes que você instala pelo shadcn CLI. Em vez de puxar outra dependência, você recebe cada arquivo direto em ",
+						middle: " e pode editar o código quando quiser. O ",
+						after: " cuida dos comportamentos de foco e teclado. O cd/ui entra com estilos e atenção a tamanho e movimento.",
+					},
+					principlesTitle: "Princípios",
+					principles: {
+						weight: {
+							title: "Peso medido no build",
+							text: (v: { avg: string; max: string }) => `O build empacota cada componente e mede o resultado em gzip. A média é ${v.avg}; o maior tem ${v.max}.`,
+						},
+						server: {
+							title: "Servidor por padrão",
+							text: (v: { server: string; count: string }) => `${v.server} dos ${v.count} componentes rodam como React Server Components e não enviam JavaScript pro navegador.`,
+						},
+						a11y: {
+							title: "Acessibilidade desde a base",
+							text: "O Base UI cuida dos comportamentos de foco, teclado e atributos aria. Você compõe esses padrões sem começar do zero.",
+						},
+						simple: {
+							title: "Comece sem cerimônia",
+							text: "Cada componente tem uma importação e uma API enxuta. No Form, passe um schema Zod e conecte os campos pelo name.",
+						},
+						motion: {
+							title: "Movimento na medida",
+							text: "Animações curtas, feitas com transform e opacity. Todos os componentes respeitam prefers-reduced-motion.",
+						},
+						code: {
+							title: "O código fica com você",
+							text: "O shadcn CLI copia cada arquivo pro seu projeto. Quer mudar um detalhe? Abra o componente e edite direto.",
+						},
+					},
+					whenTitle: "Quando usar",
+					when: "Use quando quiser começar com componentes prontos sem abrir mão do controle. Funciona em projetos Next.js e em outros apps React com Tailwind CSS v4, especialmente quando o tamanho do JavaScript importa e você quer editar o código.",
+					start: "Quer começar? ",
+					startLink: "veja como instalar →",
+				},
+				installation: {
+					description: "Prepare o projeto, instale o tema e adicione seus primeiros componentes em três passos.",
+					toc: {
+						requirements: "Requisitos",
+						shadcn: "1. shadcn CLI",
+						theme: "2. Tema",
+						components: "3. Componentes",
+						namespace: "Atalho com namespace",
+					},
+					requirements: "Requisitos",
+					react: "React 19 e Tailwind CSS v4.",
+					alias: "Um alias de importação configurado (`@/*`), como o padrão do Next.js.",
+					shadcnTitle: "1. Prepare o projeto com o shadcn CLI",
+					shadcn: "Esse comando cria o components.json, o utilitário cn e as variáveis de tema no CSS. Pule esta etapa se já usa shadcn.",
+					themeTitle: "2. Instalar o tema",
+					theme: "Adicione os tokens do cd/ui ao seu globals.css: cores creme, grafite e amarelo, raios e curvas de animação.",
+					componentsTitle: "3. Adicionar componentes",
+					components: "Adicione um componente ou vários de uma vez. O CLI também instala dependências como Base UI e Zod quando necessário.",
+					namespaceTitle: "Atalho com namespace",
+					namespace: "Quer encurtar os próximos comandos? Registre o cd/ui uma vez no components.json:",
+				},
+				theme: {
+					description: "Cores, raios e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema.",
+					toc: {
+						colors: "Cores",
+						radii: "Raios",
+						motion: "Movimento",
+						customize: "Personalizar",
+					},
+					colorsTitle: "Cores",
+					colors: "Troque o tema no botão do topo e veja os valores mudarem. Os componentes usam esses tokens em vez de cores fixas.",
+					swatches: {
+						background: "fundo",
+						card: "superfície",
+						foreground: "texto",
+						mutedForeground: "texto secundário",
+						brand: "destaque",
+						brandForeground: "destaque em texto",
+						border: "borda",
+						destructive: "perigo",
+					},
+					yellow: "O amarelo funciona como um sinal: aparece em detalhes como foco, check, switch ligado e botão principal, sem tomar a tela toda.",
+					radiiTitle: "Raios",
+					motionTitle: "Movimento",
+					motion: "Duas curvas dão ritmo às interações: `ease-out` para entradas e respostas e `ease-in-out` para elementos que se deslocam. Durações ficam entre 100 e 250ms.",
+					motionCode: "--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entradas, cliques, abrir popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* indicador de abas, switch */",
+					customizeTitle: "Personalizar",
+					customize: "Quer outra paleta? Troque os valores no seu globals.css. Aqui, o destaque amarelo vira verde:",
+				},
+				forms: {
+					description: "Passe um schema Zod pro Form e conecte cada campo pela prop name. Valide ao sair do campo e receba dados tipados no envio.",
+					toc: {
+						example: "Exemplo",
+						how: "Como funciona",
+						mini: "Ainda mais leve com zod/mini",
+						errors: "Erros do servidor",
+						install: "Instalar",
+					},
+					exampleTitle: "Exemplo",
+					example: "Teste o fluxo: envie o formulário vazio, saia de um campo inválido e corrija o valor.",
+					howTitle: "Como funciona",
+					how: {
+						one: "O `Form` recebe o schema e prepara a validação dos campos.",
+						two: "Cada `Field` com `name` valida a própria chave do schema quando você sai do campo. Mude esse momento com `validationMode`.",
+						three: "No envio, o schema inteiro é validado. Se houver erro, ele aparece no `FieldError` correspondente e o foco vai pro primeiro campo inválido. Se estiver tudo certo, `onSubmit` recebe os dados convertidos e tipados pelo schema.",
+					},
+					schemaComment: "number, não string",
+					tip: "Dica: com schema, prefira `inputMode=\"email\"` em vez de `type=\"email\"`. O teclado do celular continua igual; a mensagem de erro vem do schema, não do navegador.",
+					miniTitle: "Ainda mais leve com zod/mini",
+					mini: "O Form importa só o núcleo do Zod (`zod/v4/core`), então também aceita schemas de `zod/mini`. Com ele, o bundle fica mais enxuto.",
+					errorsTitle: "Erros do servidor",
+					errors: "Quando o back-end encontrar um erro, como um e-mail já cadastrado, passe a mensagem pela prop errors:",
+					installTitle: "Instalar",
+				},
+				performance: {
+					description: "Veja quanto pesa cada componente em gzip. A medida conta o código do cd/ui e deixa as bibliotecas externas de fora.",
+					toc: {
+						numbers: "Os números",
+						light: "Como fica leve",
+						method: "Como medimos",
+					},
+					stats: {
+						avg: "média por componente",
+						noJs: "sem JS no navegador",
+						max: "maior componente",
+					},
+					numbersTitle: "Os números",
+					client: "client",
+					server: "servidor",
+					lightTitle: "Como fica leve",
+					techniques: {
+						server: {
+							title: "Servidor por padrão",
+							text: "Componentes sem estado não precisam de \"use client\": rodam no servidor e não enviam JS ao navegador.",
+						},
+						imports: {
+							title: "Imports enxutos",
+							text: "Cada componente importa só o módulo do Base UI que usa, como @base-ui/react/dialog.",
+						},
+						css: {
+							title: "CSS onde basta",
+							text: "Animações, crescimento do Textarea, Spinner e Skeleton usam CSS, sem JavaScript extra.",
+						},
+						zod: {
+							title: "Zod pelo núcleo",
+							text: "O Form usa zod/v4/core e aceita schemas de zod/mini sem puxar a API completa.",
+						},
+						motion: {
+							title: "Movimento leve",
+							text: "As animações usam transform e opacity para evitar recalcular o layout.",
+						},
+						measured: {
+							title: "Medido no build",
+							text: "O esbuild empacota cada componente e o gzip mede o resultado. Nada de chute.",
+						},
+					},
+					methodTitle: "Como medimos",
+					method: "O script scripts/metrics.mjs empacota cada componente com esbuild, em ESM minificado, e mede o resultado em gzip nível 9. React, Base UI, Zod, lucide e utilitários de classe ficam de fora. Assim, o número mostra o custo do próprio cd/ui; as bibliotecas externas são compartilhadas no bundle do seu projeto.",
+				},
+				component: {
+					breadcrumb: "componentes",
+					runsOnServer: "roda no servidor · 0 JS",
+					toc: {
+						installation: "Instalação",
+						usage: "Uso",
+						examples: "Exemplos",
+						keyboard: "Teclado",
+						accessibility: "Acessibilidade",
+					},
+					installMethod: "Forma de instalar",
+					manual: "manual",
+					firstTime: "primeira vez? instale o tema antes: veja ",
+					firstTimeLink: "instalação",
+					installDeps: "instale as dependências:",
+					copyFile: "copie o arquivo pro seu projeto:",
+					other: "Outros componentes",
+					previous: "anterior",
+					next: "próximo",
+				},
+			},
 			metadata: {
 				title: "cd/ui · componentes React leves e acessíveis",
 				description: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Tamanho medido no build, código instalado no seu projeto pelo shadcn CLI.",
 			},
-			locale: {
-				english: "Inglês",
-				portuguese: "Português",
+			layout: {
+				mainNav: "Navegação principal",
+				docs: "docs",
+				components: "componentes",
+				blocks: "blocos",
+				madeBy: "feito por ",
+				sourceNote: "Código-fonte disponível no GitHub.",
+			},
+			home: {
+				badge: (v: { count: string }) => `v0.2 · ${v.count} componentes`,
+				title: "Componentes leves. Seu código.",
+				lead: "React 19, Base UI e Tailwind CSS v4. Acessíveis por padrão, medidos no build, com formulários movidos a Zod. Instale pelo shadcn CLI e ajuste cada componente ao seu projeto.",
+				install: "instalar cd/ui",
+				browse: "ver componentes",
+				stats: {
+					avg: "tamanho médio gzip",
+					noJs: "sem JS no navegador",
+					accessible: "acessível por padrão",
+				},
+				sticker: "quer experimentar um?",
+				installIntro: "Instale o tema e adicione o primeiro componente ao seu projeto:",
+				componentsTitle: "componentes",
+				componentsLead: "Veja o tamanho gzip de cada componente e onde ele roda.",
+				measure: "como medimos →",
+				client: "client",
+				server: "servidor · 0 js",
+			},
+		},
+		components: {
+			ui: {
+				search: {
+					open: "buscar docs…",
+					label: "Buscar na documentação",
+					input: "Buscar",
+					placeholder: "componente ou assunto…",
+					empty: "Não achei nada pra",
+				},
+				sidebar: {
+					label: "Documentação",
+				},
+				toc: {
+					label: "Nesta página",
+					title: "nesta página",
+				},
+				home: "cd/ui, início",
+				copy: {
+					copy: "Copiar",
+					copied: "Copiado",
+				},
+				theme: {
+					toLight: "Mudar pro tema claro",
+					toDark: "Mudar pro tema escuro",
+				},
+				install: {
+					packageManager: "Gerenciador de pacotes",
+				},
+				preview: {
+					view: "Ver",
+					preview: "preview",
+					code: "código",
+				},
+				language: {
+					label: "Idioma",
+					en: "Inglês",
+					pt: "Português",
+				},
+			},
+			docs: {
+				tables: {
+					prop: "prop",
+					type: "tipo",
+					default: "padrão",
+					key: "tecla",
+					action: "ação",
+				},
+			},
+		},
+		docs: {
+			guides: {
+				intro: {
+					title: "Introdução",
+					description: "Conheça a biblioteca e as escolhas por trás dela.",
+				},
+				installation: {
+					title: "Instalação",
+					description: "Do projeto pronto ao primeiro componente.",
+				},
+				theme: {
+					title: "Tema",
+					description: "Cores, cantos e movimento em tokens CSS.",
+				},
+				forms: {
+					title: "Formulários com Zod",
+					description: "Conecte schemas Zod aos campos do formulário.",
+				},
+				performance: {
+					title: "Performance",
+					description: "Veja como medimos o tamanho de cada componente.",
+				},
+			},
+			categories: {
+				actions: "Ações",
+				display: "Exibição",
+				feedback: "Feedback",
+				form: "Formulário",
+				overlay: "Sobreposição",
+				navigation: "Navegação",
+			},
+			catalog: {
+				button: "Botão com variantes, tamanhos, estado de carregamento e opção de renderizar como link.",
+				badge: "Selo compacto pra mostrar status, contagem ou categoria.",
+				card: "Agrupe conteúdo relacionado em cabeçalho, corpo e rodapé.",
+				kbd: "Mostre uma tecla ou atalho com visual de tecla.",
+				separator: "Separe conteúdo com uma linha horizontal ou vertical.",
+				skeleton: "Reserve o espaço do conteúdo enquanto ele carrega.",
+				spinner: "Indique carregamento com um SVG animado por CSS, sem JavaScript.",
+				input: "Campo de texto com estados visuais de foco, erro e desativado.",
+				textarea: "Campo de texto longo que cresce com o conteúdo, sem JavaScript.",
+				field: "Conecte label, campo, ajuda e erro com ids e atributos aria.",
+				form: "Passe um schema do Zod e valide os campos sem adicionar outra biblioteca de formulário.",
+				checkbox: "Caixa de seleção com estados marcado, desmarcado e parcial.",
+				switch: "Alterne uma opção com resposta imediata.",
+				select: "Escolha uma opção numa lista que abre a partir do botão.",
+				dialog: "Janela modal com foco controlado e devolvido ao fechar.",
+				tooltip: "Mostre uma dica curta ao passar o mouse ou navegar com teclado.",
+				tabs: "Troque de conteúdo com abas e um indicador que acompanha a seleção.",
+				accordion: "Seções empilhadas que abrem e fecham com uma animação suave de altura.",
+				alert: "Uma mensagem em bloco para informação, sucesso ou erro.",
+				avatar: "Uma foto de perfil redonda com um substituto para quando a imagem não existe.",
+				"dropdown-menu": "Um menu de ações que abre a partir de um botão, com itens marcáveis, grupos de rádio e submenus.",
+				popover: "Um painel flutuante ancorado num botão que pode ter conteúdo interativo.",
+				"radio-group": "Escolha exatamente uma opção de um conjunto pequeno, com navegação pelas setas.",
+				slider: "Escolha um número ou uma faixa arrastando o polegar ou usando as setas.",
+				progress: "Uma barra que mostra o quanto uma tarefa avançou, ou que ela ainda está em andamento.",
+				toast: "Notificações empilhadas que somem sozinhas, com suporte a swipe e teclado.",
+				table: "Uma tabela nativa estilizada para linhas e colunas de dados.",
+			},
+			content: {
+				shared: {
+					className: "Classes extras, mescladas com `cn` (a sua vence).",
+					render: "Troca o elemento renderizado mantendo comportamento e estilo (ex.: virar `<a>` ou `<Link>`).",
+					visualStyle: "Estilo visual.",
+					controlledOrInitial: "Estado controlado ou inicial.",
+					formSubmit: "Para enviar em formulário.",
+					formState: "Estados desativado e obrigatório.",
+					root: "Raiz.",
+					validationMode: "Quando validar.",
+				},
+				button: {
+					ex: {
+						default: {
+							title: "Variantes",
+						},
+						sizes: {
+							title: "Tamanhos",
+							description: "Três alturas e dois tamanhos quadrados pra ícone.",
+						},
+						loading: {
+							title: "Carregando",
+							description: "`loading` troca o conteúdo por um spinner sem mudar a largura do botão e bloqueia cliques repetidos.",
+						},
+						link: {
+							title: "Como link",
+							description: "Com `render`, o botão vira um `<a>` (ou `<Link>` do Next) com o mesmo visual.",
+						},
+					},
+					api: {
+						Button: {
+							description: "Botão nativo com variantes. Aceita todas as props do `Button` do Base UI.",
+							props: {
+								size: "Altura e espaçamento.",
+								loading: "Mostra o spinner, mantém a largura, marca `aria-busy` e bloqueia cliques (o botão continua focável).",
+								nativeButton: "Passe `false` quando usar `render` com um elemento que não é `<button>`.",
+							},
+						},
+					},
+					kb: {
+						enter: "Ativa o botão.",
+					},
+					a11y: {
+						iconOnly: "Botões só com ícone precisam de `aria-label`.",
+						loading: "Durante `loading` o botão segue focável (`focusableWhenDisabled`), então o foco não pula pra outro lugar.",
+					},
+				},
+				badge: {
+					ex: {
+						default: {
+							title: "Variantes",
+						},
+					},
+					api: {
+						Badge: {
+							description: "Um `<span>` estilizado. Componente de servidor: não envia JS.",
+						},
+					},
+				},
+				card: {
+					ex: {
+						default: {
+							title: "Card com ações",
+						},
+					},
+					api: {
+						Card: {
+							description: "Superfície com borda fina e fundo levemente elevado. Componente de servidor.",
+						},
+						header: {
+							description: "Cabeçalho, título (`<h3>`) e descrição.",
+						},
+						content: {
+							description: "Corpo e rodapé (linha de ações).",
+						},
+					},
+				},
+				kbd: {
+					ex: {
+						default: {
+							title: "Atalhos no texto",
+						},
+					},
+					api: {
+						Kbd: {
+							description: "Um `<kbd>` com cara de tecla. Componente de servidor.",
+						},
+					},
+				},
+				separator: {
+					ex: {
+						default: {
+							title: "Horizontal e vertical",
+						},
+					},
+					api: {
+						Separator: {
+							description: "Linha de 1px. Componente de servidor.",
+							props: {
+								orientation: "Direção da linha.",
+								decorative: "Se `false`, vira `role=\"separator\"` e é anunciada por leitor de tela.",
+							},
+						},
+					},
+				},
+				skeleton: {
+					ex: {
+						default: {
+							title: "Lista carregando",
+						},
+					},
+					api: {
+						Skeleton: {
+							description: "Bloco com pulso lento. Defina o tamanho com classes. Componente de servidor.",
+						},
+					},
+					a11y: {
+						hidden: "É `aria-hidden`: anuncie o carregamento em outro lugar (ex.: `aria-busy` no contêiner).",
+					},
+				},
+				spinner: {
+					ex: {
+						default: {
+							title: "Tamanhos e cor",
+						},
+					},
+					api: {
+						Spinner: {
+							description: "SVG girando via CSS. Herda a cor do texto. Componente de servidor.",
+							props: {
+								label: "Texto anunciado (`role=\"status\"`).",
+							},
+						},
+					},
+				},
+				input: {
+					ex: {
+						default: {
+							title: "Estados",
+						},
+					},
+					api: {
+						Input: {
+							description: "Campo de texto. Dentro de um `Field`, recebe id, `aria-describedby` e estado de erro sozinho.",
+							props: {
+								props: "Tudo do `<input>` nativo e do `Input` do Base UI.",
+							},
+						},
+					},
+				},
+				textarea: {
+					ex: {
+						default: {
+							title: "Com label",
+						},
+					},
+					api: {
+						Textarea: {
+							description: "`<textarea>` que cresce com o conteúdo via `field-sizing: content` (sem JS). Integra com `Field`.",
+							props: {
+								props: "Tudo do `<textarea>` nativo.",
+							},
+						},
+					},
+				},
+				field: {
+					ex: {
+						default: {
+							title: "Validação nativa",
+							description: "Sem schema, o `Field` usa a validação do HTML (`required`, `type=\"email\"`…).",
+						},
+					},
+					api: {
+						Field: {
+							description: "Agrupa as partes. Dentro de um `Form` com `schema`, valida pelo `name` sem configurar nada.",
+							props: {
+								name: "Nome do campo. Liga o valor ao form e à chave do schema.",
+								validate: "Validação própria. Se passar, tem prioridade sobre o schema.",
+								validationModeDefault: "herda do Form",
+								disabledInvalid: "Estados controlados de fora.",
+							},
+						},
+						FieldLabel: {
+							description: "`<label>` ligado ao controle.",
+						},
+						FieldDescription: {
+							description: "Texto de ajuda, ligado por `aria-describedby`.",
+						},
+						FieldError: {
+							description: "Mensagem de erro. Sem `match`, mostra o que a validação devolver.",
+							props: {
+								match: "Mostra só para um tipo de erro (ex.: `\"valueMissing\"`).",
+							},
+						},
+					},
+					a11y: {
+						error: "O erro entra em `aria-describedby` do controle e o campo recebe `aria-invalid`.",
+						label: "O label é ligado por `for`/`id` automaticamente.",
+					},
+				},
+				form: {
+					ex: {
+						zod: {
+							title: "Cadastro com Zod",
+							description: "Passe o schema e dê `name` aos campos. Cada campo valida ao sair dele; o envio só acontece com tudo válido.",
+						},
+					},
+					api: {
+						Form: {
+							description: "`<form>` com validação por schema. Usa só o núcleo do Zod (`zod/v4/core`), então aceita schemas de `zod` e de `zod/mini`.",
+							props: {
+								schema: "Schema do Zod. Cada `Field` com `name` valida a própria chave.",
+								onSubmit: "Só roda com dados válidos, já convertidos e tipados.",
+								validationMode: "Quando cada campo valida.",
+								errors: "Erros vindos de fora (ex.: resposta do servidor).",
+							},
+						},
+					},
+					a11y: {
+						errors: "Erros aparecem no `FieldError` de cada campo e ficam ligados ao controle por `aria-describedby`.",
+						focus: "Ao enviar com erro, o foco vai para o primeiro campo inválido (comportamento do Base UI).",
+						inputMode: "Com schema, prefira `inputMode=\"email\"` a `type=\"email\"`: o tipo nativo faz o navegador mostrar a mensagem dele (no idioma do sistema) no lugar da do schema.",
+					},
+				},
+				checkbox: {
+					ex: {
+						default: {
+							title: "Com label",
+						},
+						indeterminate: {
+							title: "Indeterminado",
+							description: "Um pai que reflete os filhos: marcado, desmarcado ou parcial.",
+						},
+					},
+					api: {
+						Checkbox: {
+							description: "Caixa de seleção. O check é um traço SVG que se desenha em 150ms.",
+							props: {
+								onCheckedChange: "Chamado ao marcar ou desmarcar.",
+								indeterminate: "Mostra o traço de \"parcial\".",
+							},
+						},
+					},
+					kb: {
+						space: "Marca ou desmarca.",
+					},
+				},
+				switch: {
+					ex: {
+						default: {
+							title: "Configurações",
+						},
+					},
+					api: {
+						Switch: {
+							description: "Interruptor. Use para efeito imediato; para \"aplicar depois\", prefira Checkbox.",
+							props: {
+								onCheckedChange: "Chamado ao alternar.",
+							},
+						},
+					},
+					kb: {
+						toggle: "Alterna.",
+					},
+				},
+				select: {
+					ex: {
+						default: {
+							title: "Com label",
+						},
+					},
+					api: {
+						Select: {
+							description: "Raiz. Passe `items` para o valor exibido usar o rótulo certo antes da lista abrir.",
+							props: {
+								items: "Lista de opções (usada pelo `SelectValue`).",
+								value: "Valor controlado ou inicial.",
+								onValueChange: "Chamado ao escolher.",
+							},
+						},
+						trigger: {
+							description: "Botão que abre a lista e o texto do valor atual.",
+						},
+						SelectPopup: {
+							description: "Lista. Abre do gatilho em 150ms, fecha em 100ms.",
+						},
+						SelectItem: {
+							description: "Opção com check amarelo quando escolhida.",
+							props: {
+								value: "Valor da opção.",
+							},
+						},
+					},
+					kb: {
+						open: "Abre a lista.",
+						navigate: "Navega entre opções.",
+						choose: "Escolhe a opção.",
+						close: "Fecha sem mudar.",
+						letter: "Pula para a opção que começa com a letra.",
+					},
+				},
+				dialog: {
+					ex: {
+						default: {
+							title: "Confirmação",
+						},
+					},
+					api: {
+						Dialog: {
+							description: "Raiz.",
+							props: {
+								open: "Controle de abertura.",
+							},
+						},
+						trigger: {
+							description: "Abrem e fecham. Use `render` pra usar seu `Button`.",
+						},
+						DialogPopup: {
+							description: "Janela centralizada com fundo escurecido. Entra em escala (200ms), sai mais rápido (150ms).",
+							props: {
+								showClose: "Mostra o X no canto.",
+								closeLabel: "Rótulo do X para leitor de tela.",
+							},
+						},
+						structure: {
+							description: "Estrutura do conteúdo. Título e descrição são anunciados ao abrir.",
+						},
+					},
+					kb: {
+						esc: "Fecha e devolve o foco ao gatilho.",
+						tab: "Circula só dentro da janela.",
+					},
+				},
+				tooltip: {
+					ex: {
+						default: {
+							title: "Barra de ferramentas",
+							description: "Passe de um botão pro outro: depois do primeiro, os tooltips aparecem na hora.",
+						},
+					},
+					api: {
+						TooltipProvider: {
+							description: "Compartilha o atraso entre tooltips vizinhos.",
+							props: {
+								delay: "Atraso (ms) do primeiro tooltip.",
+							},
+						},
+						root: {
+							description: "Raiz e gatilho.",
+						},
+						TooltipPopup: {
+							description: "Balão. Nasce do gatilho em 125ms; os seguintes aparecem sem animação.",
+							props: {
+								side: "Lado preferido.",
+								sideOffset: "Distância do gatilho (px).",
+							},
+						},
+					},
+					a11y: {
+						focus: "Abre também com foco de teclado.",
+						interactive: "Não coloque conteúdo interativo dentro do tooltip: use um Popover.",
+					},
+				},
+				tabs: {
+					ex: {
+						default: {
+							title: "Períodos",
+						},
+					},
+					api: {
+						Tabs: {
+							description: "Raiz.",
+							props: {
+								value: "Aba ativa.",
+							},
+						},
+						TabsList: {
+							description: "Lista com o indicador que desliza (250ms, ease-in-out forte).",
+						},
+						tab: {
+							description: "Aba e conteúdo, ligados pelo `value`.",
+							props: {
+								value: "Identificador da aba.",
+							},
+						},
+					},
+					kb: {
+						arrows: "Move entre abas.",
+						homeEnd: "Primeira e última aba.",
+					},
+				},
+				accordion: {
+					ex: {
+						default: {
+							title: "Perguntas frequentes",
+						},
+					},
+					api: {
+						Accordion: {
+							description: "Raiz. Por padrão só um item fica aberto; passe `multiple` para permitir vários.",
+							props: {
+								value: "Itens abertos, como array de valores dos itens. Controlado ou inicial.",
+								multiple: "Permite mais de um item aberto ao mesmo tempo.",
+								onValueChange: "Chamado ao abrir ou fechar um item.",
+							},
+						},
+						AccordionItem: {
+							description: "Uma seção, identificada pelo `value`.",
+							props: {
+								value: "Identificador do item.",
+							},
+						},
+						AccordionTrigger: {
+							description: "Botão do cabeçalho. O chevron gira 180° em 200ms enquanto o painel abre.",
+						},
+						AccordionPanel: {
+							description: "Conteúdo. Anima a altura em 200ms e sai da página enquanto fechado.",
+						},
+					},
+					kb: {
+						toggle: "Abre ou fecha o item em foco.",
+						arrows: "Move o foco entre os cabeçalhos.",
+						homeEnd: "Foca o primeiro ou o último cabeçalho.",
+					},
+					a11y: {
+						structure: "Cada gatilho fica dentro de um título e é ligado ao painel com `aria-expanded` e `aria-controls`.",
+					},
+				},
+				alert: {
+					ex: {
+						default: {
+							title: "Variantes",
+						},
+					},
+					api: {
+						Alert: {
+							description: "Mensagem em bloco com `role=\"alert\"`. Um ícone colocado direto dentro ocupa a primeira coluna. Componente de servidor.",
+						},
+						parts: {
+							description: "Título e descrição da mensagem.",
+						},
+					},
+					a11y: {
+						role: "`role=\"alert\"` é anunciado na hora por leitores de tela: use para mensagens importantes e troque por `role=\"status\"` nas discretas.",
+					},
+				},
+				avatar: {
+					ex: {
+						default: {
+							title: "Imagem e substituto",
+						},
+					},
+					api: {
+						Avatar: {
+							description: "Contêiner redondo, de 40px por padrão. Mude o tamanho com `className` (ex.: `size-12`).",
+						},
+						AvatarImage: {
+							description: "A foto. Só aparece depois de carregar com sucesso.",
+						},
+						AvatarFallback: {
+							description: "Aparece enquanto a imagem carrega ou se ela falhar (geralmente as iniciais).",
+							props: {
+								delay: "Espera (ms) antes de aparecer, para evitar um piscar em carregamentos rápidos.",
+							},
+						},
+					},
+					a11y: {
+						alt: "Dê ao `AvatarImage` um `alt` com o nome da pessoa, ou um `alt` vazio quando o nome já está escrito ao lado.",
+					},
+				},
+				"dropdown-menu": {
+					ex: {
+						default: {
+							title: "Menu de ações",
+						},
+					},
+					api: {
+						DropdownMenu: {
+							description: "Raiz. Também serve para cada submenu, por meio do `DropdownMenuSub`.",
+							props: {
+								open: "Controle de abertura.",
+							},
+						},
+						trigger: {
+							description: "Botão que abre o menu. Use `render` pra usar seu `Button`.",
+						},
+						DropdownMenuPopup: {
+							description: "Lista de ações. Abre do gatilho em 150ms, fecha em 100ms.",
+							props: {
+								side: "Lado preferido. Submenus abrem à direita sozinhos.",
+								align: "Alinhamento em relação ao gatilho.",
+								sideOffset: "Distância do gatilho (px).",
+							},
+						},
+						DropdownMenuItem: {
+							description: "Ação. O menu fecha depois que ela é escolhida.",
+							props: {
+								variant: "Use `destructive` para ações perigosas.",
+								onClick: "Chamado ao escolher o item.",
+							},
+						},
+						checkable: {
+							description: "Itens com check. O item checkbox alterna sozinho; os itens de rádio ficam dentro de um `DropdownMenuRadioGroup`.",
+						},
+						structure: {
+							description: "Organize a lista: `DropdownMenuGroup` com um `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut` e `DropdownMenuSub` com `DropdownMenuSubTrigger`.",
+						},
+					},
+					kb: {
+						open: "Abre o menu a partir do gatilho.",
+						navigate: "Navega entre itens.",
+						choose: "Escolhe o item.",
+						sub: "Abre e fecha um submenu.",
+						close: "Fecha e devolve o foco ao gatilho.",
+						letter: "Pula para o item que começa com a letra.",
+					},
+					a11y: {
+						shortcut: "`DropdownMenuShortcut` só mostra a dica. Ligue o atalho de verdade por conta própria.",
+					},
+				},
+				popover: {
+					ex: {
+						default: {
+							title: "Com formulário",
+						},
+					},
+					api: {
+						Popover: {
+							description: "Raiz.",
+							props: {
+								open: "Controle de abertura.",
+							},
+						},
+						trigger: {
+							description: "Abrem e fecham. Use `render` pra usar seu `Button`.",
+						},
+						PopoverPopup: {
+							description: "Painel que nasce do gatilho em 150ms e fecha em 100ms.",
+							props: {
+								side: "Lado preferido.",
+								align: "Alinhamento em relação ao gatilho.",
+								sideOffset: "Distância do gatilho (px).",
+							},
+						},
+						structure: {
+							description: "Título e descrição ficam ligados ao painel para leitores de tela.",
+						},
+					},
+					kb: {
+						open: "Abre ou fecha a partir do gatilho.",
+						esc: "Fecha e devolve o foco ao gatilho.",
+						tab: "Percorre o conteúdo do painel.",
+					},
+					a11y: {
+						interactive: "Diferente do Tooltip, o Popover pode ter botões e campos. Use `PopoverTitle` para o painel ter um nome.",
+					},
+				},
+				"radio-group": {
+					ex: {
+						default: {
+							title: "Planos",
+						},
+					},
+					api: {
+						RadioGroup: {
+							description: "Grupo de opções excludentes. Dê um nome com `aria-label` ou um label visível.",
+							props: {
+								value: "Valor controlado ou inicial.",
+								onValueChange: "Chamado ao escolher outra opção.",
+							},
+						},
+						Radio: {
+							description: "Uma opção. O ponto interno cresce em 150ms ao ser escolhida.",
+							props: {
+								value: "Valor da opção.",
+							},
+						},
+					},
+					kb: {
+						arrows: "Move a seleção entre as opções.",
+						tab: "Entra e sai do grupo.",
+						space: "Escolhe a opção em foco.",
+					},
+					a11y: {
+						label: "Envolva cada `Radio` num `<label>` para o texto ser o nome acessível e clicar nele escolher a opção.",
+					},
+				},
+				slider: {
+					ex: {
+						default: {
+							title: "Valor único e faixa",
+						},
+					},
+					api: {
+						Slider: {
+							description: "Um número renderiza um polegar; um array renderiza um polegar por valor (uma faixa).",
+							props: {
+								value: "Valor controlado ou inicial: um número ou um array de números.",
+								onValueChange: "Chamado enquanto arrasta.",
+								onValueCommitted: "Chamado ao soltar.",
+								range: "Limites e passo.",
+								thumbLabel: "Nome acessível de cada polegar. Use um array para uma faixa.",
+							},
+						},
+					},
+					kb: {
+						arrows: "Muda o valor em um passo.",
+						pageKeys: "Muda o valor em um passo maior.",
+						homeEnd: "Vai para o mínimo ou o máximo.",
+					},
+					a11y: {
+						label: "Cada polegar precisa de um nome acessível: use `thumbLabel` ou um label visível.",
+					},
+				},
+				progress: {
+					ex: {
+						default: {
+							title: "Determinado e indeterminado",
+						},
+					},
+					api: {
+						Progress: {
+							description: "Barra de 0 a 100. O preenchimento anda em 300ms. Com valor `null` ela fica indeterminada.",
+							props: {
+								value: "Progresso atual, ou `null` quando não se sabe.",
+								range: "Limites da escala.",
+							},
+						},
+						parts: {
+							description: "`ProgressLabel` dá nome à barra e `ProgressValue` mostra a porcentagem.",
+						},
+					},
+					a11y: {
+						role: "Tem `role=\"progressbar\"` com `aria-valuenow`. Sempre dê um nome com `ProgressLabel` ou `aria-label`.",
+					},
+				},
+				toast: {
+					ex: {
+						default: {
+							title: "Sucesso e erro",
+						},
+					},
+					api: {
+						ToastProvider: {
+							description: "Envolva o app uma vez. Ele renderiza a pilha de notificações no canto inferior direito.",
+							props: {
+								timeout: "Tempo (ms) até o toast sumir sozinho. Use `0` para mantê-lo.",
+								limit: "Número máximo de toasts visíveis.",
+								closeLabel: "Rótulo do X para leitor de tela.",
+							},
+						},
+						useToast: {
+							description: "Hook que devolve o gerenciador. Chame `add({ title, description, type })` para mostrar um toast; ele também tem `close` e `update`.",
+							props: {
+								content: "Texto mostrado no toast.",
+								type: "Texto livre. `success` e `error` ganham uma borda colorida.",
+							},
+						},
+						createToastManager: {
+							description: "Cria um gerenciador que funciona fora do React (passe ao `ToastProvider` como `toastManager`).",
+						},
+					},
+					kb: {
+						f6: "Move o foco para a área dos toasts.",
+						tab: "Navega entre os toasts e seus botões de fechar.",
+						activate: "Fecha o toast quando o X dele está em foco.",
+					},
+					a11y: {
+						live: "Toasts são anunciados por leitores de tela sem tirar o foco. Não deixe a única cópia de uma informação importante num toast.",
+						pause: "O tempo pausa ao passar o mouse e quando a janela perde o foco, para dar tempo de ler.",
+					},
+				},
+				table: {
+					ex: {
+						default: {
+							title: "Faturas",
+						},
+					},
+					api: {
+						Table: {
+							description: "`<table>` dentro de um contêiner que rola para o lado em telas pequenas. Componente de servidor.",
+						},
+						sections: {
+							description: "`TableHeader`, `TableBody` e `TableFooter` correspondem a `<thead>`, `<tbody>` e `<tfoot>`.",
+						},
+						cells: {
+							description: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`.",
+						},
+					},
+					a11y: {
+						semantics: "Mantém a semântica nativa de tabela. Use `TableHead` (`<th>`) nos cabeçalhos e `TableCaption` para dar nome à tabela.",
+					},
+				},
 			},
 		},
 	},

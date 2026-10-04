@@ -1,13 +1,14 @@
 "use client";
 
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
-import { CornerDownLeftIcon, FileTextIcon, SearchIcon, SquareIcon } from "lucide-react";
+import { CornerDownLeftIcon, FileTextIcon, LayoutTemplateIcon, SearchIcon, SquareIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocale } from "@/components/locale-provider";
 import { Kbd } from "@/registry/cd/ui/kbd";
 import { cn } from "@/registry/cd/lib/utils";
 
-export type SearchItem = { href: string; title: string; description: string; group: string };
+export type SearchItem = { href: string; title: string; description: string; group: "guide" | "component" | "block" };
 
 const normalize = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
@@ -16,6 +17,7 @@ const normalize = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "
  * sem animação nenhuma (a regra do Raycast).
  */
 export function Search({ items }: { items: SearchItem[] }) {
+  const { ui } = useLocale();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -61,7 +63,7 @@ export function Search({ items }: { items: SearchItem[] }) {
     >
       <DialogPrimitive.Trigger className="flex h-8 cursor-pointer items-center gap-2 rounded-lg border bg-background pr-1.5 pl-2.5 text-muted-foreground text-sm outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
         <SearchIcon aria-hidden="true" className="size-3.5" />
-        <span className="hidden md:inline">buscar docs…</span>
+        <span className="hidden md:inline">{ui.search.open}</span>
         <span className="hidden gap-0.5 sm:flex">
           <Kbd>Ctrl</Kbd>
           <Kbd>K</Kbd>
@@ -70,7 +72,7 @@ export function Search({ items }: { items: SearchItem[] }) {
       <DialogPrimitive.Portal>
         <DialogPrimitive.Backdrop className="fixed inset-0 z-50 bg-black/40" />
         <DialogPrimitive.Popup
-          aria-label="Buscar na documentação"
+          aria-label={ui.search.label}
           className="fixed top-[12vh] left-1/2 z-50 flex max-h-[70vh] w-[min(560px,calc(100vw-32px))] -translate-x-1/2 flex-col overflow-hidden rounded-2xl border bg-popover text-popover-foreground shadow-lg/10 outline-none"
         >
           <div className="flex items-center gap-2 border-b px-4">
@@ -78,7 +80,7 @@ export function Search({ items }: { items: SearchItem[] }) {
             <input
               aria-activedescendant={results[active] ? `search-${active}` : undefined}
               aria-controls="search-results"
-              aria-label="Buscar"
+              aria-label={ui.search.input}
               autoFocus
               className="h-12 flex-1 bg-transparent text-[15px] outline-none placeholder:text-muted-foreground"
               onChange={(e) => {
@@ -97,7 +99,7 @@ export function Search({ items }: { items: SearchItem[] }) {
                   go(results[active]);
                 }
               }}
-              placeholder="componente ou assunto…"
+              placeholder={ui.search.placeholder}
               role="combobox"
               aria-expanded="true"
               value={query}
@@ -105,7 +107,7 @@ export function Search({ items }: { items: SearchItem[] }) {
             <Kbd>Esc</Kbd>
           </div>
           <ul className="overflow-y-auto p-2" id="search-results" ref={list} role="listbox">
-            {results.length === 0 && <li className="px-3 py-8 text-center text-muted-foreground text-sm">Não achei nada pra “{query}”.</li>}
+            {results.length === 0 && <li className="px-3 py-8 text-center text-muted-foreground text-sm">{ui.search.empty} “{query}”.</li>}
             {results.map((item, i) => (
               <li
                 aria-selected={i === active}
@@ -121,8 +123,10 @@ export function Search({ items }: { items: SearchItem[] }) {
                 onMouseMove={() => setActive(i)}
                 role="option"
               >
-                {item.group === "Guias" ? (
+                {item.group === "guide" ? (
                   <FileTextIcon aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+                ) : item.group === "block" ? (
+                  <LayoutTemplateIcon aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
                 ) : (
                   <SquareIcon aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
                 )}

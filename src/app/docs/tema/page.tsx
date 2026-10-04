@@ -1,37 +1,38 @@
 import type { Metadata } from "next";
 import { Code } from "@/components/docs/code";
-import { DocHeader, DocPage, H2, P } from "@/components/docs/doc-page";
+import { DocHeader, DocPage, H2, P, Rich } from "@/components/docs/doc-page";
+import { setLocale, t, translations } from "@/i18n/generated";
 
-export const metadata: Metadata = { title: "Tema" };
-
-const swatches = [
-  { name: "background", label: "fundo" },
-  { name: "card", label: "superfície" },
-  { name: "foreground", label: "texto" },
-  { name: "muted-foreground", label: "texto secundário" },
-  { name: "brand", label: "destaque" },
-  { name: "brand-foreground", label: "destaque em texto" },
-  { name: "border", label: "borda" },
-  { name: "destructive", label: "perigo" },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description } = translations[await setLocale()].docs.guides.theme;
+  return { title, description };
+}
 
 export default function Theme() {
+  const page = t.app.docs.theme;
+  const swatches = [
+    { name: "background", label: page.swatches.background },
+    { name: "card", label: page.swatches.card },
+    { name: "foreground", label: page.swatches.foreground },
+    { name: "muted-foreground", label: page.swatches.mutedForeground },
+    { name: "brand", label: page.swatches.brand },
+    { name: "brand-foreground", label: page.swatches.brandForeground },
+    { name: "border", label: page.swatches.border },
+    { name: "destructive", label: page.swatches.destructive },
+  ];
   return (
     <DocPage
       toc={[
-        { id: "cores", title: "Cores" },
-        { id: "raios", title: "Raios" },
-        { id: "movimento", title: "Movimento" },
-        { id: "personalizar", title: "Personalizar" },
+        { id: "cores", title: page.toc.colors },
+        { id: "raios", title: page.toc.radii },
+        { id: "movimento", title: page.toc.motion },
+        { id: "personalizar", title: page.toc.customize },
       ]}
     >
-      <DocHeader
-        description="Cores, raios e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema."
-        title="Tema"
-      />
+      <DocHeader description={page.description} title={t.docs.guides.theme.title} />
 
-      <H2 id="cores">Cores</H2>
-      <P>Troque o tema no botão do topo e veja os valores mudarem. Os componentes usam esses tokens em vez de cores fixas.</P>
+      <H2 id="cores">{page.colorsTitle}</H2>
+      <P>{page.colors}</P>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {swatches.map((s) => (
           <div className="overflow-hidden rounded-xl border" key={s.name}>
@@ -43,11 +44,9 @@ export default function Theme() {
           </div>
         ))}
       </div>
-      <P>
-        O amarelo funciona como um sinal: aparece em detalhes como foco, check, switch ligado e botão principal, sem tomar a tela toda.
-      </P>
+      <P>{page.yellow}</P>
 
-      <H2 id="raios">Raios</H2>
+      <H2 id="raios">{page.radiiTitle}</H2>
       <div className="flex flex-wrap items-end gap-4">
         {["sm", "md", "lg", "xl", "2xl"].map((r) => (
           <div className="flex flex-col items-center gap-2" key={r}>
@@ -57,18 +56,14 @@ export default function Theme() {
         ))}
       </div>
 
-      <H2 id="movimento">Movimento</H2>
+      <H2 id="movimento">{page.motionTitle}</H2>
       <P>
-        Duas curvas dão ritmo às interações: <code className="font-mono text-sm">ease-out</code> para entradas e respostas
-        e <code className="font-mono text-sm">ease-in-out</code> para elementos que se deslocam. Durações ficam entre 100 e 250ms.
+        <Rich text={page.motion} />
       </P>
-      <Code
-        code={`--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entradas, cliques, abrir popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* indicador de abas, switch */`}
-        lang="css"
-      />
+      <Code code={page.motionCode} lang="css" />
 
-      <H2 id="personalizar">Personalizar</H2>
-      <P>Quer outra paleta? Troque os valores no seu globals.css. Aqui, o destaque amarelo vira verde:</P>
+      <H2 id="personalizar">{page.customizeTitle}</H2>
+      <P>{page.customize}</P>
       <Code code={`:root {\n  --brand: #22c55e;\n  --brand-foreground: #15803d;\n  --brand-contrast: #052e16;\n}`} lang="css" title="globals.css" />
     </DocPage>
   );

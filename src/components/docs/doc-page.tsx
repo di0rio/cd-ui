@@ -42,3 +42,17 @@ export function H3({ id, children }: { id: string; children: ReactNode }) {
 export function P({ children }: { children: ReactNode }) {
   return <p className="my-4 text-pretty leading-7">{children}</p>;
 }
+
+/** Texto com `trechos` entre crases virando <code> (os textos das páginas vêm do t.ts). */
+export function Rich({ text }: { text: string }) {
+  return text.split(/(`[^`]+`)/g).map((part, i) =>
+    part.startsWith("`") ? (
+      // biome-ignore lint/suspicious/noArrayIndexKey: partes estáticas de um texto
+      <code className="font-mono text-sm" key={i}>
+        {part.slice(1, -1)}
+      </code>
+    ) : (
+      part
+    ),
+  );
+}

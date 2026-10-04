@@ -3,8 +3,10 @@ import type { ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Install } from "@/components/docs/install";
-import { categories, components, formatBytes, stats } from "@/docs";
+import { categories, categoryTitle, formatBytes, getComponents, stats } from "@/docs";
 import FieldDefault from "@/docs/examples/field-default";
+import { t } from "@/i18n/generated";
+import { href } from "@/lib/href";
 import { siteUrl } from "@/lib/site";
 import { Button } from "@/registry/cd/ui/button";
 
@@ -12,6 +14,8 @@ import { Button } from "@/registry/cd/ui/button";
 const thumbs: Record<string, ComponentType> = { form: FieldDefault };
 
 export default function Home() {
+  const home = t.app.home;
+  const components = getComponents();
   return (
     <>
       <section className="border-b">
@@ -25,28 +29,27 @@ export default function Home() {
               width={80}
             />
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 font-mono text-muted-foreground text-xs">
-              <span className="size-1.5 rounded-full bg-brand" /> v0.2 · {stats.count} componentes
+              <span className="size-1.5 rounded-full bg-brand" /> {home.badge({ count: String(stats.count) })}
             </p>
             <h1 className="max-w-[720px] text-balance font-bold font-heading text-[44px] leading-[1.02] tracking-[-0.03em] sm:text-[60px]">
-              Lightweight components. Your code.
+              {home.title}
             </h1>
             <p className="mt-5 max-w-[560px] text-pretty text-[18px] text-muted-foreground leading-relaxed">
-              React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod-powered forms.
-              Install with the shadcn CLI and shape every component to fit your project.
+              {home.lead}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button nativeButton={false} render={<Link href="/docs/instalacao" />} size="lg" variant="brand">
-                install cd/ui <ArrowRightIcon aria-hidden="true" />
+              <Button nativeButton={false} render={<Link href={href("/docs/instalacao")} />} size="lg" variant="brand">
+                {home.install} <ArrowRightIcon aria-hidden="true" />
               </Button>
               <Button nativeButton={false} render={<Link href="#componentes" />} size="lg" variant="outline">
-                browse components
+                {home.browse}
               </Button>
             </div>
             <dl className="mt-12 grid max-w-[560px] grid-cols-3 gap-6 border-t pt-6">
               {[
-                { value: formatBytes(stats.avg), label: "avg. gzip size" },
-                { value: `${stats.server}`, label: "no browser JS" },
-                { value: "Base UI", label: "accessible by default" },
+                { value: formatBytes(stats.avg), label: home.stats.avg },
+                { value: `${stats.server}`, label: home.stats.noJs },
+                { value: "Base UI", label: home.stats.accessible },
               ].map((s) => (
                 <div key={s.label}>
                   <dt className="text-muted-foreground text-xs">{s.label}</dt>
@@ -67,7 +70,7 @@ export default function Home() {
               width={256}
             />
             <span className="absolute -top-6 -left-24 animate-sticker rounded-2xl border-[3px] border-black bg-white px-4 py-2 font-heading font-semibold text-[#1c1c1c] text-lg [animation-delay:250ms] after:absolute after:top-full after:right-6 after:-mt-[7px] after:size-3.5 after:rotate-45 after:border-black after:border-r-[3px] after:border-b-[3px] after:bg-white">
-              want to try one?
+              {home.sticker}
             </span>
           </div>
         </div>
@@ -75,7 +78,7 @@ export default function Home() {
 
       <section className="border-b bg-card/50">
         <div className="mx-auto max-w-[1400px] px-4 py-8 lg:px-6">
-          <p className="mb-3 text-muted-foreground text-sm">Install the theme and add your first component to your project:</p>
+          <p className="mb-3 text-muted-foreground text-sm">{home.installIntro}</p>
           <div className="max-w-[760px]">
             <Install urls={[`${siteUrl}/r/theme.json`, `${siteUrl}/r/button.json`]} />
           </div>
@@ -85,20 +88,20 @@ export default function Home() {
       <section className="mx-auto w-full max-w-[1400px] scroll-mt-20 px-4 py-16 lg:px-6" id="componentes">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-bold font-heading text-[32px] tracking-[-0.02em]">componentes</h2>
-            <p className="mt-1 text-muted-foreground">See each component gzip size and where it runs.</p>
+            <h2 className="font-bold font-heading text-[32px] tracking-[-0.02em]">{home.componentsTitle}</h2>
+            <p className="mt-1 text-muted-foreground">{home.componentsLead}</p>
           </div>
-          <Link className="text-muted-foreground text-sm underline-offset-4 hover:text-foreground hover:underline" href="/docs/performance">
-            how we measure →
+          <Link className="text-muted-foreground text-sm underline-offset-4 hover:text-foreground hover:underline" href={href("/docs/performance")}>
+            {home.measure}
           </Link>
         </div>
 
         {categories.map((category) => (
           <div className="mb-12" key={category}>
             <h3 className="mb-4 flex items-center gap-4 font-medium text-muted-foreground text-sm">
-              {category.toLowerCase()} <span aria-hidden="true" className="h-px flex-1 bg-border" />
+              {categoryTitle(category).toLowerCase()} <span aria-hidden="true" className="h-px flex-1 bg-border" />
             </h3>
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {components
                 .filter((c) => c.category === category)
                 .map((c) => {
@@ -107,7 +110,7 @@ export default function Home() {
                     <li key={c.name}>
                       <Link
                         className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card outline-none transition-[border-color] duration-150 hover:border-brand focus-visible:ring-2 focus-visible:ring-ring"
-                        href={`/docs/components/${c.name}`}
+                        href={href(`/docs/components/${c.name}`)}
                       >
                         <div className="relative flex h-44 items-center justify-center overflow-hidden border-b bg-background px-4">
                           {/* Prévia real, mas inerte: o card inteiro é o link. */}
@@ -122,7 +125,7 @@ export default function Home() {
                           </div>
                           <p className="line-clamp-2 text-muted-foreground text-sm">{c.description}</p>
                           <p className="mt-auto pt-2 font-mono text-[11px] text-muted-foreground">
-                            {c.metric.client ? "client" : "server · 0 js"}
+                            {c.metric.client ? home.client : home.server}
                           </p>
                         </div>
                       </Link>

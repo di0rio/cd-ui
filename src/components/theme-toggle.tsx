@@ -3,9 +3,11 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
+import { useLocale } from "@/components/locale-provider";
 import { Button } from "@/registry/cd/ui/button";
 
 export function ThemeToggle() {
+  const { ui } = useLocale();
   const { resolvedTheme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -16,12 +18,14 @@ export function ThemeToggle() {
 
   return (
     <Button
-      aria-label={dark ? "Mudar pro tema claro" : "Mudar pro tema escuro"}
+      aria-label={dark ? ui.theme.toLight : ui.theme.toDark}
       onClick={() => setTheme(dark ? "light" : "dark")}
       size="icon-sm"
       variant="outline"
     >
-      {mounted && (dark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />)}
+      {/* Os dois ícones já vêm no HTML; o CSS escolhe pelo tema, então não há botão vazio antes da hidratação. */}
+      <SunIcon aria-hidden="true" className="hidden dark:block" />
+      <MoonIcon aria-hidden="true" className="dark:hidden" />
     </Button>
   );
 }
