@@ -9,13 +9,17 @@ const features: { title: string; text: string; icon: ReactNode; wide?: boolean; 
     icon: <KeyboardIcon aria-hidden="true" />,
     wide: true,
     visual: (
-      <div className="mt-5 flex flex-wrap items-center gap-2 text-muted-foreground text-sm">
-        <Kbd>⌘</Kbd>
-        <Kbd>K</Kbd>
-        <span>open the command menu</span>
-        <span aria-hidden="true" className="mx-2 h-4 w-px bg-border" />
-        <Kbd>C</Kbd>
-        <span>new task</span>
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm">
+        <span className="flex items-center gap-2">
+          <Kbd>⌘</Kbd>
+          <Kbd>K</Kbd>
+          <span>open the command menu</span>
+        </span>
+        <span aria-hidden="true" className="h-4 w-px bg-border max-sm:hidden" />
+        <span className="flex items-center gap-2">
+          <Kbd>C</Kbd>
+          <span>new task</span>
+        </span>
       </div>
     ),
   },
