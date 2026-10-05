@@ -6,13 +6,30 @@ Made by Cauã Diório, with the same visual identity as the portfolio: warm crea
 
 ## Install
 
-```bash
-npx shadcn@latest init
-npx shadcn@latest add https://<your-domain>/r/theme.json
-npx shadcn@latest add https://<your-domain>/r/button.json https://<your-domain>/r/form.json
+Create a minimal `components.json` at the root of your project (no `shadcn init` needed, so nothing from shadcn's defaults gets installed):
+
+```json
+{
+  "style": "new-york",
+  "tailwind": { "css": "src/app/globals.css", "baseColor": "neutral" },
+  "aliases": { "components": "@/components", "utils": "@/lib/utils" }
+}
 ```
 
-Or register the namespace in `components.json` and run `npx shadcn@latest add @cd/button`:
+One command installs the theme, `cn`, and every component:
+
+```bash
+npx shadcn@latest add https://<your-domain>/r/all.json
+```
+
+Blocks (optional): `npx shadcn@latest add https://<your-domain>/r/all-blocks.json`.
+
+Single components, by URL or through the `@cd` namespace (register it in `components.json`):
+
+```bash
+npx shadcn@latest add https://<your-domain>/r/theme.json https://<your-domain>/r/button.json
+npx shadcn@latest add @cd/button
+```
 
 ```json
 { "registries": { "@cd": "https://<your-domain>/r/{name}.json" } }
@@ -20,12 +37,12 @@ Or register the namespace in `components.json` and run `npx shadcn@latest add @c
 
 ## Components
 
-17 components: Button, Badge, Card, Kbd, Separator, Skeleton, Spinner, Input, Textarea, Field, Form, Checkbox, Switch, Select, Dialog, Tooltip, and Tabs.
+27 components (actions, display, feedback, forms, overlays, and navigation) and 15 ready-made blocks (hero, pricing, footer, and more). Browse them all in the docs.
 
-- **Lightweight**: about 540 B gzip per component on average (see `/docs/performance`). Six are Server Components and send no JavaScript to the browser.
+- **Lightweight**: about 540 B gzip per component on average (see `/docs/performance`). Components without state are Server Components and send no JavaScript to the browser.
 - **Zod without extra weight**: `Form` uses only `zod/v4/core`, so it works with both `zod` and `zod/mini`. Pass a `schema`, add `name` to each `Field`, and `onSubmit` receives validated, typed data.
 - **Accessible**: focus, keyboard behavior, and ARIA come from Base UI. Each component page documents keyboard support and accessibility details.
-- **Motion with a purpose**: 100-250 ms transitions, focused on `transform` and `opacity`, with `prefers-reduced-motion` support throughout.
+- **Motion with a purpose**: `--cd-duration-*` tokens from 80 to 240 ms and strong curves, focused on `transform` and `opacity`. Retune everything in `:root`, and `prefers-reduced-motion` zeroes the durations in every component.
 
 ## Develop
 
@@ -46,7 +63,7 @@ src/docs/examples/*.tsx        live previews and displayed source code
 src/docs/metrics.json          generated gzip size and client/server data
 scripts/build-registry.mjs     builds registry.json and reads component imports
 scripts/metrics.mjs            measures each component with esbuild + gzip
-src/app/docs/...               guides and /docs/components/[name]
+src/app/[locale]/docs/...      guides (/docs/installation, /docs/theme, ...) and /docs/components/[name]
 ```
 
 ### Add a component

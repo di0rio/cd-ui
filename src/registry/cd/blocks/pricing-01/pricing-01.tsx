@@ -4,7 +4,7 @@ import { CheckIcon } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/registry/cd/ui/badge";
 import { Button } from "@/registry/cd/ui/button";
-import { Switch } from "@/registry/cd/ui/switch";
+import { PricingToggle } from "@/registry/cd/ui/pricing-toggle";
 
 const YEARLY_DISCOUNT = 0.2;
 
@@ -43,15 +43,8 @@ export function Pricing01() {
         <div className="mx-auto max-w-xl text-center">
           <h2 className="text-balance font-bold font-heading text-3xl tracking-[-0.02em] sm:text-4xl">Simple pricing that scales with you</h2>
           <p className="mt-3 text-muted-foreground">Start free. Upgrade when you outgrow it. Cancel anytime.</p>
-          <div className="mt-8 inline-flex items-center gap-3 text-sm">
-            <span className={yearly ? "text-muted-foreground" : "font-medium"} id="billing-monthly">
-              Monthly
-            </span>
-            <Switch aria-label="Bill yearly" checked={yearly} onCheckedChange={setYearly} />
-            <span className={yearly ? "font-medium" : "text-muted-foreground"} id="billing-yearly">
-              Yearly
-            </span>
-            <Badge variant="brand">Save {YEARLY_DISCOUNT * 100}%</Badge>
+          <div className="mt-8">
+            <PricingToggle badge={`Save ${YEARLY_DISCOUNT * 100}%`} onYearlyChange={setYearly} yearly={yearly} />
           </div>
         </div>
 

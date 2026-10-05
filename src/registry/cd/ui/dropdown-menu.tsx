@@ -13,7 +13,7 @@ export const DropdownMenuSub = MenuPrimitive.SubmenuRoot;
 
 const itemClass = cn(
   "relative flex min-h-8 cursor-default items-center gap-2 rounded-md px-2 text-sm outline-none select-none",
-  "data-highlighted:bg-accent data-disabled:pointer-events-none data-disabled:opacity-50",
+  "data-highlighted:bg-foreground/8 data-disabled:pointer-events-none data-disabled:opacity-50",
   "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
 );
 

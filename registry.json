@@ -14,6 +14,8 @@
           "color-brand-foreground": "var(--brand-foreground)",
           "color-brand-contrast": "var(--brand-contrast)",
           "color-destructive-foreground": "var(--destructive-foreground)",
+          "color-success": "var(--success)",
+          "color-success-foreground": "var(--success-foreground)",
           "radius-xs": "4px",
           "radius-sm": "calc(var(--radius) * 0.5)",
           "radius-md": "calc(var(--radius) * 0.75)",
@@ -46,6 +48,8 @@
           "brand": "#ffd23f",
           "brand-foreground": "#7a5c00",
           "brand-contrast": "#1c1c1c",
+          "success": "#16a34a",
+          "success-foreground": "#15803d",
           "radius": "0.75rem",
           "radius-button": "var(--radius)",
           "radius-field": "var(--radius)",
@@ -73,7 +77,8 @@
           "ring": "#ffd23f",
           "destructive": "#dc2626",
           "destructive-foreground": "#f87171",
-          "brand-foreground": "#ffd23f"
+          "brand-foreground": "#ffd23f",
+          "success-foreground": "#4ade80"
         }
       },
       "css": {
@@ -101,6 +106,17 @@
           "&[data-instant]": {
             "transition-duration": "0ms"
           }
+        },
+        "@keyframes caret": {
+          "0%, 70%, 100%": {
+            "opacity": "1"
+          },
+          "20%, 50%": {
+            "opacity": "0"
+          }
+        },
+        "@utility animate-caret": {
+          "animation": "caret 1s ease-out infinite"
         }
       }
     },
@@ -248,6 +264,25 @@
       ]
     },
     {
+      "name": "logo",
+      "type": "registry:ui",
+      "title": "Logo",
+      "description": "The cd/ui mark, wordmark, and terminal prompt, in three sizes.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/logo.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
@@ -264,10 +299,27 @@
       ]
     },
     {
+      "name": "auth-shell",
+      "type": "registry:ui",
+      "title": "Auth Shell",
+      "description": "Centered card for sign-in, sign-up, reset, and verify screens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/auth-shell.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Stacked sections that expand and collapse with a smooth height animation.",
+      "description": "Stacked sections shown as a terminal prompt tree, with a smooth height animation.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -318,7 +370,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "An inline message for information, success, or errors.",
+      "description": "A terminal-style log line for information, success, warnings, or errors.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -383,6 +435,44 @@
       "files": [
         {
           "path": "src/registry/cd/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "Password field with a show/hide toggle.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/button.json",
+        "http://localhost:3001/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/password-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "OTP Input",
+      "description": "One box per digit with auto-advance, backspace, and paste.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/otp-input.tsx",
           "type": "registry:ui"
         }
       ]
@@ -493,6 +583,24 @@
       "files": [
         {
           "path": "src/registry/cd/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pricing-toggle",
+      "type": "registry:ui",
+      "title": "Pricing Toggle",
+      "description": "Monthly/yearly switch with an optional saving badge.",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/badge.json",
+        "http://localhost:3001/r/switch.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/pricing-toggle.tsx",
           "type": "registry:ui"
         }
       ]
@@ -617,12 +725,13 @@
       ],
       "registryDependencies": [
         "http://localhost:3001/r/theme.json",
+        "http://localhost:3001/r/auth-shell.json",
         "http://localhost:3001/r/button.json",
-        "http://localhost:3001/r/card.json",
         "http://localhost:3001/r/checkbox.json",
         "http://localhost:3001/r/field.json",
         "http://localhost:3001/r/form.json",
-        "http://localhost:3001/r/input.json"
+        "http://localhost:3001/r/input.json",
+        "http://localhost:3001/r/password-input.json"
       ],
       "files": [
         {
@@ -644,7 +753,8 @@
         "http://localhost:3001/r/button.json",
         "http://localhost:3001/r/field.json",
         "http://localhost:3001/r/form.json",
-        "http://localhost:3001/r/input.json"
+        "http://localhost:3001/r/input.json",
+        "http://localhost:3001/r/password-input.json"
       ],
       "files": [
         {
@@ -663,12 +773,13 @@
       ],
       "registryDependencies": [
         "http://localhost:3001/r/theme.json",
+        "http://localhost:3001/r/auth-shell.json",
         "http://localhost:3001/r/button.json",
-        "http://localhost:3001/r/card.json",
         "http://localhost:3001/r/checkbox.json",
         "http://localhost:3001/r/field.json",
         "http://localhost:3001/r/form.json",
-        "http://localhost:3001/r/input.json"
+        "http://localhost:3001/r/input.json",
+        "http://localhost:3001/r/password-input.json"
       ],
       "files": [
         {
@@ -688,8 +799,8 @@
       ],
       "registryDependencies": [
         "http://localhost:3001/r/theme.json",
+        "http://localhost:3001/r/auth-shell.json",
         "http://localhost:3001/r/button.json",
-        "http://localhost:3001/r/card.json",
         "http://localhost:3001/r/field.json",
         "http://localhost:3001/r/form.json",
         "http://localhost:3001/r/input.json"
@@ -709,9 +820,9 @@
       "dependencies": [],
       "registryDependencies": [
         "http://localhost:3001/r/theme.json",
+        "http://localhost:3001/r/auth-shell.json",
         "http://localhost:3001/r/button.json",
-        "http://localhost:3001/r/card.json",
-        "http://localhost:3001/r/input.json"
+        "http://localhost:3001/r/otp-input.json"
       ],
       "files": [
         {
@@ -791,7 +902,7 @@
         "http://localhost:3001/r/theme.json",
         "http://localhost:3001/r/badge.json",
         "http://localhost:3001/r/button.json",
-        "http://localhost:3001/r/switch.json"
+        "http://localhost:3001/r/pricing-toggle.json"
       ],
       "files": [
         {
@@ -937,7 +1048,9 @@
         "http://localhost:3001/r/kbd.json",
         "http://localhost:3001/r/separator.json",
         "http://localhost:3001/r/avatar.json",
+        "http://localhost:3001/r/logo.json",
         "http://localhost:3001/r/table.json",
+        "http://localhost:3001/r/auth-shell.json",
         "http://localhost:3001/r/accordion.json",
         "http://localhost:3001/r/skeleton.json",
         "http://localhost:3001/r/spinner.json",
@@ -945,12 +1058,15 @@
         "http://localhost:3001/r/progress.json",
         "http://localhost:3001/r/toast.json",
         "http://localhost:3001/r/input.json",
+        "http://localhost:3001/r/password-input.json",
+        "http://localhost:3001/r/otp-input.json",
         "http://localhost:3001/r/textarea.json",
         "http://localhost:3001/r/field.json",
         "http://localhost:3001/r/form.json",
         "http://localhost:3001/r/checkbox.json",
         "http://localhost:3001/r/radio-group.json",
         "http://localhost:3001/r/switch.json",
+        "http://localhost:3001/r/pricing-toggle.json",
         "http://localhost:3001/r/slider.json",
         "http://localhost:3001/r/select.json",
         "http://localhost:3001/r/dialog.json",

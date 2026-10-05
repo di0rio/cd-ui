@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { z } from "zod";
+import { AuthShell } from "@/registry/cd/ui/auth-shell";
 import { Button } from "@/registry/cd/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/cd/ui/card";
 import { Checkbox } from "@/registry/cd/ui/checkbox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/registry/cd/ui/field";
 import { Form } from "@/registry/cd/ui/form";
 import { Input } from "@/registry/cd/ui/input";
+import { PasswordInput } from "@/registry/cd/ui/password-input";
 
 const schema = z
   .object({
@@ -27,13 +28,20 @@ export function Signup01() {
   const [created, setCreated] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-[760px] w-full items-center justify-center px-4 py-12">
-      <Card className="w-full max-w-md gap-6 p-6">
-        <CardHeader className="gap-1.5">
-          <CardTitle className="text-xl">Create your account</CardTitle>
-          <CardDescription>Free for 14 days. No credit card required.</CardDescription>
-        </CardHeader>
-        <CardContent>
+    <AuthShell
+      className="min-h-[760px]"
+      description="Free for 14 days. No credit card required."
+      footer={
+        <>
+          Already have an account?{" "}
+          <a className="font-medium text-foreground underline decoration-brand underline-offset-4" href="#login">
+            Sign in
+          </a>
+        </>
+      }
+      size="md"
+      title="Create your account"
+    >
           <Form
             onSubmit={async (values) => {
               setLoading(true);
@@ -64,13 +72,13 @@ export function Signup01() {
             </Field>
             <Field name="password">
               <FieldLabel>Password</FieldLabel>
-              <Input autoComplete="new-password" type="password" />
+              <PasswordInput autoComplete="new-password" />
               <FieldDescription>At least 8 characters.</FieldDescription>
               <FieldError />
             </Field>
             <Field name="confirm">
               <FieldLabel>Confirm password</FieldLabel>
-              <Input autoComplete="new-password" type="password" />
+              <PasswordInput autoComplete="new-password" />
               <FieldError />
             </Field>
             <Field name="terms">
@@ -86,14 +94,6 @@ export function Signup01() {
               {created && `Welcome aboard, ${created}! Check your inbox to verify your email.`}
             </p>
           </Form>
-        </CardContent>
-        <p className="-mt-2 text-center text-muted-foreground text-sm">
-          Already have an account?{" "}
-          <a className="font-medium text-foreground underline decoration-brand underline-offset-4" href="#login">
-            Sign in
-          </a>
-        </p>
-      </Card>
-    </div>
+    </AuthShell>
   );
 }

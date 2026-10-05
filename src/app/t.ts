@@ -31,8 +31,8 @@ const home = {
   },
   sticker: { en: "copy it. it's yours.", pt: "copia, cola, é seu." },
   installIntro: {
-    en: "Install the theme and add your first component to your project:",
-    pt: "Instale o tema e adicione o primeiro componente ao seu projeto:",
+    en: "Add the theme and every component to your project with one command:",
+    pt: "Adicione o tema e todos os componentes ao seu projeto com um comando:",
   },
   componentsTitle: { en: "components", pt: "componentes" },
   componentsLead: {

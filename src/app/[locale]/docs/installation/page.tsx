@@ -10,6 +10,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title, description };
 }
 
+const componentsJson = `{
+  "style": "new-york",
+  "tailwind": {
+    "css": "src/app/globals.css",
+    "baseColor": "neutral"
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils"
+  }
+}`;
+
 export default async function Installation() {
   const { tr } = await getT();
   const page = tr.app.docs.installation;
@@ -17,9 +29,10 @@ export default async function Installation() {
     <DocPage
       toc={[
         { id: "requirements", title: page.toc.requirements },
-        { id: "shadcn", title: page.toc.shadcn },
-        { id: "theme", title: page.toc.theme },
-        { id: "components", title: page.toc.components },
+        { id: "config", title: page.toc.config },
+        { id: "all", title: page.toc.all },
+        { id: "blocks", title: page.toc.blocks },
+        { id: "single", title: page.toc.single },
         { id: "namespace", title: page.toc.namespace },
       ]}
     >
@@ -33,21 +46,31 @@ export default async function Installation() {
         </li>
       </ul>
 
-      <H2 id="shadcn">{page.shadcnTitle}</H2>
-      <P>{page.shadcn}</P>
-      <Code code="npx shadcn@latest init" lang="bash" />
+      <H2 id="config">{page.configTitle}</H2>
+      <P>
+        <Rich text={page.config} />
+      </P>
+      <Code code={componentsJson} lang="json" title="components.json" />
 
-      <H2 id="theme">{page.themeTitle}</H2>
-      <P>{page.theme}</P>
-      <Install urls={[`${siteUrl}/r/theme.json`]} />
+      <H2 id="all">{page.allTitle}</H2>
+      <P>{page.all}</P>
+      <Install urls={[`${siteUrl}/r/all.json`]} />
 
-      <H2 id="components">{page.componentsTitle}</H2>
-      <P>{page.components}</P>
-      <Install urls={[`${siteUrl}/r/button.json`, `${siteUrl}/r/form.json`]} />
+      <H2 id="blocks">{page.blocksTitle}</H2>
+      <P>{page.blocks}</P>
+      <Install urls={[`${siteUrl}/r/all-blocks.json`]} />
+
+      <H2 id="single">{page.singleTitle}</H2>
+      <P>{page.single}</P>
+      <Install urls={[`${siteUrl}/r/theme.json`, `${siteUrl}/r/button.json`]} />
 
       <H2 id="namespace">{page.namespaceTitle}</H2>
       <P>{page.namespace}</P>
-      <Code code={`{\n  "registries": {\n    "@cd": "${siteUrl}/r/{name}.json"\n  }\n}`} lang="json" title="components.json" />
+      <Code code={`{
+  "registries": {
+    "@cd": "${siteUrl}/r/{name}.json"
+  }
+}`} lang="json" title="components.json" />
       <div className="mt-4">
         <Code code="npx shadcn@latest add @cd/button @cd/dialog" lang="bash" />
       </div>
