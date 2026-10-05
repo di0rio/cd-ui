@@ -5,7 +5,7 @@ export const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const site = {
   name: "cd/ui",
-  author: "Cauã Diorio",
+  author: "Cauã Diório",
   github: "di0rio",
   portfolio: "", // TODO: link do portfólio. Vazio = nome sem link no rodapé.
 };
