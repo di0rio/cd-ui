@@ -133,6 +133,8 @@
   }
   html {
     @apply font-sans;
+    /* Reserve the scrollbar space so short and long pages keep the same width (no sideways jump between pages). */
+    scrollbar-gutter: stable;
     caret-color: var(--brand-foreground);
   }
   body {

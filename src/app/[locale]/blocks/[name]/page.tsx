@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { BlockStepper, type StepperLink } from "@/components/blocks/block-stepper";
 import { DevicePreview } from "@/components/blocks/device-preview";
 import { Code } from "@/components/docs/code";
+import { DocsShell } from "@/components/docs/docs-shell";
 import { Install } from "@/components/docs/install";
 import { PreviewTabs } from "@/components/docs/preview-tabs";
 import { type Block, blocks, getBlock } from "@/blocks";
@@ -44,7 +45,7 @@ export default async function BlockPage({ params }: PageProps<"/[locale]/blocks/
   const source = await readFile(join(/* turbopackIgnore: true */ process.cwd(), "src/registry/cd/blocks", block.name, `${block.name}.tsx`), "utf8");
 
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-4 py-8 lg:px-6 lg:py-12">
+    <DocsShell>
       <div className="mb-6 flex items-center justify-between gap-4">
         <Link
           className="inline-flex items-center gap-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground"
@@ -96,6 +97,6 @@ export default async function BlockPage({ params }: PageProps<"/[locale]/blocks/
           </>
         }
       />
-    </div>
+    </DocsShell>
   );
 }
