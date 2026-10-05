@@ -6,6 +6,7 @@ import { Button } from "@/registry/cd/ui/button";
 import { Field, FieldError, FieldLabel } from "@/registry/cd/ui/field";
 import { Form } from "@/registry/cd/ui/form";
 import { Input } from "@/registry/cd/ui/input";
+import { PasswordInput } from "@/registry/cd/ui/password-input";
 
 const schema = z.object({
   email: z.email("Enter a valid email address."),
@@ -50,7 +51,7 @@ export function Login02() {
                   Forgot password?
                 </a>
               </div>
-              <Input autoComplete="current-password" type="password" />
+              <PasswordInput autoComplete="current-password" />
               <FieldError />
             </Field>
             <Button className="w-full" loading={loading} size="lg" type="submit" variant="brand">

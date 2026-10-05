@@ -11,14 +11,14 @@ const variant = { paid: "brand", pending: "muted", failed: "destructive" } as co
 
 export default function TableDefault() {
   return (
-    <Table className="max-w-lg">
+    <Table aria-label="Recent invoices" className="max-w-lg">
       <TableCaption>Recent invoices</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Invoice</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead numeric>Amount</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -29,7 +29,7 @@ export default function TableDefault() {
               <Badge variant={variant[i.status]}>{i.status}</Badge>
             </TableCell>
             <TableCell>{i.method}</TableCell>
-            <TableCell className="text-right">{i.amount}</TableCell>
+            <TableCell numeric>{i.amount}</TableCell>
           </TableRow>
         ))}
       </TableBody>

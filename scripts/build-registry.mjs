@@ -69,6 +69,8 @@ const theme = {
       "color-brand-foreground": "var(--brand-foreground)",
       "color-brand-contrast": "var(--brand-contrast)",
       "color-destructive-foreground": "var(--destructive-foreground)",
+      "color-success": "var(--success)",
+      "color-success-foreground": "var(--success-foreground)",
       "radius-xs": "4px",
       "radius-sm": "calc(var(--radius) * 0.5)",
       "radius-md": "calc(var(--radius) * 0.75)",
@@ -85,7 +87,7 @@ const theme = {
     light: block(":root"),
     dark: block(".dark"),
   },
-  // Same as the @media block and the cd-popup utility in globals.css.
+  // Same as the @media block, the cd-popup utility and the caret animation in globals.css.
   css: {
     "@media (prefers-reduced-motion: reduce)": {
       ":root": {
@@ -108,6 +110,12 @@ const theme = {
       "&[data-ending-style]": { "transition-duration": "var(--cd-duration-fast)" },
       "&[data-instant]": { "transition-duration": "0ms" },
     },
+    // Blinking caret of the Logo `prompt` variant (same as globals.css).
+    "@keyframes caret": {
+      "0%, 70%, 100%": { opacity: "1" },
+      "20%, 50%": { opacity: "0" },
+    },
+    "@utility animate-caret": { animation: "caret 1s ease-out infinite" },
   },
 };
 

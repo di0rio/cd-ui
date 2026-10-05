@@ -52,7 +52,7 @@ Commit regenerated `registry.json`, `src/docs/metrics.json` and `src/i18n/genera
 
 - Accessible: keyboard operable, visible focus, correct aria. Build on Base UI primitives.
 - Works in light and dark themes and on small screens.
-- Motion is short (100-250ms), uses `transform`/`opacity`, and respects `prefers-reduced-motion`.
+- Motion uses the `--cd-duration-*` / `--cd-ease-*` tokens (80-240ms), only `transform`/`opacity`, and respects `prefers-reduced-motion`.
 - Keep components small, bytes are measured. No new runtime dependencies without opening an issue first.
 
 ## Commits and pull requests

@@ -15,7 +15,7 @@ import { Settings01 } from "@/registry/cd/blocks/settings-01/settings-01";
 import { Signup01 } from "@/registry/cd/blocks/signup-01/signup-01";
 import { Verify01 } from "@/registry/cd/blocks/verify-01/verify-01";
 
-/** Separado do catálogo pra quem só precisa de nomes (header, busca) não puxar os blocos. */
+/** Kept apart from the catalog so code that only needs names (header, search) does not pull in the blocks. */
 export const blockComponents: Record<string, ComponentType> = {
   "login-01": Login01,
   "login-02": Login02,

@@ -8,7 +8,7 @@ import { Field, FieldDescription, FieldError, FieldLabel } from "@/registry/cd/u
 import { Form } from "@/registry/cd/ui/form";
 import { Input } from "@/registry/cd/ui/input";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@/registry/cd/ui/select";
-import { Switch } from "@/registry/cd/ui/switch";
+import { SwitchRow } from "@/registry/cd/ui/switch";
 import { Textarea } from "@/registry/cd/ui/textarea";
 
 const timezones = [
@@ -120,15 +120,7 @@ export function Settings01() {
           </CardHeader>
           <CardContent className="divide-y">
             {notifications.map((item) => (
-              <div className="flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0" key={item.id}>
-                <div>
-                  <p className="font-medium" id={`${item.id}-label`}>
-                    {item.title}
-                  </p>
-                  <p className="text-muted-foreground text-sm">{item.text}</p>
-                </div>
-                <Switch aria-labelledby={`${item.id}-label`} defaultChecked={item.on} />
-              </div>
+              <SwitchRow className="py-3.5 first:pt-0 last:pb-0" defaultChecked={item.on} description={item.text} key={item.id} title={item.title} />
             ))}
           </CardContent>
         </Card>

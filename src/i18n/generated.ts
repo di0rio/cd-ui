@@ -153,28 +153,31 @@ export const translations = {
 					startLink: "see how to install →",
 				},
 				installation: {
-					description: "Go from a fresh project to your first components in three steps.",
+					description: "Go from a fresh project to every component with one file and one command.",
 					toc: {
 						requirements: "Requirements",
-						shadcn: "1. shadcn CLI",
-						theme: "2. Theme",
-						components: "3. Components",
+						config: "1. components.json",
+						all: "2. Install everything",
+						blocks: "Blocks",
+						single: "Single components",
 						namespace: "Namespace shortcut",
 					},
 					requirements: "Requirements",
 					react: "React 19 and Tailwind CSS v4.",
 					alias: "An import alias configured (`@/*`), like the Next.js default.",
-					shadcnTitle: "1. Prepare your project with the shadcn CLI",
-					shadcn: "This command creates components.json, the cn utility, and the theme variables in your CSS. Skip this step if you already use shadcn.",
-					themeTitle: "2. Install the theme",
-					theme: "Add the cd/ui tokens to your globals.css: cream, graphite, and yellow colors, radii, and animation curves.",
-					componentsTitle: "3. Add components",
-					components: "Add one component or several at once. The CLI also installs dependencies such as Base UI and Zod when needed.",
+					configTitle: "1. Create components.json",
+					config: "Create this file at the root of your project and point `css` to your global stylesheet. You do not need to run `shadcn init`: it would install shadcn's default tokens, which cd/ui replaces with its own theme.",
+					allTitle: "2. Install the theme and every component",
+					all: "One command adds the theme, the `cn` utility, and every component, with their dependencies such as Base UI and Zod. Nothing from shadcn's defaults and no tw-animate.",
+					blocksTitle: "Blocks (optional)",
+					blocks: "Ready-made sections such as hero, pricing, and footer, all in one item:",
+					singleTitle: "Single components",
+					single: "Prefer to start small? Add only what you need by URL. The theme comes first on a new project:",
 					namespaceTitle: "Namespace shortcut",
 					namespace: "Want shorter install commands? Add cd/ui to components.json once:",
 				},
 				theme: {
-					description: "Colors, radii, and animation curves come from CSS tokens. Adjust the values in your globals.css and give the theme a new look.",
+					description: "Colors, radii, durations, and animation curves come from CSS tokens. Adjust the values in your globals.css and give the theme a new look.",
 					toc: {
 						colors: "Colors",
 						radii: "Radii",
@@ -195,9 +198,32 @@ export const translations = {
 					},
 					yellow: "Yellow works as a signal: it shows up in details like focus, check, an enabled switch, and the primary button, without taking over the whole screen.",
 					radiiTitle: "Radii",
+					radii: "`--radius` (0.75rem) is the base. The scale derives from it: `xs` 4px, `sm` 6px, `md` 9px, `lg` 12px, `xl` 18px, `2xl` 24px. Change `--radius` and every size follows.",
+					radiiControls: "Buttons and fields have their own tokens, `--radius-button` and `--radius-field`, both defaulting to `var(--radius)`. Override one to round only buttons (or only fields) without touching the rest:",
+					radiiDefault: "default",
+					radiiButtonOnly: "pill button",
+					radiiFieldOnly: "square field",
+					radiiCode: ":root {\n  --radius-button: 9999px; /* pill buttons */\n  --radius-field: 0;       /* square input, textarea, select */\n}",
 					motionTitle: "Motion",
-					motion: "Two curves set the rhythm of interactions: `ease-out` for entrances and responses and `ease-in-out` for elements that move. Durations stay between 100 and 250ms.",
-					motionCode: "--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entrances, clicks, opening popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* tabs indicator, switch */",
+					motion: "One set of tokens drives every transition. Two curves set the rhythm: `ease-out` for entrances and responses, `ease-in-out` for elements that move. Durations go from 80 to 240ms.",
+					motionTable: {
+						token: "Token",
+						value: "Value",
+						use: "Used by",
+						instant: "Button press feedback.",
+						fast: "Popups and dialogs closing.",
+						base: "Color and state changes: inputs, checkbox, switch, tabs, accordion chevron.",
+						slow: "Accordion height, progress, toast.",
+						easeOut: "Entrances, clicks, opening popups.",
+						easeInOut: "Tabs indicator, switch.",
+						scaleEnter: "Starting scale of popups (dialog, dropdown, popover, select, tooltip).",
+					},
+					motionOverrideTitle: "Override",
+					motionGlobal: "Redefine a token in `:root` to retune every component at once:",
+					motionGlobalCode: ":root {\n  --cd-duration-base: 200ms;\n  --cd-ease-out: cubic-bezier(0.16, 1, 0.3, 1);\n}",
+					motionLocal: "For a single component, set the token through a Tailwind arbitrary property in its `className`:",
+					motionLocalCode: "<Switch className=\"[--cd-duration-base:300ms]\" />",
+					motionReduced: "With `prefers-reduced-motion: reduce`, one block in globals.css sets every duration to 0.01ms and `--cd-scale-enter` to 1. It sets the same tokens, so keep it after your overrides.",
 					customizeTitle: "Customize",
 					customize: "Want a different palette? Change the values in your globals.css. Here, the yellow accent turns green:",
 				},
@@ -283,7 +309,7 @@ export const translations = {
 					},
 					installMethod: "Install method",
 					manual: "manual",
-					firstTime: "first time? install the theme first: see ",
+					firstTime: "first time? set up components.json and the theme first: see ",
 					firstTimeLink: "installation",
 					installDeps: "install the dependencies:",
 					copyFile: "copy the file into your project:",
@@ -316,7 +342,7 @@ export const translations = {
 					accessible: "accessible by default",
 				},
 				sticker: "copy it. it's yours.",
-				installIntro: "Install the theme and add your first component to your project:",
+				installIntro: "Add the theme and every component to your project with one command:",
 				componentsTitle: "components",
 				componentsLead: "See each component gzip size and where it runs.",
 				measure: "how we measure →",
@@ -421,9 +447,14 @@ export const translations = {
 				select: "Pick an option from a list that opens from the button.",
 				dialog: "Modal window with managed focus that returns on close.",
 				tooltip: "Show a short hint on hover or keyboard navigation.",
+				logo: "The cd/ui mark, wordmark, and terminal prompt, in three sizes.",
 				tabs: "Switch content with tabs and an indicator that follows the selection.",
-				accordion: "Stacked sections that expand and collapse with a smooth height animation.",
-				alert: "An inline message for information, success, or errors.",
+				accordion: "Stacked sections shown as a terminal prompt tree, with a smooth height animation.",
+				alert: "A terminal-style log line for information, success, warnings, or errors.",
+				"auth-shell": "Centered card for sign-in, sign-up, reset, and verify screens.",
+				"password-input": "Password field with a show/hide toggle.",
+				"otp-input": "One box per digit with auto-advance, backspace, and paste.",
+				"pricing-toggle": "Monthly/yearly switch with an optional saving badge.",
 				avatar: "A round profile picture with a fallback for when the image is missing.",
 				"dropdown-menu": "A menu of actions that opens from a button, with checkable items, radio groups, and submenus.",
 				popover: "A floating panel anchored to a button that can hold interactive content.",
@@ -456,6 +487,10 @@ export const translations = {
 						loading: {
 							title: "Loading",
 							description: "`loading` swaps the content for a spinner without changing the button width and blocks repeated clicks.",
+						},
+						key: {
+							title: "Keycap",
+							description: "The `key` variant looks like a keyboard key: the bottom edge is a shadow that disappears when pressed.",
 						},
 						link: {
 							title: "As a link",
@@ -669,7 +704,7 @@ export const translations = {
 					},
 					api: {
 						Checkbox: {
-							description: "Checkbox. The check is an SVG stroke that draws itself in 150ms.",
+							description: "Checkbox. The check is an SVG stroke that draws itself in 160ms.",
 							props: {
 								onCheckedChange: "Called when checked or unchecked.",
 								indeterminate: "Shows the \"partial\" dash.",
@@ -685,8 +720,19 @@ export const translations = {
 						default: {
 							title: "Settings",
 						},
+						row: {
+							title: "Setting row",
+							description: "`SwitchRow` puts title, description, and switch in a `<label>`: the whole row is clickable and the title names the switch.",
+						},
 					},
 					api: {
+						SwitchRow: {
+							description: "Row with title, description, and a switch. `className` goes on the row; every other prop goes on the `Switch`. Has a focus ring on the row and a disabled state.",
+							props: {
+								title: "Main text of the row.",
+								description: "Secondary text, below the title.",
+							},
+						},
 						Switch: {
 							description: "Toggle. Use it for immediate effect; for \"apply later\", prefer Checkbox.",
 							props: {
@@ -703,6 +749,10 @@ export const translations = {
 						default: {
 							title: "With label",
 						},
+						grouped: {
+							title: "Groups and a long list",
+							description: "`SelectGroup`, `SelectGroupLabel`, and `SelectSeparator` organize the options. When the list is taller than the screen, it scrolls and arrows appear at the edges.",
+						},
 					},
 					api: {
 						Select: {
@@ -717,10 +767,16 @@ export const translations = {
 							description: "Button that opens the list and the text of the current value.",
 						},
 						SelectPopup: {
-							description: "List. Opens from the trigger in 150ms, closes in 100ms.",
+							description: "List. Opens below the trigger in 160ms, closes in 120ms, and scrolls with arrows when it is long.",
+							props: {
+								alignItemWithTrigger: "Puts the chosen item over the trigger, as on macOS. Off by default: the list doesn't jump over the button.",
+							},
+						},
+						group: {
+							description: "`SelectGroup` groups options, `SelectGroupLabel` names the group, and `SelectSeparator` draws a line between groups.",
 						},
 						SelectItem: {
-							description: "Option with a yellow check when chosen.",
+							description: "Option with a yellow check on the right when chosen.",
 							props: {
 								value: "Option value.",
 							},
@@ -751,7 +807,7 @@ export const translations = {
 							description: "Open and close. Use `render` to use your own `Button`.",
 						},
 						DialogPopup: {
-							description: "Centered window with a dimmed backdrop. Enters with a scale (200ms), leaves faster (150ms).",
+							description: "Centered window with a dimmed backdrop. Enters with a scale (160ms), leaves faster (120ms).",
 							props: {
 								showClose: "Shows the X in the corner.",
 								closeLabel: "Label of the X for screen readers.",
@@ -772,24 +828,37 @@ export const translations = {
 					ex: {
 						default: {
 							title: "Toolbar",
-							description: "Move from one button to the next: after the first, tooltips appear instantly.",
+							description: "`Tip` is the shortcut. Move from one button to the next: with a `TooltipProvider`, after the first, tooltips appear instantly.",
+						},
+						parts: {
+							title: "Parts, sides, and arrow",
+							description: "The parts give full control. `arrow` adds a pointer to the trigger.",
 						},
 					},
 					api: {
 						TooltipProvider: {
-							description: "Shares the delay between neighboring tooltips.",
+							description: "Optional. Shares the delay between neighboring tooltips: after the first, the next ones open at once.",
 							props: {
 								delay: "Delay (ms) of the first tooltip.",
+								closeDelay: "Delay (ms) before closing.",
+							},
+						},
+						Tip: {
+							description: "Shortcut: wraps the trigger element and shows `content` in a tooltip. Same as `Tooltip` + `TooltipTrigger` + `TooltipPopup`; accepts `side`, `sideOffset`, and `arrow` too.",
+							props: {
+								content: "What the tooltip shows.",
+								children: "The trigger: a single element.",
 							},
 						},
 						root: {
 							description: "Root and trigger.",
 						},
 						TooltipPopup: {
-							description: "Bubble. Grows from the trigger in 125ms; the following ones appear without animation.",
+							description: "Small bubble in the Material style. Grows from the trigger in 160ms; the following ones appear without animation.",
 							props: {
 								side: "Preferred side.",
 								sideOffset: "Distance from the trigger (px).",
+								arrow: "Shows a pointer toward the trigger.",
 							},
 						},
 					},
@@ -812,7 +881,7 @@ export const translations = {
 							},
 						},
 						TabsList: {
-							description: "List with the sliding indicator (250ms, strong ease-in-out).",
+							description: "List with the sliding indicator (160ms, strong ease-in-out).",
 						},
 						tab: {
 							description: "Tab and content, linked by `value`.",
@@ -831,11 +900,15 @@ export const translations = {
 						default: {
 							title: "FAQ",
 						},
+						chevron: {
+							title: "Chevron indicator",
+						},
 					},
 					api: {
 						Accordion: {
 							description: "Root. By default only one item stays open; pass `multiple` to allow several.",
 							props: {
+								indicator: "`\"prompt\"` shows a terminal `▸` marker and a brand rule beside the open panel. `\"chevron\"` is the classic chevron with hairlines.",
 								value: "Open items, as an array of item values. Controlled or initial.",
 								multiple: "Allows more than one item open at the same time.",
 								onValueChange: "Called when an item opens or closes.",
@@ -848,10 +921,10 @@ export const translations = {
 							},
 						},
 						AccordionTrigger: {
-							description: "Heading button. The chevron turns 180° in 200ms as the panel opens.",
+							description: "Heading button. The `▸` marker turns 90° in 120ms (or the chevron 180° in 160ms) as the panel opens.",
 						},
 						AccordionPanel: {
-							description: "Content. Animates its height in 200ms and is removed from the page while closed.",
+							description: "Content. Animates its height and opacity in 160ms and is removed from the page while closed.",
 						},
 					},
 					kb: {
@@ -871,14 +944,109 @@ export const translations = {
 					},
 					api: {
 						Alert: {
-							description: "Block message with `role=\"alert\"`. An icon placed directly inside takes the first column. Server component.",
+							description: "One log line: `[tag] time title - description`, with a colored rule on the left. An icon placed directly inside is allowed. Server component.",
+							props: {
+								variant: "Level. `default`, `brand` and `destructive` still work as `info`, `warn` and `error`.",
+								tag: "Text of the level chip. Defaults to the level name.",
+								time: "Optional timestamp shown after the tag.",
+							},
 						},
 						parts: {
-							description: "Title and description of the message.",
+							description: "`AlertTitle` and `AlertDescription` share the line, joined by a dash. `AlertAction` pins a button or link to the right end.",
 						},
 					},
 					a11y: {
-						role: "`role=\"alert\"` is announced right away by screen readers: use it for important messages, and override it with `role=\"status\"` for gentle ones.",
+						role: "`warn` and `error` use `role=\"alert\"`, announced right away. `info` and `success` use `role=\"status\"`, announced politely. Pass `role` to override.",
+					},
+				},
+				"password-input": {
+					ex: {
+						default: {
+							title: "With label",
+						},
+					},
+					api: {
+						PasswordInput: {
+							description: "`Input` with an eye button that toggles between hiding and showing the text. Inside a `Field`, it keeps its label and error.",
+							props: {
+								showLabel: "Accessible name of the button while the text is hidden.",
+								hideLabel: "Accessible name of the button while the text is visible.",
+								props: "Everything from `Input`, except `type`.",
+							},
+						},
+					},
+					a11y: {
+						toggle: "The button is a real `<button>` with `aria-pressed` and a label that names the next action. Translate `showLabel` and `hideLabel` in other languages.",
+					},
+				},
+				"otp-input": {
+					ex: {
+						default: {
+							title: "Six digits",
+						},
+					},
+					api: {
+						OtpInput: {
+							description: "One box per digit, built on Base UI's OTP Field. Numeric by default, with autofill from SMS (`autocomplete=\"one-time-code\"`).",
+							props: {
+								length: "Number of boxes.",
+								value: "Code as a string. Controlled or initial.",
+								onValueChange: "Called on every change.",
+								onValueComplete: "Called when every box is filled.",
+								invalid: "Paints the boxes with the error color.",
+							},
+						},
+					},
+					kb: {
+						type: "Fills the box and moves to the next one.",
+						backspace: "Clears the box and goes back to the previous one.",
+						arrows: "Moves between boxes.",
+						paste: "Pasting a full code fills every box.",
+					},
+					a11y: {
+						group: "The boxes sit in a `role=\"group\"` labelled \"Verification code\" (change it with `aria-label`); each box after the first is named \"Digit N of 6\".",
+					},
+				},
+				"auth-shell": {
+					ex: {
+						default: {
+							title: "Sign-in",
+						},
+					},
+					api: {
+						AuthShell: {
+							description: "Centered card with a header (logo, title, description), your form as children and a footer line. Server component. It has no logo of its own: pass yours.",
+							props: {
+								logo: "Mark shown above the title.",
+								title: "Card title.",
+								description: "Line under the title.",
+								footer: "Line under the card, such as a link to the other screen.",
+								centered: "Centers the header text.",
+								size: "Card width: 384px (`sm`) or 448px (`md`).",
+							},
+						},
+					},
+				},
+				"pricing-toggle": {
+					ex: {
+						default: {
+							title: "Monthly and yearly",
+						},
+					},
+					api: {
+						PricingToggle: {
+							description: "Switch between two billing periods, with an optional badge. Controlled: you keep `yearly` and compute the prices.",
+							props: {
+								yearly: "Whether yearly billing is selected.",
+								onYearlyChange: "Called when the switch flips.",
+								badge: "Content of the badge, such as \"Save 20%\".",
+								monthlyLabel: "Text of the monthly side.",
+								yearlyLabel: "Text of the yearly side. It also names the switch.",
+							},
+						},
+					},
+					a11y: {
+						switch: "It is a `role=\"switch\"` named by `yearlyLabel`: on means yearly billing.",
 					},
 				},
 				avatar: {
@@ -922,7 +1090,7 @@ export const translations = {
 							description: "Button that opens the menu. Use `render` to use your own `Button`.",
 						},
 						DropdownMenuPopup: {
-							description: "List of actions. Opens from the trigger in 150ms, closes in 100ms.",
+							description: "List of actions. Opens from the trigger in 160ms, closes in 120ms.",
 							props: {
 								side: "Preferred side. Submenus open to the right on their own.",
 								align: "Alignment relative to the trigger.",
@@ -972,7 +1140,7 @@ export const translations = {
 							description: "Open and close. Use `render` to use your own `Button`.",
 						},
 						PopoverPopup: {
-							description: "Panel that grows from the trigger in 150ms and closes in 100ms.",
+							description: "Panel that grows from the trigger in 160ms and closes in 120ms.",
 							props: {
 								side: "Preferred side.",
 								align: "Alignment relative to the trigger.",
@@ -1007,7 +1175,7 @@ export const translations = {
 							},
 						},
 						Radio: {
-							description: "One option. The dot inside grows in 150ms when selected.",
+							description: "One option. The dot inside grows in 160ms when selected.",
 							props: {
 								value: "Option value.",
 							},
@@ -1057,7 +1225,7 @@ export const translations = {
 					},
 					api: {
 						Progress: {
-							description: "Bar from 0 to 100. The fill moves in 300ms. With a `null` value it becomes indeterminate.",
+							description: "Bar from 0 to 100. The fill moves in 240ms. With a `null` value it becomes indeterminate.",
 							props: {
 								value: "Current progress, or `null` when unknown.",
 								range: "Limits of the scale.",
@@ -1107,21 +1275,57 @@ export const translations = {
 						pause: "The timer pauses on hover and while the window is out of focus, so there is time to read.",
 					},
 				},
+				logo: {
+					ex: {
+						default: {
+							title: "Mark, wordmark, and prompt",
+							description: "Three sizes (`sm`, `md`, `lg`). The mark follows the theme, and the prompt's caret stays still with reduced motion.",
+						},
+						link: {
+							title: "As a link",
+							description: "With `render`, the logo becomes an `<a>` (or Next's `<Link>`).",
+						},
+					},
+					api: {
+						Logo: {
+							description: "The cd/ui logo. Client component (uses `render`). The prompt variant's blink needs the theme CSS (`animate-caret`).",
+							props: {
+								variant: "Glyph, text, or terminal line.",
+								size: "Size of the glyph or the text.",
+							},
+						},
+					},
+					a11y: {
+						name: "The mark is an image named \"cd/ui\"; the wordmark and prompt are named by their text. Inside an icon-only link, the mark names the link.",
+					},
+				},
 				table: {
 					ex: {
 						default: {
 							title: "Invoices",
 						},
+						sticky: {
+							title: "Sticky header, compact, selected",
+							description: "`stickyHeader` keeps the header while the rows scroll, `density` sets the row padding, and `data-state=\"selected\"` marks a row.",
+						},
 					},
 					api: {
 						Table: {
 							description: "`<table>` inside a container that scrolls sideways on small screens. Server component.",
+							props: {
+								density: "Row padding.",
+								stickyHeader: "Keeps the header visible while the rows scroll (the container gets a max height).",
+								ariaLabel: "Names the scroll container as a region. It is keyboard-focusable either way, so you can scroll it with the arrow keys.",
+							},
 						},
 						sections: {
 							description: "`TableHeader`, `TableBody`, and `TableFooter` map to `<thead>`, `<tbody>`, and `<tfoot>`.",
 						},
 						cells: {
 							description: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`.",
+							props: {
+								numeric: "On `TableHead` and `TableCell`: aligns right with equal-width digits.",
+							},
 						},
 					},
 					a11y: {
@@ -1279,28 +1483,31 @@ export const translations = {
 					startLink: "veja como instalar →",
 				},
 				installation: {
-					description: "Do projeto limpo aos primeiros componentes em três passos.",
+					description: "Do projeto limpo a todos os componentes com um arquivo e um comando.",
 					toc: {
 						requirements: "Requisitos",
-						shadcn: "1. shadcn CLI",
-						theme: "2. Tema",
-						components: "3. Componentes",
+						config: "1. components.json",
+						all: "2. Instalar tudo",
+						blocks: "Blocos",
+						single: "Componentes avulsos",
 						namespace: "Atalho com namespace",
 					},
 					requirements: "Requisitos",
 					react: "React 19 e Tailwind CSS v4.",
 					alias: "Um alias de importação configurado (`@/*`), como o padrão do Next.js.",
-					shadcnTitle: "1. Prepare o projeto com o shadcn CLI",
-					shadcn: "Esse comando cria o components.json, o utilitário cn e as variáveis de tema no CSS. Pule esta etapa se já usa shadcn.",
-					themeTitle: "2. Instalar o tema",
-					theme: "Adicione os tokens do cd/ui ao seu globals.css: cores creme, grafite e amarelo, raios e curvas de animação.",
-					componentsTitle: "3. Adicionar componentes",
-					components: "Adicione um componente ou vários de uma vez. O CLI também instala dependências como Base UI e Zod quando necessário.",
+					configTitle: "1. Crie o components.json",
+					config: "Crie este arquivo na raiz do projeto e aponte `css` para o seu estilo global. Não precisa rodar `shadcn init`: ele instalaria os tokens padrão do shadcn, que o cd/ui troca pelo próprio tema.",
+					allTitle: "2. Instale o tema e todos os componentes",
+					all: "Um comando adiciona o tema, o utilitário `cn` e todos os componentes, com as dependências como Base UI e Zod. Nada dos padrões do shadcn e sem tw-animate.",
+					blocksTitle: "Blocos (opcional)",
+					blocks: "Seções prontas como hero, preços e rodapé, todas em um item:",
+					singleTitle: "Componentes avulsos",
+					single: "Prefere começar pequeno? Adicione só o que precisa pela URL. Em projeto novo, o tema vem primeiro:",
 					namespaceTitle: "Atalho com namespace",
 					namespace: "Quer encurtar os próximos comandos? Registre o cd/ui uma vez no components.json:",
 				},
 				theme: {
-					description: "Cores, raios e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema.",
+					description: "Cores, raios, durações e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema.",
 					toc: {
 						colors: "Cores",
 						radii: "Raios",
@@ -1321,9 +1528,32 @@ export const translations = {
 					},
 					yellow: "O amarelo funciona como um sinal: aparece em detalhes como foco, check, switch ligado e botão principal, sem tomar a tela toda.",
 					radiiTitle: "Raios",
+					radii: "`--radius` (0.75rem) é a base. A escala deriva dela: `xs` 4px, `sm` 6px, `md` 9px, `lg` 12px, `xl` 18px, `2xl` 24px. Mudou o `--radius`, todos os tamanhos acompanham.",
+					radiiControls: "Botões e campos têm tokens próprios, `--radius-button` e `--radius-field`, os dois com padrão `var(--radius)`. Sobrescreva um para arredondar só os botões (ou só os campos) sem mexer no resto:",
+					radiiDefault: "padrão",
+					radiiButtonOnly: "botão pílula",
+					radiiFieldOnly: "campo reto",
+					radiiCode: ":root {\n  --radius-button: 9999px; /* botões em pílula */\n  --radius-field: 0;       /* input, textarea e select retos */\n}",
 					motionTitle: "Movimento",
-					motion: "Duas curvas dão ritmo às interações: `ease-out` para entradas e respostas e `ease-in-out` para elementos que se deslocam. Durações ficam entre 100 e 250ms.",
-					motionCode: "--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entradas, cliques, abrir popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* indicador de abas, switch */",
+					motion: "Um único conjunto de tokens controla todas as transições. Duas curvas dão o ritmo: `ease-out` para entradas e respostas, `ease-in-out` para elementos que se deslocam. As durações vão de 80 a 240ms.",
+					motionTable: {
+						token: "Token",
+						value: "Valor",
+						use: "Usado por",
+						instant: "Feedback do clique no botão.",
+						fast: "Fechamento de popups e dialogs.",
+						base: "Mudanças de cor e estado: input, checkbox, switch, abas, seta do accordion.",
+						slow: "Altura do accordion, progress, toast.",
+						easeOut: "Entradas, cliques, abrir popups.",
+						easeInOut: "Indicador de abas, switch.",
+						scaleEnter: "Escala inicial dos popups (dialog, dropdown, popover, select, tooltip).",
+					},
+					motionOverrideTitle: "Sobrescrever",
+					motionGlobal: "Redefina um token no `:root` para ajustar todos os componentes de uma vez:",
+					motionGlobalCode: ":root {\n  --cd-duration-base: 200ms;\n  --cd-ease-out: cubic-bezier(0.16, 1, 0.3, 1);\n}",
+					motionLocal: "Para um único componente, defina o token por uma propriedade arbitrária do Tailwind no `className`:",
+					motionLocalCode: "<Switch className=\"[--cd-duration-base:300ms]\" />",
+					motionReduced: "Com `prefers-reduced-motion: reduce`, um bloco no globals.css zera todas as durações (0.01ms) e põe `--cd-scale-enter` em 1. Ele mexe nos mesmos tokens, então mantenha-o depois dos seus overrides.",
 					customizeTitle: "Personalizar",
 					customize: "Quer outra paleta? Troque os valores no seu globals.css. Aqui, o destaque amarelo vira verde:",
 				},
@@ -1409,7 +1639,7 @@ export const translations = {
 					},
 					installMethod: "Forma de instalar",
 					manual: "manual",
-					firstTime: "primeira vez? instale o tema antes: veja ",
+					firstTime: "primeira vez? configure o components.json e o tema antes: veja ",
 					firstTimeLink: "instalação",
 					installDeps: "instale as dependências:",
 					copyFile: "copie o arquivo pro seu projeto:",
@@ -1442,7 +1672,7 @@ export const translations = {
 					accessible: "acessível por padrão",
 				},
 				sticker: "copia, cola, é seu.",
-				installIntro: "Instale o tema e adicione o primeiro componente ao seu projeto:",
+				installIntro: "Adicione o tema e todos os componentes ao seu projeto com um comando:",
 				componentsTitle: "componentes",
 				componentsLead: "Veja o tamanho gzip de cada componente e onde ele roda.",
 				measure: "como medimos →",
@@ -1547,9 +1777,14 @@ export const translations = {
 				select: "Escolha uma opção numa lista que abre a partir do botão.",
 				dialog: "Janela modal com foco controlado e devolvido ao fechar.",
 				tooltip: "Mostre uma dica curta ao passar o mouse ou navegar com teclado.",
+				logo: "A marca, o wordmark e o prompt de terminal do cd/ui, em três tamanhos.",
 				tabs: "Troque de conteúdo com abas e um indicador que acompanha a seleção.",
-				accordion: "Seções empilhadas que abrem e fecham com uma animação suave de altura.",
-				alert: "Uma mensagem em bloco para informação, sucesso ou erro.",
+				accordion: "Seções empilhadas em forma de árvore de prompt de terminal, com uma animação suave de altura.",
+				alert: "Uma linha de log estilo terminal para informação, sucesso, aviso ou erro.",
+				"auth-shell": "Card centralizado para telas de login, cadastro, redefinição e verificação.",
+				"password-input": "Campo de senha com botão de mostrar/ocultar.",
+				"otp-input": "Uma caixa por dígito, com avanço automático, backspace e colagem.",
+				"pricing-toggle": "Alternador mensal/anual com selo opcional de economia.",
 				avatar: "Uma foto de perfil redonda com um substituto para quando a imagem não existe.",
 				"dropdown-menu": "Um menu de ações que abre a partir de um botão, com itens marcáveis, grupos de rádio e submenus.",
 				popover: "Um painel flutuante ancorado num botão que pode ter conteúdo interativo.",
@@ -1582,6 +1817,10 @@ export const translations = {
 						loading: {
 							title: "Carregando",
 							description: "`loading` troca o conteúdo por um spinner sem mudar a largura do botão e bloqueia cliques repetidos.",
+						},
+						key: {
+							title: "Tecla",
+							description: "A variante `key` parece uma tecla de teclado: a borda de baixo é uma sombra que some ao pressionar.",
 						},
 						link: {
 							title: "Como link",
@@ -1795,7 +2034,7 @@ export const translations = {
 					},
 					api: {
 						Checkbox: {
-							description: "Caixa de seleção. O check é um traço SVG que se desenha em 150ms.",
+							description: "Caixa de seleção. O check é um traço SVG que se desenha em 160ms.",
 							props: {
 								onCheckedChange: "Chamado ao marcar ou desmarcar.",
 								indeterminate: "Mostra o traço de \"parcial\".",
@@ -1811,8 +2050,19 @@ export const translations = {
 						default: {
 							title: "Configurações",
 						},
+						row: {
+							title: "Linha de configuração",
+							description: "`SwitchRow` coloca título, descrição e interruptor num `<label>`: a linha inteira é clicável e o título dá nome ao interruptor.",
+						},
 					},
 					api: {
+						SwitchRow: {
+							description: "Linha com título, descrição e interruptor. `className` vai na linha; as demais props vão no `Switch`. Tem anel de foco na linha e estado desativado.",
+							props: {
+								title: "Texto principal da linha.",
+								description: "Texto secundário, abaixo do título.",
+							},
+						},
 						Switch: {
 							description: "Interruptor. Use para efeito imediato; para \"aplicar depois\", prefira Checkbox.",
 							props: {
@@ -1829,6 +2079,10 @@ export const translations = {
 						default: {
 							title: "Com label",
 						},
+						grouped: {
+							title: "Grupos e lista longa",
+							description: "`SelectGroup`, `SelectGroupLabel` e `SelectSeparator` organizam as opções. Quando a lista é maior que a tela, ela rola e setas aparecem nas bordas.",
+						},
 					},
 					api: {
 						Select: {
@@ -1843,10 +2097,16 @@ export const translations = {
 							description: "Botão que abre a lista e o texto do valor atual.",
 						},
 						SelectPopup: {
-							description: "Lista. Abre do gatilho em 150ms, fecha em 100ms.",
+							description: "Lista. Abre abaixo do gatilho em 160ms, fecha em 120ms e rola com setas quando é longa.",
+							props: {
+								alignItemWithTrigger: "Põe o item escolhido sobre o gatilho, como no macOS. Desligado por padrão: a lista não pula por cima do botão.",
+							},
+						},
+						group: {
+							description: "`SelectGroup` agrupa opções, `SelectGroupLabel` dá nome ao grupo e `SelectSeparator` desenha uma linha entre grupos.",
 						},
 						SelectItem: {
-							description: "Opção com check amarelo quando escolhida.",
+							description: "Opção com check amarelo à direita quando escolhida.",
 							props: {
 								value: "Valor da opção.",
 							},
@@ -1877,7 +2137,7 @@ export const translations = {
 							description: "Abrem e fecham. Use `render` pra usar seu `Button`.",
 						},
 						DialogPopup: {
-							description: "Janela centralizada com fundo escurecido. Entra em escala (200ms), sai mais rápido (150ms).",
+							description: "Janela centralizada com fundo escurecido. Entra em escala (160ms), sai mais rápido (120ms).",
 							props: {
 								showClose: "Mostra o X no canto.",
 								closeLabel: "Rótulo do X para leitor de tela.",
@@ -1898,24 +2158,37 @@ export const translations = {
 					ex: {
 						default: {
 							title: "Barra de ferramentas",
-							description: "Passe de um botão pro outro: depois do primeiro, os tooltips aparecem na hora.",
+							description: "`Tip` é o atalho. Passe de um botão pro outro: com um `TooltipProvider`, depois do primeiro, os tooltips aparecem na hora.",
+						},
+						parts: {
+							title: "Partes, lados e seta",
+							description: "As partes dão controle total. `arrow` adiciona uma seta apontando pro gatilho.",
 						},
 					},
 					api: {
 						TooltipProvider: {
-							description: "Compartilha o atraso entre tooltips vizinhos.",
+							description: "Opcional. Compartilha o atraso entre tooltips vizinhos: depois do primeiro, os próximos abrem na hora.",
 							props: {
 								delay: "Atraso (ms) do primeiro tooltip.",
+								closeDelay: "Atraso (ms) antes de fechar.",
+							},
+						},
+						Tip: {
+							description: "Atalho: envolve o elemento gatilho e mostra `content` num tooltip. Equivale a `Tooltip` + `TooltipTrigger` + `TooltipPopup`; aceita também `side`, `sideOffset` e `arrow`.",
+							props: {
+								content: "O que o tooltip mostra.",
+								children: "O gatilho: um único elemento.",
 							},
 						},
 						root: {
 							description: "Raiz e gatilho.",
 						},
 						TooltipPopup: {
-							description: "Balão. Nasce do gatilho em 125ms; os seguintes aparecem sem animação.",
+							description: "Balão pequeno no estilo Material. Nasce do gatilho em 160ms; os seguintes aparecem sem animação.",
 							props: {
 								side: "Lado preferido.",
 								sideOffset: "Distância do gatilho (px).",
+								arrow: "Mostra uma seta apontando pro gatilho.",
 							},
 						},
 					},
@@ -1938,7 +2211,7 @@ export const translations = {
 							},
 						},
 						TabsList: {
-							description: "Lista com o indicador que desliza (250ms, ease-in-out forte).",
+							description: "Lista com o indicador que desliza (160ms, ease-in-out forte).",
 						},
 						tab: {
 							description: "Aba e conteúdo, ligados pelo `value`.",
@@ -1957,11 +2230,15 @@ export const translations = {
 						default: {
 							title: "Perguntas frequentes",
 						},
+						chevron: {
+							title: "Indicador de chevron",
+						},
 					},
 					api: {
 						Accordion: {
 							description: "Raiz. Por padrão só um item fica aberto; passe `multiple` para permitir vários.",
 							props: {
+								indicator: "`\"prompt\"` mostra um marcador `▸` de terminal e uma linha da cor da marca ao lado do painel aberto. `\"chevron\"` é o chevron clássico com linhas finas.",
 								value: "Itens abertos, como array de valores dos itens. Controlado ou inicial.",
 								multiple: "Permite mais de um item aberto ao mesmo tempo.",
 								onValueChange: "Chamado ao abrir ou fechar um item.",
@@ -1974,10 +2251,10 @@ export const translations = {
 							},
 						},
 						AccordionTrigger: {
-							description: "Botão do cabeçalho. O chevron gira 180° em 200ms enquanto o painel abre.",
+							description: "Botão do cabeçalho. O marcador `▸` gira 90° em 120ms (ou o chevron 180° em 160ms) enquanto o painel abre.",
 						},
 						AccordionPanel: {
-							description: "Conteúdo. Anima a altura em 200ms e sai da página enquanto fechado.",
+							description: "Conteúdo. Anima altura e opacidade em 160ms e sai da página enquanto fechado.",
 						},
 					},
 					kb: {
@@ -1997,14 +2274,109 @@ export const translations = {
 					},
 					api: {
 						Alert: {
-							description: "Mensagem em bloco com `role=\"alert\"`. Um ícone colocado direto dentro ocupa a primeira coluna. Componente de servidor.",
+							description: "Uma linha de log: `[tag] hora título - descrição`, com uma linha colorida à esquerda. Um ícone colocado direto dentro é permitido. Componente de servidor.",
+							props: {
+								variant: "Nível. `default`, `brand` e `destructive` continuam funcionando como `info`, `warn` e `error`.",
+								tag: "Texto do selo de nível. Por padrão, o nome do nível.",
+								time: "Horário opcional mostrado depois do selo.",
+							},
 						},
 						parts: {
-							description: "Título e descrição da mensagem.",
+							description: "`AlertTitle` e `AlertDescription` dividem a linha, unidos por um traço. `AlertAction` fixa um botão ou link na ponta direita.",
 						},
 					},
 					a11y: {
-						role: "`role=\"alert\"` é anunciado na hora por leitores de tela: use para mensagens importantes e troque por `role=\"status\"` nas discretas.",
+						role: "`warn` e `error` usam `role=\"alert\"`, anunciado na hora. `info` e `success` usam `role=\"status\"`, anunciado com calma. Passe `role` para trocar.",
+					},
+				},
+				"password-input": {
+					ex: {
+						default: {
+							title: "Com label",
+						},
+					},
+					api: {
+						PasswordInput: {
+							description: "`Input` com um botão de olho que alterna entre esconder e mostrar o texto. Dentro de um `Field`, mantém label e erro.",
+							props: {
+								showLabel: "Nome acessível do botão enquanto o texto está escondido.",
+								hideLabel: "Nome acessível do botão enquanto o texto está visível.",
+								props: "Tudo do `Input`, exceto `type`.",
+							},
+						},
+					},
+					a11y: {
+						toggle: "O botão é um `<button>` de verdade com `aria-pressed` e um rótulo que nomeia a próxima ação. Traduza `showLabel` e `hideLabel` em outros idiomas.",
+					},
+				},
+				"otp-input": {
+					ex: {
+						default: {
+							title: "Seis dígitos",
+						},
+					},
+					api: {
+						OtpInput: {
+							description: "Uma caixa por dígito, feito sobre o OTP Field do Base UI. Numérico por padrão, com preenchimento por SMS (`autocomplete=\"one-time-code\"`).",
+							props: {
+								length: "Número de caixas.",
+								value: "Código como string. Controlado ou inicial.",
+								onValueChange: "Chamado a cada mudança.",
+								onValueComplete: "Chamado quando todas as caixas estão preenchidas.",
+								invalid: "Pinta as caixas com a cor de erro.",
+							},
+						},
+					},
+					kb: {
+						type: "Preenche a caixa e vai para a próxima.",
+						backspace: "Limpa a caixa e volta para a anterior.",
+						arrows: "Move entre as caixas.",
+						paste: "Colar um código completo preenche todas as caixas.",
+					},
+					a11y: {
+						group: "As caixas ficam em um `role=\"group\"` com o nome \"Verification code\" (mude com `aria-label`); cada caixa depois da primeira se chama \"Digit N of 6\".",
+					},
+				},
+				"auth-shell": {
+					ex: {
+						default: {
+							title: "Login",
+						},
+					},
+					api: {
+						AuthShell: {
+							description: "Card centralizado com cabeçalho (logo, título, descrição), seu formulário como filhos e uma linha de rodapé. Componente de servidor. Não tem logo próprio: passe o seu.",
+							props: {
+								logo: "Marca mostrada acima do título.",
+								title: "Título do card.",
+								description: "Linha abaixo do título.",
+								footer: "Linha abaixo do card, como um link para outra tela.",
+								centered: "Centraliza o texto do cabeçalho.",
+								size: "Largura do card: 384px (`sm`) ou 448px (`md`).",
+							},
+						},
+					},
+				},
+				"pricing-toggle": {
+					ex: {
+						default: {
+							title: "Mensal e anual",
+						},
+					},
+					api: {
+						PricingToggle: {
+							description: "Alterna entre dois períodos de cobrança, com um selo opcional. Controlado: você guarda `yearly` e calcula os preços.",
+							props: {
+								yearly: "Se a cobrança anual está selecionada.",
+								onYearlyChange: "Chamado quando o alternador muda.",
+								badge: "Conteúdo do selo, como \"Save 20%\".",
+								monthlyLabel: "Texto do lado mensal.",
+								yearlyLabel: "Texto do lado anual. Também dá nome ao alternador.",
+							},
+						},
+					},
+					a11y: {
+						switch: "É um `role=\"switch\"` com o nome de `yearlyLabel`: ligado significa cobrança anual.",
 					},
 				},
 				avatar: {
@@ -2048,7 +2420,7 @@ export const translations = {
 							description: "Botão que abre o menu. Use `render` pra usar seu `Button`.",
 						},
 						DropdownMenuPopup: {
-							description: "Lista de ações. Abre do gatilho em 150ms, fecha em 100ms.",
+							description: "Lista de ações. Abre do gatilho em 160ms, fecha em 120ms.",
 							props: {
 								side: "Lado preferido. Submenus abrem à direita sozinhos.",
 								align: "Alinhamento em relação ao gatilho.",
@@ -2098,7 +2470,7 @@ export const translations = {
 							description: "Abrem e fecham. Use `render` pra usar seu `Button`.",
 						},
 						PopoverPopup: {
-							description: "Painel que nasce do gatilho em 150ms e fecha em 100ms.",
+							description: "Painel que nasce do gatilho em 160ms e fecha em 120ms.",
 							props: {
 								side: "Lado preferido.",
 								align: "Alinhamento em relação ao gatilho.",
@@ -2133,7 +2505,7 @@ export const translations = {
 							},
 						},
 						Radio: {
-							description: "Uma opção. O ponto interno cresce em 150ms ao ser escolhida.",
+							description: "Uma opção. O ponto interno cresce em 160ms ao ser escolhida.",
 							props: {
 								value: "Valor da opção.",
 							},
@@ -2183,7 +2555,7 @@ export const translations = {
 					},
 					api: {
 						Progress: {
-							description: "Barra de 0 a 100. O preenchimento anda em 300ms. Com valor `null` ela fica indeterminada.",
+							description: "Barra de 0 a 100. O preenchimento anda em 240ms. Com valor `null` ela fica indeterminada.",
 							props: {
 								value: "Progresso atual, ou `null` quando não se sabe.",
 								range: "Limites da escala.",
@@ -2233,21 +2605,57 @@ export const translations = {
 						pause: "O tempo pausa ao passar o mouse e quando a janela perde o foco, para dar tempo de ler.",
 					},
 				},
+				logo: {
+					ex: {
+						default: {
+							title: "Marca, wordmark e prompt",
+							description: "Três tamanhos (`sm`, `md`, `lg`). A marca acompanha o tema, e o cursor do prompt fica parado com movimento reduzido.",
+						},
+						link: {
+							title: "Como link",
+							description: "Com `render`, o logo vira um `<a>` (ou `<Link>` do Next).",
+						},
+					},
+					api: {
+						Logo: {
+							description: "O logo do cd/ui. Componente de cliente (usa `render`). O piscar da variante prompt precisa do CSS do tema (`animate-caret`).",
+							props: {
+								variant: "Glifo, texto ou linha de terminal.",
+								size: "Tamanho do glifo ou do texto.",
+							},
+						},
+					},
+					a11y: {
+						name: "A marca é uma imagem chamada \"cd/ui\"; o wordmark e o prompt são nomeados pelo texto. Dentro de um link só com a marca, ela dá nome ao link.",
+					},
+				},
 				table: {
 					ex: {
 						default: {
 							title: "Faturas",
 						},
+						sticky: {
+							title: "Cabeçalho fixo, compacta, selecionada",
+							description: "`stickyHeader` mantém o cabeçalho enquanto as linhas rolam, `density` define o espaçamento das linhas e `data-state=\"selected\"` marca uma linha.",
+						},
 					},
 					api: {
 						Table: {
 							description: "`<table>` dentro de um contêiner que rola para o lado em telas pequenas. Componente de servidor.",
+							props: {
+								density: "Espaçamento das linhas.",
+								stickyHeader: "Mantém o cabeçalho visível enquanto as linhas rolam (o contêiner ganha altura máxima).",
+								ariaLabel: "Dá nome ao contêiner de rolagem como região. Ele é focável por teclado de qualquer jeito, então dá pra rolar com as setas.",
+							},
 						},
 						sections: {
 							description: "`TableHeader`, `TableBody` e `TableFooter` correspondem a `<thead>`, `<tbody>` e `<tfoot>`.",
 						},
 						cells: {
 							description: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`.",
+							props: {
+								numeric: "Em `TableHead` e `TableCell`: alinha à direita com dígitos de largura igual.",
+							},
 						},
 					},
 					a11y: {

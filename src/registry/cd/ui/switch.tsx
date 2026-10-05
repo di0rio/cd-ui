@@ -25,3 +25,33 @@ export function Switch({ className, ...props }: SwitchPrimitive.Root.Props): Rea
     </SwitchPrimitive.Root>
   );
 }
+
+/**
+ * Setting row: title, description and `Switch` in a `<label>`, so the whole row toggles and names the switch.
+ * `className` goes on the row; every other prop goes on the `Switch`.
+ */
+export function SwitchRow({
+  title,
+  description,
+  className,
+  ...props
+}: Omit<SwitchPrimitive.Root.Props, "title"> & { title: React.ReactNode; description?: React.ReactNode }): React.ReactElement {
+  return (
+    <label
+      className={cn(
+        "group/row flex cursor-pointer items-center justify-between gap-4 rounded-lg outline-none",
+        "has-focus-visible:ring-2 has-focus-visible:ring-ring has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-background",
+        "has-data-disabled:cursor-not-allowed",
+        className,
+      )}
+      data-slot="switch-row"
+    >
+      <span className="grid gap-0.5 group-has-data-disabled/row:opacity-50">
+        <span className="font-medium text-sm">{title}</span>
+        {description && <span className="text-muted-foreground text-sm">{description}</span>}
+      </span>
+      {/* The row draws the focus ring; the switch's own would double it. */}
+      <Switch className="focus-visible:ring-0 focus-visible:ring-offset-0" {...props} />
+    </label>
+  );
+}

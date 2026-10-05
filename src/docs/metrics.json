@@ -1,13 +1,13 @@
 {
   "button": {
-    "gzip": 1096,
+    "gzip": 1168,
     "client": true,
     "base": [
       "button"
     ]
   },
   "dropdown-menu": {
-    "gzip": 1027,
+    "gzip": 1032,
     "client": true,
     "base": [
       "menu"
@@ -40,13 +40,26 @@
       "avatar"
     ]
   },
+  "logo": {
+    "gzip": 1074,
+    "client": true,
+    "base": [
+      "merge-props",
+      "use-render"
+    ]
+  },
   "table": {
-    "gzip": 585,
+    "gzip": 930,
+    "client": false,
+    "base": []
+  },
+  "auth-shell": {
+    "gzip": 573,
     "client": false,
     "base": []
   },
   "accordion": {
-    "gzip": 706,
+    "gzip": 912,
     "client": true,
     "base": [
       "accordion"
@@ -63,7 +76,7 @@
     "base": []
   },
   "alert": {
-    "gzip": 530,
+    "gzip": 776,
     "client": false,
     "base": []
   },
@@ -86,6 +99,18 @@
     "client": true,
     "base": [
       "input"
+    ]
+  },
+  "password-input": {
+    "gzip": 1654,
+    "client": true,
+    "base": []
+  },
+  "otp-input": {
+    "gzip": 539,
+    "client": true,
+    "base": [
+      "otp-field"
     ]
   },
   "textarea": {
@@ -125,11 +150,16 @@
     ]
   },
   "switch": {
-    "gzip": 462,
+    "gzip": 660,
     "client": true,
     "base": [
       "switch"
     ]
+  },
+  "pricing-toggle": {
+    "gzip": 885,
+    "client": true,
+    "base": []
   },
   "slider": {
     "gzip": 667,
@@ -139,7 +169,7 @@
     ]
   },
   "select": {
-    "gzip": 915,
+    "gzip": 1211,
     "client": true,
     "base": [
       "select"
@@ -160,7 +190,7 @@
     ]
   },
   "tooltip": {
-    "gzip": 370,
+    "gzip": 794,
     "client": true,
     "base": [
       "tooltip"

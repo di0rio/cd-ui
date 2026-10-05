@@ -80,7 +80,7 @@ export default async function Home() {
         <div className="mx-auto max-w-[1400px] px-4 py-8 lg:px-6">
           <p className="mb-3 text-muted-foreground text-sm">{home.installIntro}</p>
           <div className="max-w-[760px]">
-            <Install urls={[`${siteUrl}/r/theme.json`, `${siteUrl}/r/button.json`]} />
+            <Install urls={[`${siteUrl}/r/all.json`]} />
           </div>
         </div>
       </section>
@@ -108,10 +108,8 @@ export default async function Home() {
                   const Thumb = thumbs[c.name] ?? c.doc.examples[0].Component;
                   return (
                     <li key={c.name}>
-                      <Link
-                        className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card outline-none transition-[border-color] duration-150 hover:border-brand focus-visible:ring-2 focus-visible:ring-ring"
-                        href={href(`/docs/components/${c.name}`)}
-                      >
+                      {/* The link covers the card through ::after instead of wrapping it: previews may contain links, and <a> inside <a> is invalid HTML. */}
+                      <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-[border-color] duration-base hover:border-brand has-focus-visible:ring-2 has-focus-visible:ring-ring">
                         <div className="relative flex h-44 items-center justify-center overflow-hidden border-b bg-background px-4">
                           {/* Real preview, but inert: the whole card is the link. */}
                           <div className="pointer-events-none origin-center scale-[0.8]" inert>
@@ -120,7 +118,12 @@ export default async function Home() {
                         </div>
                         <div className="flex flex-1 flex-col gap-1 p-4">
                           <div className="flex items-center justify-between gap-2">
-                            <span className="font-heading font-medium">{c.title}</span>
+                            <Link
+                              className="font-heading font-medium outline-none after:absolute after:inset-0"
+                              href={href(`/docs/components/${c.name}`)}
+                            >
+                              {c.title}
+                            </Link>
                             <span className="font-mono text-muted-foreground text-xs tabular-nums">{formatBytes(c.metric.gzip)}</span>
                           </div>
                           <p className="line-clamp-2 text-muted-foreground text-sm">{c.description}</p>
@@ -128,7 +131,7 @@ export default async function Home() {
                             {c.metric.client ? home.client : home.server}
                           </p>
                         </div>
-                      </Link>
+                      </div>
                     </li>
                   );
                 })}

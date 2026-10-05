@@ -55,7 +55,7 @@ export async function ApiTable({ part }: { part: ApiPart }) {
                   <code className="font-mono text-[12px] leading-relaxed">{prop.type}</code>
                 </td>
                 <td className="px-4 py-3">
-                  {prop.default ? <code className="font-mono text-[12px]">{prop.default}</code> : <span className="text-muted-foreground">—</span>}
+                  {prop.default ? <code className="font-mono text-[12px]">{prop.default}</code> : <span className="text-muted-foreground">-</span>}
                 </td>
               </tr>
             ))}

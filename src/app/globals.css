@@ -22,6 +22,8 @@
   --brand: #ffd23f;
   --brand-foreground: #7a5c00;
   --brand-contrast: #1c1c1c;
+  --success: #16a34a;
+  --success-foreground: #15803d;
   --radius: 0.75rem;
   --radius-button: var(--radius);
   --radius-field: var(--radius);
@@ -64,6 +66,7 @@
   --destructive: #dc2626;
   --destructive-foreground: #f87171;
   --brand-foreground: #ffd23f;
+  --success-foreground: #4ade80;
 }
 
 @theme inline {
@@ -85,6 +88,8 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-contrast: var(--brand-contrast);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
   --font-mono: var(--font-mono);
