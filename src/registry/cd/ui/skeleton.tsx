@@ -1,7 +1,7 @@
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
-/** Bloco de carregamento. Pulsa devagar; com movimento reduzido fica parado. Sem estado: roda no servidor. */
+/** Loading block. Pulses slowly; with reduced motion it stays still. Stateless: runs on the server. */
 export function Skeleton({ className, ...props }: React.ComponentProps<"div">): React.ReactElement {
   return (
     <div

@@ -3,16 +3,16 @@ import Link from "next/link";
 import { ScaledThumb } from "@/components/blocks/scaled-thumb";
 import { blockCategories, blocks } from "@/blocks";
 import { blockComponents } from "@/blocks/components";
-import { setLocale, t, translations } from "@/i18n/generated";
-import { href } from "@/lib/href";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, description } = translations[await setLocale()].app.blocks.metadata;
+  const { title, description } = (await getT()).tr.app.blocks.metadata;
   return { title, description };
 }
 
-export default function BlocksPage() {
-  const page = t.app.blocks;
+export default async function BlocksPage() {
+  const { tr, href } = await getT();
+  const page = tr.app.blocks;
   return (
     <>
       <section className="border-b">
@@ -56,7 +56,7 @@ export default function BlocksPage() {
                         </div>
                         <p className="line-clamp-2 text-muted-foreground text-sm">{item.description}</p>
                       </div>
-                      {/* Link por cima do card (a prévia tem links dentro e <a> não aninha). */}
+                      {/* Link over the card (the preview has links inside and <a> does not nest). */}
                       <Link
                         aria-label={page.index.open({ name: item.title })}
                         className="absolute inset-0 z-10 outline-none"

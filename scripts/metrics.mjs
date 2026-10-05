@@ -1,6 +1,6 @@
-// Mede o custo real de cada componente: empacota com esbuild (minificado, dependências como
-// externas, que é o que vira código seu) e mede em gzip. Também registra se é client ou server.
-// Saída: src/docs/metrics.json, lida pelas páginas de docs.
+// Measures the real cost of each component: bundles with esbuild (minified, dependencies as
+// externals, which is what becomes your code) and measures gzip. Also records client or server.
+// Output: src/docs/metrics.json, read by the docs pages.
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
@@ -21,7 +21,7 @@ for (const { name } of catalog) {
     format: "esm",
     jsx: "automatic",
     logLevel: "silent",
-    // Bibliotecas ficam de fora (já existem no projeto ou são compartilhadas); o código do cd/ui entra.
+    // Libraries stay out (they already exist in the project or are shared); the cd/ui code goes in.
     external: ["react", "react/*", "react-dom", "@base-ui/react", "@base-ui/react/*", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge", "zod", "zod/*"],
     alias: { "@": resolve(root, "src") },
   });
@@ -36,5 +36,5 @@ for (const { name } of catalog) {
 writeFileSync("src/docs/metrics.json", `${JSON.stringify(metrics, null, 2)}\n`);
 const total = Object.values(metrics);
 console.log(
-  `metrics: ${total.length} componentes, ${total.filter((m) => !m.client).length} no servidor, média ${Math.round(total.reduce((a, m) => a + m.gzip, 0) / total.length)} B gzip`,
+  `metrics: ${total.length} components, ${total.filter((m) => !m.client).length} on the server, average ${Math.round(total.reduce((a, m) => a + m.gzip, 0) / total.length)} B gzip`,
 );

@@ -18,7 +18,7 @@ export const badgeVariants = cva(
   },
 );
 
-/** Etiqueta curta (status, contagem, categoria). Sem estado: roda no servidor. */
+/** Short label (status, count, category). Stateless: runs on the server. */
 export function Badge({
   className,
   variant,

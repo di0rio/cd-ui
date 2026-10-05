@@ -56,15 +56,32 @@ const catalog = {
   select: { en: "Pick an option from a list that opens from the button.", pt: "Escolha uma opção numa lista que abre a partir do botão." },
   dialog: { en: "Modal window with managed focus that returns on close.", pt: "Janela modal com foco controlado e devolvido ao fechar." },
   tooltip: { en: "Show a short hint on hover or keyboard navigation.", pt: "Mostre uma dica curta ao passar o mouse ou navegar com teclado." },
+  logo: { en: "The cd/ui mark, wordmark, and terminal prompt, in three sizes.", pt: "A marca, o wordmark e o prompt de terminal do cd/ui, em três tamanhos." },
   tabs: {
     en: "Switch content with tabs and an indicator that follows the selection.",
     pt: "Troque de conteúdo com abas e um indicador que acompanha a seleção.",
   },
   accordion: {
-    en: "Stacked sections that expand and collapse with a smooth height animation.",
-    pt: "Seções empilhadas que abrem e fecham com uma animação suave de altura.",
+    en: "Stacked sections shown as a terminal prompt tree, with a smooth height animation.",
+    pt: "Seções empilhadas em forma de árvore de prompt de terminal, com uma animação suave de altura.",
   },
-  alert: { en: "An inline message for information, success, or errors.", pt: "Uma mensagem em bloco para informação, sucesso ou erro." },
+  alert: {
+    en: "A terminal-style log line for information, success, warnings, or errors.",
+    pt: "Uma linha de log estilo terminal para informação, sucesso, aviso ou erro.",
+  },
+  "auth-shell": {
+    en: "Centered card for sign-in, sign-up, reset, and verify screens.",
+    pt: "Card centralizado para telas de login, cadastro, redefinição e verificação.",
+  },
+  "password-input": { en: "Password field with a show/hide toggle.", pt: "Campo de senha com botão de mostrar/ocultar." },
+  "otp-input": {
+    en: "One box per digit with auto-advance, backspace, and paste.",
+    pt: "Uma caixa por dígito, com avanço automático, backspace e colagem.",
+  },
+  "pricing-toggle": {
+    en: "Monthly/yearly switch with an optional saving badge.",
+    pt: "Alternador mensal/anual com selo opcional de economia.",
+  },
   avatar: {
     en: "A round profile picture with a fallback for when the image is missing.",
     pt: "Uma foto de perfil redonda com um substituto para quando a imagem não existe.",
@@ -125,6 +142,13 @@ const content = {
         description: {
           en: "`loading` swaps the content for a spinner without changing the button width and blocks repeated clicks.",
           pt: "`loading` troca o conteúdo por um spinner sem mudar a largura do botão e bloqueia cliques repetidos.",
+        },
+      },
+      key: {
+        title: { en: "Keycap", pt: "Tecla" },
+        description: {
+          en: "The `key` variant looks like a keyboard key: the bottom edge is a shadow that disappears when pressed.",
+          pt: "A variante `key` parece uma tecla de teclado: a borda de baixo é uma sombra que some ao pressionar.",
         },
       },
       link: {
@@ -397,8 +421,8 @@ const content = {
     api: {
       Checkbox: {
         description: {
-          en: "Checkbox. The check is an SVG stroke that draws itself in 150ms.",
-          pt: "Caixa de seleção. O check é um traço SVG que se desenha em 150ms.",
+          en: "Checkbox. The check is an SVG stroke that draws itself in 160ms.",
+          pt: "Caixa de seleção. O check é um traço SVG que se desenha em 160ms.",
         },
         props: {
           onCheckedChange: { en: "Called when checked or unchecked.", pt: "Chamado ao marcar ou desmarcar." },
@@ -409,8 +433,27 @@ const content = {
     kb: { space: { en: "Checks or unchecks.", pt: "Marca ou desmarca." } },
   },
   switch: {
-    ex: { default: { title: { en: "Settings", pt: "Configurações" } } },
+    ex: {
+      default: { title: { en: "Settings", pt: "Configurações" } },
+      row: {
+        title: { en: "Setting row", pt: "Linha de configuração" },
+        description: {
+          en: "`SwitchRow` puts title, description, and switch in a `<label>`: the whole row is clickable and the title names the switch.",
+          pt: "`SwitchRow` coloca título, descrição e interruptor num `<label>`: a linha inteira é clicável e o título dá nome ao interruptor.",
+        },
+      },
+    },
     api: {
+      SwitchRow: {
+        description: {
+          en: "Row with title, description, and a switch. `className` goes on the row; every other prop goes on the `Switch`. Has a focus ring on the row and a disabled state.",
+          pt: "Linha com título, descrição e interruptor. `className` vai na linha; as demais props vão no `Switch`. Tem anel de foco na linha e estado desativado.",
+        },
+        props: {
+          title: { en: "Main text of the row.", pt: "Texto principal da linha." },
+          description: { en: "Secondary text, below the title.", pt: "Texto secundário, abaixo do título." },
+        },
+      },
       Switch: {
         description: {
           en: 'Toggle. Use it for immediate effect; for "apply later", prefer Checkbox.',
@@ -422,7 +465,16 @@ const content = {
     kb: { toggle: { en: "Toggles.", pt: "Alterna." } },
   },
   select: {
-    ex: { default: { title: { en: "With label", pt: "Com label" } } },
+    ex: {
+      default: { title: { en: "With label", pt: "Com label" } },
+      grouped: {
+        title: { en: "Groups and a long list", pt: "Grupos e lista longa" },
+        description: {
+          en: "`SelectGroup`, `SelectGroupLabel`, and `SelectSeparator` organize the options. When the list is taller than the screen, it scrolls and arrows appear at the edges.",
+          pt: "`SelectGroup`, `SelectGroupLabel` e `SelectSeparator` organizam as opções. Quando a lista é maior que a tela, ela rola e setas aparecem nas bordas.",
+        },
+      },
+    },
     api: {
       Select: {
         description: {
@@ -443,12 +495,24 @@ const content = {
       },
       SelectPopup: {
         description: {
-          en: "List. Opens from the trigger in 150ms, closes in 100ms.",
-          pt: "Lista. Abre do gatilho em 150ms, fecha em 100ms.",
+          en: "List. Opens below the trigger in 160ms, closes in 120ms, and scrolls with arrows when it is long.",
+          pt: "Lista. Abre abaixo do gatilho em 160ms, fecha em 120ms e rola com setas quando é longa.",
+        },
+        props: {
+          alignItemWithTrigger: {
+            en: "Puts the chosen item over the trigger, as on macOS. Off by default: the list doesn't jump over the button.",
+            pt: "Põe o item escolhido sobre o gatilho, como no macOS. Desligado por padrão: a lista não pula por cima do botão.",
+          },
+        },
+      },
+      group: {
+        description: {
+          en: "`SelectGroup` groups options, `SelectGroupLabel` names the group, and `SelectSeparator` draws a line between groups.",
+          pt: "`SelectGroup` agrupa opções, `SelectGroupLabel` dá nome ao grupo e `SelectSeparator` desenha uma linha entre grupos.",
         },
       },
       SelectItem: {
-        description: { en: "Option with a yellow check when chosen.", pt: "Opção com check amarelo quando escolhida." },
+        description: { en: "Option with a yellow check on the right when chosen.", pt: "Opção com check amarelo à direita quando escolhida." },
         props: { value: { en: "Option value.", pt: "Valor da opção." } },
       },
     },
@@ -478,8 +542,8 @@ const content = {
       },
       DialogPopup: {
         description: {
-          en: "Centered window with a dimmed backdrop. Enters with a scale (200ms), leaves faster (150ms).",
-          pt: "Janela centralizada com fundo escurecido. Entra em escala (200ms), sai mais rápido (150ms).",
+          en: "Centered window with a dimmed backdrop. Enters with a scale (160ms), leaves faster (120ms).",
+          pt: "Janela centralizada com fundo escurecido. Entra em escala (160ms), sai mais rápido (120ms).",
         },
         props: {
           showClose: { en: "Shows the X in the corner.", pt: "Mostra o X no canto." },
@@ -511,25 +575,49 @@ const content = {
       default: {
         title: { en: "Toolbar", pt: "Barra de ferramentas" },
         description: {
-          en: "Move from one button to the next: after the first, tooltips appear instantly.",
-          pt: "Passe de um botão pro outro: depois do primeiro, os tooltips aparecem na hora.",
+          en: "`Tip` is the shortcut. Move from one button to the next: with a `TooltipProvider`, after the first, tooltips appear instantly.",
+          pt: "`Tip` é o atalho. Passe de um botão pro outro: com um `TooltipProvider`, depois do primeiro, os tooltips aparecem na hora.",
+        },
+      },
+      parts: {
+        title: { en: "Parts, sides, and arrow", pt: "Partes, lados e seta" },
+        description: {
+          en: "The parts give full control. `arrow` adds a pointer to the trigger.",
+          pt: "As partes dão controle total. `arrow` adiciona uma seta apontando pro gatilho.",
         },
       },
     },
     api: {
       TooltipProvider: {
-        description: { en: "Shares the delay between neighboring tooltips.", pt: "Compartilha o atraso entre tooltips vizinhos." },
-        props: { delay: { en: "Delay (ms) of the first tooltip.", pt: "Atraso (ms) do primeiro tooltip." } },
+        description: {
+          en: "Optional. Shares the delay between neighboring tooltips: after the first, the next ones open at once.",
+          pt: "Opcional. Compartilha o atraso entre tooltips vizinhos: depois do primeiro, os próximos abrem na hora.",
+        },
+        props: {
+          delay: { en: "Delay (ms) of the first tooltip.", pt: "Atraso (ms) do primeiro tooltip." },
+          closeDelay: { en: "Delay (ms) before closing.", pt: "Atraso (ms) antes de fechar." },
+        },
+      },
+      Tip: {
+        description: {
+          en: "Shortcut: wraps the trigger element and shows `content` in a tooltip. Same as `Tooltip` + `TooltipTrigger` + `TooltipPopup`; accepts `side`, `sideOffset`, and `arrow` too.",
+          pt: "Atalho: envolve o elemento gatilho e mostra `content` num tooltip. Equivale a `Tooltip` + `TooltipTrigger` + `TooltipPopup`; aceita também `side`, `sideOffset` e `arrow`.",
+        },
+        props: {
+          content: { en: "What the tooltip shows.", pt: "O que o tooltip mostra." },
+          children: { en: "The trigger: a single element.", pt: "O gatilho: um único elemento." },
+        },
       },
       root: { description: { en: "Root and trigger.", pt: "Raiz e gatilho." } },
       TooltipPopup: {
         description: {
-          en: "Bubble. Grows from the trigger in 125ms; the following ones appear without animation.",
-          pt: "Balão. Nasce do gatilho em 125ms; os seguintes aparecem sem animação.",
+          en: "Small bubble in the Material style. Grows from the trigger in 160ms; the following ones appear without animation.",
+          pt: "Balão pequeno no estilo Material. Nasce do gatilho em 160ms; os seguintes aparecem sem animação.",
         },
         props: {
           side: { en: "Preferred side.", pt: "Lado preferido." },
           sideOffset: { en: "Distance from the trigger (px).", pt: "Distância do gatilho (px)." },
+          arrow: { en: "Shows a pointer toward the trigger.", pt: "Mostra uma seta apontando pro gatilho." },
         },
       },
     },
@@ -550,8 +638,8 @@ const content = {
       },
       TabsList: {
         description: {
-          en: "List with the sliding indicator (250ms, strong ease-in-out).",
-          pt: "Lista com o indicador que desliza (250ms, ease-in-out forte).",
+          en: "List with the sliding indicator (160ms, strong ease-in-out).",
+          pt: "Lista com o indicador que desliza (160ms, ease-in-out forte).",
         },
       },
       tab: {
@@ -565,7 +653,10 @@ const content = {
     },
   },
   accordion: {
-    ex: { default: { title: { en: "FAQ", pt: "Perguntas frequentes" } } },
+    ex: {
+      default: { title: { en: "FAQ", pt: "Perguntas frequentes" } },
+      chevron: { title: { en: "Chevron indicator", pt: "Indicador de chevron" } },
+    },
     api: {
       Accordion: {
         description: {
@@ -573,6 +664,10 @@ const content = {
           pt: "Raiz. Por padrão só um item fica aberto; passe `multiple` para permitir vários.",
         },
         props: {
+          indicator: {
+            en: "`\"prompt\"` shows a terminal `▸` marker and a brand rule beside the open panel. `\"chevron\"` is the classic chevron with hairlines.",
+            pt: "`\"prompt\"` mostra um marcador `▸` de terminal e uma linha da cor da marca ao lado do painel aberto. `\"chevron\"` é o chevron clássico com linhas finas.",
+          },
           value: { en: "Open items, as an array of item values. Controlled or initial.", pt: "Itens abertos, como array de valores dos itens. Controlado ou inicial." },
           multiple: { en: "Allows more than one item open at the same time.", pt: "Permite mais de um item aberto ao mesmo tempo." },
           onValueChange: { en: "Called when an item opens or closes.", pt: "Chamado ao abrir ou fechar um item." },
@@ -584,14 +679,14 @@ const content = {
       },
       AccordionTrigger: {
         description: {
-          en: "Heading button. The chevron turns 180° in 200ms as the panel opens.",
-          pt: "Botão do cabeçalho. O chevron gira 180° em 200ms enquanto o painel abre.",
+          en: "Heading button. The `▸` marker turns 90° in 120ms (or the chevron 180° in 160ms) as the panel opens.",
+          pt: "Botão do cabeçalho. O marcador `▸` gira 90° em 120ms (ou o chevron 180° em 160ms) enquanto o painel abre.",
         },
       },
       AccordionPanel: {
         description: {
-          en: "Content. Animates its height in 200ms and is removed from the page while closed.",
-          pt: "Conteúdo. Anima a altura em 200ms e sai da página enquanto fechado.",
+          en: "Content. Animates its height and opacity in 160ms and is removed from the page while closed.",
+          pt: "Conteúdo. Anima altura e opacidade em 160ms e sai da página enquanto fechado.",
         },
       },
     },
@@ -612,16 +707,124 @@ const content = {
     api: {
       Alert: {
         description: {
-          en: "Block message with `role=\"alert\"`. An icon placed directly inside takes the first column. Server component.",
-          pt: "Mensagem em bloco com `role=\"alert\"`. Um ícone colocado direto dentro ocupa a primeira coluna. Componente de servidor.",
+          en: "One log line: `[tag] time title - description`, with a colored rule on the left. An icon placed directly inside is allowed. Server component.",
+          pt: "Uma linha de log: `[tag] hora título - descrição`, com uma linha colorida à esquerda. Um ícone colocado direto dentro é permitido. Componente de servidor.",
+        },
+        props: {
+          variant: {
+            en: "Level. `default`, `brand` and `destructive` still work as `info`, `warn` and `error`.",
+            pt: "Nível. `default`, `brand` e `destructive` continuam funcionando como `info`, `warn` e `error`.",
+          },
+          tag: { en: "Text of the level chip. Defaults to the level name.", pt: "Texto do selo de nível. Por padrão, o nome do nível." },
+          time: { en: "Optional timestamp shown after the tag.", pt: "Horário opcional mostrado depois do selo." },
         },
       },
-      parts: { description: { en: "Title and description of the message.", pt: "Título e descrição da mensagem." } },
+      parts: {
+        description: {
+          en: "`AlertTitle` and `AlertDescription` share the line, joined by a dash. `AlertAction` pins a button or link to the right end.",
+          pt: "`AlertTitle` e `AlertDescription` dividem a linha, unidos por um traço. `AlertAction` fixa um botão ou link na ponta direita.",
+        },
+      },
     },
     a11y: {
       role: {
-        en: "`role=\"alert\"` is announced right away by screen readers: use it for important messages, and override it with `role=\"status\"` for gentle ones.",
-        pt: "`role=\"alert\"` é anunciado na hora por leitores de tela: use para mensagens importantes e troque por `role=\"status\"` nas discretas.",
+        en: "`warn` and `error` use `role=\"alert\"`, announced right away. `info` and `success` use `role=\"status\"`, announced politely. Pass `role` to override.",
+        pt: "`warn` e `error` usam `role=\"alert\"`, anunciado na hora. `info` e `success` usam `role=\"status\"`, anunciado com calma. Passe `role` para trocar.",
+      },
+    },
+  },
+  "password-input": {
+    ex: { default: { title: { en: "With label", pt: "Com label" } } },
+    api: {
+      PasswordInput: {
+        description: {
+          en: "`Input` with an eye button that toggles between hiding and showing the text. Inside a `Field`, it keeps its label and error.",
+          pt: "`Input` com um botão de olho que alterna entre esconder e mostrar o texto. Dentro de um `Field`, mantém label e erro.",
+        },
+        props: {
+          showLabel: { en: "Accessible name of the button while the text is hidden.", pt: "Nome acessível do botão enquanto o texto está escondido." },
+          hideLabel: { en: "Accessible name of the button while the text is visible.", pt: "Nome acessível do botão enquanto o texto está visível." },
+          props: { en: "Everything from `Input`, except `type`.", pt: "Tudo do `Input`, exceto `type`." },
+        },
+      },
+    },
+    a11y: {
+      toggle: {
+        en: "The button is a real `<button>` with `aria-pressed` and a label that names the next action. Translate `showLabel` and `hideLabel` in other languages.",
+        pt: "O botão é um `<button>` de verdade com `aria-pressed` e um rótulo que nomeia a próxima ação. Traduza `showLabel` e `hideLabel` em outros idiomas.",
+      },
+    },
+  },
+  "otp-input": {
+    ex: { default: { title: { en: "Six digits", pt: "Seis dígitos" } } },
+    api: {
+      OtpInput: {
+        description: {
+          en: "One box per digit, built on Base UI's OTP Field. Numeric by default, with autofill from SMS (`autocomplete=\"one-time-code\"`).",
+          pt: "Uma caixa por dígito, feito sobre o OTP Field do Base UI. Numérico por padrão, com preenchimento por SMS (`autocomplete=\"one-time-code\"`).",
+        },
+        props: {
+          length: { en: "Number of boxes.", pt: "Número de caixas." },
+          value: { en: "Code as a string. Controlled or initial.", pt: "Código como string. Controlado ou inicial." },
+          onValueChange: { en: "Called on every change.", pt: "Chamado a cada mudança." },
+          onValueComplete: { en: "Called when every box is filled.", pt: "Chamado quando todas as caixas estão preenchidas." },
+          invalid: { en: "Paints the boxes with the error color.", pt: "Pinta as caixas com a cor de erro." },
+        },
+      },
+    },
+    kb: {
+      type: { en: "Fills the box and moves to the next one.", pt: "Preenche a caixa e vai para a próxima." },
+      backspace: { en: "Clears the box and goes back to the previous one.", pt: "Limpa a caixa e volta para a anterior." },
+      arrows: { en: "Moves between boxes.", pt: "Move entre as caixas." },
+      paste: { en: "Pasting a full code fills every box.", pt: "Colar um código completo preenche todas as caixas." },
+    },
+    a11y: {
+      group: {
+        en: "The boxes sit in a `role=\"group\"` labelled \"Verification code\" (change it with `aria-label`); each box after the first is named \"Digit N of 6\".",
+        pt: "As caixas ficam em um `role=\"group\"` com o nome \"Verification code\" (mude com `aria-label`); cada caixa depois da primeira se chama \"Digit N of 6\".",
+      },
+    },
+  },
+  "auth-shell": {
+    ex: { default: { title: { en: "Sign-in", pt: "Login" } } },
+    api: {
+      AuthShell: {
+        description: {
+          en: "Centered card with a header (logo, title, description), your form as children and a footer line. Server component. It has no logo of its own: pass yours.",
+          pt: "Card centralizado com cabeçalho (logo, título, descrição), seu formulário como filhos e uma linha de rodapé. Componente de servidor. Não tem logo próprio: passe o seu.",
+        },
+        props: {
+          logo: { en: "Mark shown above the title.", pt: "Marca mostrada acima do título." },
+          title: { en: "Card title.", pt: "Título do card." },
+          description: { en: "Line under the title.", pt: "Linha abaixo do título." },
+          footer: { en: "Line under the card, such as a link to the other screen.", pt: "Linha abaixo do card, como um link para outra tela." },
+          centered: { en: "Centers the header text.", pt: "Centraliza o texto do cabeçalho." },
+          size: { en: "Card width: 384px (`sm`) or 448px (`md`).", pt: "Largura do card: 384px (`sm`) ou 448px (`md`)." },
+        },
+      },
+    },
+  },
+  "pricing-toggle": {
+    ex: { default: { title: { en: "Monthly and yearly", pt: "Mensal e anual" } } },
+    api: {
+      PricingToggle: {
+        description: {
+          en: "Switch between two billing periods, with an optional badge. Controlled: you keep `yearly` and compute the prices.",
+          pt: "Alterna entre dois períodos de cobrança, com um selo opcional. Controlado: você guarda `yearly` e calcula os preços.",
+        },
+        props: {
+          yearly: { en: "Whether yearly billing is selected.", pt: "Se a cobrança anual está selecionada." },
+          onYearlyChange: { en: "Called when the switch flips.", pt: "Chamado quando o alternador muda." },
+          badge: { en: "Content of the badge, such as \"Save 20%\".", pt: "Conteúdo do selo, como \"Save 20%\"." },
+          monthlyLabel: { en: "Text of the monthly side.", pt: "Texto do lado mensal." },
+          yearlyLabel: { en: "Text of the yearly side. It also names the switch.", pt: "Texto do lado anual. Também dá nome ao alternador." },
+        },
+      },
+    },
+    a11y: {
+      switch: {
+        en: "It is a `role=\"switch\"` named by `yearlyLabel`: on means yearly billing.",
+        pt: "É um `role=\"switch\"` com o nome de `yearlyLabel`: ligado significa cobrança anual.",
       },
     },
   },
@@ -673,8 +876,8 @@ const content = {
       },
       DropdownMenuPopup: {
         description: {
-          en: "List of actions. Opens from the trigger in 150ms, closes in 100ms.",
-          pt: "Lista de ações. Abre do gatilho em 150ms, fecha em 100ms.",
+          en: "List of actions. Opens from the trigger in 160ms, closes in 120ms.",
+          pt: "Lista de ações. Abre do gatilho em 160ms, fecha em 120ms.",
         },
         props: {
           side: { en: "Preferred side. Submenus open to the right on their own.", pt: "Lado preferido. Submenus abrem à direita sozinhos." },
@@ -735,8 +938,8 @@ const content = {
       },
       PopoverPopup: {
         description: {
-          en: "Panel that grows from the trigger in 150ms and closes in 100ms.",
-          pt: "Painel que nasce do gatilho em 150ms e fecha em 100ms.",
+          en: "Panel that grows from the trigger in 160ms and closes in 120ms.",
+          pt: "Painel que nasce do gatilho em 160ms e fecha em 120ms.",
         },
         props: {
           side: { en: "Preferred side.", pt: "Lado preferido." },
@@ -778,8 +981,8 @@ const content = {
       },
       Radio: {
         description: {
-          en: "One option. The dot inside grows in 150ms when selected.",
-          pt: "Uma opção. O ponto interno cresce em 150ms ao ser escolhida.",
+          en: "One option. The dot inside grows in 160ms when selected.",
+          pt: "Uma opção. O ponto interno cresce em 160ms ao ser escolhida.",
         },
         props: { value: { en: "Option value.", pt: "Valor da opção." } },
       },
@@ -833,8 +1036,8 @@ const content = {
     api: {
       Progress: {
         description: {
-          en: "Bar from 0 to 100. The fill moves in 300ms. With a `null` value it becomes indeterminate.",
-          pt: "Barra de 0 a 100. O preenchimento anda em 300ms. Com valor `null` ela fica indeterminada.",
+          en: "Bar from 0 to 100. The fill moves in 240ms. With a `null` value it becomes indeterminate.",
+          pt: "Barra de 0 a 100. O preenchimento anda em 240ms. Com valor `null` ela fica indeterminada.",
         },
         props: {
           value: { en: "Current progress, or `null` when unknown.", pt: "Progresso atual, ou `null` quando não se sabe." },
@@ -902,13 +1105,69 @@ const content = {
       },
     },
   },
+  logo: {
+    ex: {
+      default: {
+        title: { en: "Mark, wordmark, and prompt", pt: "Marca, wordmark e prompt" },
+        description: {
+          en: "Three sizes (`sm`, `md`, `lg`). The mark follows the theme, and the prompt's caret stays still with reduced motion.",
+          pt: "Três tamanhos (`sm`, `md`, `lg`). A marca acompanha o tema, e o cursor do prompt fica parado com movimento reduzido.",
+        },
+      },
+      link: {
+        title: { en: "As a link", pt: "Como link" },
+        description: {
+          en: "With `render`, the logo becomes an `<a>` (or Next's `<Link>`).",
+          pt: "Com `render`, o logo vira um `<a>` (ou `<Link>` do Next).",
+        },
+      },
+    },
+    api: {
+      Logo: {
+        description: {
+          en: "The cd/ui logo. Client component (uses `render`). The prompt variant's blink needs the theme CSS (`animate-caret`).",
+          pt: "O logo do cd/ui. Componente de cliente (usa `render`). O piscar da variante prompt precisa do CSS do tema (`animate-caret`).",
+        },
+        props: {
+          variant: { en: "Glyph, text, or terminal line.", pt: "Glifo, texto ou linha de terminal." },
+          size: { en: "Size of the glyph or the text.", pt: "Tamanho do glifo ou do texto." },
+        },
+      },
+    },
+    a11y: {
+      name: {
+        en: "The mark is an image named \"cd/ui\"; the wordmark and prompt are named by their text. Inside an icon-only link, the mark names the link.",
+        pt: "A marca é uma imagem chamada \"cd/ui\"; o wordmark e o prompt são nomeados pelo texto. Dentro de um link só com a marca, ela dá nome ao link.",
+      },
+    },
+  },
   table: {
-    ex: { default: { title: { en: "Invoices", pt: "Faturas" } } },
+    ex: {
+      default: { title: { en: "Invoices", pt: "Faturas" } },
+      sticky: {
+        title: { en: "Sticky header, compact, selected", pt: "Cabeçalho fixo, compacta, selecionada" },
+        description: {
+          en: "`stickyHeader` keeps the header while the rows scroll, `density` sets the row padding, and `data-state=\"selected\"` marks a row.",
+          pt: "`stickyHeader` mantém o cabeçalho enquanto as linhas rolam, `density` define o espaçamento das linhas e `data-state=\"selected\"` marca uma linha.",
+        },
+      },
+    },
     api: {
       Table: {
         description: {
           en: "`<table>` inside a container that scrolls sideways on small screens. Server component.",
           pt: "`<table>` dentro de um contêiner que rola para o lado em telas pequenas. Componente de servidor.",
+        },
+        props: {
+          density: { en: "Row padding.", pt: "Espaçamento das linhas." },
+          stickyHeader: {
+            en: "Keeps the header visible while the rows scroll (the container gets a max height).",
+            pt: "Mantém o cabeçalho visível enquanto as linhas rolam (o contêiner ganha altura máxima).",
+          },
+          ariaLabel: {
+            en: "Names the scroll container as a region. It is keyboard-focusable either way, so you can scroll it with the arrow keys.",
+            pt: "Dá nome ao contêiner de rolagem como região. Ele é focável por teclado de qualquer jeito, então dá pra rolar com as setas.",
+          },
         },
       },
       sections: {
@@ -921,6 +1180,12 @@ const content = {
         description: {
           en: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`.",
           pt: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`.",
+        },
+        props: {
+          numeric: {
+            en: "On `TableHead` and `TableCell`: aligns right with equal-width digits.",
+            pt: "Em `TableHead` e `TableCell`: alinha à direita com dígitos de largura igual.",
+          },
         },
       },
     },

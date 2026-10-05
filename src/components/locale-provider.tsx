@@ -3,7 +3,7 @@
 import { createContext, type ReactNode, use } from "react";
 import type { Locale } from "@/lib/locale-path";
 
-/** Textos dos Client Components, resolvidos no servidor (assim o bundle do cliente não carrega as traduções). */
+/** Texts for Client Components, resolved on the server (so the client bundle does not carry the translations). */
 export type Ui = {
   search: { open: string; label: string; input: string; placeholder: string; empty: string };
   sidebar: { label: string };

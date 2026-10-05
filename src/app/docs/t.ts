@@ -84,14 +84,15 @@ const intro = {
 
 const installation = {
   description: {
-    en: "Go from a fresh project to your first components in three steps.",
-    pt: "Do projeto limpo aos primeiros componentes em três passos.",
+    en: "Go from a fresh project to every component with one file and one command.",
+    pt: "Do projeto limpo a todos os componentes com um arquivo e um comando.",
   },
   toc: {
     requirements: { en: "Requirements", pt: "Requisitos" },
-    shadcn: { en: "1. shadcn CLI", pt: "1. shadcn CLI" },
-    theme: { en: "2. Theme", pt: "2. Tema" },
-    components: { en: "3. Components", pt: "3. Componentes" },
+    config: { en: "1. components.json", pt: "1. components.json" },
+    all: { en: "2. Install everything", pt: "2. Instalar tudo" },
+    blocks: { en: "Blocks", pt: "Blocos" },
+    single: { en: "Single components", pt: "Componentes avulsos" },
     namespace: { en: "Namespace shortcut", pt: "Atalho com namespace" },
   },
   requirements: { en: "Requirements", pt: "Requisitos" },
@@ -100,20 +101,25 @@ const installation = {
     en: "An import alias configured (`@/*`), like the Next.js default.",
     pt: "Um alias de importação configurado (`@/*`), como o padrão do Next.js.",
   },
-  shadcnTitle: { en: "1. Prepare your project with the shadcn CLI", pt: "1. Prepare o projeto com o shadcn CLI" },
-  shadcn: {
-    en: "This command creates components.json, the cn utility, and the theme variables in your CSS. Skip this step if you already use shadcn.",
-    pt: "Esse comando cria o components.json, o utilitário cn e as variáveis de tema no CSS. Pule esta etapa se já usa shadcn.",
+  configTitle: { en: "1. Create components.json", pt: "1. Crie o components.json" },
+  config: {
+    en: "Create this file at the root of your project and point `css` to your global stylesheet. You do not need to run `shadcn init`: it would install shadcn's default tokens, which cd/ui replaces with its own theme.",
+    pt: "Crie este arquivo na raiz do projeto e aponte `css` para o seu estilo global. Não precisa rodar `shadcn init`: ele instalaria os tokens padrão do shadcn, que o cd/ui troca pelo próprio tema.",
   },
-  themeTitle: { en: "2. Install the theme", pt: "2. Instalar o tema" },
-  theme: {
-    en: "Add the cd/ui tokens to your globals.css: cream, graphite, and yellow colors, radii, and animation curves.",
-    pt: "Adicione os tokens do cd/ui ao seu globals.css: cores creme, grafite e amarelo, raios e curvas de animação.",
+  allTitle: { en: "2. Install the theme and every component", pt: "2. Instale o tema e todos os componentes" },
+  all: {
+    en: "One command adds the theme, the `cn` utility, and every component, with their dependencies such as Base UI and Zod. Nothing from shadcn's defaults and no tw-animate.",
+    pt: "Um comando adiciona o tema, o utilitário `cn` e todos os componentes, com as dependências como Base UI e Zod. Nada dos padrões do shadcn e sem tw-animate.",
   },
-  componentsTitle: { en: "3. Add components", pt: "3. Adicionar componentes" },
-  components: {
-    en: "Add one component or several at once. The CLI also installs dependencies such as Base UI and Zod when needed.",
-    pt: "Adicione um componente ou vários de uma vez. O CLI também instala dependências como Base UI e Zod quando necessário.",
+  blocksTitle: { en: "Blocks (optional)", pt: "Blocos (opcional)" },
+  blocks: {
+    en: "Ready-made sections such as hero, pricing, and footer, all in one item:",
+    pt: "Seções prontas como hero, preços e rodapé, todas em um item:",
+  },
+  singleTitle: { en: "Single components", pt: "Componentes avulsos" },
+  single: {
+    en: "Prefer to start small? Add only what you need by URL. The theme comes first on a new project:",
+    pt: "Prefere começar pequeno? Adicione só o que precisa pela URL. Em projeto novo, o tema vem primeiro:",
   },
   namespaceTitle: { en: "Namespace shortcut", pt: "Atalho com namespace" },
   namespace: {
@@ -124,8 +130,8 @@ const installation = {
 
 const theme = {
   description: {
-    en: "Colors, radii, and animation curves come from CSS tokens. Adjust the values in your globals.css and give the theme a new look.",
-    pt: "Cores, raios e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema.",
+    en: "Colors, radii, durations, and animation curves come from CSS tokens. Adjust the values in your globals.css and give the theme a new look.",
+    pt: "Cores, raios, durações e curvas de animação vêm de tokens CSS. Ajuste os valores no seu globals.css e dê outra cara ao tema.",
   },
   toc: {
     colors: { en: "Colors", pt: "Cores" },
@@ -153,14 +159,64 @@ const theme = {
     pt: "O amarelo funciona como um sinal: aparece em detalhes como foco, check, switch ligado e botão principal, sem tomar a tela toda.",
   },
   radiiTitle: { en: "Radii", pt: "Raios" },
+  radii: {
+    en: "`--radius` (0.75rem) is the base. The scale derives from it: `xs` 4px, `sm` 6px, `md` 9px, `lg` 12px, `xl` 18px, `2xl` 24px. Change `--radius` and every size follows.",
+    pt: "`--radius` (0.75rem) é a base. A escala deriva dela: `xs` 4px, `sm` 6px, `md` 9px, `lg` 12px, `xl` 18px, `2xl` 24px. Mudou o `--radius`, todos os tamanhos acompanham.",
+  },
+  radiiControls: {
+    en: "Buttons and fields have their own tokens, `--radius-button` and `--radius-field`, both defaulting to `var(--radius)`. Override one to round only buttons (or only fields) without touching the rest:",
+    pt: "Botões e campos têm tokens próprios, `--radius-button` e `--radius-field`, os dois com padrão `var(--radius)`. Sobrescreva um para arredondar só os botões (ou só os campos) sem mexer no resto:",
+  },
+  radiiDefault: { en: "default", pt: "padrão" },
+  radiiButtonOnly: { en: "pill button", pt: "botão pílula" },
+  radiiFieldOnly: { en: "square field", pt: "campo reto" },
+  radiiCode: {
+    en: ":root {\n  --radius-button: 9999px; /* pill buttons */\n  --radius-field: 0;       /* square input, textarea, select */\n}",
+    pt: ":root {\n  --radius-button: 9999px; /* botões em pílula */\n  --radius-field: 0;       /* input, textarea e select retos */\n}",
+  },
   motionTitle: { en: "Motion", pt: "Movimento" },
   motion: {
-    en: "Two curves set the rhythm of interactions: `ease-out` for entrances and responses and `ease-in-out` for elements that move. Durations stay between 100 and 250ms.",
-    pt: "Duas curvas dão ritmo às interações: `ease-out` para entradas e respostas e `ease-in-out` para elementos que se deslocam. Durações ficam entre 100 e 250ms.",
+    en: "One set of tokens drives every transition. Two curves set the rhythm: `ease-out` for entrances and responses, `ease-in-out` for elements that move. Durations go from 80 to 240ms.",
+    pt: "Um único conjunto de tokens controla todas as transições. Duas curvas dão o ritmo: `ease-out` para entradas e respostas, `ease-in-out` para elementos que se deslocam. As durações vão de 80 a 240ms.",
   },
-  motionCode: {
-    en: "--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entrances, clicks, opening popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* tabs indicator, switch */",
-    pt: "--ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* entradas, cliques, abrir popups */\n--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* indicador de abas, switch */",
+  motionTable: {
+    token: { en: "Token", pt: "Token" },
+    value: { en: "Value", pt: "Valor" },
+    use: { en: "Used by", pt: "Usado por" },
+    instant: { en: "Button press feedback.", pt: "Feedback do clique no botão." },
+    fast: { en: "Popups and dialogs closing.", pt: "Fechamento de popups e dialogs." },
+    base: {
+      en: "Color and state changes: inputs, checkbox, switch, tabs, accordion chevron.",
+      pt: "Mudanças de cor e estado: input, checkbox, switch, abas, seta do accordion.",
+    },
+    slow: { en: "Accordion height, progress, toast.", pt: "Altura do accordion, progress, toast." },
+    easeOut: { en: "Entrances, clicks, opening popups.", pt: "Entradas, cliques, abrir popups." },
+    easeInOut: { en: "Tabs indicator, switch.", pt: "Indicador de abas, switch." },
+    scaleEnter: {
+      en: "Starting scale of popups (dialog, dropdown, popover, select, tooltip).",
+      pt: "Escala inicial dos popups (dialog, dropdown, popover, select, tooltip).",
+    },
+  },
+  motionOverrideTitle: { en: "Override", pt: "Sobrescrever" },
+  motionGlobal: {
+    en: "Redefine a token in `:root` to retune every component at once:",
+    pt: "Redefina um token no `:root` para ajustar todos os componentes de uma vez:",
+  },
+  motionGlobalCode: {
+    en: ":root {\n  --cd-duration-base: 200ms;\n  --cd-ease-out: cubic-bezier(0.16, 1, 0.3, 1);\n}",
+    pt: ":root {\n  --cd-duration-base: 200ms;\n  --cd-ease-out: cubic-bezier(0.16, 1, 0.3, 1);\n}",
+  },
+  motionLocal: {
+    en: "For a single component, set the token through a Tailwind arbitrary property in its `className`:",
+    pt: "Para um único componente, defina o token por uma propriedade arbitrária do Tailwind no `className`:",
+  },
+  motionLocalCode: {
+    en: '<Switch className="[--cd-duration-base:300ms]" />',
+    pt: '<Switch className="[--cd-duration-base:300ms]" />',
+  },
+  motionReduced: {
+    en: "With `prefers-reduced-motion: reduce`, one block in globals.css sets every duration to 0.01ms and `--cd-scale-enter` to 1. It sets the same tokens, so keep it after your overrides.",
+    pt: "Com `prefers-reduced-motion: reduce`, um bloco no globals.css zera todas as durações (0.01ms) e põe `--cd-scale-enter` em 1. Ele mexe nos mesmos tokens, então mantenha-o depois dos seus overrides.",
   },
   customizeTitle: { en: "Customize", pt: "Personalizar" },
   customize: {
@@ -301,7 +357,7 @@ const component = {
   },
   installMethod: { en: "Install method", pt: "Forma de instalar" },
   manual: { en: "manual", pt: "manual" },
-  firstTime: { en: "first time? install the theme first: see ", pt: "primeira vez? instale o tema antes: veja " },
+  firstTime: { en: "first time? set up components.json and the theme first: see ", pt: "primeira vez? configure o components.json e o tema antes: veja " },
   firstTimeLink: { en: "installation", pt: "instalação" },
   installDeps: { en: "install the dependencies:", pt: "instale as dependências:" },
   copyFile: { en: "copy the file into your project:", pt: "copie o arquivo pro seu projeto:" },

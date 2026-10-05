@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { z } from "zod";
+import { AuthShell } from "@/registry/cd/ui/auth-shell";
 import { Button } from "@/registry/cd/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/cd/ui/card";
 import { Checkbox } from "@/registry/cd/ui/checkbox";
 import { Field, FieldError, FieldLabel } from "@/registry/cd/ui/field";
 import { Form } from "@/registry/cd/ui/form";
 import { Input } from "@/registry/cd/ui/input";
+import { PasswordInput } from "@/registry/cd/ui/password-input";
 
 const schema = z.object({
   email: z.email("Enter a valid email address."),
@@ -29,16 +30,24 @@ export function Login01() {
   const [signedIn, setSignedIn] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-[640px] w-full items-center justify-center px-4 py-12">
-      <Card className="w-full max-w-sm gap-6 p-6">
-        <CardHeader className="items-center gap-3 text-center">
-          <span className="grid size-10 -rotate-6 place-items-center rounded-xl border-2 border-foreground bg-brand font-bold font-heading text-brand-contrast shadow-[3px_3px_0_var(--foreground)]">
-            A
-          </span>
-          <CardTitle className="mt-1 text-xl">Welcome back</CardTitle>
-          <CardDescription>Sign in to your Acme account to continue.</CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-5">
+    <AuthShell
+      centered
+      description="Sign in to your Acme account to continue."
+      footer={
+        <>
+          New to Acme?{" "}
+          <a className="font-medium text-foreground underline decoration-brand underline-offset-4" href="#signup">
+            Create an account
+          </a>
+        </>
+      }
+      logo={
+        <span className="grid size-10 -rotate-6 place-items-center rounded-xl border-2 border-foreground bg-brand font-bold font-heading text-brand-contrast shadow-[3px_3px_0_var(--foreground)]">
+          A
+        </span>
+      }
+      title="Welcome back"
+    >
           <Button className="w-full" type="button" variant="outline">
             <GithubIcon aria-hidden="true" /> Continue with GitHub
           </Button>
@@ -70,7 +79,7 @@ export function Login01() {
                   Forgot password?
                 </a>
               </div>
-              <Input autoComplete="current-password" type="password" />
+              <PasswordInput autoComplete="current-password" />
               <FieldError />
             </Field>
             <Field name="remember">
@@ -85,14 +94,6 @@ export function Login01() {
               {signedIn && `Signed in as ${signedIn}.`}
             </p>
           </Form>
-        </CardContent>
-        <p className="-mt-2 text-center text-muted-foreground text-sm">
-          New to Acme?{" "}
-          <a className="font-medium text-foreground underline decoration-brand underline-offset-4" href="#signup">
-            Create an account
-          </a>
-        </p>
-      </Card>
-    </div>
+    </AuthShell>
   );
 }

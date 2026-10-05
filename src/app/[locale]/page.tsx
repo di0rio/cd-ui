@@ -5,17 +5,17 @@ import Link from "next/link";
 import { Install } from "@/components/docs/install";
 import { categories, categoryTitle, formatBytes, getComponents, stats } from "@/docs";
 import FieldDefault from "@/docs/examples/field-default";
-import { t } from "@/i18n/generated";
-import { href } from "@/lib/href";
+import { getT } from "@/i18n/server";
 import { siteUrl } from "@/lib/site";
 import { Button } from "@/registry/cd/ui/button";
 
-// Prévia de cada card: o primeiro exemplo do componente (o do Form seria grande demais pro card).
+// Preview of each card: the first example of the component (Form's would be too big for the card).
 const thumbs: Record<string, ComponentType> = { form: FieldDefault };
 
-export default function Home() {
-  const home = t.app.home;
-  const components = getComponents();
+export default async function Home() {
+  const { tr, href } = await getT();
+  const home = tr.app.home;
+  const components = getComponents(tr);
   return (
     <>
       <section className="border-b">
@@ -38,10 +38,10 @@ export default function Home() {
               {home.lead}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button nativeButton={false} render={<Link href={href("/docs/instalacao")} />} size="lg" variant="brand">
+              <Button nativeButton={false} render={<Link href={href("/docs/installation")} />} size="lg" variant="brand">
                 {home.install} <ArrowRightIcon aria-hidden="true" />
               </Button>
-              <Button nativeButton={false} render={<Link href="#componentes" />} size="lg" variant="outline">
+              <Button nativeButton={false} render={<Link href="#components" />} size="lg" variant="outline">
                 {home.browse}
               </Button>
             </div>
@@ -59,7 +59,7 @@ export default function Home() {
             </dl>
           </div>
 
-          {/* Mascote: o mesmo cartoon do portfólio, colado como adesivo. */}
+          {/* Mascot: the same cartoon as the portfolio, stuck on like a sticker. */}
           <div className="relative mx-auto hidden w-fit lg:block">
             <Image
               alt=""
@@ -80,12 +80,12 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px] px-4 py-8 lg:px-6">
           <p className="mb-3 text-muted-foreground text-sm">{home.installIntro}</p>
           <div className="max-w-[760px]">
-            <Install urls={[`${siteUrl}/r/theme.json`, `${siteUrl}/r/button.json`]} />
+            <Install urls={[`${siteUrl}/r/all.json`]} />
           </div>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-[1400px] scroll-mt-20 px-4 py-16 lg:px-6" id="componentes">
+      <section className="mx-auto w-full max-w-[1400px] scroll-mt-20 px-4 py-16 lg:px-6" id="components">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="font-bold font-heading text-[32px] tracking-[-0.02em]">{home.componentsTitle}</h2>
@@ -99,7 +99,7 @@ export default function Home() {
         {categories.map((category) => (
           <div className="mb-12" key={category}>
             <h3 className="mb-4 flex items-center gap-4 font-medium text-muted-foreground text-sm">
-              {categoryTitle(category).toLowerCase()} <span aria-hidden="true" className="h-px flex-1 bg-border" />
+              {categoryTitle(category, tr).toLowerCase()} <span aria-hidden="true" className="h-px flex-1 bg-border" />
             </h3>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {components
@@ -108,19 +108,22 @@ export default function Home() {
                   const Thumb = thumbs[c.name] ?? c.doc.examples[0].Component;
                   return (
                     <li key={c.name}>
-                      <Link
-                        className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card outline-none transition-[border-color] duration-150 hover:border-brand focus-visible:ring-2 focus-visible:ring-ring"
-                        href={href(`/docs/components/${c.name}`)}
-                      >
+                      {/* The link covers the card through ::after instead of wrapping it: previews may contain links, and <a> inside <a> is invalid HTML. */}
+                      <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-[border-color] duration-base hover:border-brand has-focus-visible:ring-2 has-focus-visible:ring-ring">
                         <div className="relative flex h-44 items-center justify-center overflow-hidden border-b bg-background px-4">
-                          {/* Prévia real, mas inerte: o card inteiro é o link. */}
+                          {/* Real preview, but inert: the whole card is the link. */}
                           <div className="pointer-events-none origin-center scale-[0.8]" inert>
                             <Thumb />
                           </div>
                         </div>
                         <div className="flex flex-1 flex-col gap-1 p-4">
                           <div className="flex items-center justify-between gap-2">
-                            <span className="font-heading font-medium">{c.title}</span>
+                            <Link
+                              className="font-heading font-medium outline-none after:absolute after:inset-0"
+                              href={href(`/docs/components/${c.name}`)}
+                            >
+                              {c.title}
+                            </Link>
                             <span className="font-mono text-muted-foreground text-xs tabular-nums">{formatBytes(c.metric.gzip)}</span>
                           </div>
                           <p className="line-clamp-2 text-muted-foreground text-sm">{c.description}</p>
@@ -128,7 +131,7 @@ export default function Home() {
                             {c.metric.client ? home.client : home.server}
                           </p>
                         </div>
-                      </Link>
+                      </div>
                     </li>
                   );
                 })}

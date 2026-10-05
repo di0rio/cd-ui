@@ -1,9 +1,8 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Tokens do cd/ui ("O Terminal de Casa"): creme/grafite, um amarelo de destaque, bordas finas. */
+/* cd/ui tokens: cream/graphite, one yellow accent, thin borders. */
 :root {
   --background: #f6f4ee;
   --foreground: #262626;
@@ -23,7 +22,31 @@
   --brand: #ffd23f;
   --brand-foreground: #7a5c00;
   --brand-contrast: #1c1c1c;
-  --radius: 0.625rem;
+  --success: #16a34a;
+  --success-foreground: #15803d;
+  --radius: 0.75rem;
+  --radius-button: var(--radius);
+  --radius-field: var(--radius);
+
+  /* Motion: one set of durations and curves for every component. */
+  --cd-duration-instant: 80ms;
+  --cd-duration-fast: 120ms;
+  --cd-duration-base: 160ms;
+  --cd-duration-slow: 240ms;
+  --cd-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --cd-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --cd-scale-enter: 0.96;
+}
+
+/* Reduced motion: no duration and no enter scale, in every component. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --cd-duration-instant: 0.01ms;
+    --cd-duration-fast: 0.01ms;
+    --cd-duration-base: 0.01ms;
+    --cd-duration-slow: 0.01ms;
+    --cd-scale-enter: 1;
+  }
 }
 
 .dark {
@@ -43,6 +66,7 @@
   --destructive: #dc2626;
   --destructive-foreground: #f87171;
   --brand-foreground: #ffd23f;
+  --success-foreground: #4ade80;
 }
 
 @theme inline {
@@ -64,20 +88,43 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-contrast: var(--brand-contrast);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
   --font-mono: var(--font-mono);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-xs: 4px;
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  /* Strong curves instead of Tailwind's; duration-instant|fast|base|slow. */
+  --ease-out: var(--cd-ease-out);
+  --ease-in-out: var(--cd-ease-in-out);
+  --transition-duration-instant: var(--cd-duration-instant);
+  --transition-duration-fast: var(--cd-duration-fast);
+  --transition-duration-base: var(--cd-duration-base);
+  --transition-duration-slow: var(--cd-duration-slow);
 }
 
-/* Curvas fortes no lugar das do Tailwind. */
-@theme {
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+/* Popup that grows from its trigger: opacity + scale in and out. `data-instant` (back-to-back tooltips) skips the animation. */
+@utility cd-popup {
+  transform-origin: var(--transform-origin);
+  transition-property: opacity, transform;
+  transition-duration: var(--cd-duration-base);
+  transition-timing-function: var(--cd-ease-out);
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    transform: scale(var(--cd-scale-enter));
+  }
+  &[data-ending-style] {
+    transition-duration: var(--cd-duration-fast);
+  }
+  &[data-instant] {
+    transition-duration: 0ms;
+  }
 }
 
 @layer base {
@@ -96,7 +143,7 @@
   }
 }
 
-/* Cursor do prompt no header (mesma piscada do portfólio). */
+/* Prompt cursor in the header (same blink as the portfolio). */
 @keyframes caret {
   0%, 70%, 100% { opacity: 1; }
   20%, 50% { opacity: 0; }
@@ -105,7 +152,7 @@
   animation: caret 1s ease-out infinite;
 }
 
-/* Mascote da home: entra como adesivo colado, uma vez. */
+/* Home mascot: lands like a stuck-on sticker, once. */
 @keyframes sticker-in {
   from {
     opacity: 0;
@@ -119,7 +166,7 @@
   }
 }
 
-/* Código destacado pelo shiki (cores em CSS vars, troca junto com o tema). */
+/* Code highlighted by shiki (colors in CSS vars, switch with the theme). */
 .code pre {
   background: transparent !important;
 }

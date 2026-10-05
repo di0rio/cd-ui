@@ -4,33 +4,34 @@ import { DocHeader, DocPage, H2, P, Rich } from "@/components/docs/doc-page";
 import { Install } from "@/components/docs/install";
 import { Preview } from "@/components/docs/preview";
 import FormZod from "@/docs/examples/form-zod";
-import { setLocale, t, translations } from "@/i18n/generated";
+import { getT } from "@/i18n/server";
 import { siteUrl } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, description } = translations[await setLocale()].docs.guides.forms;
+  const { title, description } = (await getT()).tr.docs.guides.forms;
   return { title, description };
 }
 
-export default function Forms() {
-  const page = t.app.docs.forms;
+export default async function Forms() {
+  const { tr } = await getT();
+  const page = tr.app.docs.forms;
   return (
     <DocPage
       toc={[
-        { id: "exemplo", title: page.toc.example },
-        { id: "como-funciona", title: page.toc.how },
+        { id: "example", title: page.toc.example },
+        { id: "how-it-works", title: page.toc.how },
         { id: "zod-mini", title: page.toc.mini },
-        { id: "erros-do-servidor", title: page.toc.errors },
-        { id: "instalar", title: page.toc.install },
+        { id: "server-errors", title: page.toc.errors },
+        { id: "install", title: page.toc.install },
       ]}
     >
-      <DocHeader description={page.description} title={t.docs.guides.forms.title} />
+      <DocHeader description={page.description} title={tr.docs.guides.forms.title} />
 
-      <H2 id="exemplo">{page.exampleTitle}</H2>
+      <H2 id="example">{page.exampleTitle}</H2>
       <P>{page.example}</P>
       <Preview Component={FormZod} file="form-zod" />
 
-      <H2 id="como-funciona">{page.howTitle}</H2>
+      <H2 id="how-it-works">{page.howTitle}</H2>
       <ol className="flex list-decimal flex-col gap-2 pl-5 leading-7 marker:text-muted-foreground">
         <li>
           <Rich text={page.how.one} />
@@ -68,11 +69,11 @@ export default function Forms() {
         code={`import * as z from "zod/mini"\n\nconst schema = z.object({\n  email: z.email("invalid email"),\n  password: z.string().check(z.minLength(8, "minimum 8 characters")),\n})`}
       />
 
-      <H2 id="erros-do-servidor">{page.errorsTitle}</H2>
+      <H2 id="server-errors">{page.errorsTitle}</H2>
       <P>{page.errors}</P>
       <Code code={`const [errors, setErrors] = useState({})\n\n<Form schema={schema} errors={errors} onSubmit={async (values) => {\n  const res = await signup(values)\n  if (!res.ok) setErrors({ email: "that email already has an account." })\n}}>`} />
 
-      <H2 id="instalar">{page.installTitle}</H2>
+      <H2 id="install">{page.installTitle}</H2>
       <Install urls={[`${siteUrl}/r/form.json`, `${siteUrl}/r/input.json`]} />
     </DocPage>
   );

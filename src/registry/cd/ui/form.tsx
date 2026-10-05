@@ -7,20 +7,20 @@ import { cn } from "@/registry/cd/lib/utils";
 import { FieldValidationContext } from "@/registry/cd/ui/field";
 
 /*
- * Validação com Zod sem carregar o Zod inteiro: só as funções do núcleo (`zod/v4/core`).
- * Funciona com schemas de `zod` e de `zod/mini` (o mais leve).
+ * Zod validation without loading all of Zod: only the core functions (`zod/v4/core`).
+ * Works with `zod` and `zod/mini` schemas (the lightest).
  */
 
 export type FormProps<S extends $ZodObject> = Omit<FormPrimitive.Props, "onSubmit" | "onFormSubmit"> & {
-  /** Schema do Zod. Cada `Field` com `name` valida o próprio pedaço; o envio valida tudo. */
+  /** Zod schema. Each `Field` with a `name` validates its own piece; submit validates everything. */
   schema?: S;
-  /** Chamado só com dados válidos, já convertidos e tipados pelo schema. */
+  /** Called only with valid data, already parsed and typed by the schema. */
   onSubmit?: (values: output<S>) => void | Promise<void>;
 };
 
 /**
- * Formulário. Com `schema`, a validação é automática: cada campo valida ao sair dele
- * (`validationMode="onBlur"`) e o `onSubmit` só roda com tudo válido, recebendo os dados tipados.
+ * Form. With `schema`, validation is automatic: each field validates when you leave it
+ * (`validationMode="onBlur"`) and `onSubmit` only runs when everything is valid, receiving the typed data.
  */
 export function Form<S extends $ZodObject>({
   schema,

@@ -11,12 +11,12 @@ export { buttonVariants };
 
 export type ButtonProps = ButtonPrimitive.Props &
   VariantProps<typeof buttonVariants> & {
-    /** Mostra um spinner no lugar do conteúdo, mantém a largura e bloqueia cliques. */
+    /** Shows a spinner in place of the content, keeps the width and blocks clicks. */
     loading?: boolean;
   };
 
 /**
- * Botão. `render` transforma em link sem perder o estilo:
+ * Button. `render` turns it into a link without losing the style:
  * `<Button render={<a href="/x" />} nativeButton={false}>ir</Button>`.
  */
 export function Button({
@@ -40,7 +40,7 @@ export function Button({
     >
       {loading ? (
         <>
-          {/* O conteúdo fica invisível pra segurar a largura; o spinner vai por cima, centralizado. */}
+          {/* The content stays invisible to hold the width; the spinner sits on top, centered. */}
           <span className="invisible inline-flex items-center gap-2">{children as React.ReactNode}</span>
           <Spinner className="absolute" />
         </>

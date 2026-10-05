@@ -9,8 +9,8 @@ export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverClose = PopoverPrimitive.Close;
 
 /**
- * Painel que nasce do gatilho (`transform-origin` do Base UI) em 150ms e fecha em 100ms.
- * Diferente do tooltip, aceita conteúdo interativo.
+ * Panel that grows from its trigger (Base UI's `transform-origin`) and closes faster.
+ * Unlike the tooltip, it accepts interactive content.
  */
 export function PopoverPopup({
   className,
@@ -25,11 +25,8 @@ export function PopoverPopup({
       <PopoverPrimitive.Positioner align={align} className="z-50 outline-none" side={side} sideOffset={sideOffset}>
         <PopoverPrimitive.Popup
           className={cn(
-            "w-72 origin-(--transform-origin) rounded-xl border bg-popover p-4 text-popover-foreground text-sm shadow-lg/5 outline-none",
-            "transition-[opacity,transform] duration-150 ease-out",
-            "data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-ending-style:duration-100",
-            "data-starting-style:scale-[0.97] data-starting-style:opacity-0",
-            "motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
+            "w-72 rounded-xl border bg-popover p-4 text-popover-foreground text-sm shadow-lg/5 outline-none",
+            "cd-popup",
             className,
           )}
           data-slot="popover-popup"

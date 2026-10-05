@@ -6,7 +6,7 @@ export type BlockCategory = (typeof blockCategories)[number];
 
 export type Block = {
   name: string;
-  /** Chave no t.ts (sem hífen). */
+  /** Key in t.ts (no hyphen). */
   key: keyof Dict["app"]["blocks"]["items"];
   category: BlockCategory;
   title: string;

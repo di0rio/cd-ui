@@ -8,7 +8,7 @@ import { cn } from "@/registry/cd/lib/utils";
 
 export type NavGroup = { title: string; links: { href: string; title: string; badge?: string }[] };
 
-/** Navegação das docs. A página atual ganha fundo e um ponto amarelo. */
+/** Docs navigation. The current page gets a background and a yellow dot. */
 export function Sidebar({ groups }: { groups: NavGroup[] }) {
   const path = stripLocale(usePathname());
   const { ui } = useLocale();

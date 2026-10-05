@@ -6,7 +6,7 @@ import { cn } from "@/registry/cd/lib/utils";
 
 export type TocItem = { id: string; title: string; depth?: 1 | 2 };
 
-/** "Nesta página": acompanha a seção visível enquanto você rola. */
+/** "On this page": follows the visible section while you scroll. */
 export function Toc({ items }: { items: TocItem[] }) {
   const { ui } = useLocale();
   const [active, setActive] = useState(items[0]?.id);

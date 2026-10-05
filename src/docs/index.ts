@@ -1,21 +1,20 @@
 import catalog from "@/docs/catalog.json";
 import { type ComponentDoc, getContent } from "@/docs/content";
 import metrics from "@/docs/metrics.json";
-import { t } from "@/i18n/generated";
 import type { Dict } from "@/lib/dict";
 
 export type Metric = { gzip: number; client: boolean; base: string[] };
 
 export type ComponentEntry = (typeof catalog)[number] & { metric: Metric; doc: ComponentDoc };
 
-/** Catálogo sem idioma: nome, categoria e métricas. A `description` do JSON é só do registry; as docs usam a do t.ts. */
+/** Catalog without a language: name, category and metrics. The JSON `description` is only for the registry; the docs use the one from t.ts. */
 export const components = catalog.map((c) => ({
   ...c,
   metric: (metrics as Record<string, Metric>)[c.name],
 }));
 
-/** Catálogo completo: descrição e documentação no idioma da requisição (só durante a renderização). */
-export function getComponents(tr: Dict = t): ComponentEntry[] {
+/** Full catalog: description and documentation in the given language. */
+export function getComponents(tr: Dict): ComponentEntry[] {
   const content = getContent(tr);
   return components.map((c) => ({
     ...c,
@@ -24,20 +23,20 @@ export function getComponents(tr: Dict = t): ComponentEntry[] {
   }));
 }
 
-export const getComponent = (name: string, tr: Dict = t) => getComponents(tr).find((c) => c.name === name);
+export const getComponent = (name: string, tr: Dict) => getComponents(tr).find((c) => c.name === name);
 
 export const categories = [...new Set(components.map((c) => c.category))];
 
-export const categoryTitle = (category: string, tr: Dict = t) => tr.docs.categories[category as keyof Dict["docs"]["categories"]];
+export const categoryTitle = (category: string, tr: Dict) => tr.docs.categories[category as keyof Dict["docs"]["categories"]];
 
-/** Páginas de guia (lado esquerdo das docs e busca). */
-export function getGuides(tr: Dict = t) {
+/** Guide pages (left side of the docs and search). */
+export function getGuides(tr: Dict) {
   const g = tr.docs.guides;
   return [
     { href: "/docs", title: g.intro.title, description: g.intro.description },
-    { href: "/docs/instalacao", title: g.installation.title, description: g.installation.description },
-    { href: "/docs/tema", title: g.theme.title, description: g.theme.description },
-    { href: "/docs/formularios", title: g.forms.title, description: g.forms.description },
+    { href: "/docs/installation", title: g.installation.title, description: g.installation.description },
+    { href: "/docs/theme", title: g.theme.title, description: g.theme.description },
+    { href: "/docs/forms", title: g.forms.title, description: g.forms.description },
     { href: "/docs/performance", title: g.performance.title, description: g.performance.description },
   ];
 }

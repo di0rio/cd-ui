@@ -11,13 +11,12 @@ import { Preview } from "@/components/docs/preview";
 import { ApiTable, Inline, KeyTable } from "@/components/docs/tables";
 import type { TocItem } from "@/components/docs/toc";
 import { categoryTitle, components, formatBytes, getComponent, getComponents } from "@/docs";
-import { setLocale, translations } from "@/i18n/generated";
-import { type Locale, withLocale } from "@/lib/locale-path";
+import { getT } from "@/i18n/server";
 import { siteUrl } from "@/lib/site";
 import { asInstalled } from "@/lib/source";
 import { Badge } from "@/registry/cd/ui/badge";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/cd/ui/tabs";
-import registry from "../../../../../registry.json";
+import registry from "../../../../../../registry.json";
 
 export const dynamicParams = false;
 
@@ -25,8 +24,8 @@ export function generateStaticParams() {
   return components.map((c) => ({ name: c.name }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/docs/components/[name]">): Promise<Metadata> {
-  const tr = translations[await setLocale()];
+export async function generateMetadata({ params }: PageProps<"/[locale]/docs/components/[name]">): Promise<Metadata> {
+  const { tr } = await getT();
   const entry = getComponent((await params).name, tr);
   return entry ? { title: entry.title, description: entry.description } : {};
 }
@@ -39,11 +38,9 @@ const slugify = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-export default async function ComponentPage({ params }: PageProps<"/docs/components/[name]">) {
-  const locale = (await setLocale()) as Locale;
-  const tr = translations[locale];
+export default async function ComponentPage({ params }: PageProps<"/[locale]/docs/components/[name]">) {
+  const { tr, href } = await getT();
   const page = tr.app.docs.component;
-  const href = (path: string) => withLocale(locale, path);
   const entry = getComponent((await params).name, tr);
   if (!entry) notFound();
   const { doc, metric } = entry;
@@ -57,12 +54,12 @@ export default async function ComponentPage({ params }: PageProps<"/docs/compone
   const next = all[index + 1];
 
   const toc: TocItem[] = [
-    { id: "instalacao", title: page.toc.installation },
-    { id: "uso", title: page.toc.usage },
-    ...(more.length ? [{ id: "exemplos", title: page.toc.examples }, ...more.map((e) => ({ id: slugify(e.title), title: e.title, depth: 2 as const }))] : []),
+    { id: "installation", title: page.toc.installation },
+    { id: "usage", title: page.toc.usage },
+    ...(more.length ? [{ id: "examples", title: page.toc.examples }, ...more.map((e) => ({ id: slugify(e.title), title: e.title, depth: 2 as const }))] : []),
     { id: "api", title: "API" },
-    ...(doc.keyboard ? [{ id: "teclado", title: page.toc.keyboard }] : []),
-    ...(doc.accessibility ? [{ id: "acessibilidade", title: page.toc.accessibility }] : []),
+    ...(doc.keyboard ? [{ id: "keyboard", title: page.toc.keyboard }] : []),
+    ...(doc.accessibility ? [{ id: "accessibility", title: page.toc.accessibility }] : []),
   ];
 
   return (
@@ -86,7 +83,7 @@ export default async function ComponentPage({ params }: PageProps<"/docs/compone
 
       <Preview Component={first.Component} file={first.file} />
 
-      <H2 id="instalacao">{page.toc.installation}</H2>
+      <H2 id="installation">{page.toc.installation}</H2>
       <Tabs defaultValue="cli">
         <TabsList aria-label={page.installMethod}>
           <TabsTab className="h-7 px-3 text-[13px]" value="cli">
@@ -99,7 +96,7 @@ export default async function ComponentPage({ params }: PageProps<"/docs/compone
         <TabsPanel value="cli">
           <Install urls={[`${siteUrl}/r/${entry.name}.json`]} />
           <p className="mt-3 text-muted-foreground text-sm">
-            {page.firstTime}<Link className="text-foreground underline decoration-brand underline-offset-4" href={href("/docs/instalacao")}>{page.firstTimeLink}</Link>.
+            {page.firstTime}<Link className="text-foreground underline decoration-brand underline-offset-4" href={href("/docs/installation")}>{page.firstTimeLink}</Link>.
           </p>
         </TabsPanel>
         <TabsPanel className="flex flex-col gap-4" value="manual">
@@ -114,12 +111,12 @@ export default async function ComponentPage({ params }: PageProps<"/docs/compone
         </TabsPanel>
       </Tabs>
 
-      <H2 id="uso">{page.toc.usage}</H2>
+      <H2 id="usage">{page.toc.usage}</H2>
       <Code code={doc.usage} />
 
       {more.length > 0 && (
         <>
-          <H2 id="exemplos">{page.toc.examples}</H2>
+          <H2 id="examples">{page.toc.examples}</H2>
           {more.map((example) => (
             <section key={example.file}>
               <H3 id={slugify(example.title)}>{example.title}</H3>
@@ -143,14 +140,14 @@ export default async function ComponentPage({ params }: PageProps<"/docs/compone
 
       {doc.keyboard && (
         <>
-          <H2 id="teclado">{page.toc.keyboard}</H2>
+          <H2 id="keyboard">{page.toc.keyboard}</H2>
           <KeyTable rows={doc.keyboard} />
         </>
       )}
 
       {doc.accessibility && (
         <>
-          <H2 id="acessibilidade">{page.toc.accessibility}</H2>
+          <H2 id="accessibility">{page.toc.accessibility}</H2>
           <ul className="flex list-disc flex-col gap-2 pl-5 leading-7 marker:text-brand-foreground">
             {doc.accessibility.map((line) => (
               <li key={line}>

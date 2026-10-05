@@ -14,7 +14,7 @@ export function Hero01() {
       />
       <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
         <a
-          className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card py-1 pr-3 pl-1 text-sm transition-colors duration-150 hover:border-brand"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card py-1 pr-3 pl-1 text-sm transition-colors duration-base hover:border-brand"
           href="#changelog"
         >
           <Badge variant="brand">New</Badge>

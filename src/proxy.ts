@@ -1,29 +1,27 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const COOKIE = { maxAge: 31536000, path: "/", sameSite: "lax" } as const;
-const LOCALE = /^\/(en|pt)(?=\/|$)(.*)$/;
-// Só páginas ganham prefixo: /r/* (registry), assets e rotas de metadata ficam como estão.
+const LOCALE = /^\/(en|pt)(?=\/|$)/;
+// Only pages get a prefix: /r/* (registry), assets and metadata routes stay as they are.
 const PAGE = /^\/((docs|blocks)(\/|$)|$)/;
 
 export function proxy(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const match = url.pathname.match(LOCALE);
+  const { pathname } = request.nextUrl;
+  const match = pathname.match(LOCALE);
 
-  // /pt/docs → renderiza /docs e guarda o idioma no cookie (o better-intl lê dele).
+  // /pt/docs is a real route (app/[locale]); just remember the language for the next visit to an unprefixed URL.
   if (match) {
-    const [, locale, rest] = match;
-    request.cookies.set("locale", locale);
-    url.pathname = rest || "/";
-    const response = NextResponse.rewrite(url, { request });
-    response.cookies.set("locale", locale, COOKIE);
+    const response = NextResponse.next();
+    response.cookies.set("locale", match[1], COOKIE);
     return response;
   }
 
-  // /docs → /pt/docs (cookie, depois Accept-Language, depois en): todo link carrega o idioma na URL.
-  if (PAGE.test(url.pathname)) {
+  // /docs -> /pt/docs (cookie, then Accept-Language, then en): every link carries the language in the URL.
+  if (PAGE.test(pathname)) {
+    const url = request.nextUrl.clone();
     const preferred = request.cookies.get("locale")?.value ?? request.headers.get("accept-language") ?? "";
     const locale = /^pt/i.test(preferred.trim()) ? "pt" : "en";
-    url.pathname = `/${locale}${url.pathname === "/" ? "" : url.pathname}`;
+    url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
     return NextResponse.redirect(url);
   }
 

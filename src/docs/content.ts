@@ -1,6 +1,11 @@
 import type { ComponentType } from "react";
 import AccordionDefault from "@/docs/examples/accordion-default";
+import AccordionChevron from "@/docs/examples/accordion-chevron";
 import AlertDefault from "@/docs/examples/alert-default";
+import AuthShellDefault from "@/docs/examples/auth-shell-default";
+import OtpInputDefault from "@/docs/examples/otp-input-default";
+import PasswordInputDefault from "@/docs/examples/password-input-default";
+import PricingToggleDefault from "@/docs/examples/pricing-toggle-default";
 import AvatarDefault from "@/docs/examples/avatar-default";
 import DropdownMenuDefault from "@/docs/examples/dropdown-menu-default";
 import PopoverDefault from "@/docs/examples/popover-default";
@@ -12,7 +17,14 @@ import ToastDefault from "@/docs/examples/toast-default";
 import BadgeDefault from "@/docs/examples/badge-default";
 import ButtonDefault from "@/docs/examples/button-default";
 import ButtonLink from "@/docs/examples/button-link";
+import ButtonKey from "@/docs/examples/button-key";
 import ButtonLoading from "@/docs/examples/button-loading";
+import LogoDefault from "@/docs/examples/logo-default";
+import LogoLink from "@/docs/examples/logo-link";
+import SelectGrouped from "@/docs/examples/select-grouped";
+import SwitchRowExample from "@/docs/examples/switch-row";
+import TableSticky from "@/docs/examples/table-sticky";
+import TooltipParts from "@/docs/examples/tooltip-parts";
 import ButtonSizes from "@/docs/examples/button-sizes";
 import CardDefault from "@/docs/examples/card-default";
 import CheckboxDefault from "@/docs/examples/checkbox-default";
@@ -30,7 +42,6 @@ import SwitchDefault from "@/docs/examples/switch-default";
 import TabsDefault from "@/docs/examples/tabs-default";
 import TextareaDefault from "@/docs/examples/textarea-default";
 import TooltipDefault from "@/docs/examples/tooltip-default";
-import { t } from "@/i18n/generated";
 import type { Dict } from "@/lib/dict";
 
 export type Prop = { name: string; type: string; default?: string; description: string };
@@ -47,11 +58,8 @@ export type ComponentDoc = {
   accessibility?: string[];
 };
 
-/**
- * Os textos vêm do `t` (src/docs/t.ts), que depende do idioma da requisição:
- * por isso o conteúdo é montado por função, durante a renderização, e não num módulo estático.
- */
-export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
+/** The texts come from `tr` (src/docs/t.ts), so the content is built by a function, not a static module. */
+export function getContent(tr: Dict): Record<string, ComponentDoc> {
   const c = tr.docs.content;
   const className: Prop = { name: "className", type: "string", description: c.shared.className };
   const render: Prop = { name: "render", type: "ReactElement | (props) => ReactElement", description: c.shared.render };
@@ -68,6 +76,7 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
         { file: "button-default", title: c.button.ex.default.title, Component: ButtonDefault },
         { file: "button-sizes", title: c.button.ex.sizes.title, description: c.button.ex.sizes.description, Component: ButtonSizes },
         { file: "button-loading", title: c.button.ex.loading.title, description: c.button.ex.loading.description, Component: ButtonLoading },
+        { file: "button-key", title: c.button.ex.key.title, description: c.button.ex.key.description, Component: ButtonKey },
         { file: "button-link", title: c.button.ex.link.title, description: c.button.ex.link.description, Component: ButtonLink },
       ],
       usage: `import { Button } from "@/components/ui/button"\n\n<Button variant="brand">get started</Button>`,
@@ -77,7 +86,7 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
           base: "Button",
           description: c.button.api.Button.description,
           props: [
-            { name: "variant", type: '"default" | "brand" | "outline" | "ghost" | "link" | "destructive"', default: '"default"', description: c.shared.visualStyle },
+            { name: "variant", type: '"default" | "brand" | "outline" | "ghost" | "link" | "destructive" | "key"', default: '"default"', description: c.shared.visualStyle },
             { name: "size", type: '"sm" | "md" | "lg" | "icon" | "icon-sm"', default: '"md"', description: c.button.api.Button.props.size },
             { name: "loading", type: "boolean", default: "false", description: c.button.api.Button.props.loading },
             { name: "nativeButton", type: "boolean", default: "true", description: c.button.api.Button.props.nativeButton },
@@ -242,9 +251,21 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
       keyboard: [{ keys: ["Space"], description: c.checkbox.kb.space }],
     },
     switch: {
-      examples: [{ file: "switch-default", title: c.switch.ex.default.title, Component: SwitchDefault }],
-      usage: `import { Switch } from "@/components/ui/switch"\n\n<Switch defaultChecked />`,
+      examples: [
+        { file: "switch-default", title: c.switch.ex.default.title, Component: SwitchDefault },
+        { file: "switch-row", title: c.switch.ex.row.title, description: c.switch.ex.row.description, Component: SwitchRowExample },
+      ],
+      usage: `import { Switch, SwitchRow } from "@/components/ui/switch"\n\n<Switch defaultChecked />\n\n<SwitchRow title="Weekly digest" description="A summary, once a week." />`,
       api: [
+        {
+          name: "SwitchRow",
+          description: c.switch.api.SwitchRow.description,
+          props: [
+            { name: "title", type: "ReactNode", description: c.switch.api.SwitchRow.props.title },
+            { name: "description", type: "ReactNode", description: c.switch.api.SwitchRow.props.description },
+            className,
+          ],
+        },
         {
           name: "Switch",
           base: "Switch.Root",
@@ -259,7 +280,10 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
       keyboard: [{ keys: ["Space", "Enter"], description: c.switch.kb.toggle }],
     },
     select: {
-      examples: [{ file: "select-default", title: c.select.ex.default.title, Component: SelectDefault }],
+      examples: [
+        { file: "select-default", title: c.select.ex.default.title, Component: SelectDefault },
+        { file: "select-grouped", title: c.select.ex.grouped.title, description: c.select.ex.grouped.description, Component: SelectGrouped },
+      ],
       usage: `import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@/components/ui/select"\n\n<Select items={items} defaultValue="next">\n  <SelectTrigger><SelectValue /></SelectTrigger>\n  <SelectPopup>\n    {items.map((i) => <SelectItem key={i.value} value={i.value}>{i.label}</SelectItem>)}\n  </SelectPopup>\n</Select>`,
       api: [
         {
@@ -274,7 +298,16 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
           ],
         },
         { name: "SelectTrigger · SelectValue", base: "Select.Trigger · Select.Value", description: c.select.api.trigger.description, props: [className] },
-        { name: "SelectPopup", base: "Select.Popup", description: c.select.api.SelectPopup.description, props: [className] },
+        {
+          name: "SelectPopup",
+          base: "Select.Popup",
+          description: c.select.api.SelectPopup.description,
+          props: [
+            { name: "alignItemWithTrigger", type: "boolean", default: "false", description: c.select.api.SelectPopup.props.alignItemWithTrigger },
+            className,
+          ],
+        },
+        { name: "SelectGroup · SelectGroupLabel · SelectSeparator", base: "Select.Group · Select.GroupLabel · Select.Separator", description: c.select.api.group.description, props: [className] },
         {
           name: "SelectItem",
           base: "Select.Item",
@@ -321,14 +354,28 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
       ],
     },
     tooltip: {
-      examples: [{ file: "tooltip-default", title: c.tooltip.ex.default.title, description: c.tooltip.ex.default.description, Component: TooltipDefault }],
-      usage: `import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"\n\n<TooltipProvider>\n  <Tooltip>\n    <TooltipTrigger aria-label="Help" onClick={openHelp} render={<Button />}>?</TooltipTrigger>\n    <TooltipPopup>help</TooltipPopup>\n  </Tooltip>\n</TooltipProvider>`,
+      examples: [
+        { file: "tooltip-default", title: c.tooltip.ex.default.title, description: c.tooltip.ex.default.description, Component: TooltipDefault },
+        { file: "tooltip-parts", title: c.tooltip.ex.parts.title, description: c.tooltip.ex.parts.description, Component: TooltipParts },
+      ],
+      usage: `import { Tip } from "@/components/ui/tooltip"\n\n<Tip content="Bold">\n  <Button aria-label="Bold" size="icon-sm" variant="ghost">B</Button>\n</Tip>\n\n// full control\nimport { Tooltip, TooltipPopup, TooltipTrigger } from "@/components/ui/tooltip"\n\n<Tooltip>\n  <TooltipTrigger aria-label="Help" onClick={openHelp} render={<Button />}>?</TooltipTrigger>\n  <TooltipPopup arrow side="bottom">help</TooltipPopup>\n</Tooltip>`,
       api: [
         {
           name: "TooltipProvider",
           base: "Tooltip.Provider",
           description: c.tooltip.api.TooltipProvider.description,
-          props: [{ name: "delay", type: "number", default: "400", description: c.tooltip.api.TooltipProvider.props.delay }],
+          props: [
+            { name: "delay", type: "number", default: "250", description: c.tooltip.api.TooltipProvider.props.delay },
+            { name: "closeDelay", type: "number", default: "0", description: c.tooltip.api.TooltipProvider.props.closeDelay },
+          ],
+        },
+        {
+          name: "Tip",
+          description: c.tooltip.api.Tip.description,
+          props: [
+            { name: "content", type: "ReactNode", description: c.tooltip.api.Tip.props.content },
+            { name: "children", type: "ReactElement", description: c.tooltip.api.Tip.props.children },
+          ],
         },
         { name: "Tooltip · TooltipTrigger", base: "Tooltip.Root · Tooltip.Trigger", description: c.tooltip.api.root.description, props: [render] },
         {
@@ -337,7 +384,8 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
           description: c.tooltip.api.TooltipPopup.description,
           props: [
             { name: "side", type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: c.tooltip.api.TooltipPopup.props.side },
-            { name: "sideOffset", type: "number", default: "6", description: c.tooltip.api.TooltipPopup.props.sideOffset },
+            { name: "sideOffset", type: "number", default: "8", description: c.tooltip.api.TooltipPopup.props.sideOffset },
+            { name: "arrow", type: "boolean", default: "false", description: c.tooltip.api.TooltipPopup.props.arrow },
             className,
           ],
         },
@@ -368,7 +416,10 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
       ],
     },
     accordion: {
-      examples: [{ file: "accordion-default", title: c.accordion.ex.default.title, Component: AccordionDefault }],
+      examples: [
+        { file: "accordion-default", title: c.accordion.ex.default.title, Component: AccordionDefault },
+        { file: "accordion-chevron", title: c.accordion.ex.chevron.title, Component: AccordionChevron },
+      ],
       usage: `import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@/components/ui/accordion"\n\n<Accordion defaultValue={["a"]}>\n  <AccordionItem value="a">\n    <AccordionTrigger>Question</AccordionTrigger>\n    <AccordionPanel>Answer</AccordionPanel>\n  </AccordionItem>\n</Accordion>`,
       api: [
         {
@@ -378,6 +429,7 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
           props: [
             { name: "value · defaultValue", type: "string[]", description: c.accordion.api.Accordion.props.value },
             { name: "multiple", type: "boolean", default: "false", description: c.accordion.api.Accordion.props.multiple },
+            { name: "indicator", type: '"prompt" | "chevron"', default: '"prompt"', description: c.accordion.api.Accordion.props.indicator },
             { name: "onValueChange", type: "(value: string[]) => void", description: c.accordion.api.Accordion.props.onValueChange },
             className,
           ],
@@ -400,19 +452,101 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
     },
     alert: {
       examples: [{ file: "alert-default", title: c.alert.ex.default.title, Component: AlertDefault }],
-      usage: `import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"\n\n<Alert variant="brand">\n  <AlertTitle>Heads up</AlertTitle>\n  <AlertDescription>Something worth knowing.</AlertDescription>\n</Alert>`,
+      usage: `import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"\n\n<Alert variant="warn">\n  <AlertTitle>disk almost full</AlertTitle>\n  <AlertDescription>14 GB left on /dev/sda1</AlertDescription>\n</Alert>`,
       api: [
         {
           name: "Alert",
           description: c.alert.api.Alert.description,
           props: [
-            { name: "variant", type: '"default" | "brand" | "destructive"', default: '"default"', description: c.shared.visualStyle },
+            { name: "variant", type: '"info" | "success" | "warn" | "error"', default: '"info"', description: c.alert.api.Alert.props.variant },
+            { name: "tag", type: "ReactNode", default: "variant name", description: c.alert.api.Alert.props.tag },
+            { name: "time", type: "ReactNode", description: c.alert.api.Alert.props.time },
             className,
           ],
         },
-        { name: "AlertTitle · AlertDescription", description: c.alert.api.parts.description, props: [className] },
+        { name: "AlertTitle · AlertDescription · AlertAction", description: c.alert.api.parts.description, props: [className] },
       ],
       accessibility: [c.alert.a11y.role],
+    },
+    "password-input": {
+      examples: [{ file: "password-input-default", title: c["password-input"].ex.default.title, Component: PasswordInputDefault }],
+      usage: `import { PasswordInput } from "@/components/ui/password-input"\n\n<PasswordInput autoComplete="current-password" />`,
+      api: [
+        {
+          name: "PasswordInput",
+          base: "Input",
+          description: c["password-input"].api.PasswordInput.description,
+          props: [
+            { name: "showLabel", type: "string", default: '"Show password"', description: c["password-input"].api.PasswordInput.props.showLabel },
+            { name: "hideLabel", type: "string", default: '"Hide password"', description: c["password-input"].api.PasswordInput.props.hideLabel },
+            { name: "...props", type: "Input props", description: c["password-input"].api.PasswordInput.props.props },
+          ],
+        },
+      ],
+      accessibility: [c["password-input"].a11y.toggle],
+    },
+    "otp-input": {
+      examples: [{ file: "otp-input-default", title: c["otp-input"].ex.default.title, Component: OtpInputDefault }],
+      usage: `import { OtpInput } from "@/components/ui/otp-input"\n\n<OtpInput length={6} onValueComplete={(code) => verify(code)} />`,
+      api: [
+        {
+          name: "OtpInput",
+          base: "OTPField.Root",
+          description: c["otp-input"].api.OtpInput.description,
+          props: [
+            { name: "length", type: "number", default: "6", description: c["otp-input"].api.OtpInput.props.length },
+            { name: "value · defaultValue", type: "string", description: c["otp-input"].api.OtpInput.props.value },
+            { name: "onValueChange", type: "(value: string) => void", description: c["otp-input"].api.OtpInput.props.onValueChange },
+            { name: "onValueComplete", type: "(value: string) => void", description: c["otp-input"].api.OtpInput.props.onValueComplete },
+            { name: "invalid", type: "boolean", description: c["otp-input"].api.OtpInput.props.invalid },
+            className,
+          ],
+        },
+      ],
+      keyboard: [
+        { keys: ["0-9"], description: c["otp-input"].kb.type },
+        { keys: ["Backspace"], description: c["otp-input"].kb.backspace },
+        { keys: ["←", "→"], description: c["otp-input"].kb.arrows },
+        { keys: ["Ctrl", "V"], description: c["otp-input"].kb.paste },
+      ],
+      accessibility: [c["otp-input"].a11y.group],
+    },
+    "auth-shell": {
+      examples: [{ file: "auth-shell-default", title: c["auth-shell"].ex.default.title, Component: AuthShellDefault }],
+      usage: `import { AuthShell } from "@/components/ui/auth-shell"\n\n<AuthShell title="Welcome back" description="Sign in to continue." footer={<a href="/signup">Create an account</a>}>\n  {/* your form */}\n</AuthShell>`,
+      api: [
+        {
+          name: "AuthShell",
+          description: c["auth-shell"].api.AuthShell.description,
+          props: [
+            { name: "logo", type: "ReactNode", description: c["auth-shell"].api.AuthShell.props.logo },
+            { name: "title", type: "ReactNode", description: c["auth-shell"].api.AuthShell.props.title },
+            { name: "description", type: "ReactNode", description: c["auth-shell"].api.AuthShell.props.description },
+            { name: "footer", type: "ReactNode", description: c["auth-shell"].api.AuthShell.props.footer },
+            { name: "centered", type: "boolean", default: "false", description: c["auth-shell"].api.AuthShell.props.centered },
+            { name: "size", type: '"sm" | "md"', default: '"sm"', description: c["auth-shell"].api.AuthShell.props.size },
+            className,
+          ],
+        },
+      ],
+    },
+    "pricing-toggle": {
+      examples: [{ file: "pricing-toggle-default", title: c["pricing-toggle"].ex.default.title, Component: PricingToggleDefault }],
+      usage: `import { PricingToggle } from "@/components/ui/pricing-toggle"\n\nconst [yearly, setYearly] = useState(true)\n\n<PricingToggle yearly={yearly} onYearlyChange={setYearly} badge="Save 20%" />`,
+      api: [
+        {
+          name: "PricingToggle",
+          description: c["pricing-toggle"].api.PricingToggle.description,
+          props: [
+            { name: "yearly", type: "boolean", description: c["pricing-toggle"].api.PricingToggle.props.yearly },
+            { name: "onYearlyChange", type: "(yearly: boolean) => void", description: c["pricing-toggle"].api.PricingToggle.props.onYearlyChange },
+            { name: "badge", type: "ReactNode", description: c["pricing-toggle"].api.PricingToggle.props.badge },
+            { name: "monthlyLabel", type: "string", default: '"Monthly"', description: c["pricing-toggle"].api.PricingToggle.props.monthlyLabel },
+            { name: "yearlyLabel", type: "string", default: '"Yearly"', description: c["pricing-toggle"].api.PricingToggle.props.yearlyLabel },
+          ],
+        },
+      ],
+      accessibility: [c["pricing-toggle"].a11y.switch],
     },
     avatar: {
       examples: [{ file: "avatar-default", title: c.avatar.ex.default.title, Component: AvatarDefault }],
@@ -623,13 +757,49 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
       ],
       accessibility: [c.toast.a11y.live, c.toast.a11y.pause],
     },
+    logo: {
+      examples: [
+        { file: "logo-default", title: c.logo.ex.default.title, description: c.logo.ex.default.description, Component: LogoDefault },
+        { file: "logo-link", title: c.logo.ex.link.title, description: c.logo.ex.link.description, Component: LogoLink },
+      ],
+      usage: `import { Logo } from "@/components/ui/logo"\n\n<Logo variant="prompt" />\n<Logo render={<a href="/" />} variant="mark" />`,
+      api: [
+        {
+          name: "Logo",
+          description: c.logo.api.Logo.description,
+          props: [
+            { name: "variant", type: '"mark" | "wordmark" | "prompt"', default: '"wordmark"', description: c.logo.api.Logo.props.variant },
+            { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: c.logo.api.Logo.props.size },
+            render,
+            className,
+          ],
+        },
+      ],
+      accessibility: [c.logo.a11y.name],
+    },
     table: {
-      examples: [{ file: "table-default", title: c.table.ex.default.title, Component: TableDefault }],
+      examples: [
+        { file: "table-default", title: c.table.ex.default.title, Component: TableDefault },
+        { file: "table-sticky", title: c.table.ex.sticky.title, description: c.table.ex.sticky.description, Component: TableSticky },
+      ],
       usage: `import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"\n\n<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>Name</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    <TableRow>\n      <TableCell>Ada</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>`,
       api: [
-        { name: "Table", description: c.table.api.Table.description, props: [className] },
+        {
+          name: "Table",
+          description: c.table.api.Table.description,
+          props: [
+            { name: "density", type: '"compact" | "default" | "comfortable"', default: '"default"', description: c.table.api.Table.props.density },
+            { name: "stickyHeader", type: "boolean", default: "false", description: c.table.api.Table.props.stickyHeader },
+            { name: "aria-label", type: "string", description: c.table.api.Table.props.ariaLabel },
+            className,
+          ],
+        },
         { name: "TableHeader · TableBody · TableFooter", description: c.table.api.sections.description, props: [className] },
-        { name: "TableRow · TableHead · TableCell · TableCaption", description: c.table.api.cells.description, props: [className] },
+        {
+          name: "TableRow · TableHead · TableCell · TableCaption",
+          description: c.table.api.cells.description,
+          props: [{ name: "numeric", type: "boolean", default: "false", description: c.table.api.cells.props.numeric }, className],
+        },
       ],
       accessibility: [c.table.a11y.semantics],
     },

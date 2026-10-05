@@ -1,13 +1,13 @@
 {
   "button": {
-    "gzip": 1085,
+    "gzip": 1168,
     "client": true,
     "base": [
       "button"
     ]
   },
   "dropdown-menu": {
-    "gzip": 1131,
+    "gzip": 1032,
     "client": true,
     "base": [
       "menu"
@@ -40,13 +40,26 @@
       "avatar"
     ]
   },
+  "logo": {
+    "gzip": 1074,
+    "client": true,
+    "base": [
+      "merge-props",
+      "use-render"
+    ]
+  },
   "table": {
-    "gzip": 586,
+    "gzip": 930,
+    "client": false,
+    "base": []
+  },
+  "auth-shell": {
+    "gzip": 573,
     "client": false,
     "base": []
   },
   "accordion": {
-    "gzip": 721,
+    "gzip": 912,
     "client": true,
     "base": [
       "accordion"
@@ -63,33 +76,45 @@
     "base": []
   },
   "alert": {
-    "gzip": 530,
+    "gzip": 776,
     "client": false,
     "base": []
   },
   "progress": {
-    "gzip": 475,
+    "gzip": 465,
     "client": true,
     "base": [
       "progress"
     ]
   },
   "toast": {
-    "gzip": 1296,
+    "gzip": 1295,
     "client": true,
     "base": [
       "toast"
     ]
   },
   "input": {
-    "gzip": 516,
+    "gzip": 525,
     "client": true,
     "base": [
       "input"
     ]
   },
+  "password-input": {
+    "gzip": 1654,
+    "client": true,
+    "base": []
+  },
+  "otp-input": {
+    "gzip": 539,
+    "client": true,
+    "base": [
+      "otp-field"
+    ]
+  },
   "textarea": {
-    "gzip": 445,
+    "gzip": 451,
     "client": true,
     "base": [
       "field"
@@ -110,14 +135,14 @@
     ]
   },
   "checkbox": {
-    "gzip": 702,
+    "gzip": 688,
     "client": true,
     "base": [
       "checkbox"
     ]
   },
   "radio-group": {
-    "gzip": 535,
+    "gzip": 522,
     "client": true,
     "base": [
       "radio",
@@ -125,49 +150,54 @@
     ]
   },
   "switch": {
-    "gzip": 474,
+    "gzip": 660,
     "client": true,
     "base": [
       "switch"
     ]
   },
+  "pricing-toggle": {
+    "gzip": 885,
+    "client": true,
+    "base": []
+  },
   "slider": {
-    "gzip": 668,
+    "gzip": 667,
     "client": true,
     "base": [
       "slider"
     ]
   },
   "select": {
-    "gzip": 990,
+    "gzip": 1211,
     "client": true,
     "base": [
       "select"
     ]
   },
   "dialog": {
-    "gzip": 968,
+    "gzip": 898,
     "client": true,
     "base": [
       "dialog"
     ]
   },
   "popover": {
-    "gzip": 588,
+    "gzip": 478,
     "client": true,
     "base": [
       "popover"
     ]
   },
   "tooltip": {
-    "gzip": 482,
+    "gzip": 794,
     "client": true,
     "base": [
       "tooltip"
     ]
   },
   "tabs": {
-    "gzip": 628,
+    "gzip": 613,
     "client": true,
     "base": [
       "tabs"

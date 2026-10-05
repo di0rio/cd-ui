@@ -7,14 +7,14 @@ import { cn } from "@/registry/cd/lib/utils";
 type FieldValidator = (name: string, value: unknown) => string[] | null;
 
 /**
- * Canal entre `Form` e `Field`: o form (com schema) entrega um validador por nome de campo.
- * Fica aqui, e não no form, pra quem usa só o `Field` não carregar o Zod.
+ * Channel between `Form` and `Field`: the form (with a schema) hands out one validator per field name.
+ * It lives here, not in the form, so those who only use `Field` do not load Zod.
  */
 export const FieldValidationContext = React.createContext<FieldValidator | null>(null);
 
 /**
- * Agrupa label, controle, descrição e erro com os ids e o `aria-*` certos.
- * Dentro de um `Form` com `schema`, basta dar `name` pro campo validar sozinho.
+ * Groups label, control, description and error with the right ids and `aria-*`.
+ * Inside a `Form` with `schema`, just give the field a `name` and it validates itself.
  */
 export function Field({ className, name, validate, ...props }: FieldPrimitive.Root.Props): React.ReactElement {
   const validateFromSchema = React.useContext(FieldValidationContext);
@@ -49,7 +49,7 @@ export function FieldDescription({ className, ...props }: FieldPrimitive.Descrip
   );
 }
 
-/** Mensagem de erro. Sem `match`, mostra o que a validação (HTML, `validate` ou schema) devolver. */
+/** Error message. Without `match`, shows whatever the validation (HTML, `validate` or schema) returns. */
 export function FieldError({ className, ...props }: FieldPrimitive.Error.Props): React.ReactElement {
   return (
     <FieldPrimitive.Error

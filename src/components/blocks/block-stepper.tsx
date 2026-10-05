@@ -12,8 +12,8 @@ export type StepperLink = { href: string; title: string; label: string };
 const stepClass = buttonVariants({ variant: "outline", size: "icon-sm" });
 
 /**
- * Passo anterior/próximo entre blocos: setas do teclado navegam quando o foco não está num campo,
- * nenhum modificador está apertado e nenhum diálogo está aberto.
+ * Previous/next step between blocks: arrow keys navigate when focus is not in a field,
+ * no modifier is pressed and no dialog is open.
  */
 export function BlockStepper({
   label,
