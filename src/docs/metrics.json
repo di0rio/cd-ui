@@ -146,7 +146,7 @@
     ]
   },
   "dialog": {
-    "gzip": 945,
+    "gzip": 968,
     "client": true,
     "base": [
       "dialog"

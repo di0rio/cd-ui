@@ -12,6 +12,7 @@ export const DialogClose = DialogPrimitive.Close;
 /**
  * Janela modal centralizada. Entra de `scale(0.96)` + opacidade em 200ms e sai mais rápido (150ms).
  * `position="top"` ancora no topo (ex.: paleta de comandos). Modal não nasce do gatilho: fica no centro, então o `transform-origin` é o centro mesmo.
+ * `instant` tira a animação de entrada e saída: pra diálogos abertos por atalho, que se usa o tempo todo.
  */
 export function DialogPopup({
   className,
@@ -19,14 +20,21 @@ export function DialogPopup({
   showClose = true,
   closeLabel = "Close",
   position = "center",
+  instant = false,
   ...props
-}: DialogPrimitive.Popup.Props & { showClose?: boolean; closeLabel?: string; position?: "center" | "top" }): React.ReactElement {
+}: DialogPrimitive.Popup.Props & {
+  showClose?: boolean;
+  closeLabel?: string;
+  position?: "center" | "top";
+  instant?: boolean;
+}): React.ReactElement {
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
         className={cn(
-          "fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 ease-out",
-          "data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-150",
+          "fixed inset-0 z-50 bg-black/40",
+          !instant &&
+            "transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-150",
         )}
         data-slot="dialog-backdrop"
       />
@@ -40,10 +48,12 @@ export function DialogPopup({
         <DialogPrimitive.Popup
           className={cn(
             "relative flex w-full max-w-md flex-col gap-4 rounded-2xl border bg-popover p-6 text-popover-foreground shadow-lg/5 outline-none",
-            "transition-[opacity,transform] duration-200 ease-out",
-            "data-ending-style:scale-[0.96] data-ending-style:opacity-0 data-ending-style:duration-150",
-            "data-starting-style:scale-[0.96] data-starting-style:opacity-0",
-            "motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
+            !instant && [
+              "transition-[opacity,transform] duration-200 ease-out",
+              "data-ending-style:scale-[0.96] data-ending-style:opacity-0 data-ending-style:duration-150",
+              "data-starting-style:scale-[0.96] data-starting-style:opacity-0",
+              "motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
+            ],
             className,
           )}
           data-slot="dialog-popup"
