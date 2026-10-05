@@ -29,7 +29,7 @@ const home = {
     noJs: { en: "no browser JS", pt: "zero JS no navegador" },
     accessible: { en: "accessible by default", pt: "acessível por padrão" },
   },
-  sticker: { en: "want to try one?", pt: "quer experimentar um?" },
+  sticker: { en: "copy it. it's yours.", pt: "copia, cola, é seu." },
   installIntro: {
     en: "Install the theme and add your first component to your project:",
     pt: "Instale o tema e adicione o primeiro componente ao seu projeto:",

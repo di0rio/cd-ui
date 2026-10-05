@@ -115,8 +115,8 @@ export const translations = {
 					},
 					whatTitle: "What it is",
 					what: {
-						before: "Install cd/ui components with the shadcn CLI. The source lands right in ",
-						middle: " and can edit the code whenever you want. ",
+						before: "Install cd/ui components with the shadcn CLI. The files land right in ",
+						middle: " and stay yours to edit. ",
 						after: " handles focus and keyboard behavior. cd/ui adds the styling, with bundle size and motion in mind.",
 					},
 					principlesTitle: "Principles",
@@ -292,8 +292,8 @@ export const translations = {
 				},
 			},
 			metadata: {
-				title: "cd/ui · small, accessible React components",
-				description: "Accessible React components built with Base UI and Tailwind CSS v4. Install them with the shadcn CLI, keep the source, and make each one yours.",
+				title: "cd/ui · lightweight, accessible React components",
+				description: "Accessible React components built with Base UI and Tailwind CSS v4. Bundle sizes measured at build time. Install with the shadcn CLI, keep the source, and make each component yours.",
 			},
 			layout: {
 				mainNav: "Main navigation",
@@ -306,15 +306,15 @@ export const translations = {
 			home: {
 				badge: (v: { count: string }) => `v0.2 · ${v.count} components`,
 				title: "Lean components. Yours to shape.",
-				lead: "Built with React 19, Base UI, and Tailwind CSS v4. Accessible from the start, measured at build time, and ready to edit in your project after install.",
+				lead: "React 19, Base UI, and Tailwind CSS v4. Accessible by default, measured at build time, with Zod forms. Install with the shadcn CLI and edit the source in your project.",
 				install: "install cd/ui",
 				browse: "browse components",
 				stats: {
-					avg: "average gzip size",
+					avg: "average size per component",
 					noJs: "no browser JS",
 					accessible: "accessible by default",
 				},
-				sticker: "want to try one?",
+				sticker: "copy it. it's yours.",
 				installIntro: "Install the theme and add your first component to your project:",
 				componentsTitle: "components",
 				componentsLead: "See each component gzip size and where it runs.",
@@ -1238,8 +1238,8 @@ export const translations = {
 					},
 					whatTitle: "O que é",
 					what: {
-						before: "Instale os componentes do cd/ui pelo shadcn CLI. O código vai direto pra ",
-						middle: " e pode editar o código quando quiser. O ",
+						before: "Instale os componentes do cd/ui pelo shadcn CLI. Os arquivos vão direto pra ",
+						middle: " e ficam no seu projeto pra você editar. O ",
 						after: " cuida do foco e do teclado. O cd/ui traz os estilos e deixa tamanho e movimento no radar.",
 					},
 					principlesTitle: "Princípios",
@@ -1416,7 +1416,7 @@ export const translations = {
 			},
 			metadata: {
 				title: "cd/ui · componentes leves e acessíveis",
-				description: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Instale pelo shadcn CLI, fique com o código e adapte cada um ao seu projeto.",
+				description: "Componentes React acessíveis com Base UI e Tailwind CSS v4. Tamanho medido no build. Instale pelo shadcn CLI, fique com o código e adapte cada um ao seu projeto.",
 			},
 			layout: {
 				mainNav: "Navegação principal",
@@ -1429,15 +1429,15 @@ export const translations = {
 			home: {
 				badge: (v: { count: string }) => `v0.2 · ${v.count} componentes`,
 				title: "Componentes leves. Do seu jeito.",
-				lead: "Feitos com React 19, Base UI e Tailwind CSS v4. Acessíveis desde o início, medidos no build e prontos pra você adaptar no seu projeto.",
+				lead: "React 19, Base UI e Tailwind CSS v4. Acessibilidade desde a base, tamanho medido no build e formulários com Zod. Instale pelo shadcn CLI e edite o código no seu projeto.",
 				install: "instalar cd/ui",
 				browse: "ver componentes",
 				stats: {
-					avg: "tamanho médio gzip",
+					avg: "média em gzip por componente",
 					noJs: "zero JS no navegador",
 					accessible: "acessível por padrão",
 				},
-				sticker: "quer experimentar um?",
+				sticker: "copia, cola, é seu.",
 				installIntro: "Instale o tema e adicione o primeiro componente ao seu projeto:",
 				componentsTitle: "componentes",
 				componentsLead: "Veja o tamanho gzip de cada componente e onde ele roda.",
