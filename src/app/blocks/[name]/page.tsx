@@ -4,11 +4,12 @@ import { ArrowLeftIcon, ExternalLinkIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlockStepper, type StepperLink } from "@/components/blocks/block-stepper";
 import { DevicePreview } from "@/components/blocks/device-preview";
 import { Code } from "@/components/docs/code";
 import { Install } from "@/components/docs/install";
 import { PreviewTabs } from "@/components/docs/preview-tabs";
-import { blocks, getBlock } from "@/blocks";
+import { type Block, blocks, getBlock } from "@/blocks";
 import { blockComponents } from "@/blocks/components";
 import { setLocale, translations } from "@/i18n/generated";
 import { type Locale, withLocale } from "@/lib/locale-path";
@@ -36,17 +37,29 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[name]">)
   const page = translations[locale].app.blocks;
   const item = page.items[block.key];
   const index = blocks.indexOf(block);
-  const neighbors = [blocks[index - 1], blocks[index + 1]];
+  const step = (n: Block | undefined, direction: string): StepperLink | null => {
+    if (!n) return null;
+    const title = page.items[n.key].title;
+    return { href: withLocale(locale, `/blocks/${n.name}`), title, label: `${direction}: ${title}` };
+  };
   const source = await readFile(join(/* turbopackIgnore: true */ process.cwd(), "src/registry/cd/blocks", block.name, `${block.name}.tsx`), "utf8");
 
   return (
     <div className="mx-auto w-full max-w-[1400px] px-4 py-8 lg:px-6 lg:py-12">
-      <Link
-        className="mb-6 inline-flex items-center gap-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground"
-        href={withLocale(locale, "/blocks")}
-      >
-        <ArrowLeftIcon aria-hidden="true" className="size-3.5" /> {page.detail.back}
-      </Link>
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <Link
+          className="inline-flex items-center gap-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground"
+          href={withLocale(locale, "/blocks")}
+        >
+          <ArrowLeftIcon aria-hidden="true" className="size-3.5" /> {page.detail.back}
+        </Link>
+        <BlockStepper
+          label={page.detail.pager}
+          next={step(blocks[index + 1], page.detail.next)}
+          position={`${String(index + 1).padStart(2, "0")} / ${blocks.length}`}
+          previous={step(blocks[index - 1], page.detail.previous)}
+        />
+      </div>
 
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -84,19 +97,6 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[name]">)
           </>
         }
       />
-
-      <nav className="mt-12 flex justify-between gap-4 border-t pt-6 text-sm">
-        {neighbors.map((n, i) =>
-          n ? (
-            <Link className={i ? "ml-auto text-right" : ""} href={withLocale(locale, `/blocks/${n.name}`)} key={n.name}>
-              <span className="block text-muted-foreground text-xs">{i ? page.detail.next : page.detail.previous}</span>
-              <span className="font-medium underline-offset-4 hover:underline">{page.items[n.key].title}</span>
-            </Link>
-          ) : (
-            <span key={i} />
-          ),
-        )}
-      </nav>
     </div>
   );
 }

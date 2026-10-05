@@ -40,6 +40,7 @@ const detail = {
   tablet: { en: "Tablet", pt: "Tablet" },
   mobile: { en: "Mobile", pt: "Celular" },
   frame: { en: "Block preview", pt: "Preview do bloco" },
+  pager: { en: "Other blocks", pt: "Outros blocos" },
   previous: { en: "previous", pt: "anterior" },
   next: { en: "next", pt: "próximo" },
 };

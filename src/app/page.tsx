@@ -23,7 +23,7 @@ export default function Home() {
           <div>
             <Image
               alt=""
-              className="mb-8 size-20 -rotate-6 rounded-[20px] border-2 border-black shadow-[5px_5px_0_var(--brand)] lg:hidden"
+              className="mb-8 size-20 -rotate-6 rounded-[20px] border-2 border-black bg-[#1c1c1c] shadow-[5px_5px_0_var(--brand)] lg:hidden"
               height={80}
               src="/mascot.svg"
               width={80}
@@ -63,7 +63,7 @@ export default function Home() {
           <div className="relative mx-auto hidden w-fit lg:block">
             <Image
               alt=""
-              className="size-64 animate-sticker -rotate-6 rounded-[44px] border-[3px] border-black shadow-[10px_10px_0_var(--brand)]"
+              className="size-64 animate-sticker -rotate-6 rounded-[44px] border-[3px] border-black bg-[#1c1c1c] shadow-[10px_10px_0_var(--brand)]"
               height={256}
               priority
               src="/mascot.svg"
