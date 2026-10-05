@@ -17,13 +17,24 @@ export type DevicePreviewLabels = { group: string; desktop: string; tablet: stri
 /**
  * Desktop mostra o bloco direto na página. Tablet e celular carregam a tela cheia num iframe da largura
  * escolhida: só assim as media queries do bloco respondem à largura simulada (e não à da janela).
+ * O iframe começa a carregar quando o ponteiro ou o foco chega nos botões e continua montado depois:
+ * trocar de tamanho não recarrega a página, e o bloco aparece já pronto em vez de piscar vazio.
  */
 export function DevicePreview({ children, src, labels }: { children: ReactNode; src: string; labels: DevicePreviewLabels }) {
   const [device, setDevice] = useState<Device>("desktop");
+  const [frameWanted, setFrameWanted] = useState(false);
+  const [frameLoaded, setFrameLoaded] = useState(false);
   const width = devices.find((d) => d.id === device)?.width ?? null;
+  const wantFrame = () => setFrameWanted(true);
   return (
     <div>
-      <div aria-label={labels.group} className="mb-3 hidden items-center gap-1 sm:flex" role="group">
+      <div
+        aria-label={labels.group}
+        className="mb-3 hidden items-center gap-1 sm:flex"
+        onFocus={wantFrame}
+        onPointerEnter={wantFrame}
+        role="group"
+      >
         {devices.map(({ id, icon: Icon }) => (
           <button
             aria-label={labels[id]}
@@ -33,7 +44,10 @@ export function DevicePreview({ children, src, labels }: { children: ReactNode; 
               device === id && "bg-accent text-foreground",
             )}
             key={id}
-            onClick={() => setDevice(id)}
+            onClick={() => {
+              wantFrame();
+              setDevice(id);
+            }}
             title={labels[id]}
             type="button"
           >
@@ -41,14 +55,17 @@ export function DevicePreview({ children, src, labels }: { children: ReactNode; 
           </button>
         ))}
       </div>
-      {width === null ? (
-        children
-      ) : (
-        <div className="overflow-x-auto rounded-xl border bg-muted/40 p-4">
+      {width === null && children}
+      {frameWanted && (
+        <div className={cn("overflow-x-auto rounded-xl border bg-muted/40 p-4", width === null && "hidden")}>
           <iframe
-            className="mx-auto block h-[720px] max-w-full rounded-lg border bg-background"
+            className={cn(
+              "mx-auto block h-[720px] max-w-full rounded-lg border bg-background transition-opacity duration-150 ease-out motion-reduce:transition-none",
+              !frameLoaded && "opacity-0",
+            )}
+            onLoad={() => setFrameLoaded(true)}
             src={src}
-            style={{ width }}
+            style={{ width: width ?? undefined }}
             title={labels.frame}
           />
         </div>
