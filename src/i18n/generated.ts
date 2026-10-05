@@ -755,6 +755,8 @@ export const translations = {
 							props: {
 								showClose: "Shows the X in the corner.",
 								closeLabel: "Label of the X for screen readers.",
+								position: "Where the window sits: centered, or anchored near the top (command palettes).",
+								instant: "Opens and closes without animation. Use it for dialogs opened by a keyboard shortcut.",
 							},
 						},
 						structure: {
@@ -1879,6 +1881,8 @@ export const translations = {
 							props: {
 								showClose: "Mostra o X no canto.",
 								closeLabel: "Rótulo do X para leitor de tela.",
+								position: "Onde a janela fica: no centro, ou ancorada perto do topo (paletas de comando).",
+								instant: "Abre e fecha sem animação. Use em diálogos abertos por atalho de teclado.",
 							},
 						},
 						structure: {

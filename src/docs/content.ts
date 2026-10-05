@@ -308,6 +308,8 @@ export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
           props: [
             { name: "showClose", type: "boolean", default: "true", description: c.dialog.api.DialogPopup.props.showClose },
             { name: "closeLabel", type: "string", default: '"Close"', description: c.dialog.api.DialogPopup.props.closeLabel },
+            { name: "position", type: '"center" | "top"', default: '"center"', description: c.dialog.api.DialogPopup.props.position },
+            { name: "instant", type: "boolean", default: "false", description: c.dialog.api.DialogPopup.props.instant },
             className,
           ],
         },

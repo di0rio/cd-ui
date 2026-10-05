@@ -484,6 +484,14 @@ const content = {
         props: {
           showClose: { en: "Shows the X in the corner.", pt: "Mostra o X no canto." },
           closeLabel: { en: "Label of the X for screen readers.", pt: "Rótulo do X para leitor de tela." },
+          position: {
+            en: "Where the window sits: centered, or anchored near the top (command palettes).",
+            pt: "Onde a janela fica: no centro, ou ancorada perto do topo (paletas de comando).",
+          },
+          instant: {
+            en: "Opens and closes without animation. Use it for dialogs opened by a keyboard shortcut.",
+            pt: "Abre e fecha sem animação. Use em diálogos abertos por atalho de teclado.",
+          },
         },
       },
       structure: {
