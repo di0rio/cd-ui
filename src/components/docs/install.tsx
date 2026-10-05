@@ -13,7 +13,7 @@ const managers = {
 } as const;
 type Manager = keyof typeof managers;
 
-// A escolha do gerenciador vale pra todos os blocos da página e fica salva no navegador.
+// The package manager choice applies to every block on the page and is saved in the browser.
 const KEY = "cd-ui:pm";
 const EVENT = "cd-ui:pm";
 const read = (): Manager => {
@@ -35,7 +35,7 @@ const choose = (pm: Manager) => {
   window.dispatchEvent(new Event(EVENT));
 };
 
-/** Comando de instalação com abas por gerenciador de pacotes (bun, npm, pnpm, yarn). */
+/** Install command with a tab per package manager (bun, npm, pnpm, yarn). */
 export function Install({ urls }: { urls: string[] }) {
   const { ui } = useLocale();
   const pm = useSyncExternalStore(subscribe, read, () => "npm" as Manager);

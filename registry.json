@@ -7,15 +7,25 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "cd/ui theme",
-      "description": "cd/ui color, radius, and animation-curve tokens (cream/graphite + yellow).",
+      "description": "cd/ui color, radius, and motion tokens (cream/graphite + yellow).",
       "cssVars": {
         "theme": {
           "color-brand": "var(--brand)",
           "color-brand-foreground": "var(--brand-foreground)",
           "color-brand-contrast": "var(--brand-contrast)",
           "color-destructive-foreground": "var(--destructive-foreground)",
-          "ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
-          "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
+          "radius-xs": "4px",
+          "radius-sm": "calc(var(--radius) * 0.5)",
+          "radius-md": "calc(var(--radius) * 0.75)",
+          "radius-lg": "var(--radius)",
+          "radius-xl": "calc(var(--radius) * 1.5)",
+          "radius-2xl": "calc(var(--radius) * 2)",
+          "ease-out": "var(--cd-ease-out)",
+          "ease-in-out": "var(--cd-ease-in-out)",
+          "transition-duration-instant": "var(--cd-duration-instant)",
+          "transition-duration-fast": "var(--cd-duration-fast)",
+          "transition-duration-base": "var(--cd-duration-base)",
+          "transition-duration-slow": "var(--cd-duration-slow)"
         },
         "light": {
           "background": "#f6f4ee",
@@ -36,7 +46,16 @@
           "brand": "#ffd23f",
           "brand-foreground": "#7a5c00",
           "brand-contrast": "#1c1c1c",
-          "radius": "0.625rem"
+          "radius": "0.75rem",
+          "radius-button": "var(--radius)",
+          "radius-field": "var(--radius)",
+          "cd-duration-instant": "80ms",
+          "cd-duration-fast": "120ms",
+          "cd-duration-base": "160ms",
+          "cd-duration-slow": "240ms",
+          "cd-ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
+          "cd-ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)",
+          "cd-scale-enter": "0.96"
         },
         "dark": {
           "background": "#1c1c1c",
@@ -55,6 +74,33 @@
           "destructive": "#dc2626",
           "destructive-foreground": "#f87171",
           "brand-foreground": "#ffd23f"
+        }
+      },
+      "css": {
+        "@media (prefers-reduced-motion: reduce)": {
+          ":root": {
+            "--cd-duration-instant": "0.01ms",
+            "--cd-duration-fast": "0.01ms",
+            "--cd-duration-base": "0.01ms",
+            "--cd-duration-slow": "0.01ms",
+            "--cd-scale-enter": "1"
+          }
+        },
+        "@utility cd-popup": {
+          "transform-origin": "var(--transform-origin)",
+          "transition-property": "opacity, transform",
+          "transition-duration": "var(--cd-duration-base)",
+          "transition-timing-function": "var(--cd-ease-out)",
+          "&[data-starting-style], &[data-ending-style]": {
+            "opacity": "0",
+            "transform": "scale(var(--cd-scale-enter))"
+          },
+          "&[data-ending-style]": {
+            "transition-duration": "var(--cd-duration-fast)"
+          },
+          "&[data-instant]": {
+            "transition-duration": "0ms"
+          }
         }
       }
     },
@@ -874,6 +920,66 @@
           "path": "src/registry/cd/blocks/not-found-01/not-found-01.tsx",
           "type": "registry:component"
         }
+      ]
+    },
+    {
+      "name": "all",
+      "type": "registry:item",
+      "title": "cd/ui (everything)",
+      "description": "The theme, the cn helper and every cd/ui component.",
+      "registryDependencies": [
+        "http://localhost:3001/r/theme.json",
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/button.json",
+        "http://localhost:3001/r/dropdown-menu.json",
+        "http://localhost:3001/r/badge.json",
+        "http://localhost:3001/r/card.json",
+        "http://localhost:3001/r/kbd.json",
+        "http://localhost:3001/r/separator.json",
+        "http://localhost:3001/r/avatar.json",
+        "http://localhost:3001/r/table.json",
+        "http://localhost:3001/r/accordion.json",
+        "http://localhost:3001/r/skeleton.json",
+        "http://localhost:3001/r/spinner.json",
+        "http://localhost:3001/r/alert.json",
+        "http://localhost:3001/r/progress.json",
+        "http://localhost:3001/r/toast.json",
+        "http://localhost:3001/r/input.json",
+        "http://localhost:3001/r/textarea.json",
+        "http://localhost:3001/r/field.json",
+        "http://localhost:3001/r/form.json",
+        "http://localhost:3001/r/checkbox.json",
+        "http://localhost:3001/r/radio-group.json",
+        "http://localhost:3001/r/switch.json",
+        "http://localhost:3001/r/slider.json",
+        "http://localhost:3001/r/select.json",
+        "http://localhost:3001/r/dialog.json",
+        "http://localhost:3001/r/popover.json",
+        "http://localhost:3001/r/tooltip.json",
+        "http://localhost:3001/r/tabs.json"
+      ]
+    },
+    {
+      "name": "all-blocks",
+      "type": "registry:item",
+      "title": "cd/ui blocks (everything)",
+      "description": "Every cd/ui block, with the components they use.",
+      "registryDependencies": [
+        "http://localhost:3001/r/login-01.json",
+        "http://localhost:3001/r/login-02.json",
+        "http://localhost:3001/r/signup-01.json",
+        "http://localhost:3001/r/forgot-password-01.json",
+        "http://localhost:3001/r/verify-01.json",
+        "http://localhost:3001/r/hero-01.json",
+        "http://localhost:3001/r/hero-02.json",
+        "http://localhost:3001/r/features-01.json",
+        "http://localhost:3001/r/pricing-01.json",
+        "http://localhost:3001/r/cta-01.json",
+        "http://localhost:3001/r/faq-01.json",
+        "http://localhost:3001/r/footer-01.json",
+        "http://localhost:3001/r/settings-01.json",
+        "http://localhost:3001/r/contact-01.json",
+        "http://localhost:3001/r/not-found-01.json"
       ]
     }
   ]

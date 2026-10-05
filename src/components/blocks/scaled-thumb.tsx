@@ -2,7 +2,7 @@
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
-/** Mostra o bloco renderizado em `width` x `height` e encolhido pra caber na largura do container (prévia inerte). */
+/** Shows the block rendered at `width` x `height` and scaled down to fit the container width (inert preview). */
 export function ScaledThumb({ children, width = 1280, height = 760 }: { children: ReactNode; width?: number; height?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.3);

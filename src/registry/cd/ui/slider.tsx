@@ -5,8 +5,8 @@ import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
 /**
- * Controle deslizante. Passe um número para um polegar ou um array para uma faixa (um polegar por valor).
- * Use `thumbLabel` para dar nome a cada polegar quando não houver um label visível.
+ * Slider. Pass a number for one thumb or an array for a range (one thumb per value).
+ * Use `thumbLabel` to name each thumb when there is no visible label.
  */
 export function Slider({
   className,
@@ -37,13 +37,13 @@ export function Slider({
               aria-label={labels[i]}
               className={cn(
                 "size-4.5 cursor-grab rounded-full border border-input bg-background shadow-sm/10 outline-none select-none",
-                "transition-[box-shadow,transform] duration-150 ease-out motion-safe:active:scale-110",
+                "transition-[box-shadow,transform] duration-base ease-out motion-safe:active:scale-110",
                 "has-focus-visible:ring-2 has-focus-visible:ring-ring has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-background",
                 "data-dragging:cursor-grabbing",
               )}
               data-slot="slider-thumb"
               index={count > 1 ? i : undefined}
-              // biome-ignore lint/suspicious/noArrayIndexKey: os polegares são posicionais
+              // biome-ignore lint/suspicious/noArrayIndexKey: thumbs are positional
               key={i}
             />
           ))}

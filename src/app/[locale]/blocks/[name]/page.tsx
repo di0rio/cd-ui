@@ -11,8 +11,7 @@ import { Install } from "@/components/docs/install";
 import { PreviewTabs } from "@/components/docs/preview-tabs";
 import { type Block, blocks, getBlock } from "@/blocks";
 import { blockComponents } from "@/blocks/components";
-import { setLocale, translations } from "@/i18n/generated";
-import { type Locale, withLocale } from "@/lib/locale-path";
+import { getT } from "@/i18n/server";
 import { siteUrl } from "@/lib/site";
 import { asInstalled } from "@/lib/source";
 
@@ -22,25 +21,25 @@ export function generateStaticParams() {
   return blocks.map((b) => ({ name: b.name }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/blocks/[name]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/[locale]/blocks/[name]">): Promise<Metadata> {
   const block = getBlock((await params).name);
   if (!block) return {};
-  const { title, description } = translations[await setLocale()].app.blocks.items[block.key];
+  const { title, description } = (await getT()).tr.app.blocks.items[block.key];
   return { title, description };
 }
 
-export default async function BlockPage({ params }: PageProps<"/blocks/[name]">) {
+export default async function BlockPage({ params }: PageProps<"/[locale]/blocks/[name]">) {
   const block = getBlock((await params).name);
   if (!block) notFound();
   const Block = blockComponents[block.name];
-  const locale = (await setLocale()) as Locale;
-  const page = translations[locale].app.blocks;
+  const { tr, href } = await getT();
+  const page = tr.app.blocks;
   const item = page.items[block.key];
   const index = blocks.indexOf(block);
   const step = (n: Block | undefined, direction: string): StepperLink | null => {
     if (!n) return null;
     const title = page.items[n.key].title;
-    return { href: withLocale(locale, `/blocks/${n.name}`), title, label: `${direction}: ${title}` };
+    return { href: href(`/blocks/${n.name}`), title, label: `${direction}: ${title}` };
   };
   const source = await readFile(join(/* turbopackIgnore: true */ process.cwd(), "src/registry/cd/blocks", block.name, `${block.name}.tsx`), "utf8");
 
@@ -49,7 +48,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[name]">)
       <div className="mb-6 flex items-center justify-between gap-4">
         <Link
           className="inline-flex items-center gap-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground"
-          href={withLocale(locale, "/blocks")}
+          href={href("/blocks")}
         >
           <ArrowLeftIcon aria-hidden="true" className="size-3.5" /> {page.detail.back}
         </Link>
@@ -68,7 +67,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[name]">)
         </div>
         <Link
           className="inline-flex items-center gap-1.5 text-muted-foreground text-sm underline-offset-4 hover:text-foreground hover:underline"
-          href={withLocale(locale, `/blocks/${block.name}/view`)}
+          href={href(`/blocks/${block.name}/view`)}
           target="_blank"
         >
           {page.detail.openFull} <ExternalLinkIcon aria-hidden="true" className="size-3.5" />
@@ -87,7 +86,7 @@ export default async function BlockPage({ params }: PageProps<"/blocks/[name]">)
           <>
             <DevicePreview
               labels={{ group: page.detail.devices, desktop: page.detail.desktop, tablet: page.detail.tablet, mobile: page.detail.mobile, frame: page.detail.frame }}
-              src={withLocale(locale, `/blocks/${block.name}/view`)}
+              src={href(`/blocks/${block.name}/view`)}
             >
               <div className="overflow-hidden rounded-xl border bg-background">
                 <Block />

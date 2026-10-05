@@ -34,7 +34,7 @@ export function Footer01() {
               <ul className="mt-3 flex flex-col gap-2">
                 {column.links.map((link) => (
                   <li key={link}>
-                    <a className="text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground" href={`#${link.toLowerCase()}`}>
+                    <a className="text-muted-foreground text-sm transition-colors duration-base hover:text-foreground" href={`#${link.toLowerCase()}`}>
                       {link}
                     </a>
                   </li>

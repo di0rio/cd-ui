@@ -16,7 +16,7 @@ export const alertVariants = cva(
   },
 );
 
-/** Aviso em bloco (informação, sucesso, erro). Um ícone direto dentro dele ocupa a primeira coluna. Sem estado: roda no servidor. */
+/** Block notice (info, success, error). An icon placed directly inside takes the first column. Stateless: runs on the server. */
 export function Alert({
   className,
   variant,

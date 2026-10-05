@@ -30,7 +30,6 @@ import SwitchDefault from "@/docs/examples/switch-default";
 import TabsDefault from "@/docs/examples/tabs-default";
 import TextareaDefault from "@/docs/examples/textarea-default";
 import TooltipDefault from "@/docs/examples/tooltip-default";
-import { t } from "@/i18n/generated";
 import type { Dict } from "@/lib/dict";
 
 export type Prop = { name: string; type: string; default?: string; description: string };
@@ -47,11 +46,8 @@ export type ComponentDoc = {
   accessibility?: string[];
 };
 
-/**
- * Os textos vêm do `t` (src/docs/t.ts), que depende do idioma da requisição:
- * por isso o conteúdo é montado por função, durante a renderização, e não num módulo estático.
- */
-export function getContent(tr: Dict = t): Record<string, ComponentDoc> {
+/** The texts come from `tr` (src/docs/t.ts), so the content is built by a function, not a static module. */
+export function getContent(tr: Dict): Record<string, ComponentDoc> {
   const c = tr.docs.content;
   const className: Prop = { name: "className", type: "string", description: c.shared.className };
   const render: Prop = { name: "render", type: "ReactElement | (props) => ReactElement", description: c.shared.render };

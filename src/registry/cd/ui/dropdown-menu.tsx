@@ -18,8 +18,8 @@ const itemClass = cn(
 );
 
 /**
- * Lista de ações. Abre a partir do gatilho (`transform-origin` do Base UI) em 150ms e fecha em 100ms.
- * Em submenus, o Base UI escolhe o lado e o alinhamento sozinho.
+ * List of actions. Opens from the trigger (Base UI's `transform-origin`) and closes faster.
+ * In submenus, Base UI picks the side and alignment on its own.
  */
 export function DropdownMenuPopup({
   className,
@@ -33,11 +33,8 @@ export function DropdownMenuPopup({
       <MenuPrimitive.Positioner align={align} className="z-50 outline-none" side={side} sideOffset={sideOffset}>
         <MenuPrimitive.Popup
           className={cn(
-            "max-h-(--available-height) min-w-44 origin-(--transform-origin) overflow-y-auto rounded-xl border bg-popover p-1 text-popover-foreground shadow-lg/5 outline-none",
-            "transition-[opacity,transform] duration-150 ease-out",
-            "data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-ending-style:duration-100",
-            "data-starting-style:scale-[0.97] data-starting-style:opacity-0",
-            "motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
+            "max-h-(--available-height) min-w-44 overflow-y-auto rounded-xl border bg-popover p-1.5 text-popover-foreground shadow-lg/5 outline-none",
+            "cd-popup",
             className,
           )}
           data-slot="dropdown-menu-popup"
@@ -111,7 +108,7 @@ export function DropdownMenuSeparator({ className, ...props }: MenuPrimitive.Sep
   return <MenuPrimitive.Separator className={cn("-mx-1 my-1 h-px bg-border", className)} data-slot="dropdown-menu-separator" {...props} />;
 }
 
-/** Texto de atalho alinhado à direita do item (apenas visual: o atalho em si é seu). */
+/** Shortcut text aligned to the right of the item (visual only: the shortcut itself is yours). */
 export function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"span">): React.ReactElement {
   return <span className={cn("ml-auto text-muted-foreground text-xs tracking-wide", className)} data-slot="dropdown-menu-shortcut" {...props} />;
 }

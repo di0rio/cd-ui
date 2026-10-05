@@ -4,7 +4,7 @@ import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
-/** Foto de perfil redonda. Mostra o `AvatarFallback` enquanto a imagem carrega ou se ela falhar. */
+/** Round profile picture. Shows `AvatarFallback` while the image loads or if it fails. */
 export function Avatar({ className, ...props }: AvatarPrimitive.Root.Props): React.ReactElement {
   return (
     <AvatarPrimitive.Root

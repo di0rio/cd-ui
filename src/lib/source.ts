@@ -1,4 +1,4 @@
-/** Mostra o código como ele fica no projeto de quem instala (o shadcn reescreve os caminhos). */
+/** Shows the code as it ends up in the installer's project (shadcn rewrites the paths). */
 export function asInstalled(code: string) {
   return code.replace(/@\/registry\/cd\/ui\//g, "@/components/ui/").replace(/@\/registry\/cd\/lib\//g, "@/lib/");
 }

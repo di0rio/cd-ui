@@ -5,7 +5,7 @@ import { Code } from "@/components/docs/code";
 import { PreviewTabs } from "@/components/docs/preview-tabs";
 import { asInstalled } from "@/lib/source";
 
-/** Preview ao vivo + código do exemplo (lido do próprio arquivo no build). */
+/** Live preview + example code (read from the file itself at build time). */
 export async function Preview({ file, Component, minHeight = "min-h-64" }: { file: string; Component: ComponentType; minHeight?: string }) {
   const source = await readFile(join(/* turbopackIgnore: true */ process.cwd(), "src/docs/examples", `${file}.tsx`), "utf8");
   return (

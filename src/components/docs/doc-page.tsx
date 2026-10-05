@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Toc, type TocItem } from "@/components/docs/toc";
 
-/** Estrutura de uma página das docs: conteúdo legível no meio, "nesta página" à direita. */
+/** Structure of a docs page: readable content in the middle, "on this page" on the right. */
 export function DocPage({ toc, children }: { toc: TocItem[]; children: ReactNode }) {
   return (
     <div className="flex gap-12">
@@ -43,11 +43,11 @@ export function P({ children }: { children: ReactNode }) {
   return <p className="my-4 text-pretty leading-7">{children}</p>;
 }
 
-/** Texto com `trechos` entre crases virando <code> (os textos das páginas vêm do t.ts). */
+/** Text with `snippets` between backticks turned into <code> (the page texts come from t.ts). */
 export function Rich({ text }: { text: string }) {
   return text.split(/(`[^`]+`)/g).map((part, i) =>
     part.startsWith("`") ? (
-      // biome-ignore lint/suspicious/noArrayIndexKey: partes estáticas de um texto
+      // biome-ignore lint/suspicious/noArrayIndexKey: static parts of a text
       <code className="font-mono text-sm" key={i}>
         {part.slice(1, -1)}
       </code>

@@ -5,9 +5,8 @@ import { type Locale, stripLocale } from "@/lib/locale-path";
 import { cn } from "@/registry/cd/lib/utils";
 
 /**
- * Troca o idioma indo pra mesma página com o outro prefixo. É navegação completa de propósito:
- * o layout raiz (header, rodapé, <html lang>) é compartilhado entre /en e /pt e o Next não o renderiza de novo
- * numa navegação do lado do cliente.
+ * Switches the language by going to the same page under the other prefix. A full navigation on purpose:
+ * each locale has its own root layout (<html lang>), so Next cannot swap it in a client-side navigation.
  */
 export function LocaleSwitch() {
   const pathname = usePathname();

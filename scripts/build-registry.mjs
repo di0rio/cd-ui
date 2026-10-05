@@ -1,7 +1,7 @@
-// Gera registry.json a partir do catálogo (src/docs/catalog.json) e dos próprios arquivos:
-// - dependências npm e entre componentes são lidas dos imports, nunca escritas à mão;
-// - o item "theme" copia os tokens de src/app/globals.css (:root e .dark).
-// Depois o `shadcn build` transforma isso em public/r/*.json.
+// Generates registry.json from the catalog (src/docs/catalog.json) and the files themselves:
+// - npm and cross-component dependencies are read from the imports, never written by hand;
+// - the "theme" item copies the tokens from src/app/globals.css (:root and .dark).
+// Then `shadcn build` turns it into public/r/*.json.
 import { readFileSync, writeFileSync } from "node:fs";
 
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
@@ -9,8 +9,8 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   : "http://localhost:3001";
 
 const catalog = JSON.parse(readFileSync("src/docs/catalog.json", "utf8"));
-// O nome vira caminho de arquivo e URL: só letras minúsculas, números e hífen.
-for (const { name } of catalog) if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`nome inválido no catálogo: ${name}`);
+// The name becomes a file path and a URL: lowercase letters, numbers and hyphens only.
+for (const { name } of catalog) if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`invalid name in the catalog: ${name}`);
 
 function importsOf(file) {
   const src = readFileSync(file, "utf8");
@@ -24,7 +24,7 @@ const npmName = (spec) => (spec.startsWith("@") ? spec.split("/").slice(0, 2).jo
 const utilsUrl = `${siteUrl}/r/utils.json`;
 const catalogNames = new Set(catalog.map((c) => c.name));
 
-// Itens ui: arquivos irmãos importados que não estão no catálogo (ex.: button-variants.ts) viajam no mesmo item.
+// ui items: imported sibling files that are not in the catalog (e.g. button-variants.ts) travel in the same item.
 const items = catalog.map(({ name, title, description }) => {
   const path = `src/registry/cd/ui/${name}.tsx`;
   const paths = [path];
@@ -42,7 +42,7 @@ const items = catalog.map(({ name, title, description }) => {
   return { name, type: "registry:ui", title, description, dependencies, registryDependencies, files: paths.map((p) => ({ path: p, type: "registry:ui" })) };
 });
 
-// "utils" sem URL cairia no item embutido do shadcn, que instala `export { cn } from "cn"`.
+// A bare "utils" would resolve to shadcn's built-in item, which installs `export { cn } from "cn"`.
 const utils = {
   name: "utils",
   type: "registry:lib",
@@ -62,26 +62,60 @@ const theme = {
   name: "theme",
   type: "registry:theme",
   title: "cd/ui theme",
-  description: "cd/ui color, radius, and animation-curve tokens (cream/graphite + yellow).",
+  description: "cd/ui color, radius, and motion tokens (cream/graphite + yellow).",
   cssVars: {
     theme: {
       "color-brand": "var(--brand)",
       "color-brand-foreground": "var(--brand-foreground)",
       "color-brand-contrast": "var(--brand-contrast)",
       "color-destructive-foreground": "var(--destructive-foreground)",
-      "ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
-      "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)",
+      "radius-xs": "4px",
+      "radius-sm": "calc(var(--radius) * 0.5)",
+      "radius-md": "calc(var(--radius) * 0.75)",
+      "radius-lg": "var(--radius)",
+      "radius-xl": "calc(var(--radius) * 1.5)",
+      "radius-2xl": "calc(var(--radius) * 2)",
+      "ease-out": "var(--cd-ease-out)",
+      "ease-in-out": "var(--cd-ease-in-out)",
+      "transition-duration-instant": "var(--cd-duration-instant)",
+      "transition-duration-fast": "var(--cd-duration-fast)",
+      "transition-duration-base": "var(--cd-duration-base)",
+      "transition-duration-slow": "var(--cd-duration-slow)",
     },
     light: block(":root"),
     dark: block(".dark"),
   },
+  // Same as the @media block and the cd-popup utility in globals.css.
+  css: {
+    "@media (prefers-reduced-motion: reduce)": {
+      ":root": {
+        "--cd-duration-instant": "0.01ms",
+        "--cd-duration-fast": "0.01ms",
+        "--cd-duration-base": "0.01ms",
+        "--cd-duration-slow": "0.01ms",
+        "--cd-scale-enter": "1",
+      },
+    },
+    "@utility cd-popup": {
+      "transform-origin": "var(--transform-origin)",
+      "transition-property": "opacity, transform",
+      "transition-duration": "var(--cd-duration-base)",
+      "transition-timing-function": "var(--cd-ease-out)",
+      "&[data-starting-style], &[data-ending-style]": {
+        opacity: "0",
+        transform: "scale(var(--cd-scale-enter))",
+      },
+      "&[data-ending-style]": { "transition-duration": "var(--cd-duration-fast)" },
+      "&[data-instant]": { "transition-duration": "0ms" },
+    },
+  },
 };
 
-// Blocos (src/blocks/catalog.json): uma tela pronta por pasta em src/registry/cd/blocks/<nome>/<nome>.tsx.
-// Os componentes ui usados viram registryDependencies, lidos dos imports.
+// Blocks (src/blocks/catalog.json): one ready screen per folder in src/registry/cd/blocks/<name>/<name>.tsx.
+// The ui components they use become registryDependencies, read from the imports.
 const blockCatalog = JSON.parse(readFileSync("src/blocks/catalog.json", "utf8"));
 const blockItems = blockCatalog.map(({ name, title, description }) => {
-  if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`nome inválido no catálogo de blocos: ${name}`);
+  if (!/^[a-z][a-z0-9-]*$/.test(name)) throw new Error(`invalid name in the blocks catalog: ${name}`);
   const path = `src/registry/cd/blocks/${name}/${name}.tsx`;
   const specs = importsOf(path);
   const dependencies = [...new Set(specs.filter((s) => !s.startsWith("@/") && s !== "react").map(npmName))].sort();
@@ -90,11 +124,27 @@ const blockItems = blockCatalog.map(({ name, title, description }) => {
   return { name, type: "registry:block", title, description, dependencies, registryDependencies, files: [{ path, type: "registry:component" }] };
 });
 
+// One URL installs everything: `npx shadcn add <site>/r/all.json`.
+const all = {
+  name: "all",
+  type: "registry:item",
+  title: "cd/ui (everything)",
+  description: "The theme, the cn helper and every cd/ui component.",
+  registryDependencies: [`${siteUrl}/r/theme.json`, utilsUrl, ...items.map((i) => `${siteUrl}/r/${i.name}.json`)],
+};
+const allBlocks = {
+  name: "all-blocks",
+  type: "registry:item",
+  title: "cd/ui blocks (everything)",
+  description: "Every cd/ui block, with the components they use.",
+  registryDependencies: blockItems.map((i) => `${siteUrl}/r/${i.name}.json`),
+};
+
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "cd-ui",
   homepage: siteUrl,
-  items: [theme, utils, ...items, ...blockItems],
+  items: [theme, utils, ...items, ...blockItems, all, allBlocks],
 };
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);
-console.log(`registry.json: ${items.length} componentes + ${blockItems.length} blocos + tema (${siteUrl})`);
+console.log(`registry.json: ${items.length} components + ${blockItems.length} blocks + theme (${siteUrl})`);

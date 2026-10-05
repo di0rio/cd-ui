@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocHeader, DocPage, H2, P } from "@/components/docs/doc-page";
 import { components, formatBytes, stats } from "@/docs";
-import { setLocale, t, translations } from "@/i18n/generated";
-import { href } from "@/lib/href";
+import { getT } from "@/i18n/server";
 import { Badge } from "@/registry/cd/ui/badge";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, description } = translations[await setLocale()].docs.guides.performance;
+  const { title, description } = (await getT()).tr.docs.guides.performance;
   return { title, description };
 }
 
-export default function Performance() {
-  const page = t.app.docs.performance;
+export default async function Performance() {
+  const { tr, href } = await getT();
+  const page = tr.app.docs.performance;
   const techniques = Object.values(page.techniques);
   const max = Math.max(...components.map((c) => c.metric.gzip));
   const sorted = [...components].sort((a, b) => a.metric.gzip - b.metric.gzip);
@@ -20,12 +20,12 @@ export default function Performance() {
   return (
     <DocPage
       toc={[
-        { id: "numeros", title: page.toc.numbers },
-        { id: "como", title: page.toc.light },
-        { id: "metodo", title: page.toc.method },
+        { id: "numbers", title: page.toc.numbers },
+        { id: "how", title: page.toc.light },
+        { id: "method", title: page.toc.method },
       ]}
     >
-      <DocHeader description={page.description} title={t.docs.guides.performance.title} />
+      <DocHeader description={page.description} title={tr.docs.guides.performance.title} />
 
       <div className="grid grid-cols-3 gap-3">
         {[
@@ -40,7 +40,7 @@ export default function Performance() {
         ))}
       </div>
 
-      <H2 id="numeros">{page.numbersTitle}</H2>
+      <H2 id="numbers">{page.numbersTitle}</H2>
       <ul className="flex flex-col divide-y rounded-xl border">
         {sorted.map((c) => (
           <li className="grid grid-cols-[110px_1fr_70px] items-center gap-4 px-4 py-2.5 sm:grid-cols-[140px_1fr_80px_120px]" key={c.name}>
@@ -58,7 +58,7 @@ export default function Performance() {
         ))}
       </ul>
 
-      <H2 id="como">{page.lightTitle}</H2>
+      <H2 id="how">{page.lightTitle}</H2>
       <div className="grid gap-3 sm:grid-cols-2">
         {techniques.map((tech) => (
           <div className="rounded-xl border bg-card p-5" key={tech.title}>
@@ -68,7 +68,7 @@ export default function Performance() {
         ))}
       </div>
 
-      <H2 id="metodo">{page.methodTitle}</H2>
+      <H2 id="method">{page.methodTitle}</H2>
       <P>{page.method}</P>
     </DocPage>
   );
