@@ -54,7 +54,7 @@ export function Features01() {
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {features.map((f) => (
             <li
-              className={`rounded-xl border bg-card p-6 transition-[border-color] duration-150 hover:border-brand ${f.wide ? "md:col-span-2" : ""}`}
+              className={`rounded-xl border bg-card p-6 transition-[border-color] duration-base hover:border-brand ${f.wide ? "md:col-span-2" : ""}`}
               key={f.title}
             >
               <span className="grid size-9 place-items-center rounded-lg bg-brand text-brand-contrast [&_svg]:size-4.5">{f.icon}</span>

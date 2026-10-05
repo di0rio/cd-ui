@@ -7,7 +7,7 @@ import { cn } from "@/registry/cd/lib/utils";
 
 const icon = "absolute inset-0 m-auto size-4 transition-opacity duration-150 ease-out";
 
-/** Copiar com troca de ícone por crossfade de opacidade. */
+/** Copy with the icon swapped by an opacity crossfade. */
 export function CopyButton({ text, className }: { text: string; className?: string }) {
   const { ui } = useLocale();
   const [copied, setCopied] = useState(false);

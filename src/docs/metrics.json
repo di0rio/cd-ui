@@ -1,13 +1,13 @@
 {
   "button": {
-    "gzip": 1085,
+    "gzip": 1096,
     "client": true,
     "base": [
       "button"
     ]
   },
   "dropdown-menu": {
-    "gzip": 1131,
+    "gzip": 1027,
     "client": true,
     "base": [
       "menu"
@@ -41,12 +41,12 @@
     ]
   },
   "table": {
-    "gzip": 586,
+    "gzip": 585,
     "client": false,
     "base": []
   },
   "accordion": {
-    "gzip": 721,
+    "gzip": 706,
     "client": true,
     "base": [
       "accordion"
@@ -68,28 +68,28 @@
     "base": []
   },
   "progress": {
-    "gzip": 475,
+    "gzip": 465,
     "client": true,
     "base": [
       "progress"
     ]
   },
   "toast": {
-    "gzip": 1296,
+    "gzip": 1295,
     "client": true,
     "base": [
       "toast"
     ]
   },
   "input": {
-    "gzip": 516,
+    "gzip": 525,
     "client": true,
     "base": [
       "input"
     ]
   },
   "textarea": {
-    "gzip": 445,
+    "gzip": 451,
     "client": true,
     "base": [
       "field"
@@ -110,14 +110,14 @@
     ]
   },
   "checkbox": {
-    "gzip": 702,
+    "gzip": 688,
     "client": true,
     "base": [
       "checkbox"
     ]
   },
   "radio-group": {
-    "gzip": 535,
+    "gzip": 522,
     "client": true,
     "base": [
       "radio",
@@ -125,49 +125,49 @@
     ]
   },
   "switch": {
-    "gzip": 474,
+    "gzip": 462,
     "client": true,
     "base": [
       "switch"
     ]
   },
   "slider": {
-    "gzip": 668,
+    "gzip": 667,
     "client": true,
     "base": [
       "slider"
     ]
   },
   "select": {
-    "gzip": 990,
+    "gzip": 915,
     "client": true,
     "base": [
       "select"
     ]
   },
   "dialog": {
-    "gzip": 968,
+    "gzip": 898,
     "client": true,
     "base": [
       "dialog"
     ]
   },
   "popover": {
-    "gzip": 588,
+    "gzip": 478,
     "client": true,
     "base": [
       "popover"
     ]
   },
   "tooltip": {
-    "gzip": 482,
+    "gzip": 370,
     "client": true,
     "base": [
       "tooltip"
     ]
   },
   "tabs": {
-    "gzip": 628,
+    "gzip": 613,
     "client": true,
     "base": [
       "tabs"

@@ -2,9 +2,9 @@ import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
   [
-    "relative inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border font-medium outline-none",
-    // Resposta ao clique: afunda 2% em 100ms. Cores trocam em 150ms.
-    "transition-[color,background-color,border-color,transform] duration-100 ease-out motion-safe:active:scale-[0.98]",
+    "relative inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 whitespace-nowrap rounded-(--radius-button) border font-medium outline-none",
+    // Click feedback: sinks 2% fast. Colors fade on the base duration.
+    "transition-[color,background-color,border-color,transform] duration-instant ease-out motion-safe:active:scale-[0.98]",
     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "data-disabled:pointer-events-none data-disabled:opacity-50 data-loading:opacity-100",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",

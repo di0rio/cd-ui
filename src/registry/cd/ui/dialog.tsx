@@ -10,9 +10,9 @@ export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClose = DialogPrimitive.Close;
 
 /**
- * Janela modal centralizada. Entra de `scale(0.96)` + opacidade em 200ms e sai mais rápido (150ms).
- * `position="top"` ancora no topo (ex.: paleta de comandos). Modal não nasce do gatilho: fica no centro, então o `transform-origin` é o centro mesmo.
- * `instant` tira a animação de entrada e saída: pra diálogos abertos por atalho, que se usa o tempo todo.
+ * Centered modal window. Enters from `scale(0.96)` + opacity and leaves faster.
+ * `position="top"` anchors it to the top (e.g. a command palette). A modal does not grow from its trigger: it sits in the center, so the `transform-origin` is the center.
+ * `instant` removes the enter and exit animation, for dialogs opened by a shortcut that people use all the time.
  */
 export function DialogPopup({
   className,
@@ -34,7 +34,7 @@ export function DialogPopup({
         className={cn(
           "fixed inset-0 z-50 bg-black/40",
           !instant &&
-            "transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-150",
+            "transition-opacity duration-base ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-fast",
         )}
         data-slot="dialog-backdrop"
       />
@@ -48,12 +48,7 @@ export function DialogPopup({
         <DialogPrimitive.Popup
           className={cn(
             "relative flex w-full max-w-md flex-col gap-4 rounded-2xl border bg-popover p-6 text-popover-foreground shadow-lg/5 outline-none",
-            !instant && [
-              "transition-[opacity,transform] duration-200 ease-out",
-              "data-ending-style:scale-[0.96] data-ending-style:opacity-0 data-ending-style:duration-150",
-              "data-starting-style:scale-[0.96] data-starting-style:opacity-0",
-              "motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
-            ],
+            !instant && "cd-popup",
             className,
           )}
           data-slot="dialog-popup"
@@ -63,7 +58,7 @@ export function DialogPopup({
           {showClose && (
             <DialogPrimitive.Close
               aria-label={closeLabel}
-              className="absolute top-3 right-3 grid size-8 place-items-center rounded-md text-muted-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+              className="absolute top-3 right-3 grid size-8 place-items-center rounded-md text-muted-foreground outline-none transition-colors duration-base hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
             >
               <XIcon aria-hidden="true" className="size-4" />
             </DialogPrimitive.Close>

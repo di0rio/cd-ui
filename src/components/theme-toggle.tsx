@@ -23,7 +23,7 @@ export function ThemeToggle() {
       size="icon-sm"
       variant="outline"
     >
-      {/* Os dois ícones já vêm no HTML; o CSS escolhe pelo tema, então não há botão vazio antes da hidratação. */}
+      {/* Both icons come in the HTML; CSS picks by theme, so there is no empty button before hydration. */}
       <SunIcon aria-hidden="true" className="hidden dark:block" />
       <MoonIcon aria-hidden="true" className="dark:hidden" />
     </Button>

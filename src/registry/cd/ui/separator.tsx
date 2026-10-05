@@ -2,8 +2,8 @@ import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
 /**
- * Linha divisória fina. Decorativa por padrão (some do leitor de tela);
- * passe `decorative={false}` quando ela separar conteúdo de verdade. Sem estado: roda no servidor.
+ * Thin dividing line. Decorative by default (hidden from screen readers);
+ * pass `decorative={false}` when it separates real content. Stateless: runs on the server.
  */
 export function Separator({
   className,

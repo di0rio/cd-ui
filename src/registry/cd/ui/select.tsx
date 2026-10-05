@@ -15,7 +15,7 @@ export function SelectTrigger({
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "inline-flex h-9 w-full min-w-40 cursor-pointer items-center justify-between gap-2 rounded-lg border border-input bg-background px-3 text-sm outline-none",
+        "inline-flex h-9 w-full min-w-40 cursor-pointer items-center justify-between gap-2 rounded-(--radius-field) border border-input bg-background px-3 text-sm outline-none",
         "transition-[border-color,box-shadow] duration-150 ease-out hover:bg-accent/50",
         "focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 data-popup-open:border-ring",
         "data-invalid:border-destructive data-disabled:cursor-not-allowed data-disabled:opacity-50",
@@ -43,8 +43,8 @@ export function SelectValue({ className, ...props }: SelectPrimitive.Value.Props
 }
 
 /**
- * Lista de opções. Abre a partir do gatilho (`transform-origin` do Base UI) em 150ms e
- * fecha em 100ms. Com `alignItemWithTrigger`, o item escolhido fica em cima do gatilho, como no macOS.
+ * List of options. Opens from the trigger (Base UI's `transform-origin`) and closes faster.
+ * With `alignItemWithTrigger`, the chosen item sits over the trigger, as on macOS.
  */
 export function SelectPopup({ className, children, ...props }: SelectPrimitive.Popup.Props): React.ReactElement {
   return (
@@ -52,11 +52,8 @@ export function SelectPopup({ className, children, ...props }: SelectPrimitive.P
       <SelectPrimitive.Positioner className="z-50 outline-none" sideOffset={6}>
         <SelectPrimitive.Popup
           className={cn(
-            "max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-xl border bg-popover p-1 text-popover-foreground shadow-lg/5 outline-none",
-            "transition-[opacity,transform] duration-150 ease-out",
-            "data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-ending-style:duration-100",
-            "data-starting-style:scale-[0.97] data-starting-style:opacity-0",
-            "motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
+            "max-h-(--available-height) min-w-(--anchor-width) overflow-y-auto rounded-xl border bg-popover p-1.5 text-popover-foreground shadow-lg/5 outline-none",
+            "cd-popup",
             className,
           )}
           data-slot="select-popup"

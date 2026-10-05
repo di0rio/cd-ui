@@ -1,7 +1,7 @@
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
-/** Superfície plana com borda fina. Composta por partes opcionais. Sem estado: roda no servidor. */
+/** Flat surface with a thin border. Built from optional parts. Stateless: runs on the server. */
 export function Card({ className, ...props }: React.ComponentProps<"div">): React.ReactElement {
   return (
     <div

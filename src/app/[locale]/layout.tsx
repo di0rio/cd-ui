@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { setLocale, translations } from "@/i18n/generated";
 import { LocaleProvider } from "@/components/locale-provider";
 import { LocaleSwitch } from "@/components/locale-switch";
 import { Ubuntu, Ubuntu_Mono } from "next/font/google";
@@ -13,16 +12,21 @@ import { blocks } from "@/blocks";
 import { getComponents, getGuides } from "@/docs";
 import type { Dict } from "@/lib/dict";
 import { type Locale, withLocale } from "@/lib/locale-path";
+import { getT, locales } from "@/i18n/server";
 import { site } from "@/lib/site";
 import { cn } from "@/registry/cd/lib/utils";
-import "./globals.css";
+import "../globals.css";
 
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-sans" });
 const ubuntuHeading = Ubuntu({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-heading" });
 const ubuntuMono = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono" });
 
+export const dynamicParams = false;
+
+export const generateStaticParams = () => locales.map((locale) => ({ locale }));
+
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, description } = translations[await setLocale()].app.metadata;
+  const { title, description } = (await getT()).tr.app.metadata;
   return { title: { default: title, template: "%s · cd/ui" }, description };
 }
 
@@ -42,9 +46,8 @@ function GithubIcon(props: React.ComponentProps<"svg">) {
 
 const navLink = "rounded-md px-2.5 py-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground";
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const locale = (await setLocale()) as Locale;
-  const tr = translations[locale];
+export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
+  const { locale, tr } = await getT();
   const layout = tr.app.layout;
   return (
     <html
@@ -85,7 +88,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 <Link className={cn(navLink, "max-sm:hidden")} href={withLocale(locale, "/blocks")}>
                   {layout.blocks}
                 </Link>
-                <Link className={cn(navLink, "max-sm:hidden")} href={withLocale(locale, "/#componentes")}>
+                <Link className={cn(navLink, "max-sm:hidden")} href={withLocale(locale, "/#components")}>
                   {layout.components}
                 </Link>
                 <Search items={searchItems(locale, tr)} />

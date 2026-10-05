@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import { Code } from "@/components/docs/code";
 import { DocHeader, DocPage, H2, P, Rich } from "@/components/docs/doc-page";
-import { setLocale, t, translations } from "@/i18n/generated";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { title, description } = translations[await setLocale()].docs.guides.theme;
+  const { title, description } = (await getT()).tr.docs.guides.theme;
   return { title, description };
 }
 
-export default function Theme() {
-  const page = t.app.docs.theme;
+export default async function Theme() {
+  const { tr } = await getT();
+  const page = tr.app.docs.theme;
   const swatches = [
     { name: "background", label: page.swatches.background },
     { name: "card", label: page.swatches.card },
@@ -23,15 +24,15 @@ export default function Theme() {
   return (
     <DocPage
       toc={[
-        { id: "cores", title: page.toc.colors },
-        { id: "raios", title: page.toc.radii },
-        { id: "movimento", title: page.toc.motion },
-        { id: "personalizar", title: page.toc.customize },
+        { id: "colors", title: page.toc.colors },
+        { id: "radius", title: page.toc.radii },
+        { id: "motion", title: page.toc.motion },
+        { id: "customize", title: page.toc.customize },
       ]}
     >
-      <DocHeader description={page.description} title={t.docs.guides.theme.title} />
+      <DocHeader description={page.description} title={tr.docs.guides.theme.title} />
 
-      <H2 id="cores">{page.colorsTitle}</H2>
+      <H2 id="colors">{page.colorsTitle}</H2>
       <P>{page.colors}</P>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {swatches.map((s) => (
@@ -46,7 +47,7 @@ export default function Theme() {
       </div>
       <P>{page.yellow}</P>
 
-      <H2 id="raios">{page.radiiTitle}</H2>
+      <H2 id="radius">{page.radiiTitle}</H2>
       <div className="flex flex-wrap items-end gap-4">
         {["sm", "md", "lg", "xl", "2xl"].map((r) => (
           <div className="flex flex-col items-center gap-2" key={r}>
@@ -56,13 +57,13 @@ export default function Theme() {
         ))}
       </div>
 
-      <H2 id="movimento">{page.motionTitle}</H2>
+      <H2 id="motion">{page.motionTitle}</H2>
       <P>
         <Rich text={page.motion} />
       </P>
       <Code code={page.motionCode} lang="css" />
 
-      <H2 id="personalizar">{page.customizeTitle}</H2>
+      <H2 id="customize">{page.customizeTitle}</H2>
       <P>{page.customize}</P>
       <Code code={`:root {\n  --brand: #22c55e;\n  --brand-foreground: #15803d;\n  --brand-contrast: #052e16;\n}`} lang="css" title="globals.css" />
     </DocPage>

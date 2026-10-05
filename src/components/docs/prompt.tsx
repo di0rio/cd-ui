@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLocale } from "@/components/locale-provider";
 import { stripLocale, withLocale } from "@/lib/locale-path";
 
-/** Prompt de terminal: `cd/ui ~/docs/button $▍` mostra onde você está (identidade do portfólio). O texto já é a logo. */
+/** Terminal prompt: `cd/ui ~/docs/button $▍` shows where you are (portfolio identity). The text is already the logo. */
 export function Prompt() {
   const path = stripLocale(usePathname() ?? "/");
   const { locale, ui } = useLocale();

@@ -1,7 +1,7 @@
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
-/** Tabela estilizada sobre elementos nativos (semântica de `<table>` intacta). Sem estado: roda no servidor. */
+/** Styled table over native elements (`<table>` semantics intact). Stateless: runs on the server. */
 export function Table({
   className,
   containerClassName,
@@ -29,7 +29,7 @@ export function TableFooter({ className, ...props }: React.ComponentProps<"tfoot
 export function TableRow({ className, ...props }: React.ComponentProps<"tr">): React.ReactElement {
   return (
     <tr
-      className={cn("border-b transition-colors duration-150 ease-out hover:bg-accent/50 data-[state=selected]:bg-accent", className)}
+      className={cn("border-b transition-colors duration-base ease-out hover:bg-accent/50 data-[state=selected]:bg-accent", className)}
       data-slot="table-row"
       {...props}
     />

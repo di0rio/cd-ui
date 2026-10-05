@@ -5,7 +5,7 @@ import { XIcon } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
 
-/** Dispara notificações: `const toast = useToast(); toast.add({ title, description, type })`. */
+/** Fires notifications: `const toast = useToast(); toast.add({ title, description, type })`. */
 export const useToast = ToastPrimitive.useToastManager;
 export const createToastManager = ToastPrimitive.createToastManager;
 
@@ -21,7 +21,7 @@ function ToastList({ closeLabel }: { closeLabel: string }): React.ReactElement {
             "[--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))]",
             "absolute right-0 bottom-0 left-auto z-[calc(1000-var(--toast-index))] h-(--height) w-full origin-bottom select-none rounded-xl border bg-popover text-popover-foreground shadow-lg/5",
             "[transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))]",
-            "transition-[transform,opacity] duration-300 ease-out after:absolute after:top-full after:left-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-['']",
+            "transition-[transform,opacity] duration-slow ease-out after:absolute after:top-full after:left-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-['']",
             "data-expanded:h-(--toast-height) data-expanded:[transform:translateX(var(--toast-swipe-movement-x))_translateY(var(--offset-y))]",
             "data-limited:opacity-0 data-ending-style:opacity-0 data-starting-style:[transform:translateY(150%)]",
             "[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:[transform:translateY(150%)]",
@@ -36,14 +36,14 @@ function ToastList({ closeLabel }: { closeLabel: string }): React.ReactElement {
           key={toast.id}
           toast={toast}
         >
-          <ToastPrimitive.Content className="flex items-start gap-3 overflow-hidden p-4 transition-opacity duration-200 ease-out data-behind:opacity-0 data-expanded:opacity-100">
+          <ToastPrimitive.Content className="flex items-start gap-3 overflow-hidden p-4 transition-opacity duration-base ease-out data-behind:opacity-0 data-expanded:opacity-100">
             <div className="flex min-w-0 flex-1 flex-col gap-1">
               <ToastPrimitive.Title className="font-medium text-sm" data-slot="toast-title" />
               <ToastPrimitive.Description className="text-muted-foreground text-sm" data-slot="toast-description" />
             </div>
             <ToastPrimitive.Close
               aria-label={closeLabel}
-              className="-mt-1 -mr-1 grid size-7 shrink-0 cursor-pointer place-items-center rounded-md text-muted-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+              className="-mt-1 -mr-1 grid size-7 shrink-0 cursor-pointer place-items-center rounded-md text-muted-foreground outline-none transition-colors duration-base hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
               data-slot="toast-close"
             >
               <XIcon aria-hidden="true" className="size-4" />
@@ -56,8 +56,8 @@ function ToastList({ closeLabel }: { closeLabel: string }): React.ReactElement {
 }
 
 /**
- * Envolva o app (ou a área) com `ToastProvider`: ele renderiza a pilha de notificações no canto da tela.
- * Os toasts empilham, abrem ao passar o mouse, somem sozinhos (5s) e saem com swipe.
+ * Wrap the app (or the area) with `ToastProvider`: it renders the notification stack in the screen corner.
+ * Toasts stack, expand on hover, disappear on their own (5s) and leave with a swipe.
  */
 export function ToastProvider({
   children,

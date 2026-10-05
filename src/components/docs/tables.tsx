@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 import type { ApiPart, KeyRow } from "@/docs/content";
 import { Badge } from "@/registry/cd/ui/badge";
-import { t } from "@/i18n/generated";
+import { getT } from "@/i18n/server";
 import { Kbd } from "@/registry/cd/ui/kbd";
 
-/** Transforma `trechos` entre crases em <code> (as descrições do content.ts usam isso). */
+/** Turns `snippets` between backticks into <code> (the descriptions in content.ts use this). */
 export function Inline({ text }: { text: string }): ReactNode {
   return text.split(/(`[^`]+`)/g).map((part, i) =>
     part.startsWith("`") ? (
-      // biome-ignore lint/suspicious/noArrayIndexKey: partes estáticas de um texto
+      // biome-ignore lint/suspicious/noArrayIndexKey: static parts of a text
       <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.85em]" key={i}>
         {part.slice(1, -1)}
       </code>
@@ -18,7 +18,8 @@ export function Inline({ text }: { text: string }): ReactNode {
   );
 }
 
-export function ApiTable({ part }: { part: ApiPart }) {
+export async function ApiTable({ part }: { part: ApiPart }) {
+  const { tr } = await getT();
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
@@ -36,9 +37,9 @@ export function ApiTable({ part }: { part: ApiPart }) {
         <table className="w-full min-w-[560px] text-left text-sm">
           <thead className="bg-muted/60 text-muted-foreground text-xs">
             <tr>
-              <th className="px-4 py-2 font-medium">{t.components.docs.tables.prop}</th>
-              <th className="px-4 py-2 font-medium">{t.components.docs.tables.type}</th>
-              <th className="px-4 py-2 font-medium">{t.components.docs.tables.default}</th>
+              <th className="px-4 py-2 font-medium">{tr.components.docs.tables.prop}</th>
+              <th className="px-4 py-2 font-medium">{tr.components.docs.tables.type}</th>
+              <th className="px-4 py-2 font-medium">{tr.components.docs.tables.default}</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -65,14 +66,15 @@ export function ApiTable({ part }: { part: ApiPart }) {
   );
 }
 
-export function KeyTable({ rows }: { rows: KeyRow[] }) {
+export async function KeyTable({ rows }: { rows: KeyRow[] }) {
+  const { tr } = await getT();
   return (
     <div className="overflow-hidden rounded-xl border">
       <table className="w-full text-left text-sm">
         <thead className="bg-muted/60 text-muted-foreground text-xs">
           <tr>
-            <th className="w-48 px-4 py-2 font-medium">{t.components.docs.tables.key}</th>
-            <th className="px-4 py-2 font-medium">{t.components.docs.tables.action}</th>
+            <th className="w-48 px-4 py-2 font-medium">{tr.components.docs.tables.key}</th>
+            <th className="px-4 py-2 font-medium">{tr.components.docs.tables.action}</th>
           </tr>
         </thead>
         <tbody className="divide-y">
