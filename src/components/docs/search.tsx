@@ -40,7 +40,7 @@ export function Search({ items }: { items: SearchItem[] }) {
     <>
       <button
         aria-haspopup="dialog"
-        className="flex h-8 cursor-pointer items-center gap-2 rounded-lg border bg-background pr-1.5 pl-2.5 text-muted-foreground text-sm outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex h-8 cursor-pointer items-center gap-2 rounded-lg border bg-background pr-1.5 pl-2.5 text-muted-foreground text-sm outline-none transition-colors duration-150 hover:bg-foreground/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         onClick={toggle}
         onFocus={loadDialog}
         onPointerEnter={loadDialog}

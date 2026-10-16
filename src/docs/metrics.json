@@ -1,25 +1,30 @@
 {
   "button": {
-    "gzip": 1168,
+    "gzip": 1384,
     "client": true,
     "base": [
       "button"
     ]
   },
+  "avatar-button": {
+    "gzip": 1821,
+    "client": true,
+    "base": []
+  },
   "dropdown-menu": {
-    "gzip": 1032,
+    "gzip": 2214,
     "client": true,
     "base": [
       "menu"
     ]
   },
   "badge": {
-    "gzip": 453,
+    "gzip": 707,
     "client": false,
     "base": []
   },
   "card": {
-    "gzip": 377,
+    "gzip": 645,
     "client": false,
     "base": []
   },
@@ -49,17 +54,22 @@
     ]
   },
   "table": {
-    "gzip": 930,
+    "gzip": 1464,
     "client": false,
     "base": []
   },
+  "data-table": {
+    "gzip": 6764,
+    "client": true,
+    "base": []
+  },
   "auth-shell": {
-    "gzip": 573,
+    "gzip": 831,
     "client": false,
     "base": []
   },
   "accordion": {
-    "gzip": 912,
+    "gzip": 921,
     "client": true,
     "base": [
       "accordion"
@@ -76,8 +86,8 @@
     "base": []
   },
   "alert": {
-    "gzip": 776,
-    "client": false,
+    "gzip": 1456,
+    "client": true,
     "base": []
   },
   "progress": {
@@ -94,6 +104,11 @@
       "toast"
     ]
   },
+  "confetti": {
+    "gzip": 1278,
+    "client": true,
+    "base": []
+  },
   "input": {
     "gzip": 525,
     "client": true,
@@ -102,7 +117,7 @@
     ]
   },
   "password-input": {
-    "gzip": 1654,
+    "gzip": 1871,
     "client": true,
     "base": []
   },
@@ -157,7 +172,7 @@
     ]
   },
   "pricing-toggle": {
-    "gzip": 885,
+    "gzip": 1127,
     "client": true,
     "base": []
   },

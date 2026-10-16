@@ -17,7 +17,7 @@ export default function AlertDefault() {
         <AlertDescription>14 GB left on /dev/sda1</AlertDescription>
         <AlertAction>
           <Button size="sm" variant="outline">
-            Clean up
+            Delete old builds
           </Button>
         </AlertAction>
       </Alert>

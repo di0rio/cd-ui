@@ -25,7 +25,7 @@ export async function ApiTable({ part }: { part: ApiPart }) {
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="font-heading font-medium text-[15px]">{part.name}</h3>
         {part.base && (
-          <Badge variant="muted">
+          <Badge className="h-auto min-h-5.5 max-w-full whitespace-normal rounded-lg py-0.5 [overflow-wrap:anywhere]" variant="muted">
             Base UI · {part.base}
           </Badge>
         )}

@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { Code } from "@/components/docs/code";
 import { DocHeader, DocPage, H2, H3, P, Rich } from "@/components/docs/doc-page";
 import { getT } from "@/i18n/server";
+import { CartoonPlayground } from "@/components/docs/cartoon-playground";
 import { Button } from "@/registry/cd/ui/button";
 import { Input } from "@/registry/cd/ui/input";
 
@@ -14,6 +15,14 @@ const motionTokens = [
   { name: "--cd-ease-out", value: "cubic-bezier(0.23, 1, 0.32, 1)", use: "easeOut" },
   { name: "--cd-ease-in-out", value: "cubic-bezier(0.77, 0, 0.175, 1)", use: "easeInOut" },
   { name: "--cd-scale-enter", value: "0.96", use: "scaleEnter" },
+] as const;
+
+const cartoonTokens = [
+  { name: "--cartoon-ink", value: "#1c1c1c · #f5f5f5", use: "ink" },
+  { name: "--cartoon-border", value: "2px", use: "border" },
+  { name: "--cartoon-offset", value: "3px", use: "offset" },
+  { name: "--press-depth", value: "3px", use: "depth" },
+  { name: "--cd-ease-spring", value: "cubic-bezier(0.34, 1.56, 0.64, 1)", use: "spring" },
 ] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -40,6 +49,7 @@ export default async function Theme() {
         { id: "colors", title: page.toc.colors },
         { id: "radius", title: page.toc.radii },
         { id: "motion", title: page.toc.motion },
+        { id: "cartoon", title: page.toc.cartoon },
         { id: "customize", title: page.toc.customize },
       ]}
     >
@@ -128,6 +138,35 @@ export default async function Theme() {
       <P>
         <Rich text={page.motionReduced} />
       </P>
+
+      <H2 id="cartoon">{page.cartoonTitle}</H2>
+      <P>
+        <Rich text={page.cartoon} />
+      </P>
+      <div className="overflow-x-auto rounded-xl border">
+        <table className="w-full min-w-[560px] text-left text-sm">
+          <thead className="bg-muted/60 text-muted-foreground text-xs">
+            <tr>
+              <th className="px-4 py-2 font-medium">{page.cartoonTable.token}</th>
+              <th className="px-4 py-2 font-medium">{page.cartoonTable.value}</th>
+              <th className="px-4 py-2 font-medium">{page.cartoonTable.use}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartoonTokens.map((t) => (
+              <tr className="border-t" key={t.name}>
+                <td className="px-4 py-2.5 font-mono text-[13px]">{t.name}</td>
+                <td className="px-4 py-2.5 font-mono text-[13px]">{t.value}</td>
+                <td className="px-4 py-2.5 text-muted-foreground">{page.cartoonTable[t.use]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="my-4">
+        <CartoonPlayground labels={page.cartoonPlayground} />
+      </div>
+      <Code code={page.cartoonCode} lang="css" title="globals.css" />
 
       <H2 id="customize">{page.customizeTitle}</H2>
       <P>{page.customize}</P>

@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
+import { cartoon } from "@/registry/cd/ui/cartoon";
 
 export const badgeVariants = cva(
   "inline-flex h-5.5 shrink-0 items-center gap-1 whitespace-nowrap rounded-full border px-2 font-medium text-xs [&_svg:not([class*='size-'])]:size-3",
@@ -12,6 +13,8 @@ export const badgeVariants = cva(
         outline: "border-border text-foreground",
         muted: "border-transparent bg-muted text-muted-foreground",
         destructive: "border-transparent bg-destructive/12 text-destructive-foreground",
+        // Same sticker look as Button and Card, with a smaller offset to fit the size.
+        cartoon: `${cartoon} bg-brand font-bold text-brand-contrast [--cartoon-offset:2px]`,
       },
     },
     defaultVariants: { variant: "default" },

@@ -137,6 +137,7 @@ const theme = {
     colors: { en: "Colors", pt: "Cores" },
     radii: { en: "Radii", pt: "Raios" },
     motion: { en: "Motion", pt: "Movimento" },
+    cartoon: { en: "Cartoon tokens", pt: "Tokens cartoon" },
     customize: { en: "Customize", pt: "Personalizar" },
   },
   colorsTitle: { en: "Colors", pt: "Cores" },
@@ -217,6 +218,37 @@ const theme = {
   motionReduced: {
     en: "With `prefers-reduced-motion: reduce`, one block in globals.css sets every duration to 0.01ms and `--cd-scale-enter` to 1. It sets the same tokens, so keep it after your overrides.",
     pt: "Com `prefers-reduced-motion: reduce`, um bloco no globals.css zera todas as durações (0.01ms) e põe `--cd-scale-enter` em 1. Ele mexe nos mesmos tokens, então mantenha-o depois dos seus overrides.",
+  },
+  cartoonTitle: { en: "Cartoon tokens", pt: "Tokens cartoon" },
+  cartoon: {
+    en: "The cartoon look of Button, Badge and Card comes from four variables. Set them on `:root` to restyle the whole app, or on any element to restyle only what is inside it. Drag the sliders and watch.",
+    pt: "O visual cartoon de Button, Badge e Card vem de quatro variáveis. Defina no `:root` para mudar o app inteiro, ou em qualquer elemento para mudar só o que está dentro. Arraste os controles e veja.",
+  },
+  cartoonTable: {
+    token: { en: "Token", pt: "Token" },
+    value: { en: "Default", pt: "Padrão" },
+    use: { en: "What it does", pt: "O que faz" },
+    ink: { en: "Color of the outline and the shadow. Light in dark mode.", pt: "Cor do contorno e da sombra. Clara no modo escuro." },
+    border: { en: "Thickness of the outline.", pt: "Espessura do contorno." },
+    offset: { en: "How far the hard shadow sticks out.", pt: "Quanto a sombra dura sai para o lado." },
+    depth: { en: "How far a press sinks. Keep it at or below the offset.", pt: "Quanto o clique afunda. Deixe igual ou menor que o deslocamento." },
+    spring: { en: "Curve of the springy release. Pressing is instant.", pt: "Curva da volta com mola. O clique é instantâneo." },
+  },
+  cartoonPlayground: {
+    label: { en: "Try the tokens", pt: "Teste os tokens" },
+    reset: { en: "reset", pt: "restaurar" },
+    ink: { en: "ink", pt: "tinta" },
+    border: { en: "border", pt: "borda" },
+    offset: { en: "offset", pt: "deslocamento" },
+    depth: { en: "press depth", pt: "afundar" },
+    press: { en: "Press me", pt: "Aperte" },
+    badge: { en: "New", pt: "Novo" },
+    cardTitle: { en: "Same tokens", pt: "Os mesmos tokens" },
+    cardText: { en: "Card, badge and button move together.", pt: "Card, selo e botão mudam juntos." },
+  },
+  cartoonCode: {
+    en: ":root {\n  --cartoon-ink: #1c1c1c;\n  --cartoon-border: 3px;\n  --cartoon-offset: 5px;\n  --press-depth: 4px;\n}\n\n/* or only inside one area */\n.checkout {\n  --cartoon-offset: 8px;\n}",
+    pt: ":root {\n  --cartoon-ink: #1c1c1c;\n  --cartoon-border: 3px;\n  --cartoon-offset: 5px;\n  --press-depth: 4px;\n}\n\n/* ou só dentro de uma área */\n.checkout {\n  --cartoon-offset: 8px;\n}",
   },
   customizeTitle: { en: "Customize", pt: "Personalizar" },
   customize: {
@@ -366,6 +398,45 @@ const component = {
   next: { en: "next", pt: "próximo" },
 };
 
-const translations = { layout, intro, installation, theme, forms, performance, component };
+const combos = {
+  description: {
+    en: "Components here are small on purpose and meet at the edges: wrap one in another, or call one from another. Nothing needs a special prop to work with the rest.",
+    pt: "Os componentes aqui são pequenos de propósito e se encontram nas bordas: envolva um no outro, ou chame um a partir do outro. Nenhum precisa de uma prop especial para funcionar com os demais.",
+  },
+  toc: {
+    confetti: { en: "Confetti on a button", pt: "Confete num botão" },
+    avatar: { en: "Avatar and Button", pt: "Avatar e Button" },
+    toast: { en: "A toast that celebrates", pt: "Um toast que comemora" },
+    tokens: { en: "One set of tokens", pt: "Um conjunto de tokens" },
+    rule: { en: "How they fit", pt: "Como se encaixam" },
+  },
+  confettiTitle: { en: "Confetti on a button", pt: "Confete num botão" },
+  confetti: {
+    en: "`<Confetti>` wraps one element and fires from its center on an event. The button does not know about it, so it works with Button, AvatarButton or any element that passes its handlers through.",
+    pt: "`<Confetti>` envolve um elemento e solta confete a partir do centro dele num evento. O botão não sabe disso, então funciona com Button, AvatarButton ou qualquer elemento que repasse seus handlers.",
+  },
+  avatarTitle: { en: "Avatar and Button", pt: "Avatar e Button" },
+  avatar: {
+    en: "`AvatarButton` is a Button with an Avatar inside, nothing more. It takes every Button prop, so it also takes a wrapper. Here it is inside `<Confetti>`.",
+    pt: "`AvatarButton` é um Button com um Avatar dentro, nada além disso. Aceita toda prop do Button, então também aceita um envoltório. Aqui ele está dentro de `<Confetti>`.",
+  },
+  toastTitle: { en: "A toast that celebrates", pt: "Um toast que comemora" },
+  toast: {
+    en: "Toast and Confetti stay separate. Call both from the same handler and aim the burst at the corner where the toast appears.",
+    pt: "Toast e Confetti continuam separados. Chame os dois no mesmo handler e aponte o confete para o canto onde o toast aparece.",
+  },
+  tokensTitle: { en: "One set of tokens", pt: "Um conjunto de tokens" },
+  tokens: {
+    en: "Button, Badge and Card share the cartoon variables. Set them on a parent and everything inside follows. The full list is on the Theme page.",
+    pt: "Button, Badge e Card dividem as variáveis cartoon. Defina num pai e tudo dentro acompanha. A lista completa está na página Tema.",
+  },
+  ruleTitle: { en: "How they fit", pt: "Como se encaixam" },
+  rule: {
+    en: "Three rules keep the combos honest: a wrapper clones its child instead of adding markup, a variant is a class and not a new component, and motion always comes from the shared tokens, so reduced motion turns it all off in one place.",
+    pt: "Três regras mantêm os combos honestos: um envoltório clona o filho em vez de criar marcação, uma variante é uma classe e não um componente novo, e o movimento sempre vem dos tokens compartilhados, então o movimento reduzido desliga tudo num lugar só.",
+  },
+};
+
+const translations = { layout, intro, installation, theme, forms, performance, combos, component };
 
 export default translations;

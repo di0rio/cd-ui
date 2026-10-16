@@ -50,7 +50,7 @@ export function Install({ urls }: { urls: string[] }) {
               aria-pressed={pm === name}
               className={cn(
                 "h-7 cursor-pointer rounded-md px-2.5 font-mono text-muted-foreground text-xs outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
-                pm === name && "bg-accent text-foreground",
+                pm === name && "bg-foreground/10 text-foreground",
               )}
               key={name}
               onClick={() => choose(name)}

@@ -30,7 +30,7 @@ export function DevicePreview({ children, src, labels }: { children: ReactNode; 
     <div>
       <div
         aria-label={labels.group}
-        className="mb-3 hidden items-center gap-1 sm:flex"
+        className="mb-3 hidden w-fit items-center gap-1 rounded-lg border border-foreground/15 bg-foreground/5 p-1 sm:flex"
         onFocus={wantFrame}
         onPointerEnter={wantFrame}
         role="group"
@@ -41,7 +41,7 @@ export function DevicePreview({ children, src, labels }: { children: ReactNode; 
             aria-pressed={device === id}
             className={cn(
               "grid size-8 place-items-center rounded-md text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
-              device === id && "bg-accent text-foreground",
+              device === id && "bg-card text-foreground shadow-sm ring-1 ring-foreground/15",
             )}
             key={id}
             onClick={() => {

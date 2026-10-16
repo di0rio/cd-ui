@@ -37,11 +37,13 @@ npx shadcn@latest add @cd/button
 
 ## O que tem
 
-27 componentes (ações, exibição, feedback, formulários, overlays e navegação) e 15 blocos prontos (hero, preços, rodapé e outros). Veja todos nas docs.
+35 componentes (ações, exibição, feedback, formulários, overlays e navegação) e 15 blocos prontos (hero, preços, rodapé e outros). Veja todos nas docs.
 
 - **Leve**: média ~540 B gzip por componente (veja `/docs/performance`). Os que não têm estado são Server Components e não mandam JS.
 - **Zod sem peso**: o `Form` usa só `zod/v4/core`, então aceita `zod` e `zod/mini`. Passe `schema`, dê `name` aos `Field` e o `onSubmit` recebe os dados validados e tipados.
 - **Acessível**: foco, teclado e aria vêm do Base UI. Cada página de componente lista teclas e notas de acessibilidade.
+- **Cartoon**: a variante `cartoon` de Button, Badge e Card (contorno grosso, sombra dura, afunda ao apertar e volta com mola). Ajuste com `--cartoon-ink`, `--cartoon-border`, `--cartoon-offset` e `--press-depth`.
+- **Combos**: `Confetti` envolve qualquer botão, `AvatarButton` é um Button com avatar, e o toast comemora com `confetti()`. Veja `/docs/combos`.
 - **Movimento com propósito**: tokens `--cd-duration-*` de 80 a 240ms e curvas fortes, só `transform`/`opacity`. Ajuste tudo no `:root` e `prefers-reduced-motion` zera as durações em todos.
 
 ## Desenvolver

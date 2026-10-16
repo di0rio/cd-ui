@@ -36,6 +36,13 @@
   --cd-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --cd-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --cd-scale-enter: 0.96;
+  --cd-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Cartoon style (Button, Badge and Card variant="cartoon"): outline, hard shadow and how far a press sinks. */
+  --cartoon-ink: #1c1c1c;
+  --cartoon-border: 2px;
+  --cartoon-offset: 3px;
+  --press-depth: 3px;
 }
 
 /* Reduced motion: no duration and no enter scale, in every component. */
@@ -67,6 +74,7 @@
   --destructive-foreground: #f87171;
   --brand-foreground: #ffd23f;
   --success-foreground: #4ade80;
+  --cartoon-ink: #f5f5f5;
 }
 
 @theme inline {
@@ -136,6 +144,12 @@
     /* Reserve the scrollbar space so short and long pages keep the same width (no sideways jump between pages). */
     scrollbar-gutter: stable;
     caret-color: var(--brand-foreground);
+    /* On html (not only body) so the canvas has the theme color before the first paint, also on a full navigation. */
+    @apply bg-background text-foreground;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
   }
   body {
     @apply bg-background text-foreground;
@@ -152,6 +166,15 @@
 }
 @utility animate-caret {
   animation: caret 1s ease-out infinite;
+}
+
+/* AvatarButton blink: a quick squash every few seconds. */
+@keyframes avatar-blink {
+  0%, 92%, 100% { scale: 1; }
+  95% { scale: 1.04 0.9; }
+}
+@utility animate-avatar-blink {
+  animation: avatar-blink 4s ease-in-out infinite;
 }
 
 /* Home mascot: lands like a stuck-on sticker, once. */

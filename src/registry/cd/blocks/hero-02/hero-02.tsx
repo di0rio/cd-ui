@@ -42,7 +42,7 @@ export function Hero02() {
         </div>
 
         <div className="relative mx-auto w-full max-w-md pb-10 sm:pr-8">
-          <Card className="-rotate-2 gap-4 border-[3px] border-foreground p-5 shadow-[10px_10px_0_var(--brand)]">
+          <Card className="-rotate-2 gap-4 border-[3px] border-foreground dark:border-foreground/25 p-5 shadow-[10px_10px_0_var(--brand)]">
             <div className="flex items-center justify-between">
               <p className="font-heading font-semibold">Invoice #1042</p>
               <span className="rounded-full bg-brand px-2.5 py-0.5 font-medium text-brand-contrast text-xs">Paid</span>
@@ -65,13 +65,13 @@ export function Hero02() {
               ))}
             </div>
           </Card>
-          <div className="absolute right-0 bottom-0 flex w-60 rotate-3 items-center gap-3 rounded-2xl border-[3px] border-foreground bg-white p-3 text-[#1c1c1c] shadow-[5px_5px_0_var(--foreground)]">
+          <div className="absolute right-0 bottom-0 flex w-60 rotate-3 items-center gap-3 rounded-2xl border-[3px] border-foreground dark:border-foreground/25 bg-card p-3 text-card-foreground shadow-[5px_5px_0_var(--foreground)] dark:shadow-[5px_5px_0_var(--input)]">
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand">
               <BellIcon aria-hidden="true" className="size-4" />
             </span>
             <p className="text-sm leading-tight">
               <span className="block font-semibold">Payment received</span>
-              <span className="flex items-center gap-1 text-[#686868]">
+              <span className="flex items-center gap-1 text-muted-foreground">
                 <CheckIcon aria-hidden="true" className="size-3" /> Northwind paid 2 days early
               </span>
             </p>

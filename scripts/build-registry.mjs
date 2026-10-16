@@ -116,6 +116,12 @@ const theme = {
       "20%, 50%": { opacity: "0" },
     },
     "@utility animate-caret": { animation: "caret 1s ease-out infinite" },
+    // AvatarButton blink (same as globals.css).
+    "@keyframes avatar-blink": {
+      "0%, 92%, 100%": { scale: "1" },
+      "95%": { scale: "1.04 0.9" },
+    },
+    "@utility animate-avatar-blink": { animation: "avatar-blink 4s ease-in-out infinite" },
   },
 };
 

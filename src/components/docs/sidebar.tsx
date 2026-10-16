@@ -26,7 +26,7 @@ export function Sidebar({ groups }: { groups: NavGroup[] }) {
                     aria-current={current ? "page" : undefined}
                     className={cn(
                       "flex items-center gap-2 rounded-md px-2.5 py-1.5 text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
-                      current && "bg-accent font-medium text-foreground",
+                      current && "bg-foreground/10 font-medium text-foreground",
                     )}
                     href={link.href}
                   >

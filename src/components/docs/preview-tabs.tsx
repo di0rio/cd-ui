@@ -9,7 +9,7 @@ export function PreviewTabs({ preview, code }: { preview: ReactNode; code: React
   const { ui } = useLocale();
   return (
     <Tabs className="gap-3" defaultValue="preview">
-      <TabsList aria-label={ui.preview.view} className="[&_[data-slot=tabs-indicator]]:duration-150">
+      <TabsList aria-label={ui.preview.view} className="border-foreground/15 bg-foreground/5 [&_[data-slot=tabs-indicator]]:duration-150">
         <TabsTab className="h-7 px-3 text-[13px] duration-150" value="preview">
           {ui.preview.preview}
         </TabsTab>

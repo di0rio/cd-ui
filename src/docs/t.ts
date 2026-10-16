@@ -15,6 +15,10 @@ const guides = {
     title: { en: "Forms with Zod", pt: "Formulários com Zod" },
     description: { en: "Connect Zod schemas to your form fields.", pt: "Conecte schemas Zod aos campos do formulário." },
   },
+  combos: {
+    title: { en: "Combos", pt: "Combos" },
+    description: { en: "Components that snap together: confetti on a button, a celebrating toast, an avatar that is a button.", pt: "Componentes que se encaixam: confete num botão, um toast que comemora, um avatar que é botão." },
+  },
   performance: {
     title: { en: "Performance", pt: "Performance" },
     description: { en: "See how we measure the size of each component.", pt: "Veja como medimos o tamanho de cada componente." },
@@ -87,8 +91,8 @@ const catalog = {
     pt: "Uma foto de perfil redonda com um substituto para quando a imagem não existe.",
   },
   "dropdown-menu": {
-    en: "A menu of actions that opens from a button, with checkable items, radio groups, and submenus.",
-    pt: "Um menu de ações que abre a partir de um botão, com itens marcáveis, grupos de rádio e submenus.",
+    en: "A menu of actions that opens from a button, with icons, shortcuts, search, recent items, confirm-to-run items, checkable items, and submenus.",
+    pt: "Um menu de ações que abre a partir de um botão, com ícones, atalhos, busca, itens recentes, itens que pedem confirmação, itens marcáveis e submenus.",
   },
   popover: {
     en: "A floating panel anchored to a button that can hold interactive content.",
@@ -106,11 +110,23 @@ const catalog = {
     en: "A bar that shows how far a task has come, or that it is still working.",
     pt: "Uma barra que mostra o quanto uma tarefa avançou, ou que ela ainda está em andamento.",
   },
+  "avatar-button": {
+    en: "A button with a cartoon avatar that peeks over the edge, tilts on hover and squashes on press.",
+    pt: "Um botão com um avatar de desenho que espia pela borda, inclina no hover e achata ao pressionar.",
+  },
+  confetti: {
+    en: "A burst of confetti from a function call or from any element, with no dependencies.",
+    pt: "Uma chuva de confete a partir de uma chamada de função ou de qualquer elemento, sem dependências.",
+  },
   toast: {
     en: "Stacked notifications that dismiss themselves, with swipe and keyboard support.",
     pt: "Notificações empilhadas que somem sozinhas, com suporte a swipe e teclado.",
   },
   table: { en: "A styled native table for rows and columns of data.", pt: "Uma tabela nativa estilizada para linhas e colunas de dados." },
+  "data-table": {
+    en: "Pieces that make a table useful: toolbar, sort, filter, select, paginate, row actions, status and user cells, and CSV export.",
+    pt: "Peças que deixam uma tabela útil: barra de ferramentas, ordenar, filtrar, selecionar, paginar, ações de linha, células de status e usuário e exportação CSV.",
+  },
 };
 
 const content = {
@@ -151,6 +167,13 @@ const content = {
           pt: "A variante `key` parece uma tecla de teclado: a borda de baixo é uma sombra que some ao pressionar.",
         },
       },
+      cartoon: {
+        title: { en: "Cartoon", pt: "Cartoon" },
+        description: {
+          en: "A sticker look: thick outline and a hard shadow. On press it sinks into the shadow, squashes a little and springs back. Tweak it with `--cartoon-ink`, `--cartoon-border`, `--cartoon-offset` and `--press-depth`.",
+          pt: "Visual de adesivo: contorno grosso e sombra dura. Ao pressionar, afunda na sombra, achata um pouco e volta com mola. Ajuste com `--cartoon-ink`, `--cartoon-border`, `--cartoon-offset` e `--press-depth`.",
+        },
+      },
       link: {
         title: { en: "As a link", pt: "Como link" },
         description: {
@@ -188,7 +211,16 @@ const content = {
     },
   },
   badge: {
-    ex: { default: { title: { en: "Variants", pt: "Variantes" } } },
+    ex: {
+      default: { title: { en: "Variants", pt: "Variantes" } },
+      cartoon: {
+        title: { en: "Cartoon", pt: "Cartoon" },
+        description: {
+          en: "The same outline and hard shadow as the cartoon button, with a smaller offset. Same tokens, so one change restyles both.",
+          pt: "O mesmo contorno e a mesma sombra dura do botão cartoon, com um deslocamento menor. Os mesmos tokens: uma mudança estiliza os dois.",
+        },
+      },
+    },
     api: {
       Badge: {
         description: {
@@ -199,13 +231,23 @@ const content = {
     },
   },
   card: {
-    ex: { default: { title: { en: "Card with actions", pt: "Card com ações" } } },
+    ex: {
+      default: { title: { en: "Card with actions", pt: "Card com ações" } },
+      cartoon: {
+        title: { en: "Cartoon", pt: "Cartoon" },
+        description: {
+          en: "`variant=\"cartoon\"` adds the outline and hard shadow. Cartoon buttons and badges inside follow the same tokens.",
+          pt: "`variant=\"cartoon\"` adiciona o contorno e a sombra dura. Botões e selos cartoon dentro seguem os mesmos tokens.",
+        },
+      },
+    },
     api: {
       Card: {
         description: {
           en: "Surface with a thin border and a slightly raised background. Server component.",
           pt: "Superfície com borda fina e fundo levemente elevado. Componente de servidor.",
         },
+        props: { variant: { en: "`cartoon` adds the thick outline and the hard shadow.", pt: "`cartoon` adiciona o contorno grosso e a sombra dura." } },
       },
       header: {
         description: {
@@ -703,12 +745,16 @@ const content = {
     },
   },
   alert: {
-    ex: { default: { title: { en: "Variants", pt: "Variantes" } } },
+    ex: {
+      default: { title: { en: "Variants", pt: "Variantes" } },
+      dismissible: { title: { en: "Close, actions and auto-hide", pt: "Fechar, ações e fechar sozinho" } },
+      compact: { title: { en: "Compact", pt: "Compacto" } },
+    },
     api: {
       Alert: {
         description: {
-          en: "One log line: `[tag] time title - description`, with a colored rule on the left. An icon placed directly inside is allowed. Server component.",
-          pt: "Uma linha de log: `[tag] hora título - descrição`, com uma linha colorida à esquerda. Um ícone colocado direto dentro é permitido. Componente de servidor.",
+          en: "One log line: `[icon] [tag] time title - description`, with a colored rule on the left. Each level has its own icon. Close it with a button (`onDismiss`) or let it close by itself (`autoHide`).",
+          pt: "Uma linha de log: `[ícone] [tag] hora título - descrição`, com uma linha colorida à esquerda. Cada nível tem seu ícone. Feche com um botão (`onDismiss`) ou deixe fechar sozinho (`autoHide`).",
         },
         props: {
           variant: {
@@ -717,12 +763,17 @@ const content = {
           },
           tag: { en: "Text of the level chip. Defaults to the level name.", pt: "Texto do selo de nível. Por padrão, o nome do nível." },
           time: { en: "Optional timestamp shown after the tag.", pt: "Horário opcional mostrado depois do selo." },
+          icon: { en: "Icon before the line. Each level has one by default. Pass your own, or `false` for none.", pt: "Ícone antes da linha. Cada nível tem um por padrão. Passe o seu, ou `false` para nenhum." },
+          compact: { en: "One tight line, without tag and time. For short messages next to a form.", pt: "Uma linha enxuta, sem selo e horário. Para mensagens curtas perto de um formulário." },
+          onDismiss: { en: "Shows a close button. Runs when the alert closes, by click or by `autoHide`.", pt: "Mostra um botão de fechar. Roda quando o alerta fecha, por clique ou por `autoHide`." },
+          autoHide: { en: "Closes after this many milliseconds and shows a progress bar. Pauses while the pointer or focus is on it.", pt: "Fecha depois desse tempo em milissegundos e mostra uma barra de progresso. Pausa enquanto o mouse ou o foco estiver nele." },
+          dismissLabel: { en: "Accessible name of the close button.", pt: "Nome acessível do botão de fechar." },
         },
       },
       parts: {
         description: {
-          en: "`AlertTitle` and `AlertDescription` share the line, joined by a dash. `AlertAction` pins a button or link to the right end.",
-          pt: "`AlertTitle` e `AlertDescription` dividem a linha, unidos por um traço. `AlertAction` fixa um botão ou link na ponta direita.",
+          en: "`AlertTitle` and `AlertDescription` share the line, joined by a dash. `AlertAction` pins one or more buttons or links to the right end.",
+          pt: "`AlertTitle` e `AlertDescription` dividem a linha, unidos por um traço. `AlertAction` fixa um ou mais botões ou links na ponta direita.",
         },
       },
     },
@@ -859,7 +910,22 @@ const content = {
     },
   },
   "dropdown-menu": {
-    ex: { default: { title: { en: "Actions menu", pt: "Menu de ações" } } },
+    ex: {
+      default: {
+        title: { en: "Actions menu", pt: "Menu de ações" },
+        description: {
+          en: "Items take an icon, a second line and a shortcut. Delete needs a second click, and the footer shows the keys. Open it with the keyboard and it appears with no animation.",
+          pt: "Os itens aceitam ícone, segunda linha e atalho. Excluir pede um segundo clique, e o rodapé mostra as teclas. Abra pelo teclado e ele aparece sem animação.",
+        },
+      },
+      command: {
+        title: { en: "Search and recent", pt: "Busca e recentes" },
+        description: {
+          en: "A search field filters the list as you type, and the last two actions you chose move to a Recent section.",
+          pt: "Um campo de busca filtra a lista enquanto você digita, e as duas últimas ações escolhidas sobem para uma seção Recentes.",
+        },
+      },
+    },
     api: {
       DropdownMenu: {
         description: {
@@ -876,8 +942,8 @@ const content = {
       },
       DropdownMenuPopup: {
         description: {
-          en: "List of actions. Opens from the trigger in 160ms, closes in 120ms.",
-          pt: "Lista de ações. Abre do gatilho em 160ms, fecha em 120ms.",
+          en: "List of actions. Scales and fades in from the trigger in 160ms, closes in 120ms, and appears instantly when opened with the keyboard.",
+          pt: "Lista de ações. Cresce e aparece a partir do gatilho em 160ms, fecha em 120ms e surge na hora quando aberta pelo teclado.",
         },
         props: {
           side: { en: "Preferred side. Submenus open to the right on their own.", pt: "Lado preferido. Submenus abrem à direita sozinhos." },
@@ -892,8 +958,37 @@ const content = {
         },
         props: {
           variant: { en: "Use `destructive` for dangerous actions.", pt: "Use `destructive` para ações perigosas." },
+          icon: { en: "Icon at the start of the row.", pt: "Ícone no início da linha." },
+          description: { en: "A second, muted line under the label.", pt: "Uma segunda linha apagada sob o rótulo." },
+          shortcut: { en: "Shortcut text at the end of the row, in mono. Only a hint.", pt: "Texto de atalho no fim da linha, em mono. É só uma dica." },
+          confirm: {
+            en: "The first click arms the item (it turns red and asks again), the second runs it. It goes back to idle after 3 seconds.",
+            pt: "O primeiro clique arma o item (ele fica vermelho e pergunta de novo), o segundo executa. Volta ao normal depois de 3 segundos.",
+          },
+          confirmLabel: { en: "Text shown while the item is armed.", pt: "Texto mostrado enquanto o item está armado." },
+          label: {
+            en: "Plain text used by type to select when the children are not plain text.",
+            pt: "Texto simples usado pela busca por letra quando os filhos não são texto simples.",
+          },
           onClick: { en: "Called when the item is chosen.", pt: "Chamado ao escolher o item." },
         },
+      },
+      search: {
+        description: {
+          en: "Search field pinned to the top of the menu. It only holds the text: filter your own items with `matchesMenuQuery` and show `DropdownMenuEmpty` when nothing is left.",
+          pt: "Campo de busca fixo no topo do menu. Ele só guarda o texto: filtre seus itens com `matchesMenuQuery` e mostre o `DropdownMenuEmpty` quando não sobrar nada.",
+        },
+        props: {
+          value: { en: "The text, controlled by you.", pt: "O texto, controlado por você." },
+          ariaLabel: { en: "Accessible name of the field.", pt: "Nome acessível do campo." },
+        },
+      },
+      recent: {
+        description: {
+          en: "`useRecentItems` remembers the last ids chosen, newest first, for a Recent section. `DropdownMenuFooter` shows the keyboard hints (hidden on touch screens) or your own children.",
+          pt: "`useRecentItems` guarda os últimos ids escolhidos, o mais novo primeiro, para uma seção Recentes. `DropdownMenuFooter` mostra as dicas de teclado (escondidas em telas de toque) ou os seus filhos.",
+        },
+        props: { limit: { en: "How many ids to keep.", pt: "Quantos ids guardar." } },
       },
       checkable: {
         description: {
@@ -903,8 +998,8 @@ const content = {
       },
       structure: {
         description: {
-          en: "Organize the list: `DropdownMenuGroup` with a `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut`, and `DropdownMenuSub` with `DropdownMenuSubTrigger`.",
-          pt: "Organize a lista: `DropdownMenuGroup` com um `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut` e `DropdownMenuSub` com `DropdownMenuSubTrigger`.",
+          en: "Organize the list: `DropdownMenuGroup` with a `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut`, and `DropdownMenuSub` with `DropdownMenuSubTrigger` (which also takes `icon` and `description`).",
+          pt: "Organize a lista: `DropdownMenuGroup` com um `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut` e `DropdownMenuSub` com `DropdownMenuSubTrigger` (que também aceita `icon` e `description`).",
         },
       },
     },
@@ -915,8 +1010,18 @@ const content = {
       sub: { en: "Opens and closes a submenu.", pt: "Abre e fecha um submenu." },
       close: { en: "Closes and returns focus to the trigger.", pt: "Fecha e devolve o foco ao gatilho." },
       letter: { en: "Jumps to the item that starts with the letter.", pt: "Pula para o item que começa com a letra." },
+      confirm: { en: "On an item with `confirm`, pressing it twice runs it.", pt: "Num item com `confirm`, apertar duas vezes executa." },
+      search: { en: "In the search field, moves to the first item.", pt: "No campo de busca, vai para o primeiro item." },
     },
     a11y: {
+      confirm: {
+        en: "An armed item changes its text to the confirm label, so screen readers hear it when the item is focused again. It never confirms on its own.",
+        pt: "Um item armado troca o texto pelo rótulo de confirmação, então leitores de tela ouvem quando o item recebe foco de novo. Ele nunca confirma sozinho.",
+      },
+      search: {
+        en: "Give `DropdownMenuSearch` an `aria-label`. Typing there does not trigger type to select, and Esc still closes the menu.",
+        pt: "Dê um `aria-label` ao `DropdownMenuSearch`. Digitar ali não aciona a busca por letra, e Esc continua fechando o menu.",
+      },
       shortcut: {
         en: "`DropdownMenuShortcut` only displays the hint. Wire up the real shortcut yourself.",
         pt: "`DropdownMenuShortcut` só mostra a dica. Ligue o atalho de verdade por conta própria.",
@@ -1105,6 +1210,91 @@ const content = {
       },
     },
   },
+  confetti: {
+    ex: {
+      default: { title: { en: "Around any element", pt: "Em volta de qualquer elemento" } },
+      imperative: {
+        title: { en: "From a function", pt: "Por função" },
+        description: {
+          en: "Call `confetti()` from any handler. `origin` takes an element or viewport pixels.",
+          pt: "Chame `confetti()` em qualquer handler. `origin` aceita um elemento ou pixels da janela.",
+        },
+      },
+    },
+    api: {
+      Confetti: {
+        description: {
+          en: "Wraps one element and fires a burst from its center on an event. It adds no markup and keeps the child's own handlers.",
+          pt: "Envolve um elemento e solta uma chuva a partir do centro dele num evento. Não cria marcação nova e mantém os handlers do filho.",
+        },
+        props: {
+          on: { en: "Event of the child that fires the burst.", pt: "Evento do filho que dispara a chuva." },
+          disabled: { en: "Turns the burst off without removing the wrapper.", pt: "Desliga a chuva sem tirar o envoltório." },
+          options: { en: "Every option of `confetti()` except `origin`, which is the child.", pt: "Toda opção de `confetti()` menos `origin`, que é o filho." },
+        },
+      },
+      confetti: {
+        description: {
+          en: "Fires a burst and returns a function that cancels it. Pieces are DOM nodes animated with the Web Animations API (transform and opacity) and removed at the end.",
+          pt: "Solta uma chuva e devolve uma função que cancela. As peças são nós do DOM animados com a Web Animations API (transform e opacity) e removidos no fim.",
+        },
+        props: {
+          origin: { en: "Element (its center) or `{ x, y }` in viewport pixels. Default: the middle of the screen.", pt: "Elemento (o centro dele) ou `{ x, y }` em pixels da janela. Padrão: o meio da tela." },
+          count: { en: "Number of pieces. Max 200.", pt: "Número de peças. Máximo 200." },
+          spread: { en: "Width of the cone in degrees. 360 goes in every direction.", pt: "Abertura do cone em graus. 360 vai para todos os lados." },
+          angle: { en: "Direction of the cone in degrees: 0 right, 90 down, 270 up.", pt: "Direção do cone em graus: 0 direita, 90 baixo, 270 cima." },
+          colors: { en: "Any CSS colors, `var(--brand)` included.", pt: "Qualquer cor CSS, inclusive `var(--brand)`." },
+          shapes: { en: "Mix of `square`, `circle`, `strip` and `star`.", pt: "Mistura de `square`, `circle`, `strip` e `star`." },
+          power: { en: "Launch speed in px per second.", pt: "Velocidade de saída em px por segundo." },
+        },
+      },
+    },
+    a11y: {
+      decorative: {
+        en: "The layer is `aria-hidden` and ignores the pointer, so it never gets in the way. Say what happened in text too (a toast, a label), because confetti carries no information by itself.",
+        pt: "A camada é `aria-hidden` e ignora o ponteiro, então nunca atrapalha. Diga o que aconteceu também em texto (um toast, um rótulo), porque o confete sozinho não informa nada.",
+      },
+      reduced: {
+        en: "With `prefers-reduced-motion` nothing flies: `confetti()` does nothing and `<Confetti>` only pulses the child's opacity for 200ms.",
+        pt: "Com `prefers-reduced-motion` nada voa: `confetti()` não faz nada e `<Confetti>` só pulsa a opacidade do filho por 200ms.",
+      },
+    },
+  },
+  "avatar-button": {
+    ex: {
+      default: {
+        title: { en: "Sizes and styles", pt: "Tamanhos e estilos" },
+        description: {
+          en: "Cartoon by default. `blink` makes the avatar squash quickly every few seconds. Any Button variant works.",
+          pt: "Cartoon por padrão. `blink` faz o avatar achatar rápido a cada alguns segundos. Qualquer variante do Button serve.",
+        },
+      },
+    },
+    api: {
+      AvatarButton: {
+        description: {
+          en: "A Button with an Avatar inside. The avatar peeks above the edge, tilts on hover and squashes on press. Accepts every Button prop.",
+          pt: "Um Button com um Avatar dentro. O avatar espia acima da borda, inclina no hover e achata ao pressionar. Aceita toda prop do Button.",
+        },
+        props: {
+          src: { en: "Picture of the character. A transparent SVG or PNG works best.", pt: "Imagem do personagem. Um SVG ou PNG transparente funciona melhor." },
+          fallback: { en: "Shown while the picture loads or if it fails (usually initials).", pt: "Aparece enquanto a imagem carrega ou se falhar (geralmente as iniciais)." },
+          blink: { en: "Blinks (a quick squash) every few seconds. Off with reduced motion.", pt: "Pisca (um achatamento rápido) a cada alguns segundos. Desligado com movimento reduzido." },
+        },
+      },
+    },
+    kb: { enter: { en: "Activates the button.", pt: "Ativa o botão." } },
+    a11y: {
+      name: {
+        en: "The picture is decorative (`alt=\"\"`): the button is named by its text. Without text, add an `aria-label`.",
+        pt: "A imagem é decorativa (`alt=\"\"`): o botão é nomeado pelo texto. Sem texto, adicione um `aria-label`.",
+      },
+      motion: {
+        en: "Tilt, squash and blink only run with `motion-safe`. Hover effects only apply to devices that can hover.",
+        pt: "Inclinar, achatar e piscar só rodam com `motion-safe`. Os efeitos de hover só valem para dispositivos que têm hover.",
+      },
+    },
+  },
   logo: {
     ex: {
       default: {
@@ -1144,11 +1334,39 @@ const content = {
   table: {
     ex: {
       default: { title: { en: "Invoices", pt: "Faturas" } },
-      sticky: {
-        title: { en: "Sticky header, compact, selected", pt: "Cabeçalho fixo, compacta, selecionada" },
+      striped: {
+        title: { en: "Striped", pt: "Listrada" },
         description: {
-          en: "`stickyHeader` keeps the header while the rows scroll, `density` sets the row padding, and `data-state=\"selected\"` marks a row.",
-          pt: "`stickyHeader` mantém o cabeçalho enquanto as linhas rolam, `density` define o espaçamento das linhas e `data-state=\"selected\"` marca uma linha.",
+          en: "`variant=\"striped\"` tints every other row, which helps the eye follow a line across wide cells.",
+          pt: "`variant=\"striped\"` colore uma linha sim, outra não, e ajuda o olho a seguir uma linha entre células largas.",
+        },
+      },
+      compact: {
+        title: { en: "Compact, with a footer", pt: "Compacta, com rodapé" },
+        description: {
+          en: "`density=\"compact\"` tightens the rows. `TableFooter` holds the total, and `numeric` lines the digits up on the right.",
+          pt: "`density=\"compact\"` aperta as linhas. `TableFooter` guarda o total e `numeric` alinha os dígitos à direita.",
+        },
+      },
+      sticky: {
+        title: { en: "Sticky header and first column", pt: "Cabeçalho e primeira coluna fixos" },
+        description: {
+          en: "`stickyHeader` keeps the header while the rows scroll, and `stickyFirstColumn` keeps the first column while the table scrolls sideways. Narrow the window to see it.",
+          pt: "`stickyHeader` mantém o cabeçalho enquanto as linhas rolam e `stickyFirstColumn` mantém a primeira coluna enquanto a tabela rola para o lado. Estreite a janela para ver.",
+        },
+      },
+      empty: {
+        title: { en: "Empty state", pt: "Estado vazio" },
+        description: {
+          en: "`TableEmpty` fills one row across all columns with a message for when there is nothing to show.",
+          pt: "`TableEmpty` ocupa uma linha inteira, de ponta a ponta, com uma mensagem para quando não há nada a mostrar.",
+        },
+      },
+      cartoon: {
+        title: { en: "Cartoon", pt: "Cartoon" },
+        description: {
+          en: "`variant=\"cartoon\"` uses the thick outline and hard shadow from the cartoon tokens, with a brand-colored header.",
+          pt: "`variant=\"cartoon\"` usa o contorno grosso e a sombra dura dos tokens cartoon, com cabeçalho na cor da marca.",
         },
       },
     },
@@ -1159,7 +1377,15 @@ const content = {
           pt: "`<table>` dentro de um contêiner que rola para o lado em telas pequenas. Componente de servidor.",
         },
         props: {
+          variant: {
+            en: "`striped` tints every other row. `cartoon` is the thick-outline look shared with Button, Badge, and Card.",
+            pt: "`striped` colore uma linha sim, outra não. `cartoon` é o visual de contorno grosso que Button, Badge e Card compartilham.",
+          },
           density: { en: "Row padding.", pt: "Espaçamento das linhas." },
+          stickyFirstColumn: {
+            en: "Keeps the first column in place while the table scrolls sideways.",
+            pt: "Mantém a primeira coluna no lugar enquanto a tabela rola para o lado.",
+          },
           stickyHeader: {
             en: "Keeps the header visible while the rows scroll (the container gets a max height).",
             pt: "Mantém o cabeçalho visível enquanto as linhas rolam (o contêiner ganha altura máxima).",
@@ -1176,10 +1402,17 @@ const content = {
           pt: "`TableHeader`, `TableBody` e `TableFooter` correspondem a `<thead>`, `<tbody>` e `<tfoot>`.",
         },
       },
+      empty: {
+        description: {
+          en: "One full-width row with a message, for a table with no rows.",
+          pt: "Uma linha de largura total com uma mensagem, para uma tabela sem linhas.",
+        },
+        colSpan: { en: "How many columns the table has.", pt: "Quantas colunas a tabela tem." },
+      },
       cells: {
         description: {
-          en: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`.",
-          pt: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`.",
+          en: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`. A row is highlighted on hover and when it has `aria-selected` or `data-state=\"selected\"`.",
+          pt: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`. A linha é destacada no hover e quando tem `aria-selected` ou `data-state=\"selected\"`.",
         },
         props: {
           numeric: {
@@ -1193,6 +1426,128 @@ const content = {
       semantics: {
         en: "It keeps native table semantics. Use `TableHead` (`<th>`) for headers and `TableCaption` to name the table.",
         pt: "Mantém a semântica nativa de tabela. Use `TableHead` (`<th>`) nos cabeçalhos e `TableCaption` para dar nome à tabela.",
+      },
+    },
+  },
+  "data-table": {
+    ex: {
+      users: {
+        title: { en: "Users admin", pt: "Administração de usuários" },
+        description: {
+          en: "A full admin table: search, status chips, column menu, CSV export of the rows on screen, a primary action, sorting, selection with a bulk bar, pagination, and row actions that show on hover or focus (always visible on touch). Arrow keys move between rows.",
+          pt: "Uma tabela de administração completa: busca, chips de status, menu de colunas, exportação CSV das linhas na tela, ação principal, ordenação, seleção com barra em massa, paginação e ações de linha que aparecem ao passar o mouse ou focar (sempre visíveis no toque). As setas movem entre as linhas.",
+        },
+      },
+      invoices: {
+        title: { en: "Invoices", pt: "Faturas" },
+        description: {
+          en: "Copyable ids, status with a dot, relative dates and money. A custom `TableAction` sits next to the delete button, which asks for a second click.",
+          pt: "Ids copiáveis, status com ponto, datas relativas e valores. Uma `TableAction` própria fica ao lado do botão de excluir, que pede um segundo clique.",
+        },
+      },
+      expandable: {
+        title: { en: "Expandable rows", pt: "Linhas expansíveis" },
+        description: {
+          en: "The chevron opens a detail row under the line. It is a real button with `aria-expanded`, so it works with the keyboard.",
+          pt: "A seta abre uma linha de detalhes abaixo. É um botão de verdade com `aria-expanded`, então funciona pelo teclado.",
+        },
+      },
+    },
+    api: {
+      hooks: {
+        description: {
+          en: "Hooks and a helper. They return plain values and never own your rows, so they also work with data from a server. `useSelection` is a set of ids kept across pages: use it for selected rows, open rows, or hidden columns.",
+          pt: "Hooks e um helper. Devolvem valores simples e nunca são donos das suas linhas, então também servem para dados vindos de um servidor. `useSelection` é um conjunto de ids mantido entre páginas: use para linhas selecionadas, linhas abertas ou colunas escondidas.",
+        },
+      },
+      heads: {
+        description: {
+          en: "Header and cell pieces. `SortableHead` is a `TableHead` with a button inside.",
+          pt: "Peças de cabeçalho e de célula. `SortableHead` é um `TableHead` com um botão dentro.",
+        },
+        props: {
+          direction: { en: "`\"asc\"`, `\"desc\"` or `null` when the table is not sorted by this column.", pt: "`\"asc\"`, `\"desc\"` ou `null` quando a tabela não está ordenada por esta coluna." },
+          onSort: { en: "Called when the header is activated.", pt: "Chamado quando o cabeçalho é acionado." },
+          checked: { en: "Whether the row (or, in the header, every visible row) is selected.", pt: "Se a linha (ou, no cabeçalho, todas as linhas visíveis) está selecionada." },
+          indeterminate: { en: "Shows a dash: some rows are selected, not all.", pt: "Mostra um traço: algumas linhas estão selecionadas, não todas." },
+          label: { en: "Accessible name of the checkbox or button, for example \"Select INV-1042\".", pt: "Nome acessível da caixa ou do botão, por exemplo \"Select INV-1042\"." },
+          controls: { en: "The `id` of the detail row the button opens.", pt: "O `id` da linha de detalhes que o botão abre." },
+        },
+      },
+      toolbar: {
+        description: {
+          en: "The row above the table. `TableSearch` and `TableFilterChips` are controlled; filter with `matchesQuery`. `ExportCsvButton` downloads the rows you pass, so pass the filtered and sorted ones. Cells that start with = + - or @ are escaped.",
+          pt: "A linha acima da tabela. `TableSearch` e `TableFilterChips` são controlados; filtre com `matchesQuery`. `ExportCsvButton` baixa as linhas que você passar, então passe as filtradas e ordenadas. Células que começam com = + - ou @ são escapadas.",
+        },
+        props: {
+          value: { en: "The text of the search field.", pt: "O texto do campo de busca." },
+          options: { en: "The chips. The one whose id equals `value` is pressed.", pt: "Os chips. O que tem o id igual a `value` fica pressionado." },
+          rows: { en: "The rows to export and how to read each column.", pt: "As linhas a exportar e como ler cada coluna." },
+          filename: { en: "Name of the downloaded file.", pt: "Nome do arquivo baixado." },
+        },
+      },
+      actions: {
+        description: {
+          en: "`TableRowActions` is the last cell of a row: edit, duplicate and delete buttons (delete asks for a second click) and a \"...\" menu built from your `DropdownMenuItem`s. They show on row hover or focus and stay visible on touch. `TableAction` is one icon button, to add your own.",
+          pt: "`TableRowActions` é a última célula da linha: botões de editar, duplicar e excluir (excluir pede um segundo clique) e um menu \"...\" feito com seus `DropdownMenuItem`. Aparecem ao passar o mouse ou focar e ficam visíveis no toque. `TableAction` é um botão de ícone, para você adicionar os seus.",
+        },
+        props: {
+          label: { en: "Names the row for screen readers, for example \"Marina Alves\". Each button says what it does to it.", pt: "Nomeia a linha para leitores de tela, por exemplo \"Marina Alves\". Cada botão diz o que faz com ela." },
+          handlers: { en: "A button shows only when its handler is passed.", pt: "Um botão só aparece quando o handler é passado." },
+          menu: { en: "Items of the overflow menu. The button shows only when you pass this.", pt: "Itens do menu extra. O botão só aparece quando você passa isto." },
+          children: { en: "More `TableAction` buttons, before the menu.", pt: "Mais botões `TableAction`, antes do menu." },
+        },
+      },
+      cells: {
+        description: {
+          en: "Ready-made cells. `TableStatus` is text with a colored dot, `TableUser` an avatar with a name and a second line, `TableCopyId` a mono id with a copy button, and `TableRelativeDate` \"3 days ago\" with the full date as a tooltip.",
+          pt: "Células prontas. `TableStatus` é texto com um ponto colorido, `TableUser` um avatar com nome e segunda linha, `TableCopyId` um id em mono com botão de copiar e `TableRelativeDate` \"há 3 dias\" com a data completa de dica.",
+        },
+        props: {
+          tone: { en: "Color of the dot. The text still carries the meaning.", pt: "Cor do ponto. O texto continua carregando o significado." },
+          user: { en: "Name, second line and image. Without an image, the initials show.", pt: "Nome, segunda linha e imagem. Sem imagem, aparecem as iniciais." },
+          value: { en: "The id to show and copy.", pt: "O id a mostrar e copiar." },
+          date: { en: "The date, an optional `now` to fix the reference time, and the `locale`.", pt: "A data, um `now` opcional para fixar o horário de referência e o `locale`." },
+        },
+      },
+      rowKeys: {
+        description: {
+          en: "Optional. Pass `rowArrowKeys` as the `onKeyDown` of `TableBody` and Arrow Up and Arrow Down move focus to the same control in the previous or next row. Text fields and open menus keep their keys.",
+          pt: "Opcional. Passe `rowArrowKeys` como `onKeyDown` do `TableBody` e Seta para cima e Seta para baixo movem o foco para o mesmo controle da linha anterior ou seguinte. Campos de texto e menus abertos mantêm suas teclas.",
+        },
+      },
+      bars: {
+        description: {
+          en: "Bars around the table: the bulk action bar, the column menu, and the pagination. Their texts are in English by default; `label` changes the column menu's.",
+          pt: "Barras ao redor da tabela: a de ações em massa, o menu de colunas e a paginação. Os textos vêm em inglês; `label` troca o do menu de colunas.",
+        },
+        props: {
+          count: { en: "How many rows are selected. The bar renders nothing at 0.", pt: "Quantas linhas estão selecionadas. A barra não aparece com 0." },
+          columns: { en: "The columns that can be hidden, as `{ id, label }`.", pt: "As colunas que podem ser escondidas, como `{ id, label }`." },
+          hidden: { en: "The ids of the hidden columns.", pt: "Os ids das colunas escondidas." },
+        },
+      },
+    },
+    kb: {
+      activate: { en: "Sorts by the focused column, opens the focused row, or toggles its checkbox.", pt: "Ordena pela coluna em foco, abre a linha em foco ou marca a caixa dela." },
+      rows: { en: "With `rowArrowKeys`, moves to the same control in the previous or next row.", pt: "Com `rowArrowKeys`, vai para o mesmo controle da linha anterior ou seguinte." },
+    },
+    a11y: {
+      sort: {
+        en: "`SortableHead` sets `aria-sort` on the header, and the button inside is focusable. Only the sorted column reports a direction.",
+        pt: "`SortableHead` define `aria-sort` no cabeçalho e o botão dentro dele recebe foco. Só a coluna ordenada informa uma direção.",
+      },
+      select: {
+        en: "Every checkbox needs a `label` that names its row. The bulk bar is a polite live region, so screen readers hear the count change.",
+        pt: "Toda caixa precisa de um `label` que nomeie a linha. A barra de ações em massa é uma região ao vivo educada, então leitores de tela ouvem a contagem mudar.",
+      },
+      actions: {
+        en: "Row action buttons are real buttons with a name like \"Edit Marina Alves\". They are only transparent until the row is hovered or focused, so keyboard users reach them with Tab. Delete announces that it needs another press.",
+        pt: "Os botões de ação são botões de verdade com nome como \"Edit Marina Alves\". Ficam só transparentes até a linha receber o mouse ou o foco, então quem usa teclado chega neles com Tab. Excluir anuncia que precisa de outro toque.",
+      },
+      motion: {
+        en: "The chevron turns with a short transition that is dropped under reduced motion.",
+        pt: "A seta gira com uma transição curta, que é removida quando o usuário prefere menos movimento.",
       },
     },
   },
