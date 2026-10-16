@@ -1,11 +1,19 @@
 import type * as React from "react";
 import { cn } from "@/registry/cd/lib/utils";
+import { cartoon } from "@/registry/cd/ui/cartoon";
 
-/** Flat surface with a thin border. Built from optional parts. Stateless: runs on the server. */
-export function Card({ className, ...props }: React.ComponentProps<"div">): React.ReactElement {
+/**
+ * Flat surface with a thin border. Built from optional parts. Stateless: runs on the server.
+ * `variant="cartoon"` gives it the thick ink outline and hard shadow shared with Button and Badge.
+ */
+export function Card({
+  className,
+  variant = "default",
+  ...props
+}: React.ComponentProps<"div"> & { variant?: "default" | "cartoon" }): React.ReactElement {
   return (
     <div
-      className={cn("flex flex-col gap-5 rounded-xl border bg-card p-5 text-card-foreground", className)}
+      className={cn("flex flex-col gap-5 rounded-xl border bg-card p-5 text-card-foreground", variant === "cartoon" && cartoon, className)}
       data-slot="card"
       {...props}
     />

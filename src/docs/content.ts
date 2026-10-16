@@ -1,18 +1,33 @@
 import type { ComponentType } from "react";
 import AccordionDefault from "@/docs/examples/accordion-default";
 import AccordionChevron from "@/docs/examples/accordion-chevron";
+import AlertCompact from "@/docs/examples/alert-compact";
 import AlertDefault from "@/docs/examples/alert-default";
+import AlertDismissible from "@/docs/examples/alert-dismissible";
 import AuthShellDefault from "@/docs/examples/auth-shell-default";
 import OtpInputDefault from "@/docs/examples/otp-input-default";
 import PasswordInputDefault from "@/docs/examples/password-input-default";
 import PricingToggleDefault from "@/docs/examples/pricing-toggle-default";
 import AvatarDefault from "@/docs/examples/avatar-default";
+import AvatarButtonDefault from "@/docs/examples/avatar-button-default";
+import BadgeCartoon from "@/docs/examples/badge-cartoon";
+import ButtonCartoon from "@/docs/examples/button-cartoon";
+import CardCartoon from "@/docs/examples/card-cartoon";
+import ConfettiDefault from "@/docs/examples/confetti-default";
+import ConfettiImperative from "@/docs/examples/confetti-imperative";
+import DropdownMenuCommand from "@/docs/examples/dropdown-menu-command";
 import DropdownMenuDefault from "@/docs/examples/dropdown-menu-default";
 import PopoverDefault from "@/docs/examples/popover-default";
 import ProgressDefault from "@/docs/examples/progress-default";
 import RadioGroupDefault from "@/docs/examples/radio-group-default";
 import SliderDefault from "@/docs/examples/slider-default";
+import DataTableExpandable from "@/docs/examples/data-table-expandable";
+import DataTableInvoices from "@/docs/examples/data-table-invoices";
+import DataTableUsers from "@/docs/examples/data-table-users";
+import TableCartoon from "@/docs/examples/table-cartoon";
+import TableCompact from "@/docs/examples/table-compact";
 import TableDefault from "@/docs/examples/table-default";
+import TableEmptyExample from "@/docs/examples/table-empty";
 import ToastDefault from "@/docs/examples/toast-default";
 import BadgeDefault from "@/docs/examples/badge-default";
 import ButtonDefault from "@/docs/examples/button-default";
@@ -24,6 +39,7 @@ import LogoLink from "@/docs/examples/logo-link";
 import SelectGrouped from "@/docs/examples/select-grouped";
 import SwitchRowExample from "@/docs/examples/switch-row";
 import TableSticky from "@/docs/examples/table-sticky";
+import TableStriped from "@/docs/examples/table-striped";
 import TooltipParts from "@/docs/examples/tooltip-parts";
 import ButtonSizes from "@/docs/examples/button-sizes";
 import CardDefault from "@/docs/examples/card-default";
@@ -61,6 +77,7 @@ export type ComponentDoc = {
 /** The texts come from `tr` (src/docs/t.ts), so the content is built by a function, not a static module. */
 export function getContent(tr: Dict): Record<string, ComponentDoc> {
   const c = tr.docs.content;
+  const dt = c["data-table"];
   const className: Prop = { name: "className", type: "string", description: c.shared.className };
   const render: Prop = { name: "render", type: "ReactElement | (props) => ReactElement", description: c.shared.render };
   const validationMode = (def: string, description: string): Prop => ({
@@ -77,6 +94,7 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
         { file: "button-sizes", title: c.button.ex.sizes.title, description: c.button.ex.sizes.description, Component: ButtonSizes },
         { file: "button-loading", title: c.button.ex.loading.title, description: c.button.ex.loading.description, Component: ButtonLoading },
         { file: "button-key", title: c.button.ex.key.title, description: c.button.ex.key.description, Component: ButtonKey },
+        { file: "button-cartoon", title: c.button.ex.cartoon.title, description: c.button.ex.cartoon.description, Component: ButtonCartoon },
         { file: "button-link", title: c.button.ex.link.title, description: c.button.ex.link.description, Component: ButtonLink },
       ],
       usage: `import { Button } from "@/components/ui/button"\n\n<Button variant="brand">get started</Button>`,
@@ -86,7 +104,7 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
           base: "Button",
           description: c.button.api.Button.description,
           props: [
-            { name: "variant", type: '"default" | "brand" | "outline" | "ghost" | "link" | "destructive" | "key"', default: '"default"', description: c.shared.visualStyle },
+            { name: "variant", type: '"default" | "brand" | "outline" | "ghost" | "link" | "destructive" | "key" | "cartoon"', default: '"default"', description: c.shared.visualStyle },
             { name: "size", type: '"sm" | "md" | "lg" | "icon" | "icon-sm"', default: '"md"', description: c.button.api.Button.props.size },
             { name: "loading", type: "boolean", default: "false", description: c.button.api.Button.props.loading },
             { name: "nativeButton", type: "boolean", default: "true", description: c.button.api.Button.props.nativeButton },
@@ -99,24 +117,34 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
       accessibility: [c.button.a11y.iconOnly, c.button.a11y.loading],
     },
     badge: {
-      examples: [{ file: "badge-default", title: c.badge.ex.default.title, Component: BadgeDefault }],
+      examples: [
+        { file: "badge-default", title: c.badge.ex.default.title, Component: BadgeDefault },
+        { file: "badge-cartoon", title: c.badge.ex.cartoon.title, description: c.badge.ex.cartoon.description, Component: BadgeCartoon },
+      ],
       usage: `import { Badge } from "@/components/ui/badge"\n\n<Badge variant="brand">new</Badge>`,
       api: [
         {
           name: "Badge",
           description: c.badge.api.Badge.description,
           props: [
-            { name: "variant", type: '"default" | "brand" | "outline" | "muted" | "destructive"', default: '"default"', description: c.shared.visualStyle },
+            { name: "variant", type: '"default" | "brand" | "outline" | "muted" | "destructive" | "cartoon"', default: '"default"', description: c.shared.visualStyle },
             className,
           ],
         },
       ],
     },
     card: {
-      examples: [{ file: "card-default", title: c.card.ex.default.title, Component: CardDefault }],
+      examples: [
+        { file: "card-default", title: c.card.ex.default.title, Component: CardDefault },
+        { file: "card-cartoon", title: c.card.ex.cartoon.title, description: c.card.ex.cartoon.description, Component: CardCartoon },
+      ],
       usage: `import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"\n\n<Card>\n  <CardHeader>\n    <CardTitle>title</CardTitle>\n  </CardHeader>\n  <CardContent>content</CardContent>\n</Card>`,
       api: [
-        { name: "Card", description: c.card.api.Card.description, props: [className] },
+        {
+          name: "Card",
+          description: c.card.api.Card.description,
+          props: [{ name: "variant", type: '"default" | "cartoon"', default: '"default"', description: c.card.api.Card.props.variant }, className],
+        },
         { name: "CardHeader · CardTitle · CardDescription", description: c.card.api.header.description, props: [className] },
         { name: "CardContent · CardFooter", description: c.card.api.content.description, props: [className] },
       ],
@@ -451,7 +479,11 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
       accessibility: [c.accordion.a11y.structure],
     },
     alert: {
-      examples: [{ file: "alert-default", title: c.alert.ex.default.title, Component: AlertDefault }],
+      examples: [
+        { file: "alert-default", title: c.alert.ex.default.title, Component: AlertDefault },
+        { file: "alert-dismissible", title: c.alert.ex.dismissible.title, Component: AlertDismissible },
+        { file: "alert-compact", title: c.alert.ex.compact.title, Component: AlertCompact },
+      ],
       usage: `import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"\n\n<Alert variant="warn">\n  <AlertTitle>disk almost full</AlertTitle>\n  <AlertDescription>14 GB left on /dev/sda1</AlertDescription>\n</Alert>`,
       api: [
         {
@@ -461,6 +493,11 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
             { name: "variant", type: '"info" | "success" | "warn" | "error"', default: '"info"', description: c.alert.api.Alert.props.variant },
             { name: "tag", type: "ReactNode", default: "variant name", description: c.alert.api.Alert.props.tag },
             { name: "time", type: "ReactNode", description: c.alert.api.Alert.props.time },
+            { name: "icon", type: "ReactNode | false", default: "icon of the level", description: c.alert.api.Alert.props.icon },
+            { name: "compact", type: "boolean", default: "false", description: c.alert.api.Alert.props.compact },
+            { name: "onDismiss", type: "() => void", description: c.alert.api.Alert.props.onDismiss },
+            { name: "autoHide", type: "number", description: c.alert.api.Alert.props.autoHide },
+            { name: "dismissLabel", type: "string", default: '"Dismiss"', description: c.alert.api.Alert.props.dismissLabel },
             className,
           ],
         },
@@ -564,7 +601,10 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
       accessibility: [c.avatar.a11y.alt],
     },
     "dropdown-menu": {
-      examples: [{ file: "dropdown-menu-default", title: c["dropdown-menu"].ex.default.title, Component: DropdownMenuDefault }],
+      examples: [
+        { file: "dropdown-menu-default", title: c["dropdown-menu"].ex.default.title, description: c["dropdown-menu"].ex.default.description, Component: DropdownMenuDefault },
+        { file: "dropdown-menu-command", title: c["dropdown-menu"].ex.command.title, description: c["dropdown-menu"].ex.command.description, Component: DropdownMenuCommand },
+      ],
       usage: `import { DropdownMenu, DropdownMenuItem, DropdownMenuPopup, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"\n\n<DropdownMenu>\n  <DropdownMenuTrigger render={<Button />}>Options</DropdownMenuTrigger>\n  <DropdownMenuPopup>\n    <DropdownMenuItem onClick={rename}>Rename</DropdownMenuItem>\n    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>\n  </DropdownMenuPopup>\n</DropdownMenu>`,
       api: [
         {
@@ -591,7 +631,30 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
           description: c["dropdown-menu"].api.DropdownMenuItem.description,
           props: [
             { name: "variant", type: '"default" | "destructive"', default: '"default"', description: c["dropdown-menu"].api.DropdownMenuItem.props.variant },
+            { name: "icon", type: "ReactNode", description: c["dropdown-menu"].api.DropdownMenuItem.props.icon },
+            { name: "description", type: "ReactNode", description: c["dropdown-menu"].api.DropdownMenuItem.props.description },
+            { name: "shortcut", type: "ReactNode", description: c["dropdown-menu"].api.DropdownMenuItem.props.shortcut },
+            { name: "confirm", type: "boolean", default: "false", description: c["dropdown-menu"].api.DropdownMenuItem.props.confirm },
+            { name: "confirmLabel", type: "string", default: '"Click again to confirm"', description: c["dropdown-menu"].api.DropdownMenuItem.props.confirmLabel },
+            { name: "label", type: "string", description: c["dropdown-menu"].api.DropdownMenuItem.props.label },
             { name: "onClick", type: "() => void", description: c["dropdown-menu"].api.DropdownMenuItem.props.onClick },
+            className,
+          ],
+        },
+        {
+          name: "DropdownMenuSearch · matchesMenuQuery · DropdownMenuEmpty",
+          description: c["dropdown-menu"].api.search.description,
+          props: [
+            { name: "value · onChange", type: "string / (event) => void", description: c["dropdown-menu"].api.search.props.value },
+            { name: "aria-label", type: "string", description: c["dropdown-menu"].api.search.props.ariaLabel },
+            className,
+          ],
+        },
+        {
+          name: "useRecentItems · DropdownMenuFooter",
+          description: c["dropdown-menu"].api.recent.description,
+          props: [
+            { name: "limit", type: "number", default: "3", description: c["dropdown-menu"].api.recent.props.limit },
             className,
           ],
         },
@@ -617,8 +680,10 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
         { keys: ["→", "←"], description: c["dropdown-menu"].kb.sub },
         { keys: ["Esc"], description: c["dropdown-menu"].kb.close },
         { keys: ["A-Z"], description: c["dropdown-menu"].kb.letter },
+        { keys: ["Enter"], description: c["dropdown-menu"].kb.confirm },
+        { keys: ["↓"], description: c["dropdown-menu"].kb.search },
       ],
-      accessibility: [c["dropdown-menu"].a11y.shortcut],
+      accessibility: [c["dropdown-menu"].a11y.shortcut, c["dropdown-menu"].a11y.confirm, c["dropdown-menu"].a11y.search],
     },
     popover: {
       examples: [{ file: "popover-default", title: c.popover.ex.default.title, Component: PopoverDefault }],
@@ -725,6 +790,59 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
       ],
       accessibility: [c.progress.a11y.role],
     },
+    "avatar-button": {
+      examples: [{ file: "avatar-button-default", title: c["avatar-button"].ex.default.title, description: c["avatar-button"].ex.default.description, Component: AvatarButtonDefault }],
+      usage: `import { AvatarButton } from "@/components/ui/avatar-button"\n\n<AvatarButton src="/me.svg" fallback="AL" blink>\n  Say hi\n</AvatarButton>`,
+      api: [
+        {
+          name: "AvatarButton",
+          base: "Button",
+          description: c["avatar-button"].api.AvatarButton.description,
+          props: [
+            { name: "src", type: "string", description: c["avatar-button"].api.AvatarButton.props.src },
+            { name: "fallback", type: "ReactNode", description: c["avatar-button"].api.AvatarButton.props.fallback },
+            { name: "blink", type: "boolean", default: "false", description: c["avatar-button"].api.AvatarButton.props.blink },
+            { name: "variant", type: "ButtonProps['variant']", default: '"cartoon"', description: c.shared.visualStyle },
+            { name: "size", type: '"sm" | "md" | "lg" | "icon" | "icon-sm"', default: '"md"', description: c.button.api.Button.props.size },
+            className,
+          ],
+        },
+      ],
+      keyboard: [{ keys: ["Enter", "Space"], description: c["avatar-button"].kb.enter }],
+      accessibility: [c["avatar-button"].a11y.name, c["avatar-button"].a11y.motion],
+    },
+    confetti: {
+      examples: [
+        { file: "confetti-default", title: c.confetti.ex.default.title, Component: ConfettiDefault },
+        { file: "confetti-imperative", title: c.confetti.ex.imperative.title, description: c.confetti.ex.imperative.description, Component: ConfettiImperative },
+      ],
+      usage: `import { Confetti, confetti } from "@/components/ui/confetti"\n\n// around any element\n<Confetti>\n  <Button>Celebrate</Button>\n</Confetti>\n\n// or from a function\nconfetti({ origin: { x: 200, y: 300 }, count: 80, spread: 360, shapes: ["star"] })`,
+      api: [
+        {
+          name: "Confetti",
+          description: c.confetti.api.Confetti.description,
+          props: [
+            { name: "on", type: '"click" | "pointerdown" | "pointerenter"', default: '"click"', description: c.confetti.api.Confetti.props.on },
+            { name: "disabled", type: "boolean", default: "false", description: c.confetti.api.Confetti.props.disabled },
+            { name: "count · spread · angle · colors · shapes · power", type: "ConfettiOptions", description: c.confetti.api.Confetti.props.options },
+          ],
+        },
+        {
+          name: "confetti",
+          description: c.confetti.api.confetti.description,
+          props: [
+            { name: "origin", type: "Element | { x: number; y: number }", default: "screen center", description: c.confetti.api.confetti.props.origin },
+            { name: "count", type: "number", default: "60", description: c.confetti.api.confetti.props.count },
+            { name: "spread", type: "number", default: "70", description: c.confetti.api.confetti.props.spread },
+            { name: "angle", type: "number", default: "270", description: c.confetti.api.confetti.props.angle },
+            { name: "colors", type: "string[]", description: c.confetti.api.confetti.props.colors },
+            { name: "shapes", type: '("square" | "circle" | "strip" | "star")[]', description: c.confetti.api.confetti.props.shapes },
+            { name: "power", type: "number", default: "900", description: c.confetti.api.confetti.props.power },
+          ],
+        },
+      ],
+      accessibility: [c.confetti.a11y.decorative, c.confetti.a11y.reduced],
+    },
     toast: {
       examples: [{ file: "toast-default", title: c.toast.ex.default.title, Component: ToastDefault }],
       usage: `import { ToastProvider, useToast } from "@/components/ui/toast"\n\n// once, at the root of your app\n<ToastProvider>{children}</ToastProvider>\n\n// anywhere below it\nconst toast = useToast()\ntoast.add({ title: "Saved", description: "Your changes are live.", type: "success" })`,
@@ -780,7 +898,11 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
     table: {
       examples: [
         { file: "table-default", title: c.table.ex.default.title, Component: TableDefault },
+        { file: "table-striped", title: c.table.ex.striped.title, description: c.table.ex.striped.description, Component: TableStriped },
+        { file: "table-compact", title: c.table.ex.compact.title, description: c.table.ex.compact.description, Component: TableCompact },
         { file: "table-sticky", title: c.table.ex.sticky.title, description: c.table.ex.sticky.description, Component: TableSticky },
+        { file: "table-empty", title: c.table.ex.empty.title, description: c.table.ex.empty.description, Component: TableEmptyExample },
+        { file: "table-cartoon", title: c.table.ex.cartoon.title, description: c.table.ex.cartoon.description, Component: TableCartoon },
       ],
       usage: `import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"\n\n<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>Name</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    <TableRow>\n      <TableCell>Ada</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>`,
       api: [
@@ -788,13 +910,20 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
           name: "Table",
           description: c.table.api.Table.description,
           props: [
+            { name: "variant", type: '"default" | "striped" | "cartoon"', default: '"default"', description: c.table.api.Table.props.variant },
             { name: "density", type: '"compact" | "default" | "comfortable"', default: '"default"', description: c.table.api.Table.props.density },
             { name: "stickyHeader", type: "boolean", default: "false", description: c.table.api.Table.props.stickyHeader },
+            { name: "stickyFirstColumn", type: "boolean", default: "false", description: c.table.api.Table.props.stickyFirstColumn },
             { name: "aria-label", type: "string", description: c.table.api.Table.props.ariaLabel },
             className,
           ],
         },
         { name: "TableHeader · TableBody · TableFooter", description: c.table.api.sections.description, props: [className] },
+        {
+          name: "TableEmpty",
+          description: c.table.api.empty.description,
+          props: [{ name: "colSpan", type: "number", description: c.table.api.empty.colSpan }, className],
+        },
         {
           name: "TableRow · TableHead · TableCell · TableCaption",
           description: c.table.api.cells.description,
@@ -802,6 +931,81 @@ export function getContent(tr: Dict): Record<string, ComponentDoc> {
         },
       ],
       accessibility: [c.table.a11y.semantics],
+    },
+    "data-table": {
+      examples: [
+        { file: "data-table-users", title: dt.ex.users.title, description: dt.ex.users.description, Component: DataTableUsers },
+        { file: "data-table-invoices", title: dt.ex.invoices.title, description: dt.ex.invoices.description, Component: DataTableInvoices },
+        { file: "data-table-expandable", title: dt.ex.expandable.title, description: dt.ex.expandable.description, Component: DataTableExpandable },
+      ],
+      usage: `import { SortableHead, matchesQuery, useSort } from "@/components/ui/data-table"\nimport { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table"\n\nconst { rows, toggle, directionOf } = useSort(users)\n\n<Table>\n  <TableHeader>\n    <TableRow>\n      <SortableHead direction={directionOf("name")} onSort={() => toggle("name")}>Name</SortableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    {rows.map((u) => (\n      <TableRow key={u.id}>\n        <TableCell>{u.name}</TableCell>\n      </TableRow>\n    ))}\n  </TableBody>\n</Table>`,
+      api: [
+        {
+          name: "useSort · matchesQuery · useSelection · usePagination",
+          description: dt.api.hooks.description,
+          props: [],
+        },
+        {
+          name: "SortableHead · TableSelectHead · TableSelectCell · TableExpandButton",
+          description: dt.api.heads.description,
+          props: [
+            { name: "direction", type: '"asc" | "desc" | null', description: dt.api.heads.props.direction },
+            { name: "onSort", type: "() => void", description: dt.api.heads.props.onSort },
+            { name: "checked", type: "boolean", description: dt.api.heads.props.checked },
+            { name: "indeterminate", type: "boolean", description: dt.api.heads.props.indeterminate },
+            { name: "label", type: "string", description: dt.api.heads.props.label },
+            { name: "controls", type: "string", description: dt.api.heads.props.controls },
+          ],
+        },
+        {
+          name: "TableBulkBar · ColumnToggle · TablePagination",
+          description: dt.api.bars.description,
+          props: [
+            { name: "count", type: "number", description: dt.api.bars.props.count },
+            { name: "columns", type: "{ id: string; label: string }[]", description: dt.api.bars.props.columns },
+            { name: "hidden", type: "ReadonlySet<string>", description: dt.api.bars.props.hidden },
+            className,
+          ],
+        },
+        {
+          name: "TableToolbar · TableSearch · TableFilterChips · ExportCsvButton · toCsv",
+          description: dt.api.toolbar.description,
+          props: [
+            { name: "value · onValueChange", type: "string / (value) => void", description: dt.api.toolbar.props.value },
+            { name: "options", type: "{ id: string; label: string; count?: number }[]", description: dt.api.toolbar.props.options },
+            { name: "rows · columns", type: "T[] / { header: string; value: (row) => ... }[]", description: dt.api.toolbar.props.rows },
+            { name: "filename", type: "string", default: '"export.csv"', description: dt.api.toolbar.props.filename },
+            className,
+          ],
+        },
+        {
+          name: "TableRowActions · TableAction",
+          description: dt.api.actions.description,
+          props: [
+            { name: "label", type: "string", description: dt.api.actions.props.label },
+            { name: "onEdit · onDuplicate · onDelete", type: "() => void", description: dt.api.actions.props.handlers },
+            { name: "menu", type: "ReactNode", description: dt.api.actions.props.menu },
+            { name: "children", type: "ReactNode", description: dt.api.actions.props.children },
+            className,
+          ],
+        },
+        {
+          name: "TableStatus · TableUser · TableCopyId · TableRelativeDate",
+          description: dt.api.cells.description,
+          props: [
+            { name: "tone", type: '"success" | "warning" | "danger" | "neutral"', default: '"neutral"', description: dt.api.cells.props.tone },
+            { name: "name · description · src", type: "string", description: dt.api.cells.props.user },
+            { name: "value", type: "string", description: dt.api.cells.props.value },
+            { name: "date · now · locale", type: "Date | string | number", description: dt.api.cells.props.date },
+          ],
+        },
+        { name: "rowArrowKeys", description: dt.api.rowKeys.description, props: [] },
+      ],
+      keyboard: [
+        { keys: ["Enter", "Space"], description: dt.kb.activate },
+        { keys: ["↑", "↓"], description: dt.kb.rows },
+      ],
+      accessibility: [dt.a11y.sort, dt.a11y.select, dt.a11y.actions, dt.a11y.motion],
     },
   };
 }

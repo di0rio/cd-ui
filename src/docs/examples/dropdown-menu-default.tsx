@@ -1,11 +1,12 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, CopyIcon, LinkIcon, MailIcon, PencilIcon, Share2Icon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/registry/cd/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
+  DropdownMenuFooter,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -13,7 +14,6 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
@@ -31,15 +31,17 @@ export default function DropdownMenuDefault() {
       <DropdownMenuPopup>
         <DropdownMenuGroup>
           <DropdownMenuLabel>Project</DropdownMenuLabel>
-          <DropdownMenuItem>
-            Rename <DropdownMenuShortcut>F2</DropdownMenuShortcut>
+          <DropdownMenuItem description="Change the name and the slug" icon={<PencilIcon />} shortcut="F2">
+            Rename
           </DropdownMenuItem>
-          <DropdownMenuItem>Duplicate</DropdownMenuItem>
+          <DropdownMenuItem icon={<CopyIcon />} shortcut="Ctrl D">
+            Duplicate
+          </DropdownMenuItem>
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger icon={<Share2Icon />}>Share</DropdownMenuSubTrigger>
             <DropdownMenuPopup>
-              <DropdownMenuItem>Copy link</DropdownMenuItem>
-              <DropdownMenuItem>Send by email</DropdownMenuItem>
+              <DropdownMenuItem icon={<LinkIcon />}>Copy link</DropdownMenuItem>
+              <DropdownMenuItem icon={<MailIcon />}>Send by email</DropdownMenuItem>
             </DropdownMenuPopup>
           </DropdownMenuSub>
         </DropdownMenuGroup>
@@ -54,7 +56,10 @@ export default function DropdownMenuDefault() {
           <DropdownMenuRadioItem value="date">Date</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        <DropdownMenuItem confirm icon={<Trash2Icon />} variant="destructive">
+          Delete
+        </DropdownMenuItem>
+        <DropdownMenuFooter />
       </DropdownMenuPopup>
     </DropdownMenu>
   );

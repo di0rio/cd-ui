@@ -37,6 +37,7 @@ export function getGuides(tr: Dict) {
     { href: "/docs/installation", title: g.installation.title, description: g.installation.description },
     { href: "/docs/theme", title: g.theme.title, description: g.theme.description },
     { href: "/docs/forms", title: g.forms.title, description: g.forms.description },
+    { href: "/docs/combos", title: g.combos.title, description: g.combos.description },
     { href: "/docs/performance", title: g.performance.title, description: g.performance.description },
   ];
 }

@@ -182,6 +182,7 @@ export const translations = {
 						colors: "Colors",
 						radii: "Radii",
 						motion: "Motion",
+						cartoon: "Cartoon tokens",
 						customize: "Customize",
 					},
 					colorsTitle: "Colors",
@@ -224,6 +225,31 @@ export const translations = {
 					motionLocal: "For a single component, set the token through a Tailwind arbitrary property in its `className`:",
 					motionLocalCode: "<Switch className=\"[--cd-duration-base:300ms]\" />",
 					motionReduced: "With `prefers-reduced-motion: reduce`, one block in globals.css sets every duration to 0.01ms and `--cd-scale-enter` to 1. It sets the same tokens, so keep it after your overrides.",
+					cartoonTitle: "Cartoon tokens",
+					cartoon: "The cartoon look of Button, Badge and Card comes from four variables. Set them on `:root` to restyle the whole app, or on any element to restyle only what is inside it. Drag the sliders and watch.",
+					cartoonTable: {
+						token: "Token",
+						value: "Default",
+						use: "What it does",
+						ink: "Color of the outline and the shadow. Light in dark mode.",
+						border: "Thickness of the outline.",
+						offset: "How far the hard shadow sticks out.",
+						depth: "How far a press sinks. Keep it at or below the offset.",
+						spring: "Curve of the springy release. Pressing is instant.",
+					},
+					cartoonPlayground: {
+						label: "Try the tokens",
+						reset: "reset",
+						ink: "ink",
+						border: "border",
+						offset: "offset",
+						depth: "press depth",
+						press: "Press me",
+						badge: "New",
+						cardTitle: "Same tokens",
+						cardText: "Card, badge and button move together.",
+					},
+					cartoonCode: ":root {\n  --cartoon-ink: #1c1c1c;\n  --cartoon-border: 3px;\n  --cartoon-offset: 5px;\n  --press-depth: 4px;\n}\n\n/* or only inside one area */\n.checkout {\n  --cartoon-offset: 8px;\n}",
 					customizeTitle: "Customize",
 					customize: "Want a different palette? Change the values in your globals.css. Here, the yellow accent turns green:",
 				},
@@ -296,6 +322,26 @@ export const translations = {
 					},
 					methodTitle: "How we measure",
 					method: "The scripts/metrics.mjs script bundles each component with esbuild, as minified ESM, and measures the result in gzip level 9. React, Base UI, Zod, lucide, and class utilities are left out. This way, the number shows the cost of cd/ui itself; external libraries are shared in your project's bundle.",
+				},
+				combos: {
+					description: "Components here are small on purpose and meet at the edges: wrap one in another, or call one from another. Nothing needs a special prop to work with the rest.",
+					toc: {
+						confetti: "Confetti on a button",
+						avatar: "Avatar and Button",
+						toast: "A toast that celebrates",
+						tokens: "One set of tokens",
+						rule: "How they fit",
+					},
+					confettiTitle: "Confetti on a button",
+					confetti: "`<Confetti>` wraps one element and fires from its center on an event. The button does not know about it, so it works with Button, AvatarButton or any element that passes its handlers through.",
+					avatarTitle: "Avatar and Button",
+					avatar: "`AvatarButton` is a Button with an Avatar inside, nothing more. It takes every Button prop, so it also takes a wrapper. Here it is inside `<Confetti>`.",
+					toastTitle: "A toast that celebrates",
+					toast: "Toast and Confetti stay separate. Call both from the same handler and aim the burst at the corner where the toast appears.",
+					tokensTitle: "One set of tokens",
+					tokens: "Button, Badge and Card share the cartoon variables. Set them on a parent and everything inside follows. The full list is on the Theme page.",
+					ruleTitle: "How they fit",
+					rule: "Three rules keep the combos honest: a wrapper clones its child instead of adding markup, a variant is a class and not a new component, and motion always comes from the shared tokens, so reduced motion turns it all off in one place.",
 				},
 				component: {
 					breadcrumb: "components",
@@ -417,6 +463,10 @@ export const translations = {
 					title: "Forms with Zod",
 					description: "Connect Zod schemas to your form fields.",
 				},
+				combos: {
+					title: "Combos",
+					description: "Components that snap together: confetti on a button, a celebrating toast, an avatar that is a button.",
+				},
 				performance: {
 					title: "Performance",
 					description: "See how we measure the size of each component.",
@@ -456,13 +506,16 @@ export const translations = {
 				"otp-input": "One box per digit with auto-advance, backspace, and paste.",
 				"pricing-toggle": "Monthly/yearly switch with an optional saving badge.",
 				avatar: "A round profile picture with a fallback for when the image is missing.",
-				"dropdown-menu": "A menu of actions that opens from a button, with checkable items, radio groups, and submenus.",
+				"dropdown-menu": "A menu of actions that opens from a button, with icons, shortcuts, search, recent items, confirm-to-run items, checkable items, and submenus.",
 				popover: "A floating panel anchored to a button that can hold interactive content.",
 				"radio-group": "Pick exactly one option from a small set, with arrow-key navigation.",
 				slider: "Pick a number or a range by dragging a thumb or using the arrow keys.",
 				progress: "A bar that shows how far a task has come, or that it is still working.",
+				"avatar-button": "A button with a cartoon avatar that peeks over the edge, tilts on hover and squashes on press.",
+				confetti: "A burst of confetti from a function call or from any element, with no dependencies.",
 				toast: "Stacked notifications that dismiss themselves, with swipe and keyboard support.",
 				table: "A styled native table for rows and columns of data.",
+				"data-table": "Pieces that make a table useful: toolbar, sort, filter, select, paginate, row actions, status and user cells, and CSV export.",
 			},
 			content: {
 				shared: {
@@ -492,6 +545,10 @@ export const translations = {
 							title: "Keycap",
 							description: "The `key` variant looks like a keyboard key: the bottom edge is a shadow that disappears when pressed.",
 						},
+						cartoon: {
+							title: "Cartoon",
+							description: "A sticker look: thick outline and a hard shadow. On press it sinks into the shadow, squashes a little and springs back. Tweak it with `--cartoon-ink`, `--cartoon-border`, `--cartoon-offset` and `--press-depth`.",
+						},
 						link: {
 							title: "As a link",
 							description: "With `render`, the button becomes an `<a>` (or Next's `<Link>`) with the same look.",
@@ -520,6 +577,10 @@ export const translations = {
 						default: {
 							title: "Variants",
 						},
+						cartoon: {
+							title: "Cartoon",
+							description: "The same outline and hard shadow as the cartoon button, with a smaller offset. Same tokens, so one change restyles both.",
+						},
 					},
 					api: {
 						Badge: {
@@ -532,10 +593,17 @@ export const translations = {
 						default: {
 							title: "Card with actions",
 						},
+						cartoon: {
+							title: "Cartoon",
+							description: "`variant=\"cartoon\"` adds the outline and hard shadow. Cartoon buttons and badges inside follow the same tokens.",
+						},
 					},
 					api: {
 						Card: {
 							description: "Surface with a thin border and a slightly raised background. Server component.",
+							props: {
+								variant: "`cartoon` adds the thick outline and the hard shadow.",
+							},
 						},
 						header: {
 							description: "Header, title (`<h3>`), and description.",
@@ -941,18 +1009,29 @@ export const translations = {
 						default: {
 							title: "Variants",
 						},
+						dismissible: {
+							title: "Close, actions and auto-hide",
+						},
+						compact: {
+							title: "Compact",
+						},
 					},
 					api: {
 						Alert: {
-							description: "One log line: `[tag] time title - description`, with a colored rule on the left. An icon placed directly inside is allowed. Server component.",
+							description: "One log line: `[icon] [tag] time title - description`, with a colored rule on the left. Each level has its own icon. Close it with a button (`onDismiss`) or let it close by itself (`autoHide`).",
 							props: {
 								variant: "Level. `default`, `brand` and `destructive` still work as `info`, `warn` and `error`.",
 								tag: "Text of the level chip. Defaults to the level name.",
 								time: "Optional timestamp shown after the tag.",
+								icon: "Icon before the line. Each level has one by default. Pass your own, or `false` for none.",
+								compact: "One tight line, without tag and time. For short messages next to a form.",
+								onDismiss: "Shows a close button. Runs when the alert closes, by click or by `autoHide`.",
+								autoHide: "Closes after this many milliseconds and shows a progress bar. Pauses while the pointer or focus is on it.",
+								dismissLabel: "Accessible name of the close button.",
 							},
 						},
 						parts: {
-							description: "`AlertTitle` and `AlertDescription` share the line, joined by a dash. `AlertAction` pins a button or link to the right end.",
+							description: "`AlertTitle` and `AlertDescription` share the line, joined by a dash. `AlertAction` pins one or more buttons or links to the right end.",
 						},
 					},
 					a11y: {
@@ -1077,6 +1156,11 @@ export const translations = {
 					ex: {
 						default: {
 							title: "Actions menu",
+							description: "Items take an icon, a second line and a shortcut. Delete needs a second click, and the footer shows the keys. Open it with the keyboard and it appears with no animation.",
+						},
+						command: {
+							title: "Search and recent",
+							description: "A search field filters the list as you type, and the last two actions you chose move to a Recent section.",
 						},
 					},
 					api: {
@@ -1090,7 +1174,7 @@ export const translations = {
 							description: "Button that opens the menu. Use `render` to use your own `Button`.",
 						},
 						DropdownMenuPopup: {
-							description: "List of actions. Opens from the trigger in 160ms, closes in 120ms.",
+							description: "List of actions. Scales and fades in from the trigger in 160ms, closes in 120ms, and appears instantly when opened with the keyboard.",
 							props: {
 								side: "Preferred side. Submenus open to the right on their own.",
 								align: "Alignment relative to the trigger.",
@@ -1101,14 +1185,33 @@ export const translations = {
 							description: "Action. The menu closes after it is chosen.",
 							props: {
 								variant: "Use `destructive` for dangerous actions.",
+								icon: "Icon at the start of the row.",
+								description: "A second, muted line under the label.",
+								shortcut: "Shortcut text at the end of the row, in mono. Only a hint.",
+								confirm: "The first click arms the item (it turns red and asks again), the second runs it. It goes back to idle after 3 seconds.",
+								confirmLabel: "Text shown while the item is armed.",
+								label: "Plain text used by type to select when the children are not plain text.",
 								onClick: "Called when the item is chosen.",
+							},
+						},
+						search: {
+							description: "Search field pinned to the top of the menu. It only holds the text: filter your own items with `matchesMenuQuery` and show `DropdownMenuEmpty` when nothing is left.",
+							props: {
+								value: "The text, controlled by you.",
+								ariaLabel: "Accessible name of the field.",
+							},
+						},
+						recent: {
+							description: "`useRecentItems` remembers the last ids chosen, newest first, for a Recent section. `DropdownMenuFooter` shows the keyboard hints (hidden on touch screens) or your own children.",
+							props: {
+								limit: "How many ids to keep.",
 							},
 						},
 						checkable: {
 							description: "Items with a check. The checkbox item toggles on its own; radio items live inside a `DropdownMenuRadioGroup`.",
 						},
 						structure: {
-							description: "Organize the list: `DropdownMenuGroup` with a `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut`, and `DropdownMenuSub` with `DropdownMenuSubTrigger`.",
+							description: "Organize the list: `DropdownMenuGroup` with a `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut`, and `DropdownMenuSub` with `DropdownMenuSubTrigger` (which also takes `icon` and `description`).",
 						},
 					},
 					kb: {
@@ -1118,8 +1221,12 @@ export const translations = {
 						sub: "Opens and closes a submenu.",
 						close: "Closes and returns focus to the trigger.",
 						letter: "Jumps to the item that starts with the letter.",
+						confirm: "On an item with `confirm`, pressing it twice runs it.",
+						search: "In the search field, moves to the first item.",
 					},
 					a11y: {
+						confirm: "An armed item changes its text to the confirm label, so screen readers hear it when the item is focused again. It never confirms on its own.",
+						search: "Give `DropdownMenuSearch` an `aria-label`. Typing there does not trigger type to select, and Esc still closes the menu.",
 						shortcut: "`DropdownMenuShortcut` only displays the hint. Wire up the real shortcut yourself.",
 					},
 				},
@@ -1275,6 +1382,68 @@ export const translations = {
 						pause: "The timer pauses on hover and while the window is out of focus, so there is time to read.",
 					},
 				},
+				confetti: {
+					ex: {
+						default: {
+							title: "Around any element",
+						},
+						imperative: {
+							title: "From a function",
+							description: "Call `confetti()` from any handler. `origin` takes an element or viewport pixels.",
+						},
+					},
+					api: {
+						Confetti: {
+							description: "Wraps one element and fires a burst from its center on an event. It adds no markup and keeps the child's own handlers.",
+							props: {
+								on: "Event of the child that fires the burst.",
+								disabled: "Turns the burst off without removing the wrapper.",
+								options: "Every option of `confetti()` except `origin`, which is the child.",
+							},
+						},
+						confetti: {
+							description: "Fires a burst and returns a function that cancels it. Pieces are DOM nodes animated with the Web Animations API (transform and opacity) and removed at the end.",
+							props: {
+								origin: "Element (its center) or `{ x, y }` in viewport pixels. Default: the middle of the screen.",
+								count: "Number of pieces. Max 200.",
+								spread: "Width of the cone in degrees. 360 goes in every direction.",
+								angle: "Direction of the cone in degrees: 0 right, 90 down, 270 up.",
+								colors: "Any CSS colors, `var(--brand)` included.",
+								shapes: "Mix of `square`, `circle`, `strip` and `star`.",
+								power: "Launch speed in px per second.",
+							},
+						},
+					},
+					a11y: {
+						decorative: "The layer is `aria-hidden` and ignores the pointer, so it never gets in the way. Say what happened in text too (a toast, a label), because confetti carries no information by itself.",
+						reduced: "With `prefers-reduced-motion` nothing flies: `confetti()` does nothing and `<Confetti>` only pulses the child's opacity for 200ms.",
+					},
+				},
+				"avatar-button": {
+					ex: {
+						default: {
+							title: "Sizes and styles",
+							description: "Cartoon by default. `blink` makes the avatar squash quickly every few seconds. Any Button variant works.",
+						},
+					},
+					api: {
+						AvatarButton: {
+							description: "A Button with an Avatar inside. The avatar peeks above the edge, tilts on hover and squashes on press. Accepts every Button prop.",
+							props: {
+								src: "Picture of the character. A transparent SVG or PNG works best.",
+								fallback: "Shown while the picture loads or if it fails (usually initials).",
+								blink: "Blinks (a quick squash) every few seconds. Off with reduced motion.",
+							},
+						},
+					},
+					kb: {
+						enter: "Activates the button.",
+					},
+					a11y: {
+						name: "The picture is decorative (`alt=\"\"`): the button is named by its text. Without text, add an `aria-label`.",
+						motion: "Tilt, squash and blink only run with `motion-safe`. Hover effects only apply to devices that can hover.",
+					},
+				},
 				logo: {
 					ex: {
 						default: {
@@ -1304,16 +1473,34 @@ export const translations = {
 						default: {
 							title: "Invoices",
 						},
+						striped: {
+							title: "Striped",
+							description: "`variant=\"striped\"` tints every other row, which helps the eye follow a line across wide cells.",
+						},
+						compact: {
+							title: "Compact, with a footer",
+							description: "`density=\"compact\"` tightens the rows. `TableFooter` holds the total, and `numeric` lines the digits up on the right.",
+						},
 						sticky: {
-							title: "Sticky header, compact, selected",
-							description: "`stickyHeader` keeps the header while the rows scroll, `density` sets the row padding, and `data-state=\"selected\"` marks a row.",
+							title: "Sticky header and first column",
+							description: "`stickyHeader` keeps the header while the rows scroll, and `stickyFirstColumn` keeps the first column while the table scrolls sideways. Narrow the window to see it.",
+						},
+						empty: {
+							title: "Empty state",
+							description: "`TableEmpty` fills one row across all columns with a message for when there is nothing to show.",
+						},
+						cartoon: {
+							title: "Cartoon",
+							description: "`variant=\"cartoon\"` uses the thick outline and hard shadow from the cartoon tokens, with a brand-colored header.",
 						},
 					},
 					api: {
 						Table: {
 							description: "`<table>` inside a container that scrolls sideways on small screens. Server component.",
 							props: {
+								variant: "`striped` tints every other row. `cartoon` is the thick-outline look shared with Button, Badge, and Card.",
 								density: "Row padding.",
+								stickyFirstColumn: "Keeps the first column in place while the table scrolls sideways.",
 								stickyHeader: "Keeps the header visible while the rows scroll (the container gets a max height).",
 								ariaLabel: "Names the scroll container as a region. It is keyboard-focusable either way, so you can scroll it with the arrow keys.",
 							},
@@ -1321,8 +1508,12 @@ export const translations = {
 						sections: {
 							description: "`TableHeader`, `TableBody`, and `TableFooter` map to `<thead>`, `<tbody>`, and `<tfoot>`.",
 						},
+						empty: {
+							description: "One full-width row with a message, for a table with no rows.",
+							colSpan: "How many columns the table has.",
+						},
 						cells: {
-							description: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`.",
+							description: "`TableRow`, `TableHead`, `TableCell`, and `TableCaption` map to `<tr>`, `<th>`, `<td>`, and `<caption>`. A row is highlighted on hover and when it has `aria-selected` or `data-state=\"selected\"`.",
 							props: {
 								numeric: "On `TableHead` and `TableCell`: aligns right with equal-width digits.",
 							},
@@ -1330,6 +1521,86 @@ export const translations = {
 					},
 					a11y: {
 						semantics: "It keeps native table semantics. Use `TableHead` (`<th>`) for headers and `TableCaption` to name the table.",
+					},
+				},
+				"data-table": {
+					ex: {
+						users: {
+							title: "Users admin",
+							description: "A full admin table: search, status chips, column menu, CSV export of the rows on screen, a primary action, sorting, selection with a bulk bar, pagination, and row actions that show on hover or focus (always visible on touch). Arrow keys move between rows.",
+						},
+						invoices: {
+							title: "Invoices",
+							description: "Copyable ids, status with a dot, relative dates and money. A custom `TableAction` sits next to the delete button, which asks for a second click.",
+						},
+						expandable: {
+							title: "Expandable rows",
+							description: "The chevron opens a detail row under the line. It is a real button with `aria-expanded`, so it works with the keyboard.",
+						},
+					},
+					api: {
+						hooks: {
+							description: "Hooks and a helper. They return plain values and never own your rows, so they also work with data from a server. `useSelection` is a set of ids kept across pages: use it for selected rows, open rows, or hidden columns.",
+						},
+						heads: {
+							description: "Header and cell pieces. `SortableHead` is a `TableHead` with a button inside.",
+							props: {
+								direction: "`\"asc\"`, `\"desc\"` or `null` when the table is not sorted by this column.",
+								onSort: "Called when the header is activated.",
+								checked: "Whether the row (or, in the header, every visible row) is selected.",
+								indeterminate: "Shows a dash: some rows are selected, not all.",
+								label: "Accessible name of the checkbox or button, for example \"Select INV-1042\".",
+								controls: "The `id` of the detail row the button opens.",
+							},
+						},
+						toolbar: {
+							description: "The row above the table. `TableSearch` and `TableFilterChips` are controlled; filter with `matchesQuery`. `ExportCsvButton` downloads the rows you pass, so pass the filtered and sorted ones. Cells that start with = + - or @ are escaped.",
+							props: {
+								value: "The text of the search field.",
+								options: "The chips. The one whose id equals `value` is pressed.",
+								rows: "The rows to export and how to read each column.",
+								filename: "Name of the downloaded file.",
+							},
+						},
+						actions: {
+							description: "`TableRowActions` is the last cell of a row: edit, duplicate and delete buttons (delete asks for a second click) and a \"...\" menu built from your `DropdownMenuItem`s. They show on row hover or focus and stay visible on touch. `TableAction` is one icon button, to add your own.",
+							props: {
+								label: "Names the row for screen readers, for example \"Marina Alves\". Each button says what it does to it.",
+								handlers: "A button shows only when its handler is passed.",
+								menu: "Items of the overflow menu. The button shows only when you pass this.",
+								children: "More `TableAction` buttons, before the menu.",
+							},
+						},
+						cells: {
+							description: "Ready-made cells. `TableStatus` is text with a colored dot, `TableUser` an avatar with a name and a second line, `TableCopyId` a mono id with a copy button, and `TableRelativeDate` \"3 days ago\" with the full date as a tooltip.",
+							props: {
+								tone: "Color of the dot. The text still carries the meaning.",
+								user: "Name, second line and image. Without an image, the initials show.",
+								value: "The id to show and copy.",
+								date: "The date, an optional `now` to fix the reference time, and the `locale`.",
+							},
+						},
+						rowKeys: {
+							description: "Optional. Pass `rowArrowKeys` as the `onKeyDown` of `TableBody` and Arrow Up and Arrow Down move focus to the same control in the previous or next row. Text fields and open menus keep their keys.",
+						},
+						bars: {
+							description: "Bars around the table: the bulk action bar, the column menu, and the pagination. Their texts are in English by default; `label` changes the column menu's.",
+							props: {
+								count: "How many rows are selected. The bar renders nothing at 0.",
+								columns: "The columns that can be hidden, as `{ id, label }`.",
+								hidden: "The ids of the hidden columns.",
+							},
+						},
+					},
+					kb: {
+						activate: "Sorts by the focused column, opens the focused row, or toggles its checkbox.",
+						rows: "With `rowArrowKeys`, moves to the same control in the previous or next row.",
+					},
+					a11y: {
+						sort: "`SortableHead` sets `aria-sort` on the header, and the button inside is focusable. Only the sorted column reports a direction.",
+						select: "Every checkbox needs a `label` that names its row. The bulk bar is a polite live region, so screen readers hear the count change.",
+						actions: "Row action buttons are real buttons with a name like \"Edit Marina Alves\". They are only transparent until the row is hovered or focused, so keyboard users reach them with Tab. Delete announces that it needs another press.",
+						motion: "The chevron turns with a short transition that is dropped under reduced motion.",
 					},
 				},
 			},
@@ -1512,6 +1783,7 @@ export const translations = {
 						colors: "Cores",
 						radii: "Raios",
 						motion: "Movimento",
+						cartoon: "Tokens cartoon",
 						customize: "Personalizar",
 					},
 					colorsTitle: "Cores",
@@ -1554,6 +1826,31 @@ export const translations = {
 					motionLocal: "Para um único componente, defina o token por uma propriedade arbitrária do Tailwind no `className`:",
 					motionLocalCode: "<Switch className=\"[--cd-duration-base:300ms]\" />",
 					motionReduced: "Com `prefers-reduced-motion: reduce`, um bloco no globals.css zera todas as durações (0.01ms) e põe `--cd-scale-enter` em 1. Ele mexe nos mesmos tokens, então mantenha-o depois dos seus overrides.",
+					cartoonTitle: "Tokens cartoon",
+					cartoon: "O visual cartoon de Button, Badge e Card vem de quatro variáveis. Defina no `:root` para mudar o app inteiro, ou em qualquer elemento para mudar só o que está dentro. Arraste os controles e veja.",
+					cartoonTable: {
+						token: "Token",
+						value: "Padrão",
+						use: "O que faz",
+						ink: "Cor do contorno e da sombra. Clara no modo escuro.",
+						border: "Espessura do contorno.",
+						offset: "Quanto a sombra dura sai para o lado.",
+						depth: "Quanto o clique afunda. Deixe igual ou menor que o deslocamento.",
+						spring: "Curva da volta com mola. O clique é instantâneo.",
+					},
+					cartoonPlayground: {
+						label: "Teste os tokens",
+						reset: "restaurar",
+						ink: "tinta",
+						border: "borda",
+						offset: "deslocamento",
+						depth: "afundar",
+						press: "Aperte",
+						badge: "Novo",
+						cardTitle: "Os mesmos tokens",
+						cardText: "Card, selo e botão mudam juntos.",
+					},
+					cartoonCode: ":root {\n  --cartoon-ink: #1c1c1c;\n  --cartoon-border: 3px;\n  --cartoon-offset: 5px;\n  --press-depth: 4px;\n}\n\n/* ou só dentro de uma área */\n.checkout {\n  --cartoon-offset: 8px;\n}",
 					customizeTitle: "Personalizar",
 					customize: "Quer outra paleta? Troque os valores no seu globals.css. Aqui, o destaque amarelo vira verde:",
 				},
@@ -1626,6 +1923,26 @@ export const translations = {
 					},
 					methodTitle: "Como medimos",
 					method: "O script scripts/metrics.mjs empacota cada componente com esbuild, em ESM minificado, e mede o resultado em gzip nível 9. React, Base UI, Zod, lucide e utilitários de classe ficam de fora. Assim, o número mostra o custo do próprio cd/ui; as bibliotecas externas são compartilhadas no bundle do seu projeto.",
+				},
+				combos: {
+					description: "Os componentes aqui são pequenos de propósito e se encontram nas bordas: envolva um no outro, ou chame um a partir do outro. Nenhum precisa de uma prop especial para funcionar com os demais.",
+					toc: {
+						confetti: "Confete num botão",
+						avatar: "Avatar e Button",
+						toast: "Um toast que comemora",
+						tokens: "Um conjunto de tokens",
+						rule: "Como se encaixam",
+					},
+					confettiTitle: "Confete num botão",
+					confetti: "`<Confetti>` envolve um elemento e solta confete a partir do centro dele num evento. O botão não sabe disso, então funciona com Button, AvatarButton ou qualquer elemento que repasse seus handlers.",
+					avatarTitle: "Avatar e Button",
+					avatar: "`AvatarButton` é um Button com um Avatar dentro, nada além disso. Aceita toda prop do Button, então também aceita um envoltório. Aqui ele está dentro de `<Confetti>`.",
+					toastTitle: "Um toast que comemora",
+					toast: "Toast e Confetti continuam separados. Chame os dois no mesmo handler e aponte o confete para o canto onde o toast aparece.",
+					tokensTitle: "Um conjunto de tokens",
+					tokens: "Button, Badge e Card dividem as variáveis cartoon. Defina num pai e tudo dentro acompanha. A lista completa está na página Tema.",
+					ruleTitle: "Como se encaixam",
+					rule: "Três regras mantêm os combos honestos: um envoltório clona o filho em vez de criar marcação, uma variante é uma classe e não um componente novo, e o movimento sempre vem dos tokens compartilhados, então o movimento reduzido desliga tudo num lugar só.",
 				},
 				component: {
 					breadcrumb: "componentes",
@@ -1747,6 +2064,10 @@ export const translations = {
 					title: "Formulários com Zod",
 					description: "Conecte schemas Zod aos campos do formulário.",
 				},
+				combos: {
+					title: "Combos",
+					description: "Componentes que se encaixam: confete num botão, um toast que comemora, um avatar que é botão.",
+				},
 				performance: {
 					title: "Performance",
 					description: "Veja como medimos o tamanho de cada componente.",
@@ -1786,13 +2107,16 @@ export const translations = {
 				"otp-input": "Uma caixa por dígito, com avanço automático, backspace e colagem.",
 				"pricing-toggle": "Alternador mensal/anual com selo opcional de economia.",
 				avatar: "Uma foto de perfil redonda com um substituto para quando a imagem não existe.",
-				"dropdown-menu": "Um menu de ações que abre a partir de um botão, com itens marcáveis, grupos de rádio e submenus.",
+				"dropdown-menu": "Um menu de ações que abre a partir de um botão, com ícones, atalhos, busca, itens recentes, itens que pedem confirmação, itens marcáveis e submenus.",
 				popover: "Um painel flutuante ancorado num botão que pode ter conteúdo interativo.",
 				"radio-group": "Escolha exatamente uma opção de um conjunto pequeno, com navegação pelas setas.",
 				slider: "Escolha um número ou uma faixa arrastando o polegar ou usando as setas.",
 				progress: "Uma barra que mostra o quanto uma tarefa avançou, ou que ela ainda está em andamento.",
+				"avatar-button": "Um botão com um avatar de desenho que espia pela borda, inclina no hover e achata ao pressionar.",
+				confetti: "Uma chuva de confete a partir de uma chamada de função ou de qualquer elemento, sem dependências.",
 				toast: "Notificações empilhadas que somem sozinhas, com suporte a swipe e teclado.",
 				table: "Uma tabela nativa estilizada para linhas e colunas de dados.",
+				"data-table": "Peças que deixam uma tabela útil: barra de ferramentas, ordenar, filtrar, selecionar, paginar, ações de linha, células de status e usuário e exportação CSV.",
 			},
 			content: {
 				shared: {
@@ -1822,6 +2146,10 @@ export const translations = {
 							title: "Tecla",
 							description: "A variante `key` parece uma tecla de teclado: a borda de baixo é uma sombra que some ao pressionar.",
 						},
+						cartoon: {
+							title: "Cartoon",
+							description: "Visual de adesivo: contorno grosso e sombra dura. Ao pressionar, afunda na sombra, achata um pouco e volta com mola. Ajuste com `--cartoon-ink`, `--cartoon-border`, `--cartoon-offset` e `--press-depth`.",
+						},
 						link: {
 							title: "Como link",
 							description: "Com `render`, o botão vira um `<a>` (ou `<Link>` do Next) com o mesmo visual.",
@@ -1850,6 +2178,10 @@ export const translations = {
 						default: {
 							title: "Variantes",
 						},
+						cartoon: {
+							title: "Cartoon",
+							description: "O mesmo contorno e a mesma sombra dura do botão cartoon, com um deslocamento menor. Os mesmos tokens: uma mudança estiliza os dois.",
+						},
 					},
 					api: {
 						Badge: {
@@ -1862,10 +2194,17 @@ export const translations = {
 						default: {
 							title: "Card com ações",
 						},
+						cartoon: {
+							title: "Cartoon",
+							description: "`variant=\"cartoon\"` adiciona o contorno e a sombra dura. Botões e selos cartoon dentro seguem os mesmos tokens.",
+						},
 					},
 					api: {
 						Card: {
 							description: "Superfície com borda fina e fundo levemente elevado. Componente de servidor.",
+							props: {
+								variant: "`cartoon` adiciona o contorno grosso e a sombra dura.",
+							},
 						},
 						header: {
 							description: "Cabeçalho, título (`<h3>`) e descrição.",
@@ -2271,18 +2610,29 @@ export const translations = {
 						default: {
 							title: "Variantes",
 						},
+						dismissible: {
+							title: "Fechar, ações e fechar sozinho",
+						},
+						compact: {
+							title: "Compacto",
+						},
 					},
 					api: {
 						Alert: {
-							description: "Uma linha de log: `[tag] hora título - descrição`, com uma linha colorida à esquerda. Um ícone colocado direto dentro é permitido. Componente de servidor.",
+							description: "Uma linha de log: `[ícone] [tag] hora título - descrição`, com uma linha colorida à esquerda. Cada nível tem seu ícone. Feche com um botão (`onDismiss`) ou deixe fechar sozinho (`autoHide`).",
 							props: {
 								variant: "Nível. `default`, `brand` e `destructive` continuam funcionando como `info`, `warn` e `error`.",
 								tag: "Texto do selo de nível. Por padrão, o nome do nível.",
 								time: "Horário opcional mostrado depois do selo.",
+								icon: "Ícone antes da linha. Cada nível tem um por padrão. Passe o seu, ou `false` para nenhum.",
+								compact: "Uma linha enxuta, sem selo e horário. Para mensagens curtas perto de um formulário.",
+								onDismiss: "Mostra um botão de fechar. Roda quando o alerta fecha, por clique ou por `autoHide`.",
+								autoHide: "Fecha depois desse tempo em milissegundos e mostra uma barra de progresso. Pausa enquanto o mouse ou o foco estiver nele.",
+								dismissLabel: "Nome acessível do botão de fechar.",
 							},
 						},
 						parts: {
-							description: "`AlertTitle` e `AlertDescription` dividem a linha, unidos por um traço. `AlertAction` fixa um botão ou link na ponta direita.",
+							description: "`AlertTitle` e `AlertDescription` dividem a linha, unidos por um traço. `AlertAction` fixa um ou mais botões ou links na ponta direita.",
 						},
 					},
 					a11y: {
@@ -2407,6 +2757,11 @@ export const translations = {
 					ex: {
 						default: {
 							title: "Menu de ações",
+							description: "Os itens aceitam ícone, segunda linha e atalho. Excluir pede um segundo clique, e o rodapé mostra as teclas. Abra pelo teclado e ele aparece sem animação.",
+						},
+						command: {
+							title: "Busca e recentes",
+							description: "Um campo de busca filtra a lista enquanto você digita, e as duas últimas ações escolhidas sobem para uma seção Recentes.",
 						},
 					},
 					api: {
@@ -2420,7 +2775,7 @@ export const translations = {
 							description: "Botão que abre o menu. Use `render` pra usar seu `Button`.",
 						},
 						DropdownMenuPopup: {
-							description: "Lista de ações. Abre do gatilho em 160ms, fecha em 120ms.",
+							description: "Lista de ações. Cresce e aparece a partir do gatilho em 160ms, fecha em 120ms e surge na hora quando aberta pelo teclado.",
 							props: {
 								side: "Lado preferido. Submenus abrem à direita sozinhos.",
 								align: "Alinhamento em relação ao gatilho.",
@@ -2431,14 +2786,33 @@ export const translations = {
 							description: "Ação. O menu fecha depois que ela é escolhida.",
 							props: {
 								variant: "Use `destructive` para ações perigosas.",
+								icon: "Ícone no início da linha.",
+								description: "Uma segunda linha apagada sob o rótulo.",
+								shortcut: "Texto de atalho no fim da linha, em mono. É só uma dica.",
+								confirm: "O primeiro clique arma o item (ele fica vermelho e pergunta de novo), o segundo executa. Volta ao normal depois de 3 segundos.",
+								confirmLabel: "Texto mostrado enquanto o item está armado.",
+								label: "Texto simples usado pela busca por letra quando os filhos não são texto simples.",
 								onClick: "Chamado ao escolher o item.",
+							},
+						},
+						search: {
+							description: "Campo de busca fixo no topo do menu. Ele só guarda o texto: filtre seus itens com `matchesMenuQuery` e mostre o `DropdownMenuEmpty` quando não sobrar nada.",
+							props: {
+								value: "O texto, controlado por você.",
+								ariaLabel: "Nome acessível do campo.",
+							},
+						},
+						recent: {
+							description: "`useRecentItems` guarda os últimos ids escolhidos, o mais novo primeiro, para uma seção Recentes. `DropdownMenuFooter` mostra as dicas de teclado (escondidas em telas de toque) ou os seus filhos.",
+							props: {
+								limit: "Quantos ids guardar.",
 							},
 						},
 						checkable: {
 							description: "Itens com check. O item checkbox alterna sozinho; os itens de rádio ficam dentro de um `DropdownMenuRadioGroup`.",
 						},
 						structure: {
-							description: "Organize a lista: `DropdownMenuGroup` com um `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut` e `DropdownMenuSub` com `DropdownMenuSubTrigger`.",
+							description: "Organize a lista: `DropdownMenuGroup` com um `DropdownMenuLabel`, `DropdownMenuSeparator`, `DropdownMenuShortcut` e `DropdownMenuSub` com `DropdownMenuSubTrigger` (que também aceita `icon` e `description`).",
 						},
 					},
 					kb: {
@@ -2448,8 +2822,12 @@ export const translations = {
 						sub: "Abre e fecha um submenu.",
 						close: "Fecha e devolve o foco ao gatilho.",
 						letter: "Pula para o item que começa com a letra.",
+						confirm: "Num item com `confirm`, apertar duas vezes executa.",
+						search: "No campo de busca, vai para o primeiro item.",
 					},
 					a11y: {
+						confirm: "Um item armado troca o texto pelo rótulo de confirmação, então leitores de tela ouvem quando o item recebe foco de novo. Ele nunca confirma sozinho.",
+						search: "Dê um `aria-label` ao `DropdownMenuSearch`. Digitar ali não aciona a busca por letra, e Esc continua fechando o menu.",
 						shortcut: "`DropdownMenuShortcut` só mostra a dica. Ligue o atalho de verdade por conta própria.",
 					},
 				},
@@ -2605,6 +2983,68 @@ export const translations = {
 						pause: "O tempo pausa ao passar o mouse e quando a janela perde o foco, para dar tempo de ler.",
 					},
 				},
+				confetti: {
+					ex: {
+						default: {
+							title: "Em volta de qualquer elemento",
+						},
+						imperative: {
+							title: "Por função",
+							description: "Chame `confetti()` em qualquer handler. `origin` aceita um elemento ou pixels da janela.",
+						},
+					},
+					api: {
+						Confetti: {
+							description: "Envolve um elemento e solta uma chuva a partir do centro dele num evento. Não cria marcação nova e mantém os handlers do filho.",
+							props: {
+								on: "Evento do filho que dispara a chuva.",
+								disabled: "Desliga a chuva sem tirar o envoltório.",
+								options: "Toda opção de `confetti()` menos `origin`, que é o filho.",
+							},
+						},
+						confetti: {
+							description: "Solta uma chuva e devolve uma função que cancela. As peças são nós do DOM animados com a Web Animations API (transform e opacity) e removidos no fim.",
+							props: {
+								origin: "Elemento (o centro dele) ou `{ x, y }` em pixels da janela. Padrão: o meio da tela.",
+								count: "Número de peças. Máximo 200.",
+								spread: "Abertura do cone em graus. 360 vai para todos os lados.",
+								angle: "Direção do cone em graus: 0 direita, 90 baixo, 270 cima.",
+								colors: "Qualquer cor CSS, inclusive `var(--brand)`.",
+								shapes: "Mistura de `square`, `circle`, `strip` e `star`.",
+								power: "Velocidade de saída em px por segundo.",
+							},
+						},
+					},
+					a11y: {
+						decorative: "A camada é `aria-hidden` e ignora o ponteiro, então nunca atrapalha. Diga o que aconteceu também em texto (um toast, um rótulo), porque o confete sozinho não informa nada.",
+						reduced: "Com `prefers-reduced-motion` nada voa: `confetti()` não faz nada e `<Confetti>` só pulsa a opacidade do filho por 200ms.",
+					},
+				},
+				"avatar-button": {
+					ex: {
+						default: {
+							title: "Tamanhos e estilos",
+							description: "Cartoon por padrão. `blink` faz o avatar achatar rápido a cada alguns segundos. Qualquer variante do Button serve.",
+						},
+					},
+					api: {
+						AvatarButton: {
+							description: "Um Button com um Avatar dentro. O avatar espia acima da borda, inclina no hover e achata ao pressionar. Aceita toda prop do Button.",
+							props: {
+								src: "Imagem do personagem. Um SVG ou PNG transparente funciona melhor.",
+								fallback: "Aparece enquanto a imagem carrega ou se falhar (geralmente as iniciais).",
+								blink: "Pisca (um achatamento rápido) a cada alguns segundos. Desligado com movimento reduzido.",
+							},
+						},
+					},
+					kb: {
+						enter: "Ativa o botão.",
+					},
+					a11y: {
+						name: "A imagem é decorativa (`alt=\"\"`): o botão é nomeado pelo texto. Sem texto, adicione um `aria-label`.",
+						motion: "Inclinar, achatar e piscar só rodam com `motion-safe`. Os efeitos de hover só valem para dispositivos que têm hover.",
+					},
+				},
 				logo: {
 					ex: {
 						default: {
@@ -2634,16 +3074,34 @@ export const translations = {
 						default: {
 							title: "Faturas",
 						},
+						striped: {
+							title: "Listrada",
+							description: "`variant=\"striped\"` colore uma linha sim, outra não, e ajuda o olho a seguir uma linha entre células largas.",
+						},
+						compact: {
+							title: "Compacta, com rodapé",
+							description: "`density=\"compact\"` aperta as linhas. `TableFooter` guarda o total e `numeric` alinha os dígitos à direita.",
+						},
 						sticky: {
-							title: "Cabeçalho fixo, compacta, selecionada",
-							description: "`stickyHeader` mantém o cabeçalho enquanto as linhas rolam, `density` define o espaçamento das linhas e `data-state=\"selected\"` marca uma linha.",
+							title: "Cabeçalho e primeira coluna fixos",
+							description: "`stickyHeader` mantém o cabeçalho enquanto as linhas rolam e `stickyFirstColumn` mantém a primeira coluna enquanto a tabela rola para o lado. Estreite a janela para ver.",
+						},
+						empty: {
+							title: "Estado vazio",
+							description: "`TableEmpty` ocupa uma linha inteira, de ponta a ponta, com uma mensagem para quando não há nada a mostrar.",
+						},
+						cartoon: {
+							title: "Cartoon",
+							description: "`variant=\"cartoon\"` usa o contorno grosso e a sombra dura dos tokens cartoon, com cabeçalho na cor da marca.",
 						},
 					},
 					api: {
 						Table: {
 							description: "`<table>` dentro de um contêiner que rola para o lado em telas pequenas. Componente de servidor.",
 							props: {
+								variant: "`striped` colore uma linha sim, outra não. `cartoon` é o visual de contorno grosso que Button, Badge e Card compartilham.",
 								density: "Espaçamento das linhas.",
+								stickyFirstColumn: "Mantém a primeira coluna no lugar enquanto a tabela rola para o lado.",
 								stickyHeader: "Mantém o cabeçalho visível enquanto as linhas rolam (o contêiner ganha altura máxima).",
 								ariaLabel: "Dá nome ao contêiner de rolagem como região. Ele é focável por teclado de qualquer jeito, então dá pra rolar com as setas.",
 							},
@@ -2651,8 +3109,12 @@ export const translations = {
 						sections: {
 							description: "`TableHeader`, `TableBody` e `TableFooter` correspondem a `<thead>`, `<tbody>` e `<tfoot>`.",
 						},
+						empty: {
+							description: "Uma linha de largura total com uma mensagem, para uma tabela sem linhas.",
+							colSpan: "Quantas colunas a tabela tem.",
+						},
 						cells: {
-							description: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`.",
+							description: "`TableRow`, `TableHead`, `TableCell` e `TableCaption` correspondem a `<tr>`, `<th>`, `<td>` e `<caption>`. A linha é destacada no hover e quando tem `aria-selected` ou `data-state=\"selected\"`.",
 							props: {
 								numeric: "Em `TableHead` e `TableCell`: alinha à direita com dígitos de largura igual.",
 							},
@@ -2660,6 +3122,86 @@ export const translations = {
 					},
 					a11y: {
 						semantics: "Mantém a semântica nativa de tabela. Use `TableHead` (`<th>`) nos cabeçalhos e `TableCaption` para dar nome à tabela.",
+					},
+				},
+				"data-table": {
+					ex: {
+						users: {
+							title: "Administração de usuários",
+							description: "Uma tabela de administração completa: busca, chips de status, menu de colunas, exportação CSV das linhas na tela, ação principal, ordenação, seleção com barra em massa, paginação e ações de linha que aparecem ao passar o mouse ou focar (sempre visíveis no toque). As setas movem entre as linhas.",
+						},
+						invoices: {
+							title: "Faturas",
+							description: "Ids copiáveis, status com ponto, datas relativas e valores. Uma `TableAction` própria fica ao lado do botão de excluir, que pede um segundo clique.",
+						},
+						expandable: {
+							title: "Linhas expansíveis",
+							description: "A seta abre uma linha de detalhes abaixo. É um botão de verdade com `aria-expanded`, então funciona pelo teclado.",
+						},
+					},
+					api: {
+						hooks: {
+							description: "Hooks e um helper. Devolvem valores simples e nunca são donos das suas linhas, então também servem para dados vindos de um servidor. `useSelection` é um conjunto de ids mantido entre páginas: use para linhas selecionadas, linhas abertas ou colunas escondidas.",
+						},
+						heads: {
+							description: "Peças de cabeçalho e de célula. `SortableHead` é um `TableHead` com um botão dentro.",
+							props: {
+								direction: "`\"asc\"`, `\"desc\"` ou `null` quando a tabela não está ordenada por esta coluna.",
+								onSort: "Chamado quando o cabeçalho é acionado.",
+								checked: "Se a linha (ou, no cabeçalho, todas as linhas visíveis) está selecionada.",
+								indeterminate: "Mostra um traço: algumas linhas estão selecionadas, não todas.",
+								label: "Nome acessível da caixa ou do botão, por exemplo \"Select INV-1042\".",
+								controls: "O `id` da linha de detalhes que o botão abre.",
+							},
+						},
+						toolbar: {
+							description: "A linha acima da tabela. `TableSearch` e `TableFilterChips` são controlados; filtre com `matchesQuery`. `ExportCsvButton` baixa as linhas que você passar, então passe as filtradas e ordenadas. Células que começam com = + - ou @ são escapadas.",
+							props: {
+								value: "O texto do campo de busca.",
+								options: "Os chips. O que tem o id igual a `value` fica pressionado.",
+								rows: "As linhas a exportar e como ler cada coluna.",
+								filename: "Nome do arquivo baixado.",
+							},
+						},
+						actions: {
+							description: "`TableRowActions` é a última célula da linha: botões de editar, duplicar e excluir (excluir pede um segundo clique) e um menu \"...\" feito com seus `DropdownMenuItem`. Aparecem ao passar o mouse ou focar e ficam visíveis no toque. `TableAction` é um botão de ícone, para você adicionar os seus.",
+							props: {
+								label: "Nomeia a linha para leitores de tela, por exemplo \"Marina Alves\". Cada botão diz o que faz com ela.",
+								handlers: "Um botão só aparece quando o handler é passado.",
+								menu: "Itens do menu extra. O botão só aparece quando você passa isto.",
+								children: "Mais botões `TableAction`, antes do menu.",
+							},
+						},
+						cells: {
+							description: "Células prontas. `TableStatus` é texto com um ponto colorido, `TableUser` um avatar com nome e segunda linha, `TableCopyId` um id em mono com botão de copiar e `TableRelativeDate` \"há 3 dias\" com a data completa de dica.",
+							props: {
+								tone: "Cor do ponto. O texto continua carregando o significado.",
+								user: "Nome, segunda linha e imagem. Sem imagem, aparecem as iniciais.",
+								value: "O id a mostrar e copiar.",
+								date: "A data, um `now` opcional para fixar o horário de referência e o `locale`.",
+							},
+						},
+						rowKeys: {
+							description: "Opcional. Passe `rowArrowKeys` como `onKeyDown` do `TableBody` e Seta para cima e Seta para baixo movem o foco para o mesmo controle da linha anterior ou seguinte. Campos de texto e menus abertos mantêm suas teclas.",
+						},
+						bars: {
+							description: "Barras ao redor da tabela: a de ações em massa, o menu de colunas e a paginação. Os textos vêm em inglês; `label` troca o do menu de colunas.",
+							props: {
+								count: "Quantas linhas estão selecionadas. A barra não aparece com 0.",
+								columns: "As colunas que podem ser escondidas, como `{ id, label }`.",
+								hidden: "Os ids das colunas escondidas.",
+							},
+						},
+					},
+					kb: {
+						activate: "Ordena pela coluna em foco, abre a linha em foco ou marca a caixa dela.",
+						rows: "Com `rowArrowKeys`, vai para o mesmo controle da linha anterior ou seguinte.",
+					},
+					a11y: {
+						sort: "`SortableHead` define `aria-sort` no cabeçalho e o botão dentro dele recebe foco. Só a coluna ordenada informa uma direção.",
+						select: "Toda caixa precisa de um `label` que nomeie a linha. A barra de ações em massa é uma região ao vivo educada, então leitores de tela ouvem a contagem mudar.",
+						actions: "Os botões de ação são botões de verdade com nome como \"Edit Marina Alves\". Ficam só transparentes até a linha receber o mouse ou o foco, então quem usa teclado chega neles com Tab. Excluir anuncia que precisa de outro toque.",
+						motion: "A seta gira com uma transição curta, que é removida quando o usuário prefere menos movimento.",
 					},
 				},
 			},

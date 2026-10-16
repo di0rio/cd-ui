@@ -59,7 +59,12 @@
           "cd-duration-slow": "240ms",
           "cd-ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
           "cd-ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)",
-          "cd-scale-enter": "0.96"
+          "cd-scale-enter": "0.96",
+          "cd-ease-spring": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+          "cartoon-ink": "#1c1c1c",
+          "cartoon-border": "2px",
+          "cartoon-offset": "3px",
+          "press-depth": "3px"
         },
         "dark": {
           "background": "#1c1c1c",
@@ -78,7 +83,8 @@
           "destructive": "#dc2626",
           "destructive-foreground": "#f87171",
           "brand-foreground": "#ffd23f",
-          "success-foreground": "#4ade80"
+          "success-foreground": "#4ade80",
+          "cartoon-ink": "#f5f5f5"
         }
       },
       "css": {
@@ -117,6 +123,17 @@
         },
         "@utility animate-caret": {
           "animation": "caret 1s ease-out infinite"
+        },
+        "@keyframes avatar-blink": {
+          "0%, 92%, 100%": {
+            "scale": "1"
+          },
+          "95%": {
+            "scale": "1.04 0.9"
+          }
+        },
+        "@utility animate-avatar-blink": {
+          "animation": "avatar-blink 4s ease-in-out infinite"
         }
       }
     },
@@ -157,6 +174,28 @@
         {
           "path": "src/registry/cd/ui/button-variants.ts",
           "type": "registry:ui"
+        },
+        {
+          "path": "src/registry/cd/ui/cartoon.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar-button",
+      "type": "registry:ui",
+      "title": "Avatar Button",
+      "description": "A button with a cartoon avatar that peeks over the edge, tilts on hover and squashes on press.",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/avatar.json",
+        "http://localhost:3001/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/avatar-button.tsx",
+          "type": "registry:ui"
         }
       ]
     },
@@ -164,13 +203,14 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
-      "description": "A menu of actions that opens from a button, with checkable items, radio groups, and submenus.",
+      "description": "A menu of actions that opens from a button, with icons, shortcuts, search, recent items, confirm-to-run items, checkable items, and submenus.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3001/r/utils.json"
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/kbd.json"
       ],
       "files": [
         {
@@ -194,6 +234,10 @@
         {
           "path": "src/registry/cd/ui/badge.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "src/registry/cd/ui/cartoon.ts",
+          "type": "registry:ui"
         }
       ]
     },
@@ -209,6 +253,10 @@
       "files": [
         {
           "path": "src/registry/cd/ui/card.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/registry/cd/ui/cartoon.ts",
           "type": "registry:ui"
         }
       ]
@@ -295,6 +343,35 @@
         {
           "path": "src/registry/cd/ui/table.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "src/registry/cd/ui/cartoon.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Pieces that make a table useful: toolbar, sort, filter, select, paginate, row actions, status and user cells, and CSV export.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json",
+        "http://localhost:3001/r/avatar.json",
+        "http://localhost:3001/r/badge.json",
+        "http://localhost:3001/r/button.json",
+        "http://localhost:3001/r/checkbox.json",
+        "http://localhost:3001/r/dropdown-menu.json",
+        "http://localhost:3001/r/input.json",
+        "http://localhost:3001/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/data-table.tsx",
+          "type": "registry:ui"
         }
       ]
     },
@@ -372,7 +449,8 @@
       "title": "Alert",
       "description": "A terminal-style log line for information, success, warnings, or errors.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority",
+        "lucide-react"
       ],
       "registryDependencies": [
         "http://localhost:3001/r/utils.json"
@@ -417,6 +495,22 @@
       "files": [
         {
           "path": "src/registry/cd/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "confetti",
+      "type": "registry:ui",
+      "title": "Confetti",
+      "description": "A burst of confetti from a function call or from any element, with no dependencies.",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3001/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/registry/cd/ui/confetti.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1042,6 +1136,7 @@
         "http://localhost:3001/r/theme.json",
         "http://localhost:3001/r/utils.json",
         "http://localhost:3001/r/button.json",
+        "http://localhost:3001/r/avatar-button.json",
         "http://localhost:3001/r/dropdown-menu.json",
         "http://localhost:3001/r/badge.json",
         "http://localhost:3001/r/card.json",
@@ -1050,6 +1145,7 @@
         "http://localhost:3001/r/avatar.json",
         "http://localhost:3001/r/logo.json",
         "http://localhost:3001/r/table.json",
+        "http://localhost:3001/r/data-table.json",
         "http://localhost:3001/r/auth-shell.json",
         "http://localhost:3001/r/accordion.json",
         "http://localhost:3001/r/skeleton.json",
@@ -1057,6 +1153,7 @@
         "http://localhost:3001/r/alert.json",
         "http://localhost:3001/r/progress.json",
         "http://localhost:3001/r/toast.json",
+        "http://localhost:3001/r/confetti.json",
         "http://localhost:3001/r/input.json",
         "http://localhost:3001/r/password-input.json",
         "http://localhost:3001/r/otp-input.json",
