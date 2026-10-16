@@ -18,7 +18,7 @@ export function CopyButton({ text, className }: { text: string; className?: stri
     <button
       aria-label={copied ? ui.copy.copied : ui.copy.copy}
       className={cn(
-        "relative size-8 shrink-0 cursor-pointer rounded-md text-muted-foreground outline-none transition-[color,background-color,transform] duration-150 ease-out hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring motion-safe:active:scale-[0.96]",
+        "relative size-8 shrink-0 cursor-pointer rounded-md text-muted-foreground outline-none transition-[color,background-color,transform] duration-150 ease-out hover:bg-foreground/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring motion-safe:active:scale-[0.96]",
         className,
       )}
       onClick={async () => {

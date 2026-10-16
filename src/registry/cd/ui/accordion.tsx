@@ -49,7 +49,7 @@ export function AccordionTrigger({ className, children, ...props }: AccordionPri
         {...props}
       >
         {!chevron && (
-          <span aria-hidden="true" className="inline-block shrink-0 text-muted-foreground transition-transform duration-fast ease-out">
+          <span aria-hidden="true" className="inline-block w-3 shrink-0 text-center text-muted-foreground transition-transform duration-fast ease-out">
             ▸
           </span>
         )}
@@ -75,7 +75,7 @@ export function AccordionPanel({ className, children, ...props }: AccordionPrimi
       data-slot="accordion-panel"
       {...props}
     >
-      <div className={chevron ? "pb-4" : "mb-3 ml-1 border-brand border-l-2 pl-4"}>{children}</div>
+      <div className={chevron ? "pb-4" : "mb-3 ml-1 border-brand border-l-2 pl-3.5"}>{children}</div>
     </AccordionPrimitive.Panel>
   );
 }

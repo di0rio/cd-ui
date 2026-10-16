@@ -35,7 +35,7 @@ export function BlockStepper({
       if (e.target instanceof Element && e.target.closest("input, textarea, select, [contenteditable]:not([contenteditable=false])")) return;
       if (document.querySelector("[role=dialog], [role=alertdialog]")) return;
       const target = e.key === "ArrowLeft" ? previous : next;
-      if (target) router.push(target.href);
+      if (target) router.push(target.href, { scroll: false });
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -63,7 +63,7 @@ function Step({ Icon, step }: { Icon: typeof ChevronLeftIcon; step: StepperLink 
   }
   return (
     <Tooltip>
-      <TooltipTrigger aria-label={step.label} render={<Link className={stepClass} href={step.href} />}>
+      <TooltipTrigger aria-label={step.label} render={<Link className={stepClass} href={step.href} scroll={false} />}>
         {icon}
       </TooltipTrigger>
       <TooltipPopup>{step.title}</TooltipPopup>

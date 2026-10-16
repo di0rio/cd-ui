@@ -19,12 +19,12 @@ export function Footer01() {
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.4fr_2fr]">
         <div>
           <a className="inline-flex items-center gap-2 font-heading font-semibold" href="#home">
-            <span className="grid size-8 place-items-center rounded-lg border-2 border-foreground bg-brand font-bold text-brand-contrast text-sm">A</span>
+            <span className="grid size-8 place-items-center rounded-lg border-2 border-foreground dark:border-foreground/25 bg-brand font-bold text-brand-contrast text-sm">A</span>
             Acme
           </a>
           <p className="mt-3 max-w-xs text-muted-foreground text-sm leading-relaxed">One calm workspace for plans, people and progress.</p>
           <p className="mt-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs">
-            <span className="size-1.5 rounded-full bg-emerald-500" /> All systems operational
+            <span className="size-1.5 rounded-full bg-success" /> All systems operational
           </p>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3">

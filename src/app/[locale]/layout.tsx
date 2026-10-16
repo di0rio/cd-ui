@@ -44,6 +44,9 @@ function GithubIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
+/** Runs in <head>, before first paint: sets the theme class on a full navigation (locale switch) so dark never flashes white. Same storage key as next-themes. */
+const themeScript = `try{var t=localStorage.getItem("theme"),d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(e){}`;
+
 const navLink = "rounded-md px-2.5 py-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground";
 
 export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
@@ -55,6 +58,9 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
       lang={locale}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <LocaleProvider locale={locale} ui={tr.components.ui}>
         <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>

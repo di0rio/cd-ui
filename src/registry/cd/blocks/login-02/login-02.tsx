@@ -22,7 +22,7 @@ export function Login02() {
     <div className="grid min-h-[680px] w-full lg:grid-cols-2">
       <div className="flex flex-col px-6 py-8 sm:px-12">
         <a className="inline-flex items-center gap-2 font-heading font-semibold" href="#home">
-          <span className="grid size-8 place-items-center rounded-lg border-2 border-foreground bg-brand font-bold text-brand-contrast text-sm">A</span>
+          <span className="grid size-8 place-items-center rounded-lg border-2 border-foreground dark:border-foreground/25 bg-brand font-bold text-brand-contrast text-sm">A</span>
           Acme
         </a>
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-10">
@@ -80,15 +80,15 @@ export function Login02() {
           <p className="max-w-md text-balance font-bold font-heading text-4xl leading-[1.05] tracking-[-0.03em]">
             Ship the boring parts in an afternoon.
           </p>
-          <figure className="-rotate-2 rounded-2xl border-[3px] border-foreground bg-white p-6 text-[#1c1c1c] shadow-[8px_8px_0_var(--foreground)]">
+          <figure className="-rotate-2 rounded-2xl border-[3px] border-foreground dark:border-foreground/25 bg-card p-6 text-card-foreground shadow-[8px_8px_0_var(--foreground)] dark:shadow-[8px_8px_0_var(--input)]">
             <blockquote className="text-pretty text-lg leading-snug">
               “We replaced three internal tools with Acme and nobody asked where they went.”
             </blockquote>
             <figcaption className="mt-4 flex items-center gap-3 text-sm">
-              <span className="grid size-9 place-items-center rounded-full border-2 border-foreground bg-brand font-bold">MR</span>
+              <span className="grid size-9 place-items-center rounded-full border-2 border-foreground dark:border-foreground/25 bg-brand font-bold">MR</span>
               <span>
                 <span className="block font-semibold">Maya Ramos</span>
-                <span className="block text-[#686868]">Head of Operations, Northwind</span>
+                <span className="block text-muted-foreground">Head of Operations, Northwind</span>
               </span>
             </figcaption>
           </figure>

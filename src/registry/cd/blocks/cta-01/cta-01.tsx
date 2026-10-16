@@ -10,7 +10,7 @@ export function Cta01() {
           aria-hidden="true"
           className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(var(--foreground)_1px,transparent_1px)] [background-size:22px_22px]"
         />
-        <span className="absolute top-8 right-8 hidden rotate-6 rounded-2xl border-[3px] border-foreground bg-brand px-4 py-2 font-heading font-semibold text-brand-contrast text-sm shadow-[4px_4px_0_var(--foreground)] sm:block">
+        <span className="absolute top-8 right-8 hidden rotate-6 rounded-2xl border-[3px] border-foreground dark:border-foreground/25 bg-brand px-4 py-2 font-heading font-semibold text-brand-contrast text-sm shadow-[4px_4px_0_var(--foreground)] dark:shadow-[4px_4px_0_var(--input)] sm:block">
           14-day free trial
         </span>
         <div className="relative max-w-xl">

@@ -89,7 +89,7 @@ export default function SearchDialog({ items, open, onOpenChange }: { items: Sea
                 aria-selected={i === active}
                 className={cn(
                   "flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm",
-                  i === active && "bg-accent",
+                  i === active && "bg-foreground/10",
                 )}
                 data-index={i}
                 id={`search-${i}`}

@@ -42,7 +42,7 @@ export function Login01() {
         </>
       }
       logo={
-        <span className="grid size-10 -rotate-6 place-items-center rounded-xl border-2 border-foreground bg-brand font-bold font-heading text-brand-contrast shadow-[3px_3px_0_var(--foreground)]">
+        <span className="grid size-10 -rotate-6 place-items-center rounded-xl border-2 border-foreground dark:border-foreground/25 bg-brand font-bold font-heading text-brand-contrast shadow-[3px_3px_0_var(--foreground)] dark:shadow-[3px_3px_0_var(--input)]">
           A
         </span>
       }
